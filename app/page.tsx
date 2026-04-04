@@ -17,6 +17,48 @@ export default function Home() {
         cta1: 'Enter',
         cta2: 'Contact',
       },
+      roadmap: {
+        title: 'Mission Roadmap',
+        subtitle: 'Born 1998 - Mission: Enable humanity to transcend the universe',
+        phases: [
+          {
+            phase: 'Phase 1: Capital Accumulation',
+            period: '2024-2030',
+            items: [
+              'Build wealth through Web3 & Web4 technologies',
+              'Establish multiple revenue streams',
+              'Create sustainable passive income',
+            ],
+          },
+          {
+            phase: 'Phase 2: Space Empire',
+            period: '2030-2040',
+            items: [
+              'Launch rocket company',
+              'Build private space infrastructure',
+              'Establish orbital operations',
+            ],
+          },
+          {
+            phase: 'Phase 3: Molecular Revolution',
+            period: '2040-2050',
+            items: [
+              'Develop molecular-level recycling technology',
+              'Achieve zero-waste civilization',
+              'Master matter reconstruction',
+            ],
+          },
+          {
+            phase: 'Phase 4: Digital Immortality',
+            period: '2050+',
+            items: [
+              'Mind uploading & downloading technology',
+              'Virtual world eternal existence',
+              'Continuous innovation in digital realm',
+            ],
+          },
+        ],
+      },
       projects: {
         title: 'Active Projects',
         items: [
@@ -55,6 +97,16 @@ export default function Home() {
             title: 'Web3 Development',
             desc: 'Creating decentralized applications',
           },
+          {
+            title: 'Meme Coin Trading',
+            desc: 'Caught Trump 7u→65u, early WLFI investor, already profitable',
+            status: 'Waiting for opportunities',
+          },
+          {
+            title: 'Prediction Market Bot',
+            desc: 'Developing automated monitoring bot for Polymarket and prediction markets',
+            status: 'In Development',
+          },
         ],
       },
       contact: {
@@ -76,6 +128,48 @@ export default function Home() {
         subtitle: 'Web3 开发者 | AI 爱好者 | 交易员',
         cta1: '进入',
         cta2: '联系我',
+      },
+      roadmap: {
+        title: '使命路线图',
+        subtitle: '生于 1998 - 使命：实现人类超越宇宙的思想启蒙',
+        phases: [
+          {
+            phase: '第一阶段：资本积累',
+            period: '2024-2030',
+            items: [
+              '通过 Web3 和 Web4 技术积累财富',
+              '建立多元化收入渠道',
+              '创建可持续被动收入',
+            ],
+          },
+          {
+            phase: '第二阶段：太空帝国',
+            period: '2030-2040',
+            items: [
+              '创办火箭公司',
+              '建设私人太空基础设施',
+              '建立轨道运营系统',
+            ],
+          },
+          {
+            phase: '第三阶段：分子革命',
+            period: '2040-2050',
+            items: [
+              '开发分子级别回收技术',
+              '实现零垃圾文明',
+              '掌握物质重组技术',
+            ],
+          },
+          {
+            phase: '第四阶段：数字永生',
+            period: '2050+',
+            items: [
+              '思维上传与下载技术',
+              '虚拟世界永恒存在',
+              '数字领域持续创新',
+            ],
+          },
+        ],
       },
       projects: {
         title: '正在运行项目',
@@ -114,6 +208,16 @@ export default function Home() {
           {
             title: 'Web3 开发',
             desc: '创建去中心化应用',
+          },
+          {
+            title: '土狗交易',
+            desc: '曾在 Trump 代币 7u→65u 获利，WLFI 早期投资者已回本',
+            status: '机会等待中',
+          },
+          {
+            title: '预测市场机器人',
+            desc: '开发 Polymarket 等预测市场自动监控机器人',
+            status: '开发中',
           },
         ],
       },
@@ -241,7 +345,7 @@ export default function Home() {
             {t.about.title}
           </motion.h2>
           
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-8">
             {t.about.items.map((item, i) => (
               <motion.div
                 key={i}
@@ -256,8 +360,56 @@ export default function Home() {
                   <h3 className="text-2xl font-bold mb-4 text-neon-green">
                     {item.title}
                   </h3>
-                  <p className="text-gray-400">{item.desc}</p>
+                  <p className="text-gray-400 mb-3">{item.desc}</p>
+                  {item.status && (
+                    <span className="inline-block px-3 py-1 bg-neon-purple/20 text-neon-purple rounded-full text-xs">
+                      {item.status}
+                    </span>
+                  )}
                 </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Roadmap Section */}
+      <section className="py-20 px-4 relative z-10">
+        <div className="max-w-6xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-5xl font-bold mb-4">{t.roadmap.title}</h2>
+            <p className="text-xl text-neon-purple">{t.roadmap.subtitle}</p>
+          </motion.div>
+          
+          <div className="space-y-8">
+            {t.roadmap.phases.map((phase, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, x: i % 2 === 0 ? -50 : 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.2 }}
+                className="glass rounded-xl p-8 hover:border-neon-green/50 transition-all"
+              >
+                <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+                  <h3 className="text-3xl font-bold text-neon-green mb-2 md:mb-0">
+                    {phase.phase}
+                  </h3>
+                  <span className="text-xl text-neon-purple">{phase.period}</span>
+                </div>
+                <ul className="space-y-3">
+                  {phase.items.map((item, j) => (
+                    <li key={j} className="flex items-start gap-3 text-gray-300">
+                      <span className="text-neon-green mt-1">▹</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </motion.div>
             ))}
           </div>
