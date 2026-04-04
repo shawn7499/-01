@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import Giscus from '../components/Giscus'
 import MatrixRain from '../components/MatrixRain'
 
 export default function Home() {
@@ -482,17 +483,31 @@ export default function Home() {
                   ))}
                 </div>
                 <div className="border-t border-gray-700 pt-6">
-                  <p className="text-gray-400 text-sm mb-4">
-                    {lang === 'en' ? 'Join the discussion on X (Twitter)' : '在 X (Twitter) 上参与讨论'}
-                  </p>
-                  <a
-                    href="https://x.com/shawnwick960"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block px-6 py-3 bg-neon-green/10 hover:bg-neon-green/20 text-neon-green rounded-lg transition-all"
-                  >
-                    {lang === 'en' ? 'Discuss on X →' : '前往 X 讨论 →'}
-                  </a>
+                  <h4 className="text-xl font-bold mb-4 text-gray-300">
+                    {lang === 'en' ? 'Discussion' : '讨论区'}
+                  </h4>
+                  <Giscus
+                    repo="shawn7499/-01"
+                    repoId="R_kgDOR5t1kg"
+                    category="Announcements"
+                    categoryId="DIC_kwDOR5t1ks4C6DGn"
+                    mapping="pathname"
+                    theme="dark_dimmed"
+                    lang={lang === 'en' ? 'en' : 'zh-CN'}
+                  />
+                  <div className="mt-6">
+                    <p className="text-gray-400 text-sm mb-4">
+                      {lang === 'en' ? 'Also discuss on X (Twitter)' : '也可以在 X (Twitter) 上讨论'}
+                    </p>
+                    <a
+                      href="https://x.com/shawnwick960"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block px-6 py-3 bg-neon-green/10 hover:bg-neon-green/20 text-neon-green rounded-lg transition-all"
+                    >
+                      {lang === 'en' ? 'Discuss on X →' : '前往 X 讨论 →'}
+                    </a>
+                  </div>
                 </div>
               </motion.article>
             ))}
