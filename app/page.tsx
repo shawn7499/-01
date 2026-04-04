@@ -17,6 +17,19 @@ export default function Home() {
         cta1: 'Enter',
         cta2: 'Contact',
       },
+      thoughts: {
+        title: 'My Thoughts',
+        subtitle: 'Ideas that shape the future',
+        items: [
+          {
+            id: 1,
+            date: '2026-04-05',
+            title: 'Beyond Nations: A Species-Level Perspective',
+            content: 'I believe humanity no longer needs the concept of nations. We should unite as a species to explore outward. The concept of nations is outdated. For humanity to evolve to its highest level, we must abandon the concept of nations and work together as one species.',
+            tags: ['Philosophy', 'Future', 'Unity'],
+          },
+        ],
+      },
       roadmap: {
         title: 'Mission Roadmap',
         subtitle: 'Born 1998 - Mission: Enable humanity to transcend the universe',
@@ -123,6 +136,19 @@ export default function Home() {
         subtitle: 'Web3 开发者 | AI 爱好者 | 交易员',
         cta1: '进入',
         cta2: '联系我',
+      },
+      thoughts: {
+        title: '我的想法',
+        subtitle: '塑造未来的思想',
+        items: [
+          {
+            id: 1,
+            date: '2026-04-05',
+            title: '超越国家：物种级别的视角',
+            content: '我认为人类其实不需要国家这个概念，应该是全人类进行向外探索。国家这个概念其实早都应该过时了。人类这个物种想要发展到最高等级，必须抛弃国家这个概念。',
+            tags: ['哲学', '未来', '统一'],
+          },
+        ],
       },
       roadmap: {
         title: '使命路线图',
@@ -408,6 +434,67 @@ export default function Home() {
                   ))}
                 </ul>
               </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Thoughts Section */}
+      <section className="py-20 px-4 relative z-10">
+        <div className="max-w-4xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-5xl font-bold mb-4">{t.thoughts.title}</h2>
+            <p className="text-xl text-gray-400">{t.thoughts.subtitle}</p>
+          </motion.div>
+          
+          <div className="space-y-8">
+            {t.thoughts.items.map((thought, i) => (
+              <motion.article
+                key={thought.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="glass rounded-xl p-8 hover:border-neon-purple/50 transition-all"
+              >
+                <div className="mb-4">
+                  <span className="text-sm text-gray-500">{thought.date}</span>
+                </div>
+                <h3 className="text-3xl font-bold mb-4 text-neon-green">
+                  {thought.title}
+                </h3>
+                <p className="text-lg text-gray-300 mb-6 leading-relaxed">
+                  {thought.content}
+                </p>
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {thought.tags.map((tag, j) => (
+                    <span
+                      key={j}
+                      className="px-3 py-1 bg-neon-purple/20 text-neon-purple rounded-full text-sm"
+                    >
+                      #{tag}
+                    </span>
+                  ))}
+                </div>
+                <div className="border-t border-gray-700 pt-6">
+                  <p className="text-gray-400 text-sm mb-4">
+                    {lang === 'en' ? 'Join the discussion on X (Twitter)' : '在 X (Twitter) 上参与讨论'}
+                  </p>
+                  <a
+                    href="https://x.com/shawnwick960"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-block px-6 py-3 bg-neon-green/10 hover:bg-neon-green/20 text-neon-green rounded-lg transition-all"
+                  >
+                    {lang === 'en' ? 'Discuss on X →' : '前往 X 讨论 →'}
+                  </a>
+                </div>
+              </motion.article>
             ))}
           </div>
         </div>
