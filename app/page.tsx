@@ -24,37 +24,32 @@ export default function Home() {
           {
             phase: 'Phase 1: Capital Accumulation',
             period: '2024-2030',
+            status: 'Current Phase',
             items: [
               'Build wealth through Web3 & Web4 technologies',
+              'Quantitative trading & meme coin opportunities',
+              'OpenClaw automation & Web3 development services',
               'Establish multiple revenue streams',
-              'Create sustainable passive income',
             ],
           },
           {
-            phase: 'Phase 2: Space Empire',
-            period: '2030-2040',
+            phase: 'Phase 2: Parallel Execution',
+            period: '2030+',
+            status: 'Three simultaneous missions',
             items: [
-              'Launch rocket company',
-              'Build private space infrastructure',
-              'Establish orbital operations',
+              '🚀 Space Empire: Launch rocket company, build private space infrastructure',
+              '⚛️ Molecular Revolution: Develop molecular-level recycling, achieve zero-waste civilization',
+              '🧠 Digital Immortality: Mind uploading/downloading, virtual world eternal existence',
             ],
           },
           {
-            phase: 'Phase 3: Molecular Revolution',
-            period: '2040-2050',
+            phase: 'Ultimate Goal',
+            period: 'Lifetime Mission',
+            status: 'The Grand Vision',
             items: [
-              'Develop molecular-level recycling technology',
-              'Achieve zero-waste civilization',
-              'Master matter reconstruction',
-            ],
-          },
-          {
-            phase: 'Phase 4: Digital Immortality',
-            period: '2050+',
-            items: [
-              'Mind uploading & downloading technology',
-              'Virtual world eternal existence',
-              'Continuous innovation in digital realm',
+              'Enable humanity to transcend the universe',
+              'Break through dimensional limitations',
+              'Achieve true cosmic exploration',
             ],
           },
         ],
@@ -136,37 +131,32 @@ export default function Home() {
           {
             phase: '第一阶段：资本积累',
             period: '2024-2030',
+            status: '当前阶段',
             items: [
               '通过 Web3 和 Web4 技术积累财富',
+              '量化交易与土狗机会',
+              'OpenClaw 自动化与 Web3 开发服务',
               '建立多元化收入渠道',
-              '创建可持续被动收入',
             ],
           },
           {
-            phase: '第二阶段：太空帝国',
-            period: '2030-2040',
+            phase: '第二阶段：并行执行',
+            period: '2030+',
+            status: '三大使命同时进行',
             items: [
-              '创办火箭公司',
-              '建设私人太空基础设施',
-              '建立轨道运营系统',
+              '🚀 太空帝国：创办火箭公司，建设私人太空基础设施',
+              '⚛️ 分子革命：开发分子级别回收技术，实现零垃圾文明',
+              '🧠 数字永生：思维上传/下载，虚拟世界永恒存在',
             ],
           },
           {
-            phase: '第三阶段：分子革命',
-            period: '2040-2050',
+            phase: '终极目标',
+            period: '终生使命',
+            status: '宏伟愿景',
             items: [
-              '开发分子级别回收技术',
-              '实现零垃圾文明',
-              '掌握物质重组技术',
-            ],
-          },
-          {
-            phase: '第四阶段：数字永生',
-            period: '2050+',
-            items: [
-              '思维上传与下载技术',
-              '虚拟世界永恒存在',
-              '数字领域持续创新',
+              '实现人类超越宇宙',
+              '突破维度限制',
+              '实现真正的宇宙探索',
             ],
           },
         ],
@@ -396,12 +386,19 @@ export default function Home() {
                 transition={{ delay: i * 0.2 }}
                 className="glass rounded-xl p-8 hover:border-neon-green/50 transition-all"
               >
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+                <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
                   <h3 className="text-3xl font-bold text-neon-green mb-2 md:mb-0">
                     {phase.phase}
                   </h3>
                   <span className="text-xl text-neon-purple">{phase.period}</span>
                 </div>
+                {phase.status && (
+                  <div className="mb-4">
+                    <span className="inline-block px-4 py-1 bg-neon-purple/20 text-neon-purple rounded-full text-sm">
+                      {phase.status}
+                    </span>
+                  </div>
+                )}
                 <ul className="space-y-3">
                   {phase.items.map((item, j) => (
                     <li key={j} className="flex items-start gap-3 text-gray-300">
