@@ -335,7 +335,7 @@ export default function Home() {
             {t.about.title}
           </motion.h2>
           
-          <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-8">
+          <div className="grid md:grid-cols-3 gap-8">
             {t.about.items.map((item, i) => (
               <motion.div
                 key={i}
