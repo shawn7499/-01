@@ -59,8 +59,13 @@ export default function Home() {
       },
       contact: {
         title: 'Get In Touch',
-        telegram: 'Telegram',
-        email: 'Email',
+        items: [
+          { name: 'X (Twitter)', icon: '𝕏', link: 'https://x.com/shawnwick960' },
+          { name: 'Telegram', icon: '✈️', link: 'https://t.me/shawick' },
+          { name: 'Email', icon: '✉️', link: 'mailto:sahwnwick7499@gmail.com' },
+          { name: 'GitHub', icon: '💻', link: 'https://github.com/shawn7499' },
+          { name: 'WeChat', icon: '💬', link: null, wechat: 'shawnwick' },
+        ],
       },
     },
     zh: {
@@ -114,8 +119,13 @@ export default function Home() {
       },
       contact: {
         title: '联系我',
-        telegram: 'Telegram',
-        email: '邮箱',
+        items: [
+          { name: 'X (Twitter)', icon: '𝕏', link: 'https://x.com/shawnwick960' },
+          { name: 'Telegram', icon: '✈️', link: 'https://t.me/shawick' },
+          { name: '邮箱', icon: '✉️', link: 'mailto:sahwnwick7499@gmail.com' },
+          { name: 'GitHub', icon: '💻', link: 'https://github.com/shawn7499' },
+          { name: '微信', icon: '💬', link: null, wechat: 'shawnwick' },
+        ],
       },
     },
   }
@@ -266,22 +276,37 @@ export default function Home() {
             {t.contact.title}
           </motion.h2>
           
-          <div className="flex gap-6 justify-center">
-            <motion.a
-              href="https://t.me/shawick"
-              target="_blank"
-              whileHover={{ scale: 1.1 }}
-              className="px-8 py-4 glass rounded-lg hover:bg-neon-green/10 transition-all"
-            >
-              {t.contact.telegram}
-            </motion.a>
-            <motion.a
-              href="mailto:your@email.com"
-              whileHover={{ scale: 1.1 }}
-              className="px-8 py-4 glass rounded-lg hover:bg-neon-purple/10 transition-all"
-            >
-              {t.contact.email}
-            </motion.a>
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
+            {t.contact.items.map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                whileHover={{ scale: 1.1 }}
+              >
+                {item.link ? (
+                  <a
+                    href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="glass rounded-xl p-6 hover:bg-neon-green/10 transition-all flex flex-col items-center gap-3"
+                  >
+                    <span className="text-4xl">{item.icon}</span>
+                    <span className="text-sm">{item.name}</span>
+                  </a>
+                ) : (
+                  <div className="glass rounded-xl p-6 hover:bg-neon-purple/10 transition-all flex flex-col items-center gap-3 cursor-pointer">
+                    <span className="text-4xl">{item.icon}</span>
+                    <span className="text-sm">{item.name}</span>
+                    {item.wechat && (
+                      <span className="text-xs text-gray-500">{item.wechat}</span>
+                    )}
+                  </div>
+                )}
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
