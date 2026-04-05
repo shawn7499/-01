@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import Giscus from '../components/Giscus'
-import MatrixRain from '../components/MatrixRain'
 
 export default function Home() {
   const [lang, setLang] = useState<'en' | 'zh'>('en')
@@ -11,55 +10,71 @@ export default function Home() {
   const content = {
     en: {
       hero: {
-        name: 'Shawn Wick',
-        tagline: 'Building the Future',
+        title: 'Permissionless infrastructure',
+        subtitle: 'for a better world',
         mission: 'Taking Humanity Beyond the Universe',
-        subtitle: 'Web3 Developer | AI Enthusiast | Trader',
-        cta1: 'Enter',
-        cta2: 'Contact',
       },
-      thoughts: {
-        title: 'My Thoughts',
-        subtitle: 'Ideas that shape the future',
+      intro: {
+        text: 'Building technology that makes humanity\'s cosmic exploration possible, scalable, and inevitable.',
+      },
+      projects: {
+        title: 'PROJECTS',
         items: [
           {
-            id: 1,
-            date: '2026-04-05',
-            title: 'Beyond Nations: A Species-Level Perspective',
-            content: 'I believe humanity no longer needs the concept of nations. We should unite as a species to explore outward. The concept of nations is outdated. For humanity to evolve to its highest level, we must abandon the concept of nations and work together as one species.',
-            tags: ['Philosophy', 'Future', 'Unity'],
+            number: '01',
+            title: 'Gold Quantitative Trading',
+            desc: 'Sustainable compound interest strategy for long-term wealth accumulation.',
+            tags: ['Quantitative', 'Compound Interest', 'Long-term'],
+            link: 'https://smartgold.ai/dashboard?inviteCode=J5n5Rv',
+          },
+          {
+            number: '02',
+            title: 'OpenClaw Automation',
+            desc: 'Full personalization services including token provision, installation, and maintenance.',
+            tags: ['OpenClaw', 'Automation', 'Custom Service'],
+            link: null,
+          },
+          {
+            number: '03',
+            title: 'Web3 Development',
+            desc: 'Professional Web3 website design and development services.',
+            tags: ['Web3', 'Next.js', 'Custom Design'],
+            link: null,
           },
         ],
       },
       roadmap: {
-        title: 'Mission Roadmap',
+        title: 'MISSION ROADMAP',
         subtitle: 'Born 1998 - Mission: Enable humanity to transcend the universe',
         phases: [
           {
-            phase: 'Phase 1: Capital Accumulation',
+            number: '01',
+            phase: 'Capital Accumulation',
             period: '2024-2030',
             status: 'Current Phase',
             items: [
-              'Build wealth through Web3 & Web4 technologies',
-              'Quantitative trading & meme coin opportunities',
-              'OpenClaw automation & Web3 development services',
-              'Establish multiple revenue streams',
+              'Build wealth through Web3 & Web4',
+              'Quantitative trading strategies',
+              'OpenClaw automation services',
+              'Multiple revenue streams',
             ],
           },
           {
-            phase: 'Phase 2: Parallel Execution',
+            number: '02',
+            phase: 'Parallel Execution',
             period: '2030+',
-            status: 'Three simultaneous missions',
+            status: 'Three Missions',
             items: [
-              '🚀 Space Empire: Launch rocket company, build private space infrastructure',
-              '⚛️ Molecular Revolution: Develop molecular-level recycling, achieve zero-waste civilization',
-              '🧠 Digital Immortality: Mind uploading/downloading, virtual world eternal existence',
+              'Space Empire: Private space infrastructure',
+              'Molecular Revolution: Zero-waste civilization',
+              'Digital Immortality: Mind uploading/downloading',
             ],
           },
           {
+            number: '03',
             phase: 'Ultimate Goal',
-            period: 'Lifetime Mission',
-            status: 'The Grand Vision',
+            period: 'Lifetime',
+            status: 'Grand Vision',
             items: [
               'Enable humanity to transcend the universe',
               'Break through dimensional limitations',
@@ -68,184 +83,112 @@ export default function Home() {
           },
         ],
       },
-      projects: {
-        title: 'Active Projects',
+      stats: {
         items: [
-          {
-            title: 'Gold Quantitative Trading',
-            desc: 'First project tested for over 2 years with highest annual returns. Sustainable compound interest strategy for long-term growth.',
-            tech: ['Quantitative Trading', 'Compound Interest', 'Long-term Strategy'],
-            link: 'https://smartgold.ai/dashboard?inviteCode=J5n5Rv',
-          },
-          {
-            title: 'OpenClaw Custom Automation',
-            desc: 'Full OpenClaw personalization services including low-cost token provision, installation, and ongoing maintenance. Monthly subscription available.',
-            tech: ['OpenClaw', 'Automation', 'Custom Service'],
-            link: null,
-          },
-          {
-            title: 'Web3 Website Development',
-            desc: 'Professional Web3 website design and development services. Custom solutions tailored to your needs.',
-            tech: ['Web3', 'Next.js', 'Custom Design'],
-            link: null,
-          },
-        ],
-      },
-      about: {
-        title: 'What I Do',
-        items: [
-          {
-            title: 'AI Automation',
-            desc: 'Building intelligent agents with OpenClaw',
-          },
-          {
-            title: 'Quantitative Trading',
-            desc: 'Developing profitable trading strategies',
-          },
-          {
-            title: 'Web3 Development',
-            desc: 'Creating decentralized applications',
-          },
-          {
-            title: 'Meme Coin Trading',
-            desc: 'Caught Trump 7u→65u, early WLFI investor, already profitable',
-            status: 'Waiting for opportunities',
-          },
-          {
-            title: 'Prediction Market Bot',
-            desc: 'Developing automated monitoring bot for Polymarket and prediction markets',
-            status: 'In Development',
-          },
+          { label: 'Years of Experience', value: '5+' },
+          { label: 'Projects Completed', value: '20+' },
+          { label: 'Trading ROI', value: '100x' },
         ],
       },
       contact: {
-        title: 'Get In Touch',
+        title: 'Connect',
         items: [
-          { name: 'X (Twitter)', icon: '𝕏', link: 'https://x.com/shawnwick960' },
-          { name: 'Telegram', icon: '✈️', link: 'https://t.me/shawick' },
-          { name: 'Email', icon: '✉️', link: 'mailto:sahwnwick7499@gmail.com' },
-          { name: 'GitHub', icon: '💻', link: 'https://github.com/shawn7499' },
-          { name: 'WeChat', icon: '💬', link: null, wechat: 'shawnwick' },
+          { name: 'X (Twitter)', link: 'https://x.com/shawnwick960' },
+          { name: 'Telegram', link: 'https://t.me/shawick' },
+          { name: 'Email', link: 'mailto:sahwnwick7499@gmail.com' },
+          { name: 'GitHub', link: 'https://github.com/shawn7499' },
         ],
       },
     },
     zh: {
       hero: {
-        name: 'Shawn Wick',
-        tagline: '构建未来',
+        title: '无需许可的基础设施',
+        subtitle: '为了更美好的世界',
         mission: '让人类走出宇宙',
-        subtitle: 'Web3 开发者 | AI 爱好者 | 交易员',
-        cta1: '进入',
-        cta2: '联系我',
       },
-      thoughts: {
-        title: '我的想法',
-        subtitle: '塑造未来的思想',
+      intro: {
+        text: '构建让人类宇宙探索成为可能、可扩展且不可避免的技术。',
+      },
+      projects: {
+        title: '项目',
         items: [
           {
-            id: 1,
-            date: '2026-04-05',
-            title: '超越国家：物种级别的视角',
-            content: '我认为人类其实不需要国家这个概念，应该是全人类进行向外探索。国家这个概念其实早都应该过时了。人类这个物种想要发展到最高等级，必须抛弃国家这个概念。',
-            tags: ['哲学', '未来', '统一'],
+            number: '01',
+            title: '黄金量化交易',
+            desc: '可持续的复利策略，用于长期财富积累。',
+            tags: ['量化交易', '复利', '长期策略'],
+            link: 'https://smartgold.ai/dashboard?inviteCode=J5n5Rv',
+          },
+          {
+            number: '02',
+            title: 'OpenClaw 自动化',
+            desc: '全方位个性化服务，包括代币供应、安装和维护。',
+            tags: ['OpenClaw', '自动化', '定制服务'],
+            link: null,
+          },
+          {
+            number: '03',
+            title: 'Web3 开发',
+            desc: '专业的 Web3 网站设计和开发服务。',
+            tags: ['Web3', 'Next.js', '定制设计'],
+            link: null,
           },
         ],
       },
       roadmap: {
         title: '使命路线图',
-        subtitle: '生于 1998 - 使命：实现人类超越宇宙的思想启蒙',
+        subtitle: '生于 1998 - 使命：让人类超越宇宙',
         phases: [
           {
-            phase: '第一阶段：资本积累',
+            number: '01',
+            phase: '资本积累',
             period: '2024-2030',
             status: '当前阶段',
             items: [
-              '通过 Web3 和 Web4 技术积累财富',
-              '量化交易与土狗机会',
-              'OpenClaw 自动化与 Web3 开发服务',
-              '建立多元化收入渠道',
+              '通过 Web3 & Web4 积累财富',
+              '量化交易策略',
+              'OpenClaw 自动化服务',
+              '多元化收入来源',
             ],
           },
           {
-            phase: '第二阶段：并行执行',
+            number: '02',
+            phase: '并行执行',
             period: '2030+',
-            status: '三大使命同时进行',
+            status: '三大使命',
             items: [
-              '🚀 太空帝国：创办火箭公司，建设私人太空基础设施',
-              '⚛️ 分子革命：开发分子级别回收技术，实现零垃圾文明',
-              '🧠 数字永生：思维上传/下载，虚拟世界永恒存在',
+              '太空帝国：私人太空基础设施',
+              '分子革命：零废物文明',
+              '数字永生：意识上传/下载',
             ],
           },
           {
+            number: '03',
             phase: '终极目标',
-            period: '终生使命',
+            period: '终生',
             status: '宏伟愿景',
             items: [
-              '实现人类超越宇宙',
+              '让人类超越宇宙',
               '突破维度限制',
               '实现真正的宇宙探索',
             ],
           },
         ],
       },
-      projects: {
-        title: '正在运行项目',
+      stats: {
         items: [
-          {
-            title: '黄金量化交易',
-            desc: '首个测试超过2年的项目，年化收益最高。可持续复利投入，长期稳定增长策略。',
-            tech: ['量化交易', '复利', '长期策略'],
-            link: 'https://smartgold.ai/dashboard?inviteCode=J5n5Rv',
-          },
-          {
-            title: 'OpenClaw 自动化个性定制',
-            desc: '提供 OpenClaw 全方位个性化定制服务，包括低价 token 提供、安装服务和后期维护。按月订阅，欢迎联系。',
-            tech: ['OpenClaw', '自动化', '定制服务'],
-            link: null,
-          },
-          {
-            title: 'Web3 网站制作',
-            desc: '专业 Web3 网站设计与开发服务，根据您的需求量身定制解决方案。',
-            tech: ['Web3', 'Next.js', '定制设计'],
-            link: null,
-          },
-        ],
-      },
-      about: {
-        title: '我在做什么',
-        items: [
-          {
-            title: 'AI 自动化',
-            desc: '使用 OpenClaw 构建智能代理',
-          },
-          {
-            title: '量化交易',
-            desc: '开发盈利的交易策略',
-          },
-          {
-            title: 'Web3 开发',
-            desc: '创建去中心化应用',
-          },
-          {
-            title: '土狗交易',
-            desc: '曾在 Trump 代币 7u→65u 获利，WLFI 早期投资者已回本',
-            status: '机会等待中',
-          },
-          {
-            title: '预测市场机器人',
-            desc: '开发 Polymarket 等预测市场自动监控机器人',
-            status: '开发中',
-          },
+          { label: '经验年限', value: '5+' },
+          { label: '完成项目', value: '20+' },
+          { label: '交易回报', value: '100x' },
         ],
       },
       contact: {
-        title: '联系我',
+        title: '联系',
         items: [
-          { name: 'X (Twitter)', icon: '𝕏', link: 'https://x.com/shawnwick960' },
-          { name: 'Telegram', icon: '✈️', link: 'https://t.me/shawick' },
-          { name: '邮箱', icon: '✉️', link: 'mailto:sahwnwick7499@gmail.com' },
-          { name: 'GitHub', icon: '💻', link: 'https://github.com/shawn7499' },
-          { name: '微信', icon: '💬', link: null, wechat: 'shawnwick' },
+          { name: 'X (Twitter)', link: 'https://x.com/shawnwick960' },
+          { name: 'Telegram', link: 'https://t.me/shawick' },
+          { name: 'Email', link: 'mailto:sahwnwick7499@gmail.com' },
+          { name: 'GitHub', link: 'https://github.com/shawn7499' },
         ],
       },
     },
@@ -254,136 +197,103 @@ export default function Home() {
   const t = content[lang]
 
   return (
-    <main className="min-h-screen bg-dark-bg text-white relative">
-      {/* 黑客帝国代码雨背景 */}
-      <MatrixRain />
-      {/* 语言切换 */}
-      <div className="fixed top-8 right-8 z-50">
-        <button
-          onClick={() => setLang(lang === 'en' ? 'zh' : 'en')}
-          className="glass px-4 py-2 rounded-lg hover:bg-neon-green/10 transition-all"
-        >
-          {lang === 'en' ? '中文' : 'EN'}
-        </button>
-      </div>
+    <div className="min-h-screen bg-black text-white">
+      {/* 导航栏 */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm border-b border-white/10">
+        <div className="container mx-auto px-6 py-4">
+          <div className="flex justify-between items-center">
+            <div className="text-xl font-bold">SHAWN WICK</div>
+            <div className="flex gap-8 items-center">
+              <a href="#projects" className="hover:text-[#00ff88] transition-colors">
+                {lang === 'en' ? 'Projects' : '项目'}
+              </a>
+              <a href="#roadmap" className="hover:text-[#00ff88] transition-colors">
+                {lang === 'en' ? 'Roadmap' : '路线图'}
+              </a>
+              <a href="#contact" className="hover:text-[#00ff88] transition-colors">
+                {lang === 'en' ? 'Contact' : '联系'}
+              </a>
+              <button
+                onClick={() => setLang(lang === 'en' ? 'zh' : 'en')}
+                className="px-4 py-2 border border-white/20 rounded hover:border-[#00ff88] transition-colors"
+              >
+                {lang === 'en' ? '中文' : 'EN'}
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
 
       {/* Hero Section */}
-      <section className="min-h-screen flex items-center justify-center px-4 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center"
-        >
-          <h1 className="text-8xl font-bold mb-4 neon-text">{t.hero.name}</h1>
-          <p className="text-4xl mb-4 text-gray-400">{t.hero.tagline}</p>
-          <p className="text-2xl mb-6 text-neon-purple font-semibold">{t.hero.mission}</p>
-          <p className="text-xl mb-12 text-gray-500">{t.hero.subtitle}</p>
-          
-          <div className="flex gap-4 justify-center">
-            <motion.a
-              href="#projects"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 bg-neon-green text-black rounded-lg font-semibold hover:shadow-lg hover:shadow-neon-green/50 transition-all"
-            >
-              {t.hero.cta1}
-            </motion.a>
-            <motion.a
-              href="#contact"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 glass rounded-lg font-semibold hover:bg-white/10 transition-all"
-            >
-              {t.hero.cta2}
-            </motion.a>
-          </div>
-        </motion.div>
-      </section>
-
-      {/* Projects Section - 移到前面 */}
-      <section id="projects" className="py-20 px-4 relative z-10">
-        <div className="max-w-6xl mx-auto">
-          <motion.h2
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-5xl font-bold mb-16 text-center"
+      <section className="min-h-screen flex items-center justify-center px-6 pt-20">
+        <div className="container mx-auto max-w-6xl">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="text-center"
           >
-            {t.projects.title}
-          </motion.h2>
-          
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {t.projects.items.map((project, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                whileHover={{ scale: 1.05 }}
-                onClick={() => project.link && window.open(project.link, '_blank')}
-                className={`glass rounded-xl p-6 hover:border-neon-green/50 transition-all ${
-                  project.link ? 'cursor-pointer' : ''
-                }`}
-              >
-                <h3 className="text-2xl font-bold mb-3">{project.title}</h3>
-                <p className="text-gray-400 mb-4">{project.desc}</p>
-                <div className="flex flex-wrap gap-2">
-                  {project.tech.map((tech, j) => (
-                    <span
-                      key={j}
-                      className="px-3 py-1 bg-neon-purple/20 text-neon-purple rounded-full text-sm"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-                {project.link && (
-                  <div className="mt-4 text-neon-green text-sm">
-                    {lang === 'en' ? 'Click to visit →' : '点击访问 →'}
-                  </div>
-                )}
-              </motion.div>
-            ))}
-          </div>
+            <h1 className="text-7xl md:text-9xl font-bold mb-6 leading-tight">
+              {t.hero.title}
+            </h1>
+            <h2 className="text-7xl md:text-9xl font-bold mb-12 leading-tight">
+              {t.hero.subtitle}
+            </h2>
+            <div className="inline-block px-6 py-3 border border-[#00ff88] text-[#00ff88] text-xl mb-12">
+              {t.hero.mission}
+            </div>
+            <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+              {t.intro.text}
+            </p>
+          </motion.div>
         </div>
       </section>
 
-      {/* About Section */}
-      <section className="py-20 px-4 relative z-10">
-        <div className="max-w-6xl mx-auto">
-          <motion.h2
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-5xl font-bold mb-16 text-center"
-          >
-            {t.about.title}
-          </motion.h2>
+      {/* Projects Section */}
+      <section id="projects" className="py-32 px-6 border-t border-white/10">
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-sm text-gray-500 mb-4">/// {t.projects.title}</div>
           
-          <div className="grid md:grid-cols-3 gap-8">
-            {t.about.items.map((item, i) => (
+          <div className="space-y-8">
+            {t.projects.items.map((project, index) => (
               <motion.div
-                key={i}
+                key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.2 }}
-                whileHover={{ y: -10 }}
-                className="gradient-border"
+                className="group"
               >
-                <div className="gradient-border-content">
-                  <h3 className="text-2xl font-bold mb-4 text-neon-green">
-                    {item.title}
-                  </h3>
-                  <p className="text-gray-400 mb-3">{item.desc}</p>
-                  {item.status && (
-                    <span className="inline-block px-3 py-1 bg-neon-purple/20 text-neon-purple rounded-full text-xs">
-                      {item.status}
-                    </span>
-                  )}
-                </div>
+                <a
+                  href={project.link || '#'}
+                  target={project.link ? '_blank' : undefined}
+                  rel={project.link ? 'noopener noreferrer' : undefined}
+                  className="block border border-white/10 hover:border-[#00ff88] transition-all duration-300 p-12"
+                >
+                  <div className="flex items-start justify-between mb-6">
+                    <div className="flex-1">
+                      <div className="text-sm text-gray-500 mb-2">[{project.number}]</div>
+                      <h3 className="text-4xl font-bold mb-4 group-hover:text-[#00ff88] transition-colors">
+                        {project.title}
+                      </h3>
+                      <p className="text-xl text-gray-400 mb-6 leading-relaxed">
+                        {project.desc}
+                      </p>
+                      <div className="flex gap-4">
+                        {project.tags.map((tag, i) => (
+                          <span key={i} className="text-sm text-gray-500 border border-white/10 px-3 py-1">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                    {project.link && (
+                      <div className="text-[#00ff88] text-2xl group-hover:translate-x-2 transition-transform">
+                        →
+                      </div>
+                    )}
+                  </div>
+                </a>
               </motion.div>
             ))}
           </div>
@@ -391,181 +301,113 @@ export default function Home() {
       </section>
 
       {/* Roadmap Section */}
-      <section className="py-20 px-4 relative z-10">
-        <div className="max-w-6xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-5xl font-bold mb-4">{t.roadmap.title}</h2>
-            <p className="text-xl text-neon-purple">{t.roadmap.subtitle}</p>
-          </motion.div>
+      <section id="roadmap" className="py-32 px-6 border-t border-white/10">
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-sm text-gray-500 mb-4">/// {t.roadmap.title}</div>
+          <p className="text-xl text-gray-400 mb-16">{t.roadmap.subtitle}</p>
           
           <div className="space-y-8">
-            {t.roadmap.phases.map((phase, i) => (
+            {t.roadmap.phases.map((phase, index) => (
               <motion.div
-                key={i}
-                initial={{ opacity: 0, x: i % 2 === 0 ? -50 : 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.2 }}
-                className="glass rounded-xl p-8 hover:border-neon-green/50 transition-all"
+                className="border border-white/10 p-12"
               >
-                <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                  <h3 className="text-3xl font-bold text-neon-green mb-2 md:mb-0">
-                    {phase.phase}
-                  </h3>
-                  <span className="text-xl text-neon-purple">{phase.period}</span>
-                </div>
-                {phase.status && (
-                  <div className="mb-4">
-                    <span className="inline-block px-4 py-1 bg-neon-purple/20 text-neon-purple rounded-full text-sm">
-                      {phase.status}
-                    </span>
+                <div className="flex items-start gap-8">
+                  <div className="text-6xl font-bold text-gray-800">[{phase.number}]</div>
+                  <div className="flex-1">
+                    <h3 className="text-3xl font-bold mb-2">{phase.phase}</h3>
+                    <div className="flex gap-4 text-sm text-gray-500 mb-6">
+                      <span>{phase.period}</span>
+                      <span>•</span>
+                      <span>{phase.status}</span>
+                    </div>
+                    <ul className="space-y-3">
+                      {phase.items.map((item, i) => (
+                        <li key={i} className="text-gray-400 flex items-start gap-3">
+                          <span className="text-[#00ff88] mt-1">→</span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                )}
-                <ul className="space-y-3">
-                  {phase.items.map((item, j) => (
-                    <li key={j} className="flex items-start gap-3 text-gray-300">
-                      <span className="text-neon-green mt-1">▹</span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
+                </div>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Thoughts Section */}
-      <section className="py-20 px-4 relative z-10">
-        <div className="max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-5xl font-bold mb-4">{t.thoughts.title}</h2>
-            <p className="text-xl text-gray-400">{t.thoughts.subtitle}</p>
-          </motion.div>
-          
-          <div className="space-y-8">
-            {t.thoughts.items.map((thought, i) => (
-              <motion.article
-                key={thought.id}
+      {/* Stats Section */}
+      <section className="py-32 px-6 border-t border-white/10">
+        <div className="container mx-auto max-w-6xl">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {t.stats.items.map((stat, index) => (
+              <motion.div
+                key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className="glass rounded-xl p-8 hover:border-neon-purple/50 transition-all"
+                className="text-center border border-white/10 p-12"
               >
-                <div className="mb-4">
-                  <span className="text-sm text-gray-500">{thought.date}</span>
-                </div>
-                <h3 className="text-3xl font-bold mb-4 text-neon-green">
-                  {thought.title}
-                </h3>
-                <p className="text-lg text-gray-300 mb-6 leading-relaxed">
-                  {thought.content}
-                </p>
-                <div className="flex flex-wrap gap-2 mb-6">
-                  {thought.tags.map((tag, j) => (
-                    <span
-                      key={j}
-                      className="px-3 py-1 bg-neon-purple/20 text-neon-purple rounded-full text-sm"
-                    >
-                      #{tag}
-                    </span>
-                  ))}
-                </div>
-                <div className="border-t border-gray-700 pt-6">
-                  <h4 className="text-xl font-bold mb-4 text-gray-300">
-                    {lang === 'en' ? 'Discussion' : '讨论区'}
-                  </h4>
-                  <Giscus
-                    repo="shawn7499/-01"
-                    repoId="R_kgDOR5t1kg"
-                    category="Announcements"
-                    categoryId="DIC_kwDOR5t1ks4C6DGn"
-                    mapping="pathname"
-                    theme="dark_dimmed"
-                    lang={lang === 'en' ? 'en' : 'zh-CN'}
-                  />
-                  <div className="mt-6">
-                    <p className="text-gray-400 text-sm mb-4">
-                      {lang === 'en' ? 'Also discuss on X (Twitter)' : '也可以在 X (Twitter) 上讨论'}
-                    </p>
-                    <a
-                      href="https://x.com/shawnwick960"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-block px-6 py-3 bg-neon-green/10 hover:bg-neon-green/20 text-neon-green rounded-lg transition-all"
-                    >
-                      {lang === 'en' ? 'Discuss on X →' : '前往 X 讨论 →'}
-                    </a>
-                  </div>
-                </div>
-              </motion.article>
+                <div className="text-6xl font-bold text-[#00ff88] mb-4">{stat.value}</div>
+                <div className="text-gray-400">{stat.label}</div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-20 px-4 relative z-10">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.h2
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-5xl font-bold mb-12"
-          >
-            {t.contact.title}
-          </motion.h2>
+      <section id="contact" className="py-32 px-6 border-t border-white/10">
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-sm text-gray-500 mb-8">/// {t.contact.title}</div>
           
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-6">
-            {t.contact.items.map((item, i) => (
-              <motion.div
-                key={i}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {t.contact.items.map((item, index) => (
+              <motion.a
+                key={index}
+                href={item.link}
+                target="_blank"
+                rel="noopener noreferrer"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                whileHover={{ scale: 1.1 }}
+                className="border border-white/10 hover:border-[#00ff88] p-8 text-center transition-all group"
               >
-                {item.link ? (
-                  <a
-                    href={item.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="glass rounded-xl p-6 hover:bg-neon-green/10 transition-all flex flex-col items-center gap-3"
-                  >
-                    <span className="text-4xl">{item.icon}</span>
-                    <span className="text-sm">{item.name}</span>
-                  </a>
-                ) : (
-                  <div className="glass rounded-xl p-6 hover:bg-neon-purple/10 transition-all flex flex-col items-center gap-3 cursor-pointer">
-                    <span className="text-4xl">{item.icon}</span>
-                    <span className="text-sm">{item.name}</span>
-                    {item.wechat && (
-                      <span className="text-xs text-gray-500">{item.wechat}</span>
-                    )}
-                  </div>
-                )}
-              </motion.div>
+                <div className="text-xl font-bold group-hover:text-[#00ff88] transition-colors">
+                  {item.name}
+                </div>
+              </motion.a>
             ))}
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-8 text-center text-gray-500 border-t border-gray-800 relative z-10">
-        <p>© 2026 Wick. Built with Next.js & Tailwind CSS.</p>
+      <footer className="border-t border-white/10 py-12 px-6">
+        <div className="container mx-auto max-w-6xl">
+          <div className="flex justify-between items-center text-sm text-gray-500">
+            <div>SHAWN WICK 2026</div>
+            <div className="flex gap-8">
+              <a href="https://x.com/shawnwick960" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                X (Twitter)
+              </a>
+              <a href="https://t.me/shawick" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                Telegram
+              </a>
+              <a href="https://github.com/shawn7499" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                GitHub
+              </a>
+            </div>
+          </div>
+        </div>
       </footer>
-    </main>
+    </div>
   )
 }
