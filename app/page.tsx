@@ -1,24 +1,61 @@
 'use client'
 
-import { useState } from 'react'
-import { motion } from 'framer-motion'
-import Giscus from '../components/Giscus'
+import { useState, useEffect } from 'react'
+import { motion, useScroll, useTransform } from 'framer-motion'
 
 export default function Home() {
   const [lang, setLang] = useState<'en' | 'zh'>('en')
+  const { scrollYProgress } = useScroll()
+  
+  // 视差效果
+  const y1 = useTransform(scrollYProgress, [0, 1], [0, -100])
+  const y2 = useTransform(scrollYProgress, [0, 1], [0, 100])
+  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [1, 0.8, 0.8, 1])
 
   const content = {
     en: {
       hero: {
-        title: 'Permissionless infrastructure',
-        subtitle: 'for a better world',
+        title: 'Building the future',
+        subtitle: 'beyond the universe',
         mission: 'Taking Humanity Beyond the Universe',
       },
       intro: {
         text: 'Building technology that makes humanity\'s cosmic exploration possible, scalable, and inevitable.',
       },
+      whatIDo: {
+        title: 'WHAT I DO',
+        items: [
+          {
+            number: '01',
+            title: 'AI Automation',
+            desc: 'Building intelligent agents with OpenClaw',
+          },
+          {
+            number: '02',
+            title: 'Quantitative Trading',
+            desc: 'Developing profitable trading strategies',
+          },
+          {
+            number: '03',
+            title: 'Web3 Development',
+            desc: 'Creating decentralized applications',
+          },
+          {
+            number: '04',
+            title: 'Meme Coin Trading',
+            desc: 'Caught Trump 7u→65u, early WLFI investor',
+            status: 'Waiting for opportunities',
+          },
+          {
+            number: '05',
+            title: 'Prediction Market Bot',
+            desc: 'Automated monitoring for Polymarket',
+            status: 'In Development',
+          },
+        ],
+      },
       projects: {
-        title: 'PROJECTS',
+        title: 'ACTIVE PROJECTS',
         items: [
           {
             number: '01',
@@ -91,7 +128,7 @@ export default function Home() {
         ],
       },
       contact: {
-        title: 'Connect',
+        title: 'CONNECT',
         items: [
           { name: 'X (Twitter)', link: 'https://x.com/shawnwick960' },
           { name: 'Telegram', link: 'https://t.me/shawick' },
@@ -102,15 +139,47 @@ export default function Home() {
     },
     zh: {
       hero: {
-        title: '无需许可的基础设施',
-        subtitle: '为了更美好的世界',
+        title: '构建未来',
+        subtitle: '超越宇宙',
         mission: '让人类走出宇宙',
       },
       intro: {
         text: '构建让人类宇宙探索成为可能、可扩展且不可避免的技术。',
       },
+      whatIDo: {
+        title: '我正在做的',
+        items: [
+          {
+            number: '01',
+            title: 'AI 自动化',
+            desc: '使用 OpenClaw 构建智能代理',
+          },
+          {
+            number: '02',
+            title: '量化交易',
+            desc: '开发盈利的交易策略',
+          },
+          {
+            number: '03',
+            title: 'Web3 开发',
+            desc: '创建去中心化应用',
+          },
+          {
+            number: '04',
+            title: 'Meme 币交易',
+            desc: '抓住 Trump 7u→65u，WLFI 早期投资者',
+            status: '等待机会',
+          },
+          {
+            number: '05',
+            title: '预测市场机器人',
+            desc: 'Polymarket 自动监控',
+            status: '开发中',
+          },
+        ],
+      },
       projects: {
-        title: '项目',
+        title: '活跃项目',
         items: [
           {
             number: '01',
@@ -197,13 +266,28 @@ export default function Home() {
   const t = content[lang]
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-black text-white overflow-hidden">
+      {/* 抽象背景元素 */}
+      <div className="fixed inset-0 pointer-events-none">
+        <motion.div
+          style={{ y: y1, opacity }}
+          className="absolute top-20 right-20 w-96 h-96 bg-[#00ff88]/5 rounded-full blur-3xl"
+        />
+        <motion.div
+          style={{ y: y2, opacity }}
+          className="absolute bottom-20 left-20 w-96 h-96 bg-[#8b5cf6]/5 rounded-full blur-3xl"
+        />
+      </div>
+
       {/* 导航栏 */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm border-b border-white/10">
         <div className="container mx-auto px-6 py-4">
           <div className="flex justify-between items-center">
             <div className="text-xl font-bold">SHAWN WICK</div>
             <div className="flex gap-8 items-center">
+              <a href="#what-i-do" className="hover:text-[#00ff88] transition-colors">
+                {lang === 'en' ? 'What I Do' : '我在做的'}
+              </a>
               <a href="#projects" className="hover:text-[#00ff88] transition-colors">
                 {lang === 'en' ? 'Projects' : '项目'}
               </a>
@@ -225,7 +309,7 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section className="min-h-screen flex items-center justify-center px-6 pt-20">
+      <section className="min-h-screen flex items-center justify-center px-6 pt-20 relative">
         <div className="container mx-auto max-w-6xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -249,8 +333,68 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 过渡动画元素 1 */}
+      <div className="relative h-32 overflow-hidden">
+        <motion.div
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          transition={{ duration: 1 }}
+          viewport={{ once: true }}
+          className="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#00ff88] to-transparent"
+        />
+      </div>
+
+      {/* What I Do Section */}
+      <section id="what-i-do" className="py-32 px-6">
+        <div className="container mx-auto max-w-6xl">
+          <div className="text-sm text-gray-500 mb-16">/// {t.whatIDo.title}</div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {t.whatIDo.items.map((item, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                className="border border-white/10 hover:border-[#00ff88] transition-all duration-300 p-8 group"
+              >
+                <div className="text-sm text-gray-500 mb-4">[{item.number}]</div>
+                <h3 className="text-2xl font-bold mb-3 group-hover:text-[#00ff88] transition-colors">
+                  {item.title}
+                </h3>
+                <p className="text-gray-400 mb-4">{item.desc}</p>
+                {item.status && (
+                  <div className="text-sm text-[#00ff88] border border-[#00ff88]/30 px-3 py-1 inline-block">
+                    {item.status}
+                  </div>
+                )}
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 过渡动画元素 2 */}
+      <div className="relative h-32 overflow-hidden">
+        <motion.div
+          initial={{ rotate: 0 }}
+          whileInView={{ rotate: 360 }}
+          transition={{ duration: 2 }}
+          viewport={{ once: true }}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 border border-[#00ff88]/30 rounded-full"
+        />
+        <motion.div
+          initial={{ rotate: 0 }}
+          whileInView={{ rotate: -360 }}
+          transition={{ duration: 3 }}
+          viewport={{ once: true }}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 border border-[#8b5cf6]/20 rounded-full"
+        />
+      </div>
+
       {/* Projects Section */}
-      <section id="projects" className="py-32 px-6 border-t border-white/10">
+      <section id="projects" className="py-32 px-6">
         <div className="container mx-auto max-w-6xl">
           <div className="text-sm text-gray-500 mb-4">/// {t.projects.title}</div>
           
@@ -258,8 +402,8 @@ export default function Home() {
             {t.projects.items.map((project, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
                 className="group"
@@ -300,8 +444,19 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 过渡动画元素 3 */}
+      <div className="relative h-32 overflow-hidden">
+        <motion.div
+          initial={{ width: 0 }}
+          whileInView={{ width: '100%' }}
+          transition={{ duration: 1.5 }}
+          viewport={{ once: true }}
+          className="absolute top-1/2 left-0 h-px bg-gradient-to-r from-[#00ff88] via-[#8b5cf6] to-[#00ff88]"
+        />
+      </div>
+
       {/* Roadmap Section */}
-      <section id="roadmap" className="py-32 px-6 border-t border-white/10">
+      <section id="roadmap" className="py-32 px-6">
         <div className="container mx-auto max-w-6xl">
           <div className="text-sm text-gray-500 mb-4">/// {t.roadmap.title}</div>
           <p className="text-xl text-gray-400 mb-16">{t.roadmap.subtitle}</p>
@@ -310,11 +465,11 @@ export default function Home() {
             {t.roadmap.phases.map((phase, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="border border-white/10 p-12"
+                className="border border-white/10 p-12 hover:border-[#00ff88]/50 transition-all"
               >
                 <div className="flex items-start gap-8">
                   <div className="text-6xl font-bold text-gray-800">[{phase.number}]</div>
@@ -342,7 +497,7 @@ export default function Home() {
       </section>
 
       {/* Stats Section */}
-      <section className="py-32 px-6 border-t border-white/10">
+      <section className="py-32 px-6">
         <div className="container mx-auto max-w-6xl">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {t.stats.items.map((stat, index) => (
@@ -352,7 +507,7 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="text-center border border-white/10 p-12"
+                className="text-center border border-white/10 p-12 hover:border-[#00ff88] transition-all"
               >
                 <div className="text-6xl font-bold text-[#00ff88] mb-4">{stat.value}</div>
                 <div className="text-gray-400">{stat.label}</div>
@@ -363,7 +518,7 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-32 px-6 border-t border-white/10">
+      <section id="contact" className="py-32 px-6">
         <div className="container mx-auto max-w-6xl">
           <div className="text-sm text-gray-500 mb-8">/// {t.contact.title}</div>
           
