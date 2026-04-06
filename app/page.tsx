@@ -380,9 +380,9 @@ export default function Home() {
       </section>
 
       {/* 过渡动画元素 1 - LayerZero 风格线条 */}
-      <div className="relative h-64 overflow-hidden">
+      <div className="relative h-48 md:h-64 overflow-hidden my-16">
         {/* 网格线条 */}
-        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1000 200">
+        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1000 200" preserveAspectRatio="xMidYMid slice">
           {/* 水平线条组 */}
           <motion.line
             initial={{ pathLength: 0, opacity: 0 }}
@@ -529,8 +529,8 @@ export default function Home() {
       </section>
 
       {/* 过渡动画元素 2 - 几何图形变换 */}
-      <div className="relative h-64 overflow-hidden">
-        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1000 200">
+      <div className="relative h-48 md:h-64 overflow-hidden my-16">
+        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1000 200" preserveAspectRatio="xMidYMid slice">
           {/* 三角形组合 */}
           <motion.path
             initial={{ pathLength: 0, opacity: 0 }}
@@ -693,8 +693,8 @@ export default function Home() {
       </section>
 
       {/* 过渡动画元素 3 - 抽象线条网络 */}
-      <div className="relative h-64 overflow-hidden">
-        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1000 200">
+      <div className="relative h-48 md:h-64 overflow-hidden my-16">
+        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1000 200" preserveAspectRatio="xMidYMid slice">
           {/* 主对角线 */}
           <motion.line
             initial={{ pathLength: 0, opacity: 0 }}
@@ -930,8 +930,8 @@ export default function Home() {
       </section>
 
       {/* 过渡动画元素 4 - 螺旋扩散 */}
-      <div className="relative h-64 overflow-hidden">
-        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1000 200">
+      <div className="relative h-48 md:h-64 overflow-hidden my-16">
+        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1000 200" preserveAspectRatio="xMidYMid slice">
           {/* 中心扩散圆环 */}
           <motion.circle
             initial={{ scale: 0, opacity: 0 }}
