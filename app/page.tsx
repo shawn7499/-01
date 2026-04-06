@@ -269,15 +269,58 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden">
-      {/* 抽象背景元素 */}
+      {/* 抽象背景元素 - 增强版 */}
       <div className="fixed inset-0 pointer-events-none">
+        {/* 主光晕 - 视差 + 脉冲 */}
         <motion.div
           style={{ y: y1, opacity }}
+          animate={{
+            scale: [1, 1.1, 1],
+            opacity: [0.05, 0.08, 0.05],
+          }}
+          transition={{
+            scale: { duration: 8, repeat: Infinity, ease: "easeInOut" },
+            opacity: { duration: 8, repeat: Infinity, ease: "easeInOut" },
+          }}
           className="absolute top-20 right-20 w-96 h-96 bg-[#00ff88]/5 rounded-full blur-3xl"
         />
         <motion.div
           style={{ y: y2, opacity }}
+          animate={{
+            scale: [1, 1.15, 1],
+            opacity: [0.05, 0.08, 0.05],
+          }}
+          transition={{
+            scale: { duration: 10, repeat: Infinity, ease: "easeInOut" },
+            opacity: { duration: 10, repeat: Infinity, ease: "easeInOut" },
+          }}
           className="absolute bottom-20 left-20 w-96 h-96 bg-[#8b5cf6]/5 rounded-full blur-3xl"
+        />
+        {/* 额外的浮动光晕 */}
+        <motion.div
+          style={{ y: y3 }}
+          animate={{
+            x: [0, 50, 0],
+            scale: [1, 1.2, 1],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+          className="absolute top-1/2 right-1/4 w-64 h-64 bg-[#00ff88]/3 rounded-full blur-3xl"
+        />
+        <motion.div
+          animate={{
+            x: [0, -50, 0],
+            y: [0, 30, 0],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+          className="absolute bottom-1/3 left-1/3 w-80 h-80 bg-[#8b5cf6]/3 rounded-full blur-3xl"
         />
       </div>
 
@@ -335,14 +378,49 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 过渡动画元素 1 */}
-      <div className="relative h-32 overflow-hidden">
+      {/* 过渡动画元素 1 - 增强版 */}
+      <div className="relative h-48 overflow-hidden">
+        {/* 主线条 - 滚动触发 */}
         <motion.div
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
-          transition={{ duration: 1 }}
+          transition={{ duration: 1.5, ease: "easeInOut" }}
           viewport={{ once: true }}
           className="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#00ff88] to-transparent"
+        />
+        {/* 脉冲圆点 - 持续动画 */}
+        <motion.div
+          animate={{
+            scale: [1, 1.5, 1],
+            opacity: [0.3, 0.8, 0.3],
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+          className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-[#00ff88] rounded-full"
+        />
+        <motion.div
+          animate={{
+            scale: [1, 1.5, 1],
+            opacity: [0.3, 0.8, 0.3],
+          }}
+          transition={{
+            duration: 2,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 0.5
+          }}
+          className="absolute top-1/2 left-3/4 -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-[#00ff88] rounded-full"
+        />
+        {/* 移动的光点 */}
+        <motion.div
+          initial={{ x: '-100%' }}
+          whileInView={{ x: '200%' }}
+          transition={{ duration: 3, ease: "easeInOut" }}
+          viewport={{ once: true }}
+          className="absolute top-1/2 -translate-y-1/2 w-2 h-2 bg-[#00ff88] rounded-full blur-sm"
         />
       </div>
 
@@ -377,21 +455,44 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 过渡动画元素 2 */}
-      <div className="relative h-32 overflow-hidden">
+      {/* 过渡动画元素 2 - 增强版 */}
+      <div className="relative h-48 overflow-hidden">
+        {/* 旋转圆环 - 持续动画 */}
         <motion.div
-          initial={{ rotate: 0 }}
-          whileInView={{ rotate: 360 }}
-          transition={{ duration: 2 }}
-          viewport={{ once: true }}
+          animate={{ rotate: 360 }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 border border-[#00ff88]/30 rounded-full"
         />
         <motion.div
-          initial={{ rotate: 0 }}
-          whileInView={{ rotate: -360 }}
-          transition={{ duration: 3 }}
-          viewport={{ once: true }}
+          animate={{ rotate: -360 }}
+          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 border border-[#8b5cf6]/20 rounded-full"
+        />
+        <motion.div
+          animate={{ rotate: 360 }}
+          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 border border-[#00ff88]/10 rounded-full"
+        />
+        {/* 脉冲效果 */}
+        <motion.div
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.5, 0, 0.5],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 bg-[#00ff88]/10 rounded-full blur-xl"
+        />
+        {/* 滚动触发的缩放 */}
+        <motion.div
+          initial={{ scale: 0, opacity: 0 }}
+          whileInView={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 1 }}
+          viewport={{ once: true }}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-[#00ff88] rounded-full"
         />
       </div>
 
@@ -446,14 +547,66 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 过渡动画元素 3 */}
-      <div className="relative h-32 overflow-hidden">
+      {/* 过渡动画元素 3 - 增强版 */}
+      <div className="relative h-48 overflow-hidden">
+        {/* 渐变线条 - 滚动触发 */}
         <motion.div
           initial={{ width: 0 }}
           whileInView={{ width: '100%' }}
-          transition={{ duration: 1.5 }}
+          transition={{ duration: 2, ease: "easeInOut" }}
           viewport={{ once: true }}
           className="absolute top-1/2 left-0 h-px bg-gradient-to-r from-[#00ff88] via-[#8b5cf6] to-[#00ff88]"
+        />
+        {/* 波浪效果 */}
+        <motion.div
+          animate={{
+            x: ['-100%', '100%'],
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+          className="absolute top-1/2 -translate-y-1/2 w-32 h-px bg-gradient-to-r from-transparent via-[#00ff88] to-transparent"
+        />
+        {/* 上下浮动的点 */}
+        <motion.div
+          animate={{
+            y: [-10, 10, -10],
+            opacity: [0.3, 1, 0.3],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+          className="absolute top-1/2 left-1/3 -translate-x-1/2 w-2 h-2 bg-[#00ff88] rounded-full"
+        />
+        <motion.div
+          animate={{
+            y: [10, -10, 10],
+            opacity: [0.3, 1, 0.3],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 0.5
+          }}
+          className="absolute top-1/2 left-2/3 -translate-x-1/2 w-2 h-2 bg-[#8b5cf6] rounded-full"
+        />
+        {/* 扩散光晕 */}
+        <motion.div
+          animate={{
+            scale: [1, 2, 1],
+            opacity: [0.2, 0, 0.2],
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-[#00ff88]/20 rounded-full blur-2xl"
         />
       </div>
 
