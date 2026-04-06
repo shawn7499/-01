@@ -283,17 +283,17 @@ export default function Home() {
 
       {/* 导航栏 */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm border-b border-white/10">
-        <div className="container mx-auto px-6 py-4">
+        <div className="container mx-auto px-4 md:px-6 py-4">
           <div className="flex justify-between items-center">
-            <div className="text-xl font-bold">SHAWN WICK</div>
-            <div className="flex gap-8 items-center">
-              <a href="#what-i-do" className="hover:text-[#00ff88] transition-colors">
+            <div className="text-lg md:text-xl font-bold">SHAWN WICK</div>
+            <div className="flex gap-3 md:gap-8 items-center text-sm md:text-base">
+              <a href="#what-i-do" className="hidden md:block hover:text-[#00ff88] transition-colors">
                 {lang === 'en' ? 'What I Do' : '我在做的'}
               </a>
-              <a href="#projects" className="hover:text-[#00ff88] transition-colors">
+              <a href="#projects" className="hidden md:block hover:text-[#00ff88] transition-colors">
                 {lang === 'en' ? 'Projects' : '项目'}
               </a>
-              <a href="#roadmap" className="hover:text-[#00ff88] transition-colors">
+              <a href="#roadmap" className="hidden md:block hover:text-[#00ff88] transition-colors">
                 {lang === 'en' ? 'Roadmap' : '路线图'}
               </a>
               <a href="#contact" className="hover:text-[#00ff88] transition-colors">
@@ -301,7 +301,7 @@ export default function Home() {
               </a>
               <button
                 onClick={() => setLang(lang === 'en' ? 'zh' : 'en')}
-                className="px-4 py-2 border border-white/20 rounded hover:border-[#00ff88] transition-colors"
+                className="px-3 md:px-4 py-1 md:py-2 border border-white/20 rounded hover:border-[#00ff88] transition-colors text-sm"
               >
                 {lang === 'en' ? '中文' : 'EN'}
               </button>
@@ -319,16 +319,16 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="text-center"
           >
-            <h1 className="text-7xl md:text-9xl font-bold mb-6 leading-tight">
+            <h1 className="text-5xl md:text-7xl lg:text-9xl font-bold mb-6 leading-tight">
               {t.hero.title}
             </h1>
-            <h2 className="text-7xl md:text-9xl font-bold mb-12 leading-tight">
+            <h2 className="text-5xl md:text-7xl lg:text-9xl font-bold mb-12 leading-tight">
               {t.hero.subtitle}
             </h2>
-            <div className="inline-block px-6 py-3 border border-[#00ff88] text-[#00ff88] text-xl mb-12">
+            <div className="inline-block px-4 md:px-6 py-2 md:py-3 border border-[#00ff88] text-[#00ff88] text-base md:text-xl mb-12">
               {t.hero.mission}
             </div>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-base md:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
               {t.intro.text}
             </p>
           </motion.div>
@@ -414,15 +414,15 @@ export default function Home() {
                   href={project.link || '#'}
                   target={project.link ? '_blank' : undefined}
                   rel={project.link ? 'noopener noreferrer' : undefined}
-                  className="block border border-white/10 hover:border-[#00ff88] transition-all duration-300 p-12"
+                  className="block border border-white/10 hover:border-[#00ff88] transition-all duration-300 p-6 md:p-12"
                 >
                   <div className="flex items-start justify-between mb-6">
                     <div className="flex-1">
                       <div className="text-sm text-gray-500 mb-2">[{project.number}]</div>
-                      <h3 className="text-4xl font-bold mb-4 group-hover:text-[#00ff88] transition-colors">
+                      <h3 className="text-2xl md:text-4xl font-bold mb-4 group-hover:text-[#00ff88] transition-colors">
                         {project.title}
                       </h3>
-                      <p className="text-xl text-gray-400 mb-6 leading-relaxed">
+                      <p className="text-base md:text-xl text-gray-400 mb-6 leading-relaxed">
                         {project.desc}
                       </p>
                       <div className="flex gap-4">
@@ -471,12 +471,12 @@ export default function Home() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="border border-white/10 p-12 hover:border-[#00ff88]/50 transition-all"
+                className="border border-white/10 p-6 md:p-12 hover:border-[#00ff88]/50 transition-all"
               >
                 <div className="flex items-start gap-8">
                   <div className="text-6xl font-bold text-gray-800">[{phase.number}]</div>
                   <div className="flex-1">
-                    <h3 className="text-3xl font-bold mb-2">{phase.phase}</h3>
+                    <h3 className="text-2xl md:text-3xl font-bold mb-2">{phase.phase}</h3>
                     <div className="flex gap-4 text-sm text-gray-500 mb-6">
                       <span>{phase.period}</span>
                       <span>•</span>
@@ -509,9 +509,9 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: index * 0.1 }}
                 viewport={{ once: true }}
-                className="text-center border border-white/10 p-12 hover:border-[#00ff88] transition-all"
+                className="text-center border border-white/10 p-8 md:p-12 hover:border-[#00ff88] transition-all"
               >
-                <div className="text-6xl font-bold text-[#00ff88] mb-4">{stat.value}</div>
+                <div className="text-4xl md:text-6xl font-bold text-[#00ff88] mb-4">{stat.value}</div>
                 <div className="text-gray-400">{stat.label}</div>
               </motion.div>
             ))}
@@ -524,7 +524,7 @@ export default function Home() {
         <div className="container mx-auto max-w-6xl">
           <div className="text-sm text-gray-500 mb-8">/// {t.contact.title}</div>
           
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {t.contact.items.map((item, index) => (
               item.link ? (
                 <motion.a
@@ -536,7 +536,7 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="border border-white/10 hover:border-[#00ff88] p-8 text-center transition-all group flex flex-col items-center gap-3"
+                  className="border border-white/10 hover:border-[#00ff88] p-6 md:p-8 text-center transition-all group flex flex-col items-center gap-3"
                 >
                   <span className="text-4xl">{item.icon}</span>
                   <div className="text-sm font-bold group-hover:text-[#00ff88] transition-colors">
@@ -550,7 +550,7 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   viewport={{ once: true }}
-                  className="border border-white/10 hover:border-[#00ff88] p-8 text-center transition-all group flex flex-col items-center gap-3 cursor-pointer"
+                  className="border border-white/10 hover:border-[#00ff88] p-6 md:p-8 text-center transition-all group flex flex-col items-center gap-3 cursor-pointer"
                   title={item.wechat}
                 >
                   <span className="text-4xl">{item.icon}</span>
