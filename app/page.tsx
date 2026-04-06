@@ -464,31 +464,64 @@ export default function Home() {
         </svg>
       </div>
 
-      {/* What I Do Section */}
-      <section id="what-i-do" className="py-32 px-6">
-        <div className="container mx-auto max-w-6xl">
-          <div className="text-sm text-gray-500 mb-16">/// {t.whatIDo.title}</div>
+      {/* What I Do Section - 与动画结合 */}
+      <section id="what-i-do" className="py-32 px-6 relative">
+        {/* 背景扩展元素 */}
+        <motion.div
+          initial={{ scale: 0, opacity: 0 }}
+          whileInView={{ scale: 1, opacity: 0.05 }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
+          viewport={{ once: true }}
+          className="absolute inset-0 bg-[#00ff88] blur-3xl"
+        />
+        
+        <div className="container mx-auto max-w-6xl relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-sm text-gray-500 mb-16"
+          >
+            /// {t.whatIDo.title}
+          </motion.div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {t.whatIDo.items.map((item, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                initial={{ scale: 0.8, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                transition={{ 
+                  duration: 0.6, 
+                  delay: index * 0.1,
+                  ease: "easeOut"
+                }}
                 viewport={{ once: true }}
-                className="border border-white/10 hover:border-[#00ff88] transition-all duration-300 p-8 group"
+                whileHover={{ scale: 1.05 }}
+                className="border border-white/10 hover:border-[#00ff88] transition-all duration-300 p-8 group relative overflow-hidden"
               >
-                <div className="text-sm text-gray-500 mb-4">[{item.number}]</div>
-                <h3 className="text-2xl font-bold mb-3 group-hover:text-[#00ff88] transition-colors">
-                  {item.title}
-                </h3>
-                <p className="text-gray-400 mb-4">{item.desc}</p>
-                {item.status && (
-                  <div className="text-sm text-[#00ff88] border border-[#00ff88]/30 px-3 py-1 inline-block">
-                    {item.status}
-                  </div>
-                )}
+                {/* 卡片背景扩展 */}
+                <motion.div
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  transition={{ duration: 0.8, delay: index * 0.1 + 0.3 }}
+                  viewport={{ once: true }}
+                  className="absolute inset-0 bg-[#00ff88]/5 group-hover:bg-[#00ff88]/10 transition-all"
+                />
+                
+                <div className="relative z-10">
+                  <div className="text-sm text-gray-500 mb-4">[{item.number}]</div>
+                  <h3 className="text-2xl font-bold mb-3 group-hover:text-[#00ff88] transition-colors">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-400 mb-4">{item.desc}</p>
+                  {item.status && (
+                    <div className="text-sm text-[#00ff88] border border-[#00ff88]/30 px-3 py-1 inline-block">
+                      {item.status}
+                    </div>
+                  )}
+                </div>
               </motion.div>
             ))}
           </div>
@@ -574,26 +607,56 @@ export default function Home() {
         </svg>
       </div>
 
-      {/* Projects Section */}
-      <section id="projects" className="py-32 px-6">
-        <div className="container mx-auto max-w-6xl">
-          <div className="text-sm text-gray-500 mb-4">/// {t.projects.title}</div>
+      {/* Projects Section - 与动画结合 */}
+      <section id="projects" className="py-32 px-6 relative">
+        {/* 背景扩展元素 */}
+        <motion.div
+          initial={{ scale: 0, opacity: 0 }}
+          whileInView={{ scale: 1, opacity: 0.03 }}
+          transition={{ duration: 2, ease: "easeOut" }}
+          viewport={{ once: true }}
+          className="absolute inset-0 bg-[#8b5cf6] blur-3xl"
+        />
+        
+        <div className="container mx-auto max-w-6xl relative z-10">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-sm text-gray-500 mb-4"
+          >
+            /// {t.projects.title}
+          </motion.div>
           
           <div className="space-y-8">
             {t.projects.items.map((project, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                initial={{ scale: 0.9, opacity: 0, x: -50 }}
+                whileInView={{ scale: 1, opacity: 1, x: 0 }}
+                transition={{ 
+                  duration: 0.8, 
+                  delay: index * 0.2,
+                  ease: "easeOut"
+                }}
                 viewport={{ once: true }}
-                className="group"
+                className="group relative"
               >
+                {/* 卡片背景扩展 */}
+                <motion.div
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  transition={{ duration: 1, delay: index * 0.2 + 0.3 }}
+                  viewport={{ once: true }}
+                  className="absolute inset-0 bg-gradient-to-r from-[#00ff88]/5 to-transparent origin-left"
+                />
+                
                 <a
                   href={project.link || '#'}
                   target={project.link ? '_blank' : undefined}
                   rel={project.link ? 'noopener noreferrer' : undefined}
-                  className="block border border-white/10 hover:border-[#00ff88] transition-all duration-300 p-6 md:p-12"
+                  className="block border border-white/10 hover:border-[#00ff88] transition-all duration-300 p-6 md:p-12 relative z-10"
                 >
                   <div className="flex items-start justify-between mb-6">
                     <div className="flex-1">
@@ -613,9 +676,13 @@ export default function Home() {
                       </div>
                     </div>
                     {project.link && (
-                      <div className="text-[#00ff88] text-2xl group-hover:translate-x-2 transition-transform">
+                      <motion.div
+                        initial={{ x: 0 }}
+                        whileHover={{ x: 10 }}
+                        className="text-[#00ff88] text-2xl"
+                      >
                         →
-                      </div>
+                      </motion.div>
                     )}
                   </div>
                 </a>
@@ -712,24 +779,71 @@ export default function Home() {
         </svg>
       </div>
 
-      {/* Roadmap Section */}
-      <section id="roadmap" className="py-32 px-6">
-        <div className="container mx-auto max-w-6xl">
-          <div className="text-sm text-gray-500 mb-4">/// {t.roadmap.title}</div>
-          <p className="text-xl text-gray-400 mb-16">{t.roadmap.subtitle}</p>
+      {/* Roadmap Section - 与动画结合 */}
+      <section id="roadmap" className="py-32 px-6 relative">
+        {/* 背景扩展元素 */}
+        <motion.div
+          initial={{ scale: 0, opacity: 0 }}
+          whileInView={{ scale: 1, opacity: 0.04 }}
+          transition={{ duration: 2, ease: "easeOut" }}
+          viewport={{ once: true }}
+          className="absolute inset-0 bg-[#00ff88] blur-3xl"
+        />
+        
+        <div className="container mx-auto max-w-6xl relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-sm text-gray-500 mb-4"
+          >
+            /// {t.roadmap.title}
+          </motion.div>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+            className="text-xl text-gray-400 mb-16"
+          >
+            {t.roadmap.subtitle}
+          </motion.p>
           
           <div className="space-y-8">
             {t.roadmap.phases.map((phase, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                initial={{ scale: 0.85, opacity: 0, rotateX: -15 }}
+                whileInView={{ scale: 1, opacity: 1, rotateX: 0 }}
+                transition={{ 
+                  duration: 0.8, 
+                  delay: index * 0.2,
+                  ease: "easeOut"
+                }}
                 viewport={{ once: true }}
-                className="border border-white/10 p-6 md:p-12 hover:border-[#00ff88]/50 transition-all"
+                style={{ perspective: 1000 }}
+                className="border border-white/10 p-6 md:p-12 hover:border-[#00ff88]/50 transition-all relative overflow-hidden"
               >
-                <div className="flex items-start gap-8">
-                  <div className="text-6xl font-bold text-gray-800">[{phase.number}]</div>
+                {/* 卡片背景扩展 */}
+                <motion.div
+                  initial={{ scale: 0, opacity: 0 }}
+                  whileInView={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 1, delay: index * 0.2 + 0.4 }}
+                  viewport={{ once: true }}
+                  className="absolute top-0 right-0 w-64 h-64 bg-[#00ff88]/5 rounded-full blur-3xl"
+                />
+                
+                <div className="flex items-start gap-8 relative z-10">
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    transition={{ duration: 0.5, delay: index * 0.2 + 0.6 }}
+                    viewport={{ once: true }}
+                    className="text-6xl font-bold text-gray-800"
+                  >
+                    [{phase.number}]
+                  </motion.div>
                   <div className="flex-1">
                     <h3 className="text-2xl md:text-3xl font-bold mb-2">{phase.phase}</h3>
                     <div className="flex gap-4 text-sm text-gray-500 mb-6">
@@ -739,10 +853,17 @@ export default function Home() {
                     </div>
                     <ul className="space-y-3">
                       {phase.items.map((item, i) => (
-                        <li key={i} className="text-gray-400 flex items-start gap-3">
+                        <motion.li
+                          key={i}
+                          initial={{ opacity: 0, x: -20 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          transition={{ duration: 0.5, delay: index * 0.2 + 0.8 + i * 0.1 }}
+                          viewport={{ once: true }}
+                          className="text-gray-400 flex items-start gap-3"
+                        >
                           <span className="text-[#00ff88] mt-1">→</span>
                           <span>{item}</span>
-                        </li>
+                        </motion.li>
                       ))}
                     </ul>
                   </div>
@@ -753,31 +874,82 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-32 px-6">
-        <div className="container mx-auto max-w-6xl">
+      {/* Stats Section - 与动画结合 */}
+      <section className="py-32 px-6 relative">
+        {/* 背景扩展元素 */}
+        <motion.div
+          initial={{ scale: 0, opacity: 0 }}
+          whileInView={{ scale: 1, opacity: 0.03 }}
+          transition={{ duration: 2, ease: "easeOut" }}
+          viewport={{ once: true }}
+          className="absolute inset-0 bg-[#8b5cf6] blur-3xl"
+        />
+        
+        <div className="container mx-auto max-w-6xl relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {t.stats.items.map((stat, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                initial={{ scale: 0, opacity: 0, rotateY: -90 }}
+                whileInView={{ scale: 1, opacity: 1, rotateY: 0 }}
+                transition={{ 
+                  duration: 0.8, 
+                  delay: index * 0.2,
+                  ease: "easeOut"
+                }}
                 viewport={{ once: true }}
-                className="text-center border border-white/10 p-8 md:p-12 hover:border-[#00ff88] transition-all"
+                style={{ perspective: 1000 }}
+                whileHover={{ scale: 1.05 }}
+                className="text-center border border-white/10 p-8 md:p-12 hover:border-[#00ff88] transition-all relative overflow-hidden"
               >
-                <div className="text-4xl md:text-6xl font-bold text-[#00ff88] mb-4">{stat.value}</div>
-                <div className="text-gray-400">{stat.label}</div>
+                {/* 卡片背景扩展 */}
+                <motion.div
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  transition={{ duration: 0.8, delay: index * 0.2 + 0.4 }}
+                  viewport={{ once: true }}
+                  className="absolute inset-0 bg-[#00ff88]/5"
+                />
+                
+                <div className="relative z-10">
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    transition={{ duration: 0.5, delay: index * 0.2 + 0.6 }}
+                    viewport={{ once: true }}
+                    className="text-4xl md:text-6xl font-bold text-[#00ff88] mb-4"
+                  >
+                    {stat.value}
+                  </motion.div>
+                  <div className="text-gray-400">{stat.label}</div>
+                </div>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section id="contact" className="py-32 px-6">
-        <div className="container mx-auto max-w-6xl">
-          <div className="text-sm text-gray-500 mb-8">/// {t.contact.title}</div>
+      {/* Contact Section - 与动画结合 */}
+      <section id="contact" className="py-32 px-6 relative">
+        {/* 背景扩展元素 */}
+        <motion.div
+          initial={{ scale: 0, opacity: 0 }}
+          whileInView={{ scale: 1, opacity: 0.05 }}
+          transition={{ duration: 2, ease: "easeOut" }}
+          viewport={{ once: true }}
+          className="absolute inset-0 bg-[#00ff88] blur-3xl"
+        />
+        
+        <div className="container mx-auto max-w-6xl relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+            className="text-sm text-gray-500 mb-8"
+          >
+            /// {t.contact.title}
+          </motion.div>
           
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {t.contact.items.map((item, index) => (
@@ -787,32 +959,60 @@ export default function Home() {
                   href={item.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  initial={{ scale: 0, opacity: 0, rotateZ: -45 }}
+                  whileInView={{ scale: 1, opacity: 1, rotateZ: 0 }}
+                  transition={{ 
+                    duration: 0.6, 
+                    delay: index * 0.1,
+                    ease: "easeOut"
+                  }}
                   viewport={{ once: true }}
-                  className="border border-white/10 hover:border-[#00ff88] p-6 md:p-8 text-center transition-all group flex flex-col items-center gap-3"
+                  whileHover={{ scale: 1.1, y: -5 }}
+                  className="border border-white/10 hover:border-[#00ff88] p-6 md:p-8 text-center transition-all group flex flex-col items-center gap-3 relative overflow-hidden"
                 >
-                  <span className="text-4xl">{item.icon}</span>
-                  <div className="text-sm font-bold group-hover:text-[#00ff88] transition-colors">
+                  {/* 卡片背景扩展 */}
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 + 0.3 }}
+                    viewport={{ once: true }}
+                    className="absolute inset-0 bg-[#00ff88]/5 group-hover:bg-[#00ff88]/10 transition-all"
+                  />
+                  
+                  <span className="text-4xl relative z-10">{item.icon}</span>
+                  <div className="text-sm font-bold group-hover:text-[#00ff88] transition-colors relative z-10">
                     {item.name}
                   </div>
                 </motion.a>
               ) : (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  initial={{ scale: 0, opacity: 0, rotateZ: -45 }}
+                  whileInView={{ scale: 1, opacity: 1, rotateZ: 0 }}
+                  transition={{ 
+                    duration: 0.6, 
+                    delay: index * 0.1,
+                    ease: "easeOut"
+                  }}
                   viewport={{ once: true }}
-                  className="border border-white/10 hover:border-[#00ff88] p-6 md:p-8 text-center transition-all group flex flex-col items-center gap-3 cursor-pointer"
+                  whileHover={{ scale: 1.1, y: -5 }}
+                  className="border border-white/10 hover:border-[#00ff88] p-6 md:p-8 text-center transition-all group flex flex-col items-center gap-3 cursor-pointer relative overflow-hidden"
                   title={item.wechat}
                 >
-                  <span className="text-4xl">{item.icon}</span>
-                  <div className="text-sm font-bold group-hover:text-[#00ff88] transition-colors">
+                  {/* 卡片背景扩展 */}
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 + 0.3 }}
+                    viewport={{ once: true }}
+                    className="absolute inset-0 bg-[#00ff88]/5 group-hover:bg-[#00ff88]/10 transition-all"
+                  />
+                  
+                  <span className="text-4xl relative z-10">{item.icon}</span>
+                  <div className="text-sm font-bold group-hover:text-[#00ff88] transition-colors relative z-10">
                     {item.name}
                   </div>
-                  <div className="text-xs text-gray-500 mt-1">{item.wechat}</div>
+                  <div className="text-xs text-gray-500 mt-1 relative z-10">{item.wechat}</div>
                 </motion.div>
               )
             ))}
