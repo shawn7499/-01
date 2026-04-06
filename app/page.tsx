@@ -380,64 +380,64 @@ export default function Home() {
       </section>
 
       {/* 过渡动画元素 1 - LayerZero 风格线条 */}
-      <div className="relative h-48 md:h-64 overflow-hidden my-16">
+      <div className="relative h-48 md:h-64 overflow-hidden my-16 bg-black/50">
         {/* 网格线条 */}
         <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1000 200" preserveAspectRatio="xMidYMid slice">
           {/* 水平线条组 */}
           <motion.line
             initial={{ pathLength: 0, opacity: 0 }}
-            whileInView={{ pathLength: 1, opacity: 0.3 }}
+            whileInView={{ pathLength: 1, opacity: 0.8 }}
             transition={{ duration: 1.5, ease: "easeInOut" }}
             viewport={{ once: true }}
             x1="0" y1="80" x2="1000" y2="80"
             stroke="#00ff88"
-            strokeWidth="1"
+            strokeWidth="2"
           />
           <motion.line
             initial={{ pathLength: 0, opacity: 0 }}
-            whileInView={{ pathLength: 1, opacity: 0.2 }}
+            whileInView={{ pathLength: 1, opacity: 0.6 }}
             transition={{ duration: 1.5, ease: "easeInOut", delay: 0.2 }}
             viewport={{ once: true }}
             x1="0" y1="100" x2="1000" y2="100"
             stroke="#00ff88"
-            strokeWidth="1"
+            strokeWidth="2"
           />
           <motion.line
             initial={{ pathLength: 0, opacity: 0 }}
-            whileInView={{ pathLength: 1, opacity: 0.3 }}
+            whileInView={{ pathLength: 1, opacity: 0.8 }}
             transition={{ duration: 1.5, ease: "easeInOut", delay: 0.4 }}
             viewport={{ once: true }}
             x1="0" y1="120" x2="1000" y2="120"
             stroke="#00ff88"
-            strokeWidth="1"
+            strokeWidth="2"
           />
           {/* 垂直线条 */}
           <motion.line
             initial={{ pathLength: 0, opacity: 0 }}
-            whileInView={{ pathLength: 1, opacity: 0.2 }}
+            whileInView={{ pathLength: 1, opacity: 0.6 }}
             transition={{ duration: 1, ease: "easeInOut", delay: 0.6 }}
             viewport={{ once: true }}
             x1="200" y1="60" x2="200" y2="140"
             stroke="#00ff88"
-            strokeWidth="1"
+            strokeWidth="2"
           />
           <motion.line
             initial={{ pathLength: 0, opacity: 0 }}
-            whileInView={{ pathLength: 1, opacity: 0.2 }}
+            whileInView={{ pathLength: 1, opacity: 0.6 }}
             transition={{ duration: 1, ease: "easeInOut", delay: 0.8 }}
             viewport={{ once: true }}
             x1="500" y1="60" x2="500" y2="140"
             stroke="#00ff88"
-            strokeWidth="1"
+            strokeWidth="2"
           />
           <motion.line
             initial={{ pathLength: 0, opacity: 0 }}
-            whileInView={{ pathLength: 1, opacity: 0.2 }}
+            whileInView={{ pathLength: 1, opacity: 0.6 }}
             transition={{ duration: 1, ease: "easeInOut", delay: 1 }}
             viewport={{ once: true }}
             x1="800" y1="60" x2="800" y2="140"
             stroke="#00ff88"
-            strokeWidth="1"
+            strokeWidth="2"
           />
           {/* 连接节点 */}
           <motion.circle
@@ -445,21 +445,21 @@ export default function Home() {
             whileInView={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.5, delay: 1.2 }}
             viewport={{ once: true }}
-            cx="200" cy="100" r="3" fill="#00ff88"
+            cx="200" cy="100" r="5" fill="#00ff88"
           />
           <motion.circle
             initial={{ scale: 0, opacity: 0 }}
             whileInView={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.5, delay: 1.4 }}
             viewport={{ once: true }}
-            cx="500" cy="100" r="3" fill="#00ff88"
+            cx="500" cy="100" r="5" fill="#00ff88"
           />
           <motion.circle
             initial={{ scale: 0, opacity: 0 }}
             whileInView={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.5, delay: 1.6 }}
             viewport={{ once: true }}
-            cx="800" cy="100" r="3" fill="#00ff88"
+            cx="800" cy="100" r="5" fill="#00ff88"
           />
         </svg>
       </div>
@@ -529,79 +529,79 @@ export default function Home() {
       </section>
 
       {/* 过渡动画元素 2 - 几何图形变换 */}
-      <div className="relative h-48 md:h-64 overflow-hidden my-16">
+      <div className="relative h-48 md:h-64 overflow-hidden my-16 bg-black/50">
         <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1000 200" preserveAspectRatio="xMidYMid slice">
           {/* 三角形组合 */}
           <motion.path
             initial={{ pathLength: 0, opacity: 0 }}
-            whileInView={{ pathLength: 1, opacity: 0.3 }}
+            whileInView={{ pathLength: 1, opacity: 0.8 }}
             transition={{ duration: 2, ease: "easeInOut" }}
             viewport={{ once: true }}
             d="M 400 60 L 450 140 L 350 140 Z"
             stroke="#00ff88"
-            strokeWidth="1"
+            strokeWidth="2"
             fill="none"
           />
           <motion.path
             initial={{ pathLength: 0, opacity: 0 }}
-            whileInView={{ pathLength: 1, opacity: 0.2 }}
+            whileInView={{ pathLength: 1, opacity: 0.6 }}
             transition={{ duration: 2, ease: "easeInOut", delay: 0.3 }}
             viewport={{ once: true }}
             d="M 500 80 L 540 140 L 460 140 Z"
             stroke="#8b5cf6"
-            strokeWidth="1"
+            strokeWidth="2"
             fill="none"
           />
           <motion.path
             initial={{ pathLength: 0, opacity: 0 }}
-            whileInView={{ pathLength: 1, opacity: 0.3 }}
+            whileInView={{ pathLength: 1, opacity: 0.8 }}
             transition={{ duration: 2, ease: "easeInOut", delay: 0.6 }}
             viewport={{ once: true }}
             d="M 600 60 L 650 140 L 550 140 Z"
             stroke="#00ff88"
-            strokeWidth="1"
+            strokeWidth="2"
             fill="none"
           />
           {/* 矩形框架 */}
           <motion.rect
             initial={{ pathLength: 0, opacity: 0 }}
-            whileInView={{ pathLength: 1, opacity: 0.2 }}
+            whileInView={{ pathLength: 1, opacity: 0.6 }}
             transition={{ duration: 1.5, ease: "easeInOut", delay: 0.9 }}
             viewport={{ once: true }}
             x="250" y="70" width="60" height="60"
             stroke="#00ff88"
-            strokeWidth="1"
+            strokeWidth="2"
             fill="none"
           />
           <motion.rect
             initial={{ pathLength: 0, opacity: 0 }}
-            whileInView={{ pathLength: 1, opacity: 0.2 }}
+            whileInView={{ pathLength: 1, opacity: 0.6 }}
             transition={{ duration: 1.5, ease: "easeInOut", delay: 1.2 }}
             viewport={{ once: true }}
             x="700" y="70" width="60" height="60"
             stroke="#8b5cf6"
-            strokeWidth="1"
+            strokeWidth="2"
             fill="none"
           />
           {/* 连接线 */}
           <motion.line
             initial={{ pathLength: 0, opacity: 0 }}
-            whileInView={{ pathLength: 1, opacity: 0.15 }}
+            whileInView={{ pathLength: 1, opacity: 0.5 }}
             transition={{ duration: 1, ease: "easeInOut", delay: 1.5 }}
             viewport={{ once: true }}
             x1="310" y1="100" x2="400" y2="100"
             stroke="#00ff88"
-            strokeWidth="1"
+            strokeWidth="2"
             strokeDasharray="5,5"
           />
           <motion.line
             initial={{ pathLength: 0, opacity: 0 }}
-            whileInView={{ pathLength: 1, opacity: 0.15 }}
+            whileInView={{ pathLength: 1, opacity: 0.5 }}
             transition={{ duration: 1, ease: "easeInOut", delay: 1.7 }}
             viewport={{ once: true }}
             x1="650" y1="100" x2="700" y2="100"
             stroke="#8b5cf6"
-            strokeWidth="1"
+            strokeWidth="2"
             strokeDasharray="5,5"
           />
         </svg>
@@ -693,46 +693,46 @@ export default function Home() {
       </section>
 
       {/* 过渡动画元素 3 - 抽象线条网络 */}
-      <div className="relative h-48 md:h-64 overflow-hidden my-16">
+      <div className="relative h-48 md:h-64 overflow-hidden my-16 bg-black/50">
         <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1000 200" preserveAspectRatio="xMidYMid slice">
           {/* 主对角线 */}
           <motion.line
             initial={{ pathLength: 0, opacity: 0 }}
-            whileInView={{ pathLength: 1, opacity: 0.3 }}
+            whileInView={{ pathLength: 1, opacity: 0.8 }}
             transition={{ duration: 2, ease: "easeInOut" }}
             viewport={{ once: true }}
             x1="100" y1="50" x2="900" y2="150"
             stroke="#00ff88"
-            strokeWidth="1"
+            strokeWidth="2"
           />
           <motion.line
             initial={{ pathLength: 0, opacity: 0 }}
-            whileInView={{ pathLength: 1, opacity: 0.2 }}
+            whileInView={{ pathLength: 1, opacity: 0.6 }}
             transition={{ duration: 2, ease: "easeInOut", delay: 0.3 }}
             viewport={{ once: true }}
             x1="100" y1="150" x2="900" y2="50"
             stroke="#8b5cf6"
-            strokeWidth="1"
+            strokeWidth="2"
           />
           {/* 分支线条 */}
           <motion.path
             initial={{ pathLength: 0, opacity: 0 }}
-            whileInView={{ pathLength: 1, opacity: 0.25 }}
+            whileInView={{ pathLength: 1, opacity: 0.7 }}
             transition={{ duration: 1.5, ease: "easeInOut", delay: 0.6 }}
             viewport={{ once: true }}
             d="M 300 80 L 400 100 L 500 90"
             stroke="#00ff88"
-            strokeWidth="1"
+            strokeWidth="2"
             fill="none"
           />
           <motion.path
             initial={{ pathLength: 0, opacity: 0 }}
-            whileInView={{ pathLength: 1, opacity: 0.25 }}
+            whileInView={{ pathLength: 1, opacity: 0.7 }}
             transition={{ duration: 1.5, ease: "easeInOut", delay: 0.9 }}
             viewport={{ once: true }}
             d="M 500 110 L 600 100 L 700 120"
             stroke="#8b5cf6"
-            strokeWidth="1"
+            strokeWidth="2"
             fill="none"
           />
           {/* 节点组 */}
@@ -741,21 +741,21 @@ export default function Home() {
             whileInView={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.5, delay: 1.2 }}
             viewport={{ once: true }}
-            cx="300" cy="80" r="4" fill="#00ff88"
+            cx="300" cy="80" r="5" fill="#00ff88"
           />
           <motion.circle
             initial={{ scale: 0, opacity: 0 }}
             whileInView={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.5, delay: 1.4 }}
             viewport={{ once: true }}
-            cx="500" cy="100" r="5" fill="#00ff88"
+            cx="500" cy="100" r="6" fill="#00ff88"
           />
           <motion.circle
             initial={{ scale: 0, opacity: 0 }}
             whileInView={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.5, delay: 1.6 }}
             viewport={{ once: true }}
-            cx="700" cy="120" r="4" fill="#8b5cf6"
+            cx="700" cy="120" r="5" fill="#8b5cf6"
           />
           {/* 脉冲光晕 */}
           <motion.circle
@@ -763,17 +763,17 @@ export default function Home() {
             whileInView={{ r: 20, opacity: 0 }}
             transition={{ duration: 1.5, delay: 1.8 }}
             viewport={{ once: true }}
-            cx="500" cy="100" r="20" fill="none" stroke="#00ff88" strokeWidth="1" opacity="0.3"
+            cx="500" cy="100" r="20" fill="none" stroke="#00ff88" strokeWidth="2" opacity="0.5"
           />
           {/* 水平连接线 */}
           <motion.line
             initial={{ pathLength: 0, opacity: 0 }}
-            whileInView={{ pathLength: 1, opacity: 0.15 }}
+            whileInView={{ pathLength: 1, opacity: 0.5 }}
             transition={{ duration: 1, ease: "easeInOut", delay: 2 }}
             viewport={{ once: true }}
             x1="200" y1="100" x2="800" y2="100"
             stroke="#00ff88"
-            strokeWidth="1"
+            strokeWidth="2"
             strokeDasharray="10,10"
           />
         </svg>
@@ -930,75 +930,75 @@ export default function Home() {
       </section>
 
       {/* 过渡动画元素 4 - 螺旋扩散 */}
-      <div className="relative h-48 md:h-64 overflow-hidden my-16">
+      <div className="relative h-48 md:h-64 overflow-hidden my-16 bg-black/50">
         <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1000 200" preserveAspectRatio="xMidYMid slice">
           {/* 中心扩散圆环 */}
           <motion.circle
             initial={{ scale: 0, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 0.3 }}
+            whileInView={{ scale: 1, opacity: 0.8 }}
             transition={{ duration: 2, ease: "easeOut" }}
             viewport={{ once: true }}
             cx="500" cy="100" r="40"
             stroke="#00ff88"
-            strokeWidth="1"
+            strokeWidth="2"
             fill="none"
           />
           <motion.circle
             initial={{ scale: 0, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 0.2 }}
+            whileInView={{ scale: 1, opacity: 0.6 }}
             transition={{ duration: 2, ease: "easeOut", delay: 0.3 }}
             viewport={{ once: true }}
             cx="500" cy="100" r="60"
             stroke="#8b5cf6"
-            strokeWidth="1"
+            strokeWidth="2"
             fill="none"
           />
           <motion.circle
             initial={{ scale: 0, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 0.1 }}
+            whileInView={{ scale: 1, opacity: 0.4 }}
             transition={{ duration: 2, ease: "easeOut", delay: 0.6 }}
             viewport={{ once: true }}
             cx="500" cy="100" r="80"
             stroke="#00ff88"
-            strokeWidth="1"
+            strokeWidth="2"
             fill="none"
           />
           {/* 放射线 */}
           <motion.line
             initial={{ pathLength: 0, opacity: 0 }}
-            whileInView={{ pathLength: 1, opacity: 0.3 }}
+            whileInView={{ pathLength: 1, opacity: 0.8 }}
             transition={{ duration: 1.5, ease: "easeOut", delay: 0.9 }}
             viewport={{ once: true }}
             x1="500" y1="100" x2="650" y2="50"
             stroke="#00ff88"
-            strokeWidth="1"
+            strokeWidth="2"
           />
           <motion.line
             initial={{ pathLength: 0, opacity: 0 }}
-            whileInView={{ pathLength: 1, opacity: 0.3 }}
+            whileInView={{ pathLength: 1, opacity: 0.8 }}
             transition={{ duration: 1.5, ease: "easeOut", delay: 1.1 }}
             viewport={{ once: true }}
             x1="500" y1="100" x2="650" y2="150"
             stroke="#00ff88"
-            strokeWidth="1"
+            strokeWidth="2"
           />
           <motion.line
             initial={{ pathLength: 0, opacity: 0 }}
-            whileInView={{ pathLength: 1, opacity: 0.3 }}
+            whileInView={{ pathLength: 1, opacity: 0.8 }}
             transition={{ duration: 1.5, ease: "easeOut", delay: 1.3 }}
             viewport={{ once: true }}
             x1="500" y1="100" x2="350" y2="50"
             stroke="#8b5cf6"
-            strokeWidth="1"
+            strokeWidth="2"
           />
           <motion.line
             initial={{ pathLength: 0, opacity: 0 }}
-            whileInView={{ pathLength: 1, opacity: 0.3 }}
+            whileInView={{ pathLength: 1, opacity: 0.8 }}
             transition={{ duration: 1.5, ease: "easeOut", delay: 1.5 }}
             viewport={{ once: true }}
             x1="500" y1="100" x2="350" y2="150"
             stroke="#8b5cf6"
-            strokeWidth="1"
+            strokeWidth="2"
           />
           {/* 端点节点 */}
           <motion.circle
@@ -1006,28 +1006,28 @@ export default function Home() {
             whileInView={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.5, delay: 1.7 }}
             viewport={{ once: true }}
-            cx="650" cy="50" r="3" fill="#00ff88"
+            cx="650" cy="50" r="5" fill="#00ff88"
           />
           <motion.circle
             initial={{ scale: 0, opacity: 0 }}
             whileInView={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.5, delay: 1.8 }}
             viewport={{ once: true }}
-            cx="650" cy="150" r="3" fill="#00ff88"
+            cx="650" cy="150" r="5" fill="#00ff88"
           />
           <motion.circle
             initial={{ scale: 0, opacity: 0 }}
             whileInView={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.5, delay: 1.9 }}
             viewport={{ once: true }}
-            cx="350" cy="50" r="3" fill="#8b5cf6"
+            cx="350" cy="50" r="5" fill="#8b5cf6"
           />
           <motion.circle
             initial={{ scale: 0, opacity: 0 }}
             whileInView={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.5, delay: 2.0 }}
             viewport={{ once: true }}
-            cx="350" cy="150" r="3" fill="#8b5cf6"
+            cx="350" cy="150" r="5" fill="#8b5cf6"
           />
         </svg>
       </div>
