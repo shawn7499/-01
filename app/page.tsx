@@ -929,6 +929,109 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 过渡动画元素 4 - 螺旋扩散 */}
+      <div className="relative h-64 overflow-hidden">
+        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1000 200">
+          {/* 中心扩散圆环 */}
+          <motion.circle
+            initial={{ scale: 0, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 0.3 }}
+            transition={{ duration: 2, ease: "easeOut" }}
+            viewport={{ once: true }}
+            cx="500" cy="100" r="40"
+            stroke="#00ff88"
+            strokeWidth="1"
+            fill="none"
+          />
+          <motion.circle
+            initial={{ scale: 0, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 0.2 }}
+            transition={{ duration: 2, ease: "easeOut", delay: 0.3 }}
+            viewport={{ once: true }}
+            cx="500" cy="100" r="60"
+            stroke="#8b5cf6"
+            strokeWidth="1"
+            fill="none"
+          />
+          <motion.circle
+            initial={{ scale: 0, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 0.1 }}
+            transition={{ duration: 2, ease: "easeOut", delay: 0.6 }}
+            viewport={{ once: true }}
+            cx="500" cy="100" r="80"
+            stroke="#00ff88"
+            strokeWidth="1"
+            fill="none"
+          />
+          {/* 放射线 */}
+          <motion.line
+            initial={{ pathLength: 0, opacity: 0 }}
+            whileInView={{ pathLength: 1, opacity: 0.3 }}
+            transition={{ duration: 1.5, ease: "easeOut", delay: 0.9 }}
+            viewport={{ once: true }}
+            x1="500" y1="100" x2="650" y2="50"
+            stroke="#00ff88"
+            strokeWidth="1"
+          />
+          <motion.line
+            initial={{ pathLength: 0, opacity: 0 }}
+            whileInView={{ pathLength: 1, opacity: 0.3 }}
+            transition={{ duration: 1.5, ease: "easeOut", delay: 1.1 }}
+            viewport={{ once: true }}
+            x1="500" y1="100" x2="650" y2="150"
+            stroke="#00ff88"
+            strokeWidth="1"
+          />
+          <motion.line
+            initial={{ pathLength: 0, opacity: 0 }}
+            whileInView={{ pathLength: 1, opacity: 0.3 }}
+            transition={{ duration: 1.5, ease: "easeOut", delay: 1.3 }}
+            viewport={{ once: true }}
+            x1="500" y1="100" x2="350" y2="50"
+            stroke="#8b5cf6"
+            strokeWidth="1"
+          />
+          <motion.line
+            initial={{ pathLength: 0, opacity: 0 }}
+            whileInView={{ pathLength: 1, opacity: 0.3 }}
+            transition={{ duration: 1.5, ease: "easeOut", delay: 1.5 }}
+            viewport={{ once: true }}
+            x1="500" y1="100" x2="350" y2="150"
+            stroke="#8b5cf6"
+            strokeWidth="1"
+          />
+          {/* 端点节点 */}
+          <motion.circle
+            initial={{ scale: 0, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.5, delay: 1.7 }}
+            viewport={{ once: true }}
+            cx="650" cy="50" r="3" fill="#00ff88"
+          />
+          <motion.circle
+            initial={{ scale: 0, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.5, delay: 1.8 }}
+            viewport={{ once: true }}
+            cx="650" cy="150" r="3" fill="#00ff88"
+          />
+          <motion.circle
+            initial={{ scale: 0, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.5, delay: 1.9 }}
+            viewport={{ once: true }}
+            cx="350" cy="50" r="3" fill="#8b5cf6"
+          />
+          <motion.circle
+            initial={{ scale: 0, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.5, delay: 2.0 }}
+            viewport={{ once: true }}
+            cx="350" cy="150" r="3" fill="#8b5cf6"
+          />
+        </svg>
+      </div>
+
       {/* Contact Section - 与动画结合 */}
       <section id="contact" className="py-32 px-6 relative">
         {/* 背景扩展元素 */}
