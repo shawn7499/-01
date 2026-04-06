@@ -1,5 +1,5 @@
 import React from 'react';
-import './transitions.css';
+import '../app/transitions.css';
 
 export function Transition1() {
   return (
