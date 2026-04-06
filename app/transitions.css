@@ -1,0 +1,33 @@
+/* 过渡动画 CSS */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes drawLine {
+  from { stroke-dashoffset: 1000; }
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.transition-line {
+  stroke-dasharray: 1000;
+  animation: drawLine 2s ease-out forwards, pulse 3s ease-in-out infinite;
+}
+
+.transition-circle {
+  animation: scaleIn 0.5s ease-out forwards, pulse 2s ease-in-out infinite;
+}
+
+.transition-container {
+  animation: fadeIn 1s ease-out;
+}
