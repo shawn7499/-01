@@ -383,17 +383,8 @@ export default function Home() {
       {/* 过渡动画元素 1 - LayerZero 风格线条 */}
       <Transition1 />
 
-      {/* What I Do Section - 与动画结合 */}
+      {/* What I Do Section */}
       <section id="what-i-do" className="py-32 px-6 relative">
-        {/* 背景扩展元素 */}
-        <motion.div
-          initial={{ scale: 0, opacity: 0 }}
-          whileInView={{ scale: 1, opacity: 0.05 }}
-          transition={{ duration: 1.5, ease: "easeOut" }}
-          viewport={{ once: true }}
-          className="absolute inset-0 bg-[#00ff88] blur-3xl"
-        />
-        
         <div className="container mx-auto max-w-6xl relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -420,15 +411,6 @@ export default function Home() {
                 whileHover={{ scale: 1.05 }}
                 className="border border-white/10 hover:border-[#00ff88] transition-all duration-300 p-8 group relative overflow-hidden"
               >
-                {/* 卡片背景扩展 */}
-                <motion.div
-                  initial={{ scale: 0 }}
-                  whileInView={{ scale: 1 }}
-                  transition={{ duration: 0.8, delay: index * 0.1 + 0.3 }}
-                  viewport={{ once: true }}
-                  className="absolute inset-0 bg-[#00ff88]/5 group-hover:bg-[#00ff88]/10 transition-all"
-                />
-                
                 <div className="relative z-10">
                   <div className="text-sm text-gray-500 mb-4">[{item.number}]</div>
                   <h3 className="text-2xl font-bold mb-3 group-hover:text-[#00ff88] transition-colors">
@@ -450,17 +432,8 @@ export default function Home() {
       {/* 过渡动画元素 2 - 几何图形变换 */}
       <Transition2 />
 
-      {/* Projects Section - 与动画结合 */}
+      {/* Projects Section */}
       <section id="projects" className="py-32 px-6 relative">
-        {/* 背景扩展元素 */}
-        <motion.div
-          initial={{ scale: 0, opacity: 0 }}
-          whileInView={{ scale: 1, opacity: 0.03 }}
-          transition={{ duration: 2, ease: "easeOut" }}
-          viewport={{ once: true }}
-          className="absolute inset-0 bg-[#8b5cf6] blur-3xl"
-        />
-        
         <div className="container mx-auto max-w-6xl relative z-10">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -486,15 +459,6 @@ export default function Home() {
                 viewport={{ once: true }}
                 className="group relative"
               >
-                {/* 卡片背景扩展 */}
-                <motion.div
-                  initial={{ scaleX: 0 }}
-                  whileInView={{ scaleX: 1 }}
-                  transition={{ duration: 1, delay: index * 0.2 + 0.3 }}
-                  viewport={{ once: true }}
-                  className="absolute inset-0 bg-gradient-to-r from-[#00ff88]/5 to-transparent origin-left"
-                />
-                
                 <a
                   href={project.link || '#'}
                   target={project.link ? '_blank' : undefined}
@@ -538,17 +502,8 @@ export default function Home() {
       {/* 过渡动画元素 3 - 抽象线条网络 */}
       <Transition3 />
 
-      {/* Roadmap Section - 与动画结合 */}
+      {/* Roadmap Section */}
       <section id="roadmap" className="py-32 px-6 relative">
-        {/* 背景扩展元素 */}
-        <motion.div
-          initial={{ scale: 0, opacity: 0 }}
-          whileInView={{ scale: 1, opacity: 0.04 }}
-          transition={{ duration: 2, ease: "easeOut" }}
-          viewport={{ once: true }}
-          className="absolute inset-0 bg-[#00ff88] blur-3xl"
-        />
-        
         <div className="container mx-auto max-w-6xl relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -584,15 +539,6 @@ export default function Home() {
                 style={{ perspective: 1000 }}
                 className="border border-white/10 p-6 md:p-12 hover:border-[#00ff88]/50 transition-all relative overflow-hidden"
               >
-                {/* 卡片背景扩展 */}
-                <motion.div
-                  initial={{ scale: 0, opacity: 0 }}
-                  whileInView={{ scale: 1, opacity: 1 }}
-                  transition={{ duration: 1, delay: index * 0.2 + 0.4 }}
-                  viewport={{ once: true }}
-                  className="absolute top-0 right-0 w-64 h-64 bg-[#00ff88]/5 rounded-full blur-3xl"
-                />
-                
                 <div className="flex items-start gap-8 relative z-10">
                   <motion.div
                     initial={{ scale: 0 }}
@@ -633,17 +579,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Stats Section - 与动画结合 */}
+      {/* Stats Section */}
       <section className="py-32 px-6 relative">
-        {/* 背景扩展元素 */}
-        <motion.div
-          initial={{ scale: 0, opacity: 0 }}
-          whileInView={{ scale: 1, opacity: 0.03 }}
-          transition={{ duration: 2, ease: "easeOut" }}
-          viewport={{ once: true }}
-          className="absolute inset-0 bg-[#8b5cf6] blur-3xl"
-        />
-        
         <div className="container mx-auto max-w-6xl relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {t.stats.items.map((stat, index) => (
@@ -661,15 +598,6 @@ export default function Home() {
                 whileHover={{ scale: 1.05 }}
                 className="text-center border border-white/10 p-8 md:p-12 hover:border-[#00ff88] transition-all relative overflow-hidden"
               >
-                {/* 卡片背景扩展 */}
-                <motion.div
-                  initial={{ scale: 0 }}
-                  whileInView={{ scale: 1 }}
-                  transition={{ duration: 0.8, delay: index * 0.2 + 0.4 }}
-                  viewport={{ once: true }}
-                  className="absolute inset-0 bg-[#00ff88]/5"
-                />
-                
                 <div className="relative z-10">
                   <motion.div
                     initial={{ scale: 0 }}
@@ -691,17 +619,8 @@ export default function Home() {
       {/* 过渡动画元素 4 - 螺旋扩散 */}
       <Transition4 />
 
-      {/* Contact Section - 与动画结合 */}
+      {/* Contact Section */}
       <section id="contact" className="py-32 px-6 relative">
-        {/* 背景扩展元素 */}
-        <motion.div
-          initial={{ scale: 0, opacity: 0 }}
-          whileInView={{ scale: 1, opacity: 0.05 }}
-          transition={{ duration: 2, ease: "easeOut" }}
-          viewport={{ once: true }}
-          className="absolute inset-0 bg-[#00ff88] blur-3xl"
-        />
-        
         <div className="container mx-auto max-w-6xl relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -732,15 +651,6 @@ export default function Home() {
                   whileHover={{ scale: 1.1, y: -5 }}
                   className="border border-white/10 hover:border-[#00ff88] p-6 md:p-8 text-center transition-all group flex flex-col items-center gap-3 relative overflow-hidden"
                 >
-                  {/* 卡片背景扩展 */}
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 + 0.3 }}
-                    viewport={{ once: true }}
-                    className="absolute inset-0 bg-[#00ff88]/5 group-hover:bg-[#00ff88]/10 transition-all"
-                  />
-                  
                   <span className="text-4xl relative z-10">{item.icon}</span>
                   <div className="text-sm font-bold group-hover:text-[#00ff88] transition-colors relative z-10">
                     {item.name}
@@ -761,15 +671,6 @@ export default function Home() {
                   className="border border-white/10 hover:border-[#00ff88] p-6 md:p-8 text-center transition-all group flex flex-col items-center gap-3 cursor-pointer relative overflow-hidden"
                   title={item.wechat}
                 >
-                  {/* 卡片背景扩展 */}
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    transition={{ duration: 0.5, delay: index * 0.1 + 0.3 }}
-                    viewport={{ once: true }}
-                    className="absolute inset-0 bg-[#00ff88]/5 group-hover:bg-[#00ff88]/10 transition-all"
-                  />
-                  
                   <span className="text-4xl relative z-10">{item.icon}</span>
                   <div className="text-sm font-bold group-hover:text-[#00ff88] transition-colors relative z-10">
                     {item.name}

@@ -1,124 +1,183 @@
 import React from 'react';
 import '../app/transitions.css';
 
+// Transition 1: 极简线条网格 - 灵感来自 LayerZero 的网格系统
 export function Transition1() {
   return (
-    <div className="relative h-48 md:h-64 overflow-hidden my-16 bg-black/30">
-      <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1000 200" preserveAspectRatio="xMidYMid slice">
-        {/* 流动的波浪曲线 */}
-        <path className="transition-path" style={{ animationDelay: '0s' }}
-          d="M 0 100 Q 250 50, 500 100 T 1000 100"
-          stroke="#00ff88" strokeWidth="2" fill="none" opacity="0.8" />
-        <path className="transition-path" style={{ animationDelay: '0.3s' }}
-          d="M 0 120 Q 250 80, 500 120 T 1000 120"
-          stroke="#00ff88" strokeWidth="2" fill="none" opacity="0.6" />
-        <path className="transition-path" style={{ animationDelay: '0.6s' }}
-          d="M 0 80 Q 250 120, 500 80 T 1000 80"
-          stroke="#8b5cf6" strokeWidth="2" fill="none" opacity="0.5" />
+    <div className="relative h-32 md:h-48 overflow-hidden my-24">
+      <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1200 200" preserveAspectRatio="xMidYMid slice">
+        {/* 主水平线 */}
+        <path 
+          className="transition-path" 
+          style={{ animationDelay: '0s', animationDuration: '3s' }}
+          d="M 0 100 L 1200 100"
+          stroke="#00ff88" 
+          strokeWidth="1" 
+          fill="none" 
+          opacity="0.6"
+        />
         
-        {/* 浮动的圆点 */}
-        <circle className="transition-circle transition-float" style={{ animationDelay: '0.9s' }}
-          cx="250" cy="100" r="6" fill="#00ff88" />
-        <circle className="transition-circle transition-float" style={{ animationDelay: '1.1s', animationDuration: '5s' }}
-          cx="500" cy="100" r="8" fill="#00ff88" />
-        <circle className="transition-circle transition-float" style={{ animationDelay: '1.3s', animationDuration: '4.5s' }}
-          cx="750" cy="100" r="6" fill="#8b5cf6" />
+        {/* 垂直分割线 */}
+        {[200, 400, 600, 800, 1000].map((x, i) => (
+          <line
+            key={i}
+            className="transition-path"
+            style={{ animationDelay: `${i * 0.2}s`, animationDuration: '2s' }}
+            x1={x} y1="60" x2={x} y2="140"
+            stroke="#00ff88"
+            strokeWidth="1"
+            opacity="0.4"
+          />
+        ))}
         
-        {/* 光晕效果 */}
-        <circle className="transition-glow" style={{ animationDelay: '1.5s' }}
-          cx="500" cy="100" r="30" fill="none" stroke="#00ff88" strokeWidth="1" opacity="0.3" />
+        {/* 节点 */}
+        {[200, 400, 600, 800, 1000].map((x, i) => (
+          <circle
+            key={i}
+            className="transition-circle transition-glow"
+            style={{ animationDelay: `${1 + i * 0.15}s` }}
+            cx={x} cy="100" r="3"
+            fill="#00ff88"
+          />
+        ))}
       </svg>
     </div>
   );
 }
 
+// Transition 2: 旋转几何 - 灵感来自 LayerZero 的动态图形
 export function Transition2() {
   return (
-    <div className="relative h-48 md:h-64 overflow-hidden my-16 bg-black/30">
-      <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1000 200" preserveAspectRatio="xMidYMid slice">
-        {/* 螺旋曲线 */}
-        <path className="transition-path" style={{ animationDelay: '0s' }}
-          d="M 200 100 Q 300 50, 400 100 Q 500 150, 600 100 Q 700 50, 800 100"
-          stroke="#00ff88" strokeWidth="2" fill="none" opacity="0.8" />
-        <path className="transition-path" style={{ animationDelay: '0.4s' }}
-          d="M 200 120 Q 300 80, 400 120 Q 500 160, 600 120 Q 700 80, 800 120"
-          stroke="#8b5cf6" strokeWidth="2" fill="none" opacity="0.6" />
+    <div className="relative h-32 md:h-48 overflow-hidden my-24">
+      <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1200 200" preserveAspectRatio="xMidYMid slice">
+        {/* 中心旋转六边形 */}
+        <g className="transition-rotate" style={{ transformOrigin: '600px 100px' }}>
+          <path
+            d="M 600 60 L 640 80 L 640 120 L 600 140 L 560 120 L 560 80 Z"
+            stroke="#00ff88"
+            strokeWidth="1"
+            fill="none"
+            opacity="0.6"
+          />
+        </g>
         
-        {/* 圆环组合 */}
-        <circle className="transition-circle" style={{ animationDelay: '0.8s' }}
-          cx="300" cy="100" r="20" fill="none" stroke="#00ff88" strokeWidth="2" opacity="0.6" />
-        <circle className="transition-circle" style={{ animationDelay: '1s' }}
-          cx="500" cy="100" r="25" fill="none" stroke="#00ff88" strokeWidth="2" opacity="0.7" />
-        <circle className="transition-circle" style={{ animationDelay: '1.2s' }}
-          cx="700" cy="100" r="20" fill="none" stroke="#8b5cf6" strokeWidth="2" opacity="0.6" />
+        {/* 外围圆环 */}
+        <circle
+          className="transition-path"
+          style={{ animationDelay: '0.5s' }}
+          cx="600" cy="100" r="60"
+          stroke="#8b5cf6"
+          strokeWidth="1"
+          fill="none"
+          opacity="0.4"
+        />
         
-        {/* 中心点 */}
-        <circle className="transition-circle transition-glow" style={{ animationDelay: '1.4s' }}
-          cx="500" cy="100" r="5" fill="#00ff88" />
+        {/* 对角线 */}
+        <path
+          className="transition-path"
+          style={{ animationDelay: '1s' }}
+          d="M 400 100 L 800 100"
+          stroke="#00ff88"
+          strokeWidth="1"
+          opacity="0.3"
+        />
+        
+        {/* 端点 */}
+        <circle className="transition-circle transition-glow" style={{ animationDelay: '1.5s' }}
+          cx="400" cy="100" r="3" fill="#8b5cf6" />
+        <circle className="transition-circle transition-glow" style={{ animationDelay: '1.6s' }}
+          cx="800" cy="100" r="3" fill="#8b5cf6" />
       </svg>
     </div>
   );
 }
 
+// Transition 3: 波浪扩散 - 灵感来自 LayerZero 的流动感
 export function Transition3() {
   return (
-    <div className="relative h-48 md:h-64 overflow-hidden my-16 bg-black/30">
-      <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1000 200" preserveAspectRatio="xMidYMid slice">
-        {/* 交织的曲线 */}
-        <path className="transition-path" style={{ animationDelay: '0s' }}
-          d="M 100 50 Q 300 150, 500 100 Q 700 50, 900 150"
-          stroke="#00ff88" strokeWidth="2" fill="none" opacity="0.8" />
-        <path className="transition-path" style={{ animationDelay: '0.3s' }}
-          d="M 100 150 Q 300 50, 500 100 Q 700 150, 900 50"
-          stroke="#8b5cf6" strokeWidth="2" fill="none" opacity="0.7" />
+    <div className="relative h-32 md:h-48 overflow-hidden my-24">
+      <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1200 200" preserveAspectRatio="xMidYMid slice">
+        {/* 同心圆扩散 */}
+        {[30, 50, 70, 90].map((r, i) => (
+          <circle
+            key={i}
+            className="transition-path"
+            style={{ animationDelay: `${i * 0.3}s`, animationDuration: '3s' }}
+            cx="600" cy="100" r={r}
+            stroke="#00ff88"
+            strokeWidth="1"
+            fill="none"
+            opacity={0.6 - i * 0.1}
+          />
+        ))}
         
-        {/* 连接节点 */}
-        <circle className="transition-circle transition-float" style={{ animationDelay: '0.6s' }}
-          cx="300" cy="100" r="8" fill="#00ff88" opacity="0.8" />
-        <circle className="transition-circle transition-float" style={{ animationDelay: '0.8s', animationDuration: '5s' }}
-          cx="500" cy="100" r="10" fill="#00ff88" opacity="0.9" />
-        <circle className="transition-circle transition-float" style={{ animationDelay: '1s', animationDuration: '4.5s' }}
-          cx="700" cy="100" r="8" fill="#8b5cf6" opacity="0.8" />
+        {/* 中心点 */}
+        <circle
+          className="transition-circle transition-glow"
+          style={{ animationDelay: '1.5s' }}
+          cx="600" cy="100" r="4"
+          fill="#00ff88"
+        />
         
-        {/* 扩散光环 */}
-        <circle className="transition-glow" style={{ animationDelay: '1.2s' }}
-          cx="500" cy="100" r="40" fill="none" stroke="#00ff88" strokeWidth="1" opacity="0.3" />
-        <circle className="transition-glow" style={{ animationDelay: '1.4s', animationDuration: '4s' }}
-          cx="500" cy="100" r="60" fill="none" stroke="#8b5cf6" strokeWidth="1" opacity="0.2" />
+        {/* 水平连接线 */}
+        <path
+          className="transition-path"
+          style={{ animationDelay: '2s' }}
+          d="M 200 100 L 1000 100"
+          stroke="#8b5cf6"
+          strokeWidth="1"
+          strokeDasharray="10,10"
+          opacity="0.3"
+        />
       </svg>
     </div>
   );
 }
 
+// Transition 4: 对称几何 - 灵感来自 LayerZero 的平衡美学
 export function Transition4() {
   return (
-    <div className="relative h-48 md:h-64 overflow-hidden my-16 bg-black/30">
-      <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1000 200" preserveAspectRatio="xMidYMid slice">
-        {/* 花瓣形曲线 */}
-        <path className="transition-path" style={{ animationDelay: '0s' }}
-          d="M 500 100 Q 450 50, 500 60 Q 550 50, 500 100"
-          stroke="#00ff88" strokeWidth="2" fill="none" opacity="0.7" />
-        <path className="transition-path" style={{ animationDelay: '0.2s' }}
-          d="M 500 100 Q 550 50, 560 100 Q 550 150, 500 100"
-          stroke="#00ff88" strokeWidth="2" fill="none" opacity="0.7" />
-        <path className="transition-path" style={{ animationDelay: '0.4s' }}
-          d="M 500 100 Q 550 150, 500 140 Q 450 150, 500 100"
-          stroke="#8b5cf6" strokeWidth="2" fill="none" opacity="0.7" />
-        <path className="transition-path" style={{ animationDelay: '0.6s' }}
-          d="M 500 100 Q 450 150, 440 100 Q 450 50, 500 100"
-          stroke="#8b5cf6" strokeWidth="2" fill="none" opacity="0.7" />
+    <div className="relative h-32 md:h-48 overflow-hidden my-24">
+      <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1200 200" preserveAspectRatio="xMidYMid slice">
+        {/* 左侧三角形 */}
+        <path
+          className="transition-path"
+          style={{ animationDelay: '0s' }}
+          d="M 400 60 L 450 100 L 400 140 Z"
+          stroke="#00ff88"
+          strokeWidth="1"
+          fill="none"
+          opacity="0.6"
+        />
         
-        {/* 同心圆 */}
-        <circle className="transition-circle" style={{ animationDelay: '0.8s' }}
-          cx="500" cy="100" r="30" fill="none" stroke="#00ff88" strokeWidth="2" opacity="0.6" />
-        <circle className="transition-circle" style={{ animationDelay: '1s' }}
-          cx="500" cy="100" r="50" fill="none" stroke="#8b5cf6" strokeWidth="2" opacity="0.5" />
-        <circle className="transition-circle" style={{ animationDelay: '1.2s' }}
-          cx="500" cy="100" r="70" fill="none" stroke="#00ff88" strokeWidth="2" opacity="0.4" />
+        {/* 右侧三角形（镜像） */}
+        <path
+          className="transition-path"
+          style={{ animationDelay: '0.3s' }}
+          d="M 800 60 L 750 100 L 800 140 Z"
+          stroke="#00ff88"
+          strokeWidth="1"
+          fill="none"
+          opacity="0.6"
+        />
         
-        {/* 中心发光点 */}
-        <circle className="transition-circle transition-glow" style={{ animationDelay: '1.4s' }}
-          cx="500" cy="100" r="8" fill="#00ff88" />
+        {/* 中心连接线 */}
+        <path
+          className="transition-path"
+          style={{ animationDelay: '0.6s' }}
+          d="M 450 100 L 750 100"
+          stroke="#8b5cf6"
+          strokeWidth="1"
+          opacity="0.5"
+        />
+        
+        {/* 节点 */}
+        <circle className="transition-circle transition-glow" style={{ animationDelay: '1s' }}
+          cx="450" cy="100" r="3" fill="#00ff88" />
+        <circle className="transition-circle transition-glow" style={{ animationDelay: '1.1s' }}
+          cx="600" cy="100" r="4" fill="#8b5cf6" />
+        <circle className="transition-circle transition-glow" style={{ animationDelay: '1.2s' }}
+          cx="750" cy="100" r="3" fill="#00ff88" />
       </svg>
     </div>
   );
