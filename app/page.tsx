@@ -378,50 +378,89 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 过渡动画元素 1 - 增强版 */}
-      <div className="relative h-48 overflow-hidden">
-        {/* 主线条 - 滚动触发 */}
-        <motion.div
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          transition={{ duration: 1.5, ease: "easeInOut" }}
-          viewport={{ once: true }}
-          className="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#00ff88] to-transparent"
-        />
-        {/* 脉冲圆点 - 持续动画 */}
-        <motion.div
-          animate={{
-            scale: [1, 1.5, 1],
-            opacity: [0.3, 0.8, 0.3],
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-          className="absolute top-1/2 left-1/4 -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-[#00ff88] rounded-full"
-        />
-        <motion.div
-          animate={{
-            scale: [1, 1.5, 1],
-            opacity: [0.3, 0.8, 0.3],
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 0.5
-          }}
-          className="absolute top-1/2 left-3/4 -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-[#00ff88] rounded-full"
-        />
-        {/* 移动的光点 */}
-        <motion.div
-          initial={{ x: '-100%' }}
-          whileInView={{ x: '200%' }}
-          transition={{ duration: 3, ease: "easeInOut" }}
-          viewport={{ once: true }}
-          className="absolute top-1/2 -translate-y-1/2 w-2 h-2 bg-[#00ff88] rounded-full blur-sm"
-        />
+      {/* 过渡动画元素 1 - LayerZero 风格线条 */}
+      <div className="relative h-64 overflow-hidden">
+        {/* 网格线条 */}
+        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1000 200">
+          {/* 水平线条组 */}
+          <motion.line
+            initial={{ pathLength: 0, opacity: 0 }}
+            whileInView={{ pathLength: 1, opacity: 0.3 }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
+            viewport={{ once: true }}
+            x1="0" y1="80" x2="1000" y2="80"
+            stroke="#00ff88"
+            strokeWidth="1"
+          />
+          <motion.line
+            initial={{ pathLength: 0, opacity: 0 }}
+            whileInView={{ pathLength: 1, opacity: 0.2 }}
+            transition={{ duration: 1.5, ease: "easeInOut", delay: 0.2 }}
+            viewport={{ once: true }}
+            x1="0" y1="100" x2="1000" y2="100"
+            stroke="#00ff88"
+            strokeWidth="1"
+          />
+          <motion.line
+            initial={{ pathLength: 0, opacity: 0 }}
+            whileInView={{ pathLength: 1, opacity: 0.3 }}
+            transition={{ duration: 1.5, ease: "easeInOut", delay: 0.4 }}
+            viewport={{ once: true }}
+            x1="0" y1="120" x2="1000" y2="120"
+            stroke="#00ff88"
+            strokeWidth="1"
+          />
+          {/* 垂直线条 */}
+          <motion.line
+            initial={{ pathLength: 0, opacity: 0 }}
+            whileInView={{ pathLength: 1, opacity: 0.2 }}
+            transition={{ duration: 1, ease: "easeInOut", delay: 0.6 }}
+            viewport={{ once: true }}
+            x1="200" y1="60" x2="200" y2="140"
+            stroke="#00ff88"
+            strokeWidth="1"
+          />
+          <motion.line
+            initial={{ pathLength: 0, opacity: 0 }}
+            whileInView={{ pathLength: 1, opacity: 0.2 }}
+            transition={{ duration: 1, ease: "easeInOut", delay: 0.8 }}
+            viewport={{ once: true }}
+            x1="500" y1="60" x2="500" y2="140"
+            stroke="#00ff88"
+            strokeWidth="1"
+          />
+          <motion.line
+            initial={{ pathLength: 0, opacity: 0 }}
+            whileInView={{ pathLength: 1, opacity: 0.2 }}
+            transition={{ duration: 1, ease: "easeInOut", delay: 1 }}
+            viewport={{ once: true }}
+            x1="800" y1="60" x2="800" y2="140"
+            stroke="#00ff88"
+            strokeWidth="1"
+          />
+          {/* 连接节点 */}
+          <motion.circle
+            initial={{ scale: 0, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.5, delay: 1.2 }}
+            viewport={{ once: true }}
+            cx="200" cy="100" r="3" fill="#00ff88"
+          />
+          <motion.circle
+            initial={{ scale: 0, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.5, delay: 1.4 }}
+            viewport={{ once: true }}
+            cx="500" cy="100" r="3" fill="#00ff88"
+          />
+          <motion.circle
+            initial={{ scale: 0, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.5, delay: 1.6 }}
+            viewport={{ once: true }}
+            cx="800" cy="100" r="3" fill="#00ff88"
+          />
+        </svg>
       </div>
 
       {/* What I Do Section */}
@@ -455,45 +494,83 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 过渡动画元素 2 - 增强版 */}
-      <div className="relative h-48 overflow-hidden">
-        {/* 旋转圆环 - 持续动画 */}
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 border border-[#00ff88]/30 rounded-full"
-        />
-        <motion.div
-          animate={{ rotate: -360 }}
-          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 border border-[#8b5cf6]/20 rounded-full"
-        />
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 border border-[#00ff88]/10 rounded-full"
-        />
-        {/* 脉冲效果 */}
-        <motion.div
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.5, 0, 0.5],
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-24 h-24 bg-[#00ff88]/10 rounded-full blur-xl"
-        />
-        {/* 滚动触发的缩放 */}
-        <motion.div
-          initial={{ scale: 0, opacity: 0 }}
-          whileInView={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 1 }}
-          viewport={{ once: true }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-[#00ff88] rounded-full"
-        />
+      {/* 过渡动画元素 2 - 几何图形变换 */}
+      <div className="relative h-64 overflow-hidden">
+        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1000 200">
+          {/* 三角形组合 */}
+          <motion.path
+            initial={{ pathLength: 0, opacity: 0 }}
+            whileInView={{ pathLength: 1, opacity: 0.3 }}
+            transition={{ duration: 2, ease: "easeInOut" }}
+            viewport={{ once: true }}
+            d="M 400 60 L 450 140 L 350 140 Z"
+            stroke="#00ff88"
+            strokeWidth="1"
+            fill="none"
+          />
+          <motion.path
+            initial={{ pathLength: 0, opacity: 0 }}
+            whileInView={{ pathLength: 1, opacity: 0.2 }}
+            transition={{ duration: 2, ease: "easeInOut", delay: 0.3 }}
+            viewport={{ once: true }}
+            d="M 500 80 L 540 140 L 460 140 Z"
+            stroke="#8b5cf6"
+            strokeWidth="1"
+            fill="none"
+          />
+          <motion.path
+            initial={{ pathLength: 0, opacity: 0 }}
+            whileInView={{ pathLength: 1, opacity: 0.3 }}
+            transition={{ duration: 2, ease: "easeInOut", delay: 0.6 }}
+            viewport={{ once: true }}
+            d="M 600 60 L 650 140 L 550 140 Z"
+            stroke="#00ff88"
+            strokeWidth="1"
+            fill="none"
+          />
+          {/* 矩形框架 */}
+          <motion.rect
+            initial={{ pathLength: 0, opacity: 0 }}
+            whileInView={{ pathLength: 1, opacity: 0.2 }}
+            transition={{ duration: 1.5, ease: "easeInOut", delay: 0.9 }}
+            viewport={{ once: true }}
+            x="250" y="70" width="60" height="60"
+            stroke="#00ff88"
+            strokeWidth="1"
+            fill="none"
+          />
+          <motion.rect
+            initial={{ pathLength: 0, opacity: 0 }}
+            whileInView={{ pathLength: 1, opacity: 0.2 }}
+            transition={{ duration: 1.5, ease: "easeInOut", delay: 1.2 }}
+            viewport={{ once: true }}
+            x="700" y="70" width="60" height="60"
+            stroke="#8b5cf6"
+            strokeWidth="1"
+            fill="none"
+          />
+          {/* 连接线 */}
+          <motion.line
+            initial={{ pathLength: 0, opacity: 0 }}
+            whileInView={{ pathLength: 1, opacity: 0.15 }}
+            transition={{ duration: 1, ease: "easeInOut", delay: 1.5 }}
+            viewport={{ once: true }}
+            x1="310" y1="100" x2="400" y2="100"
+            stroke="#00ff88"
+            strokeWidth="1"
+            strokeDasharray="5,5"
+          />
+          <motion.line
+            initial={{ pathLength: 0, opacity: 0 }}
+            whileInView={{ pathLength: 1, opacity: 0.15 }}
+            transition={{ duration: 1, ease: "easeInOut", delay: 1.7 }}
+            viewport={{ once: true }}
+            x1="650" y1="100" x2="700" y2="100"
+            stroke="#8b5cf6"
+            strokeWidth="1"
+            strokeDasharray="5,5"
+          />
+        </svg>
       </div>
 
       {/* Projects Section */}
@@ -547,67 +624,91 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 过渡动画元素 3 - 增强版 */}
-      <div className="relative h-48 overflow-hidden">
-        {/* 渐变线条 - 滚动触发 */}
-        <motion.div
-          initial={{ width: 0 }}
-          whileInView={{ width: '100%' }}
-          transition={{ duration: 2, ease: "easeInOut" }}
-          viewport={{ once: true }}
-          className="absolute top-1/2 left-0 h-px bg-gradient-to-r from-[#00ff88] via-[#8b5cf6] to-[#00ff88]"
-        />
-        {/* 波浪效果 */}
-        <motion.div
-          animate={{
-            x: ['-100%', '100%'],
-          }}
-          transition={{
-            duration: 4,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-          className="absolute top-1/2 -translate-y-1/2 w-32 h-px bg-gradient-to-r from-transparent via-[#00ff88] to-transparent"
-        />
-        {/* 上下浮动的点 */}
-        <motion.div
-          animate={{
-            y: [-10, 10, -10],
-            opacity: [0.3, 1, 0.3],
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-          className="absolute top-1/2 left-1/3 -translate-x-1/2 w-2 h-2 bg-[#00ff88] rounded-full"
-        />
-        <motion.div
-          animate={{
-            y: [10, -10, 10],
-            opacity: [0.3, 1, 0.3],
-          }}
-          transition={{
-            duration: 3,
-            repeat: Infinity,
-            ease: "easeInOut",
-            delay: 0.5
-          }}
-          className="absolute top-1/2 left-2/3 -translate-x-1/2 w-2 h-2 bg-[#8b5cf6] rounded-full"
-        />
-        {/* 扩散光晕 */}
-        <motion.div
-          animate={{
-            scale: [1, 2, 1],
-            opacity: [0.2, 0, 0.2],
-          }}
-          transition={{
-            duration: 4,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-[#00ff88]/20 rounded-full blur-2xl"
-        />
+      {/* 过渡动画元素 3 - 抽象线条网络 */}
+      <div className="relative h-64 overflow-hidden">
+        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 1000 200">
+          {/* 主对角线 */}
+          <motion.line
+            initial={{ pathLength: 0, opacity: 0 }}
+            whileInView={{ pathLength: 1, opacity: 0.3 }}
+            transition={{ duration: 2, ease: "easeInOut" }}
+            viewport={{ once: true }}
+            x1="100" y1="50" x2="900" y2="150"
+            stroke="#00ff88"
+            strokeWidth="1"
+          />
+          <motion.line
+            initial={{ pathLength: 0, opacity: 0 }}
+            whileInView={{ pathLength: 1, opacity: 0.2 }}
+            transition={{ duration: 2, ease: "easeInOut", delay: 0.3 }}
+            viewport={{ once: true }}
+            x1="100" y1="150" x2="900" y2="50"
+            stroke="#8b5cf6"
+            strokeWidth="1"
+          />
+          {/* 分支线条 */}
+          <motion.path
+            initial={{ pathLength: 0, opacity: 0 }}
+            whileInView={{ pathLength: 1, opacity: 0.25 }}
+            transition={{ duration: 1.5, ease: "easeInOut", delay: 0.6 }}
+            viewport={{ once: true }}
+            d="M 300 80 L 400 100 L 500 90"
+            stroke="#00ff88"
+            strokeWidth="1"
+            fill="none"
+          />
+          <motion.path
+            initial={{ pathLength: 0, opacity: 0 }}
+            whileInView={{ pathLength: 1, opacity: 0.25 }}
+            transition={{ duration: 1.5, ease: "easeInOut", delay: 0.9 }}
+            viewport={{ once: true }}
+            d="M 500 110 L 600 100 L 700 120"
+            stroke="#8b5cf6"
+            strokeWidth="1"
+            fill="none"
+          />
+          {/* 节点组 */}
+          <motion.circle
+            initial={{ scale: 0, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.5, delay: 1.2 }}
+            viewport={{ once: true }}
+            cx="300" cy="80" r="4" fill="#00ff88"
+          />
+          <motion.circle
+            initial={{ scale: 0, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.5, delay: 1.4 }}
+            viewport={{ once: true }}
+            cx="500" cy="100" r="5" fill="#00ff88"
+          />
+          <motion.circle
+            initial={{ scale: 0, opacity: 0 }}
+            whileInView={{ scale: 1, opacity: 1 }}
+            transition={{ duration: 0.5, delay: 1.6 }}
+            viewport={{ once: true }}
+            cx="700" cy="120" r="4" fill="#8b5cf6"
+          />
+          {/* 脉冲光晕 */}
+          <motion.circle
+            initial={{ r: 0, opacity: 0 }}
+            whileInView={{ r: 20, opacity: 0 }}
+            transition={{ duration: 1.5, delay: 1.8 }}
+            viewport={{ once: true }}
+            cx="500" cy="100" r="20" fill="none" stroke="#00ff88" strokeWidth="1" opacity="0.3"
+          />
+          {/* 水平连接线 */}
+          <motion.line
+            initial={{ pathLength: 0, opacity: 0 }}
+            whileInView={{ pathLength: 1, opacity: 0.15 }}
+            transition={{ duration: 1, ease: "easeInOut", delay: 2 }}
+            viewport={{ once: true }}
+            x1="200" y1="100" x2="800" y2="100"
+            stroke="#00ff88"
+            strokeWidth="1"
+            strokeDasharray="10,10"
+          />
+        </svg>
       </div>
 
       {/* Roadmap Section */}
