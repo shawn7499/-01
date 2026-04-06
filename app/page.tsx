@@ -130,10 +130,11 @@ export default function Home() {
       contact: {
         title: 'CONNECT',
         items: [
-          { name: 'X (Twitter)', link: 'https://x.com/shawnwick960' },
-          { name: 'Telegram', link: 'https://t.me/shawick' },
-          { name: 'Email', link: 'mailto:sahwnwick7499@gmail.com' },
-          { name: 'GitHub', link: 'https://github.com/shawn7499' },
+          { name: 'X (Twitter)', link: 'https://x.com/shawnwick960', icon: '𝕏' },
+          { name: 'Telegram', link: 'https://t.me/shawick', icon: '✈️' },
+          { name: 'Email', link: 'mailto:sahwnwick7499@gmail.com', icon: '✉️' },
+          { name: 'GitHub', link: 'https://github.com/shawn7499', icon: '💻' },
+          { name: 'WeChat', link: null, icon: '💬', wechat: 'shawnwick' },
         ],
       },
     },
@@ -254,10 +255,11 @@ export default function Home() {
       contact: {
         title: '联系',
         items: [
-          { name: 'X (Twitter)', link: 'https://x.com/shawnwick960' },
-          { name: 'Telegram', link: 'https://t.me/shawick' },
-          { name: 'Email', link: 'mailto:sahwnwick7499@gmail.com' },
-          { name: 'GitHub', link: 'https://github.com/shawn7499' },
+          { name: 'X (Twitter)', link: 'https://x.com/shawnwick960', icon: '𝕏' },
+          { name: 'Telegram', link: 'https://t.me/shawick', icon: '✈️' },
+          { name: '邮箱', link: 'mailto:sahwnwick7499@gmail.com', icon: '✉️' },
+          { name: 'GitHub', link: 'https://github.com/shawn7499', icon: '💻' },
+          { name: '微信', link: null, icon: '💬', wechat: 'shawnwick' },
         ],
       },
     },
@@ -522,23 +524,42 @@ export default function Home() {
         <div className="container mx-auto max-w-6xl">
           <div className="text-sm text-gray-500 mb-8">/// {t.contact.title}</div>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             {t.contact.items.map((item, index) => (
-              <motion.a
-                key={index}
-                href={item.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="border border-white/10 hover:border-[#00ff88] p-8 text-center transition-all group"
-              >
-                <div className="text-xl font-bold group-hover:text-[#00ff88] transition-colors">
-                  {item.name}
-                </div>
-              </motion.a>
+              item.link ? (
+                <motion.a
+                  key={index}
+                  href={item.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="border border-white/10 hover:border-[#00ff88] p-8 text-center transition-all group flex flex-col items-center gap-3"
+                >
+                  <span className="text-4xl">{item.icon}</span>
+                  <div className="text-sm font-bold group-hover:text-[#00ff88] transition-colors">
+                    {item.name}
+                  </div>
+                </motion.a>
+              ) : (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                  className="border border-white/10 hover:border-[#00ff88] p-8 text-center transition-all group flex flex-col items-center gap-3 cursor-pointer"
+                  title={item.wechat}
+                >
+                  <span className="text-4xl">{item.icon}</span>
+                  <div className="text-sm font-bold group-hover:text-[#00ff88] transition-colors">
+                    {item.name}
+                  </div>
+                  <div className="text-xs text-gray-500 mt-1">{item.wechat}</div>
+                </motion.div>
+              )
             ))}
           </div>
         </div>
