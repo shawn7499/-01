@@ -14,7 +14,10 @@ export function FullPageScroll({ sections }: FullPageScrollProps) {
   
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
-      if (isAnimating) return;
+      if (isAnimating) {
+        e.preventDefault();
+        return;
+      }
       
       e.preventDefault();
       
@@ -22,7 +25,7 @@ export function FullPageScroll({ sections }: FullPageScrollProps) {
         // 向下滚动
         setDirection('down');
         setIsAnimating(true);
-        setTimeout(() => setCurrentSection(prev => prev + 1), 400); // 动画展开后切换
+        setTimeout(() => setCurrentSection(prev => prev + 1), 400);
         setTimeout(() => setIsAnimating(false), 1800);
       } else if (e.deltaY < 0 && currentSection > 0) {
         // 向上滚动
@@ -33,8 +36,8 @@ export function FullPageScroll({ sections }: FullPageScrollProps) {
       }
     };
     
-    window.addEventListener('wheel', handleWheel, { passive: false });
-    return () => window.removeEventListener('wheel', handleWheel);
+    document.addEventListener('wheel', handleWheel, { passive: false });
+    return () => document.removeEventListener('wheel', handleWheel);
   }, [currentSection, isAnimating, sections.length]);
   
   return (
