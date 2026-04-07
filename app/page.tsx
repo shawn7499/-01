@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { Transition1, Transition2, Transition3, Transition4 } from '@/components/Transitions'
+import { TransitionSection } from '@/components/Transitions'
 
 export default function Home() {
   const [lang, setLang] = useState<'en' | 'zh'>('en')
@@ -380,60 +380,57 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 过渡动画元素 1 - LayerZero 风格线条 */}
-      <Transition1 />
-
-      {/* What I Do Section */}
-      <section id="what-i-do" className="py-32 px-6 relative">
-        <div className="container mx-auto max-w-6xl relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-            className="text-sm text-gray-500 mb-16"
-          >
-            /// {t.whatIDo.title}
-          </motion.div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {t.whatIDo.items.map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ scale: 0.8, opacity: 0 }}
-                whileInView={{ scale: 1, opacity: 1 }}
-                transition={{ 
-                  duration: 0.6, 
-                  delay: index * 0.1,
-                  ease: "easeOut"
-                }}
-                viewport={{ once: true }}
-                whileHover={{ scale: 1.05 }}
-                className="border border-white/10 hover:border-[#00ff88] transition-all duration-300 p-8 group relative overflow-hidden"
-              >
-                <div className="relative z-10">
-                  <div className="text-sm text-gray-500 mb-4">[{item.number}]</div>
-                  <h3 className="text-2xl font-bold mb-3 group-hover:text-[#00ff88] transition-colors">
-                    {item.title}
-                  </h3>
-                  <p className="text-gray-400 mb-4">{item.desc}</p>
-                  {item.status && (
-                    <div className="text-sm text-[#00ff88] border border-[#00ff88]/30 px-3 py-1 inline-block">
-                      {item.status}
-                    </div>
-                  )}
-                </div>
-              </motion.div>
-            ))}
+      {/* What I Do Section - 从动画中展开 */}
+      <TransitionSection transitionType={1}>
+        <section id="what-i-do" className="py-32 px-6 relative">
+          <div className="container mx-auto max-w-6xl relative z-10">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              viewport={{ once: true }}
+              className="text-sm text-gray-500 mb-16"
+            >
+              /// {t.whatIDo.title}
+            </motion.div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {t.whatIDo.items.map((item, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  whileInView={{ scale: 1, opacity: 1 }}
+                  transition={{ 
+                    duration: 0.6, 
+                    delay: index * 0.1,
+                    ease: "easeOut"
+                  }}
+                  viewport={{ once: true }}
+                  whileHover={{ scale: 1.05 }}
+                  className="border border-white/10 hover:border-[#00ff88] transition-all duration-300 p-8 group relative overflow-hidden"
+                >
+                  <div className="relative z-10">
+                    <div className="text-sm text-gray-500 mb-4">[{item.number}]</div>
+                    <h3 className="text-2xl font-bold mb-3 group-hover:text-[#00ff88] transition-colors">
+                      {item.title}
+                    </h3>
+                    <p className="text-gray-400 mb-4">{item.desc}</p>
+                    {item.status && (
+                      <div className="text-sm text-[#00ff88] border border-[#00ff88]/30 px-3 py-1 inline-block">
+                        {item.status}
+                      </div>
+                    )}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </TransitionSection>
 
-      {/* 过渡动画元素 2 - 几何图形变换 */}
-      <Transition2 />
-
-      {/* Projects Section */}
-      <section id="projects" className="py-32 px-6 relative">
+      {/* Projects Section - 从动画中展开 */}
+      <TransitionSection transitionType={2}>
+        <section id="projects" className="py-32 px-6 relative">
         <div className="container mx-auto max-w-6xl relative z-10">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -498,12 +495,11 @@ export default function Home() {
           </div>
         </div>
       </section>
+      </TransitionSection>
 
-      {/* 过渡动画元素 3 - 抽象线条网络 */}
-      <Transition3 />
-
-      {/* Roadmap Section */}
-      <section id="roadmap" className="py-32 px-6 relative">
+      {/* Roadmap Section - 从动画中展开 */}
+      <TransitionSection transitionType={3}>
+        <section id="roadmap" className="py-32 px-6 relative">
         <div className="container mx-auto max-w-6xl relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -578,9 +574,12 @@ export default function Home() {
           </div>
         </div>
       </section>
+      </TransitionSection>
 
-      {/* Stats Section */}
-      <section className="py-32 px-6 relative">
+      {/* Stats + Contact Section - 从动画中展开 */}
+      <TransitionSection transitionType={4}>
+        {/* Stats Section */}
+        <section className="py-32 px-6 relative">
         <div className="container mx-auto max-w-6xl relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {t.stats.items.map((stat, index) => (
@@ -615,9 +614,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* 过渡动画元素 4 - 螺旋扩散 */}
-      <Transition4 />
 
       {/* Contact Section */}
       <section id="contact" className="py-32 px-6 relative">
@@ -682,6 +678,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      </TransitionSection>
 
       {/* Footer */}
       <footer className="border-t border-white/10 py-12 px-6">
