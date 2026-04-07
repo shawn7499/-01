@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import '../app/transitions.css';
 
@@ -11,7 +11,10 @@ export function FullPageScroll({ sections }: FullPageScrollProps) {
   const [currentSection, setCurrentSection] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [direction, setDirection] = useState<'down' | 'up'>('down');
+  const touchStartY = useRef(0);
+  const touchEndY = useRef(0);
   
+  // 鼠标滚轮事件
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
       if (isAnimating) {
@@ -40,13 +43,63 @@ export function FullPageScroll({ sections }: FullPageScrollProps) {
     return () => document.removeEventListener('wheel', handleWheel);
   }, [currentSection, isAnimating, sections.length]);
   
+  // 触摸事件（手机端）
+  useEffect(() => {
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartY.current = e.touches[0].clientY;
+    };
+    
+    const handleTouchMove = (e: TouchEvent) => {
+      if (isAnimating) {
+        e.preventDefault();
+        return;
+      }
+      e.preventDefault();
+    };
+    
+    const handleTouchEnd = (e: TouchEvent) => {
+      if (isAnimating) return;
+      
+      touchEndY.current = e.changedTouches[0].clientY;
+      const diff = touchStartY.current - touchEndY.current;
+      
+      // 滑动距离超过 50px 才触发
+      if (Math.abs(diff) > 50) {
+        if (diff > 0 && currentSection < sections.length - 1) {
+          // 向上滑动（下一页）
+          setDirection('down');
+          setIsAnimating(true);
+          setTimeout(() => setCurrentSection(prev => prev + 1), 400);
+          setTimeout(() => setIsAnimating(false), 1800);
+        } else if (diff < 0 && currentSection > 0) {
+          // 向下滑动（上一页）
+          setDirection('up');
+          setIsAnimating(true);
+          setTimeout(() => setCurrentSection(prev => prev - 1), 400);
+          setTimeout(() => setIsAnimating(false), 1800);
+        }
+      }
+    };
+    
+    document.addEventListener('touchstart', handleTouchStart, { passive: false });
+    document.addEventListener('touchmove', handleTouchMove, { passive: false });
+    document.addEventListener('touchend', handleTouchEnd, { passive: false });
+    
+    return () => {
+      document.removeEventListener('touchstart', handleTouchStart);
+      document.removeEventListener('touchmove', handleTouchMove);
+      document.removeEventListener('touchend', handleTouchEnd);
+    };
+  }, [currentSection, isAnimating, sections.length]);
+  
   return (
     <div className="fixed inset-0 overflow-hidden bg-black">
-      {/* 当前页面 */}
+      {/* 当前页面 - 只渲染当前这一页 */}
       <AnimatePresence mode="wait">
         <motion.div
           key={currentSection}
-          initial={{ opacity: 1 }}
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
           exit={{ 
             opacity: 0,
             scale: direction === 'down' ? 0.95 : 1.05,
