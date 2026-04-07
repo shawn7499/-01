@@ -1,6 +1,6 @@
-/* 过渡动画 CSS - LayerZero 风格 */
+/* 过渡动画 CSS - LayerZero 极简风格 */
 
-/* 基础动画 */
+/* 基础动画 - 慢速、优雅 */
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -8,7 +8,7 @@
 
 @keyframes drawPath {
   from { 
-    stroke-dashoffset: 3000;
+    stroke-dashoffset: 2000;
     opacity: 0;
   }
   to { 
@@ -17,83 +17,12 @@
   }
 }
 
-@keyframes glow {
-  0%, 100% { 
-    opacity: 0.6;
-    filter: drop-shadow(0 0 8px currentColor);
-  }
-  50% { 
-    opacity: 1;
-    filter: drop-shadow(0 0 20px currentColor);
-  }
-}
-
-@keyframes float {
-  0% { 
-    transform: translateX(0px) translateY(0px);
-    opacity: 0;
-  }
-  10% {
-    opacity: 0.8;
-  }
-  90% {
-    opacity: 0.8;
-  }
-  100% { 
-    transform: translateX(400px) translateY(-20px);
-    opacity: 0;
-  }
-}
-
-@keyframes rotate {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-@keyframes scaleIn {
-  from { 
-    transform: scale(0);
-    opacity: 0;
-  }
-  to { 
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes pulse {
-  0%, 100% { 
-    transform: scale(1);
-    opacity: 0.6;
-  }
-  50% { 
-    transform: scale(1.1);
-    opacity: 1;
-  }
-}
-
 /* 应用到元素 */
 .transition-path {
-  stroke-dasharray: 3000;
-  animation: drawPath 3s ease-out forwards;
-}
-
-.transition-glow {
-  animation: glow 3s ease-in-out infinite;
-}
-
-.transition-float {
-  animation: float 8s ease-in-out infinite;
-}
-
-.transition-rotate {
-  animation: rotate 30s linear infinite;
-}
-
-.transition-circle {
-  animation: scaleIn 0.8s ease-out forwards, pulse 3s ease-in-out infinite 1s;
+  stroke-dasharray: 2000;
+  animation: drawPath 4s ease-in-out forwards;
 }
 
 .transition-container {
-  animation: fadeIn 1.5s ease-out;
+  animation: fadeIn 2s ease-out;
 }
