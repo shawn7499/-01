@@ -171,7 +171,7 @@ export function Transition({ type }: TransitionProps) {
   );
 }
 
-// 内容区块包装器 - 让内容从上方动画中"展开"
+// 内容区块包装器 - 进入视口时淡入，离开时淡出
 interface ContentSectionProps {
   children: React.ReactNode;
 }
@@ -180,17 +180,20 @@ export function ContentSection({ children }: ContentSectionProps) {
   const ref = React.useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ["start end", "start center"]
+    offset: ["start end", "end start"]
   });
   
-  const y = useTransform(scrollYProgress, [0, 1], [100, 0]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [0, 0.5, 1]);
-  const scale = useTransform(scrollYProgress, [0, 1], [0.95, 1]);
+  // 进入视口：0 → 0.3 淡入
+  // 在视口中：0.3 → 0.7 完全可见
+  // 离开视口：0.7 → 1 淡出
+  const opacity = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0, 1, 1, 0]);
+  const y = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [100, 0, 0, -100]);
+  const scale = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.95, 1, 1, 1.05]);
   
   return (
     <motion.div
       ref={ref}
-      style={{ y, opacity, scale }}
+      style={{ opacity, y, scale }}
     >
       {children}
     </motion.div>
