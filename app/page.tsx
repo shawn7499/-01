@@ -221,7 +221,7 @@ export default function Home() {
     </div>,
 
     // Section 2: What I Do
-    <div key="what-i-do" className="h-screen flex items-center justify-center px-6 relative overflow-y-auto">
+    <div key="what-i-do" className="min-h-screen flex items-center justify-center px-6 relative">
       <div className="container mx-auto max-w-6xl py-20">
         <div className="text-sm text-gray-500 mb-16">/// {t.whatIDo.title}</div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -250,7 +250,7 @@ export default function Home() {
     </div>,
 
     // Section 3: Projects
-    <div key="projects" className="h-screen flex items-center justify-center px-6 relative overflow-y-auto">
+    <div key="projects" className="min-h-screen flex items-center justify-center px-6 relative">
       <div className="container mx-auto max-w-6xl py-20">
         <div className="text-sm text-gray-500 mb-4">/// {t.projects.title}</div>
         <div className="space-y-8">
@@ -300,7 +300,7 @@ export default function Home() {
     </div>,
 
     // Section 4: Roadmap
-    <div key="roadmap" className="h-screen flex items-center justify-center px-6 relative overflow-y-auto">
+    <div key="roadmap" className="min-h-screen flex items-center justify-center px-6 relative">
       <div className="container mx-auto max-w-6xl py-20">
         <div className="text-sm text-gray-500 mb-4">/// {t.roadmap.title}</div>
         <p className="text-xl text-gray-400 mb-16">{t.roadmap.subtitle}</p>
