@@ -11,10 +11,11 @@ export function FullPageScroll({ sections }: FullPageScrollProps) {
   const [currentSection, setCurrentSection] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [direction, setDirection] = useState<'down' | 'up'>('down');
+  const containerRef = useRef<HTMLDivElement>(null);
   const touchStartY = useRef(0);
-  const touchEndY = useRef(0);
+  const scrollStartY = useRef(0);
   
-  // 鼠标滚轮事件
+  // 鼠标滚轮事件 - 只在滚动到边界时触发翻页
   useEffect(() => {
     const handleWheel = (e: WheelEvent) => {
       if (isAnimating) {
@@ -22,16 +23,67 @@ export function FullPageScroll({ sections }: FullPageScrollProps) {
         return;
       }
       
-      e.preventDefault();
+      const container = containerRef.current;
+      if (!container) return;
       
-      if (e.deltaY > 0 && currentSection < sections.length - 1) {
-        // 向下滚动
+      const isAtTop = container.scrollTop === 0;
+      const isAtBottom = container.scrollTop + container.clientHeight >= container.scrollHeight - 1;
+      
+      // 向下滚动且已到底部 → 下一页
+      if (e.deltaY > 0 && isAtBottom && currentSection < sections.length - 1) {
+        e.preventDefault();
         setDirection('down');
         setIsAnimating(true);
         setTimeout(() => setCurrentSection(prev => prev + 1), 400);
         setTimeout(() => setIsAnimating(false), 1800);
-      } else if (e.deltaY < 0 && currentSection > 0) {
-        // 向上滚动
+      }
+      // 向上滚动且已到顶部 → 上一页
+      else if (e.deltaY < 0 && isAtTop && currentSection > 0) {
+        e.preventDefault();
+        setDirection('up');
+        setIsAnimating(true);
+        setTimeout(() => setCurrentSection(prev => prev - 1), 400);
+        setTimeout(() => setIsAnimating(false), 1800);
+      }
+      // 否则允许正常滚动
+    };
+    
+    document.addEventListener('wheel', handleWheel, { passive: false });
+    return () => document.removeEventListener('wheel', handleWheel);
+  }, [currentSection, isAnimating, sections.length]);
+  
+  // 触摸事件（手机端）- 只在滚动到边界时触发翻页
+  useEffect(() => {
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartY.current = e.touches[0].clientY;
+      const container = containerRef.current;
+      if (container) {
+        scrollStartY.current = container.scrollTop;
+      }
+    };
+    
+    const handleTouchEnd = (e: TouchEvent) => {
+      if (isAnimating) return;
+      
+      const container = containerRef.current;
+      if (!container) return;
+      
+      const touchEndY = e.changedTouches[0].clientY;
+      const touchDiff = touchStartY.current - touchEndY;
+      const scrollDiff = container.scrollTop - scrollStartY.current;
+      
+      const isAtTop = container.scrollTop === 0;
+      const isAtBottom = container.scrollTop + container.clientHeight >= container.scrollHeight - 1;
+      
+      // 向上滑动（下一页）：必须在底部 + 滑动距离 > 50px
+      if (touchDiff > 50 && isAtBottom && scrollDiff >= 0 && currentSection < sections.length - 1) {
+        setDirection('down');
+        setIsAnimating(true);
+        setTimeout(() => setCurrentSection(prev => prev + 1), 400);
+        setTimeout(() => setIsAnimating(false), 1800);
+      }
+      // 向下滑动（上一页）：必须在顶部 + 滑动距离 > 50px
+      else if (touchDiff < -50 && isAtTop && scrollDiff <= 0 && currentSection > 0) {
         setDirection('up');
         setIsAnimating(true);
         setTimeout(() => setCurrentSection(prev => prev - 1), 400);
@@ -39,65 +91,30 @@ export function FullPageScroll({ sections }: FullPageScrollProps) {
       }
     };
     
-    document.addEventListener('wheel', handleWheel, { passive: false });
-    return () => document.removeEventListener('wheel', handleWheel);
-  }, [currentSection, isAnimating, sections.length]);
-  
-  // 触摸事件（手机端）
-  useEffect(() => {
-    const handleTouchStart = (e: TouchEvent) => {
-      touchStartY.current = e.touches[0].clientY;
-    };
-    
-    const handleTouchMove = (e: TouchEvent) => {
-      if (isAnimating) {
-        e.preventDefault();
-        return;
-      }
-      e.preventDefault();
-    };
-    
-    const handleTouchEnd = (e: TouchEvent) => {
-      if (isAnimating) return;
-      
-      touchEndY.current = e.changedTouches[0].clientY;
-      const diff = touchStartY.current - touchEndY.current;
-      
-      // 滑动距离超过 50px 才触发
-      if (Math.abs(diff) > 50) {
-        if (diff > 0 && currentSection < sections.length - 1) {
-          // 向上滑动（下一页）
-          setDirection('down');
-          setIsAnimating(true);
-          setTimeout(() => setCurrentSection(prev => prev + 1), 400);
-          setTimeout(() => setIsAnimating(false), 1800);
-        } else if (diff < 0 && currentSection > 0) {
-          // 向下滑动（上一页）
-          setDirection('up');
-          setIsAnimating(true);
-          setTimeout(() => setCurrentSection(prev => prev - 1), 400);
-          setTimeout(() => setIsAnimating(false), 1800);
-        }
-      }
-    };
-    
-    document.addEventListener('touchstart', handleTouchStart, { passive: false });
-    document.addEventListener('touchmove', handleTouchMove, { passive: false });
-    document.addEventListener('touchend', handleTouchEnd, { passive: false });
+    document.addEventListener('touchstart', handleTouchStart, { passive: true });
+    document.addEventListener('touchend', handleTouchEnd, { passive: true });
     
     return () => {
       document.removeEventListener('touchstart', handleTouchStart);
-      document.removeEventListener('touchmove', handleTouchMove);
       document.removeEventListener('touchend', handleTouchEnd);
     };
   }, [currentSection, isAnimating, sections.length]);
   
+  // 切换页面时重置滚动位置
+  useEffect(() => {
+    const container = containerRef.current;
+    if (container) {
+      container.scrollTop = 0;
+    }
+  }, [currentSection]);
+  
   return (
     <div className="fixed inset-0 overflow-hidden bg-black">
-      {/* 当前页面 - 只渲染当前这一页 */}
+      {/* 当前页面 - 可滚动 */}
       <AnimatePresence mode="wait">
         <motion.div
           key={currentSection}
+          ref={containerRef}
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ 
@@ -106,8 +123,18 @@ export function FullPageScroll({ sections }: FullPageScrollProps) {
             y: direction === 'down' ? -50 : 50
           }}
           transition={{ duration: 0.6, ease: "easeInOut" }}
-          className="absolute inset-0"
+          className="absolute inset-0 overflow-y-auto overflow-x-hidden"
+          style={{ 
+            WebkitOverflowScrolling: 'touch',
+            scrollbarWidth: 'none',
+            msOverflowStyle: 'none'
+          }}
         >
+          <style jsx>{`
+            div::-webkit-scrollbar {
+              display: none;
+            }
+          `}</style>
           {sections[currentSection]}
         </motion.div>
       </AnimatePresence>
