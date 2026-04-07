@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { TransitionSection } from '@/components/Transitions'
+import { Transition, ContentSection } from '@/components/Transitions'
 
 export default function Home() {
   const [lang, setLang] = useState<'en' | 'zh'>('en')
@@ -380,8 +380,11 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 过渡动画 1 */}
+      <Transition type={1} />
+
       {/* What I Do Section - 从动画中展开 */}
-      <TransitionSection transitionType={1}>
+      <ContentSection>
         <section id="what-i-do" className="py-32 px-6 relative">
           <div className="container mx-auto max-w-6xl relative z-10">
             <motion.div
@@ -426,10 +429,13 @@ export default function Home() {
             </div>
           </div>
         </section>
-      </TransitionSection>
+      </ContentSection>
+
+      {/* 过渡动画 2 */}
+      <Transition type={2} />
 
       {/* Projects Section - 从动画中展开 */}
-      <TransitionSection transitionType={2}>
+      <ContentSection>
         <section id="projects" className="py-32 px-6 relative">
         <div className="container mx-auto max-w-6xl relative z-10">
           <motion.div
@@ -495,10 +501,13 @@ export default function Home() {
           </div>
         </div>
       </section>
-      </TransitionSection>
+      </ContentSection>
+
+      {/* 过渡动画 3 */}
+      <Transition type={3} />
 
       {/* Roadmap Section - 从动画中展开 */}
-      <TransitionSection transitionType={3}>
+      <ContentSection>
         <section id="roadmap" className="py-32 px-6 relative">
         <div className="container mx-auto max-w-6xl relative z-10">
           <motion.div
@@ -574,10 +583,13 @@ export default function Home() {
           </div>
         </div>
       </section>
-      </TransitionSection>
+      </ContentSection>
+
+      {/* 过渡动画 4 */}
+      <Transition type={4} />
 
       {/* Stats + Contact Section - 从动画中展开 */}
-      <TransitionSection transitionType={4}>
+      <ContentSection>
         {/* Stats Section */}
         <section className="py-32 px-6 relative">
         <div className="container mx-auto max-w-6xl relative z-10">
@@ -678,7 +690,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      </TransitionSection>
+      </ContentSection>
 
       {/* Footer */}
       <footer className="border-t border-white/10 py-12 px-6">
