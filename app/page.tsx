@@ -1,7 +1,6 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import Link from 'next/link'
 import dynamic from 'next/dynamic'
 
 const GradientMosaic = dynamic(() => import('@/components/GradientMosaic'), {
@@ -24,7 +23,7 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* Hero Section with Gradient Mosaic */}
+      {/* Hero Section with Gradient Mosaic - ONLY HERE */}
       <section className="min-h-screen flex flex-col items-center justify-center px-6 py-20 relative pt-32 overflow-hidden">
         <GradientMosaic />
         <div className="absolute inset-0 bg-black/40 z-10"></div>
@@ -47,7 +46,7 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* What I Do */}
+      {/* What I Do - Pure Black Background */}
       <section id="about" className="min-h-screen flex items-center justify-center px-6 py-20 bg-black">
         <div className="max-w-7xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-20">
@@ -73,8 +72,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Projects */}
-      <section id="projects" className="min-h-screen flex items-center justify-center px-6 py-20 bg-gray-900">
+      {/* Projects - Pure Black Background */}
+      <section id="projects" className="min-h-screen flex items-center justify-center px-6 py-20 bg-black">
         <div className="max-w-7xl mx-auto w-full">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-20">
             <h2 className="text-5xl md:text-7xl font-black mb-8 leading-tight">Active Projects</h2>
@@ -124,7 +123,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Roadmap */}
+      {/* Roadmap - Pure Black Background */}
       <section id="roadmap" className="min-h-screen flex items-center justify-center px-6 py-20 bg-black">
         <div className="max-w-7xl mx-auto w-full">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-20">
@@ -162,8 +161,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Contact */}
-      <section id="contact" className="min-h-screen flex items-center justify-center px-6 py-20 bg-gray-900">
+      {/* Contact - Pure Black Background */}
+      <section id="contact" className="min-h-screen flex items-center justify-center px-6 py-20 bg-black">
         <div className="max-w-5xl mx-auto text-center w-full">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <h2 className="text-5xl md:text-7xl font-black mb-12 leading-tight">Lets Connect</h2>
