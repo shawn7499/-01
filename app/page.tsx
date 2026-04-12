@@ -3,18 +3,11 @@
 import { motion } from 'framer-motion'
 import dynamic from 'next/dynamic'
 
-const UniverseBackground = dynamic(() => import('@/components/UniverseBackground'), {
+const AbstractBackground = dynamic(() => import('@/components/AbstractBackground'), {
   ssr: false,
 })
 
 export default function Home() {
-  const backgroundImages = [
-    'https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=1400&h=900&fit=crop',
-    'https://images.unsplash.com/photo-1462332420958-a05d1e7413e3?w=1400&h=900&fit=crop',
-    'https://images.unsplash.com/photo-1444080748397-f442aa95c3e5?w=1400&h=900&fit=crop',
-    'https://images.unsplash.com/photo-1446776877081-d282a0f896e2?w=1400&h=900&fit=crop',
-  ]
-
   return (
     <div className="bg-black text-white">
       {/* Navigation */}
@@ -30,17 +23,10 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* Hero Section - Universe Background */}
-      <section
-        className="min-h-screen flex flex-col items-center justify-center px-6 py-20 relative pt-32 overflow-hidden"
-        style={{
-          backgroundImage: `url(${backgroundImages[0]})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundAttachment: 'fixed',
-        }}
-      >
-        <div className="absolute inset-0 bg-black/50 z-10"></div>
+      {/* Hero Section - Gradient Abstract Background */}
+      <section className="min-h-screen flex flex-col items-center justify-center px-6 py-20 relative pt-32 overflow-hidden bg-black">
+        <AbstractBackground type="gradient" />
+        <div className="absolute inset-0 bg-black/30 z-10"></div>
         
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="max-w-5xl text-center relative z-20">
           <h1 className="text-6xl md:text-8xl font-black mb-12 leading-tight tracking-tight">Building the Future</h1>
@@ -60,18 +46,10 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* What I Do - Universe Background */}
-      <section
-        id="about"
-        className="min-h-screen flex items-center justify-center px-6 py-20 relative"
-        style={{
-          backgroundImage: `url(${backgroundImages[1]})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundAttachment: 'fixed',
-        }}
-      >
-        <div className="absolute inset-0 bg-black/60 z-10"></div>
+      {/* What I Do - Waves Abstract Background */}
+      <section id="about" className="min-h-screen flex items-center justify-center px-6 py-20 relative bg-black overflow-hidden">
+        <AbstractBackground type="waves" />
+        <div className="absolute inset-0 bg-black/40 z-10"></div>
         <div className="max-w-7xl mx-auto relative z-20">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-20">
             <h2 className="text-5xl md:text-7xl font-black mb-8 leading-tight">What I Do</h2>
@@ -96,18 +74,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Projects - Universe Background */}
-      <section
-        id="projects"
-        className="min-h-screen flex items-center justify-center px-6 py-20 relative"
-        style={{
-          backgroundImage: `url(${backgroundImages[2]})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundAttachment: 'fixed',
-        }}
-      >
-        <div className="absolute inset-0 bg-black/60 z-10"></div>
+      {/* Projects - Particles Abstract Background */}
+      <section id="projects" className="min-h-screen flex items-center justify-center px-6 py-20 relative bg-black overflow-hidden">
+        <AbstractBackground type="particles" />
+        <div className="absolute inset-0 bg-black/40 z-10"></div>
         <div className="max-w-7xl mx-auto w-full relative z-20">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-20">
             <h2 className="text-5xl md:text-7xl font-black mb-8 leading-tight">Active Projects</h2>
@@ -148,7 +118,7 @@ export default function Home() {
                 </div>
                 {project.link && (
                   <a href={project.link} target={project.link.startsWith('http') ? '_blank' : undefined} rel={project.link.startsWith('http') ? 'noopener noreferrer' : undefined} className="inline-block px-6 py-2 border border-white text-white hover:bg-white hover:text-black transition-all text-sm font-semibold">
-                    {project.link.startsWith('http') ? 'Visit Project' : 'View Project'} →
+                    {project.link.startsWith('http') ? 'Visit Project' : 'View Project'} arrow
                   </a>
                 )}
               </motion.div>
@@ -157,18 +127,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Roadmap - Universe Background */}
-      <section
-        id="roadmap"
-        className="min-h-screen flex items-center justify-center px-6 py-20 relative"
-        style={{
-          backgroundImage: `url(${backgroundImages[3]})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundAttachment: 'fixed',
-        }}
-      >
-        <div className="absolute inset-0 bg-black/60 z-10"></div>
+      {/* Roadmap - Geometric Abstract Background */}
+      <section id="roadmap" className="min-h-screen flex items-center justify-center px-6 py-20 relative bg-black overflow-hidden">
+        <AbstractBackground type="geometric" />
+        <div className="absolute inset-0 bg-black/40 z-10"></div>
         <div className="max-w-7xl mx-auto w-full relative z-20">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-20">
             <h2 className="text-5xl md:text-7xl font-black mb-8 leading-tight">Mission Roadmap</h2>
@@ -205,18 +167,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Contact - Universe Background */}
-      <section
-        id="contact"
-        className="min-h-screen flex items-center justify-center px-6 py-20 relative"
-        style={{
-          backgroundImage: `url(${backgroundImages[0]})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundAttachment: 'fixed',
-        }}
-      >
-        <div className="absolute inset-0 bg-black/60 z-10"></div>
+      {/* Contact - Gradient Abstract Background */}
+      <section id="contact" className="min-h-screen flex items-center justify-center px-6 py-20 relative bg-black overflow-hidden">
+        <AbstractBackground type="gradient" />
+        <div className="absolute inset-0 bg-black/40 z-10"></div>
         <div className="max-w-5xl mx-auto text-center w-full relative z-20">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <h2 className="text-5xl md:text-7xl font-black mb-12 leading-tight">Lets Connect</h2>
