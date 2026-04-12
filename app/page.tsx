@@ -9,9 +9,9 @@ const AICreatePage = dynamic(() => import('@/components/AICreatePage'), {
 
 export default function Home() {
   return (
-    <div className="bg-white text-black">
+    <div className="bg-black text-white">
       {/* Hero Section */}
-      <section className="min-h-screen flex flex-col items-center justify-center px-6 py-20 bg-gradient-to-b from-white to-gray-50">
+      <section className="min-h-screen flex flex-col items-center justify-center px-6 py-20 bg-gradient-to-b from-black to-gray-900">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -21,10 +21,10 @@ export default function Home() {
           <h1 className="text-6xl md:text-8xl font-black mb-12 leading-tight tracking-tight">
             Building the Future
           </h1>
-          <h2 className="text-3xl md:text-5xl font-light mb-16 text-gray-700 leading-tight">
+          <h2 className="text-3xl md:text-5xl font-light mb-16 text-gray-300 leading-tight">
             Beyond the Universe
           </h2>
-          <p className="text-xl md:text-2xl text-gray-600 mb-20 leading-relaxed max-w-3xl mx-auto">
+          <p className="text-xl md:text-2xl text-gray-400 mb-20 leading-relaxed max-w-3xl mx-auto">
             Pioneering technology that enables humanity's cosmic exploration, scalable, and inevitable.
           </p>
         </motion.div>
@@ -38,13 +38,13 @@ export default function Home() {
         >
           <a
             href="#contact"
-            className="px-8 py-4 bg-black text-white font-bold rounded hover:bg-gray-900 transition-all"
+            className="px-8 py-4 bg-white text-black font-bold rounded hover:bg-gray-200 transition-all"
           >
             Get Started
           </a>
           <a
             href="#about"
-            className="px-8 py-4 border-2 border-black text-black font-bold rounded hover:bg-black hover:text-white transition-all"
+            className="px-8 py-4 border-2 border-white text-white font-bold rounded hover:bg-white hover:text-black transition-all"
           >
             Learn More
           </a>
@@ -52,7 +52,7 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section id="about" className="min-h-screen flex items-center justify-center px-6 py-20 bg-white">
+      <section id="about" className="min-h-screen flex items-center justify-center px-6 py-20 bg-black">
         <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -61,7 +61,7 @@ export default function Home() {
             className="text-center mb-20"
           >
             <h2 className="text-5xl md:text-7xl font-black mb-8 leading-tight">What I Do</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
               Combining AI, trading, and Web3 to build the future of technology and create sustainable abundance.
             </p>
           </motion.div>
@@ -81,10 +81,10 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="border-l-4 border-black pl-6"
+                className="border-l-4 border-white pl-6"
               >
                 <h3 className="text-2xl font-bold mb-3">{item.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{item.desc}</p>
+                <p className="text-gray-400 leading-relaxed">{item.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -92,12 +92,12 @@ export default function Home() {
       </section>
 
       {/* AI Workshop */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-20 bg-gray-900">
         <AICreatePage />
       </section>
 
       {/* Projects Section */}
-      <section className="min-h-screen flex items-center justify-center px-6 py-20 bg-white">
+      <section className="min-h-screen flex items-center justify-center px-6 py-20 bg-black">
         <div className="max-w-7xl mx-auto w-full">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -106,7 +106,7 @@ export default function Home() {
             className="text-center mb-20"
           >
             <h2 className="text-5xl md:text-7xl font-black mb-8 leading-tight">Active Projects</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
               Transforming ideas into reality with cutting-edge technology.
             </p>
           </motion.div>
@@ -135,15 +135,15 @@ export default function Home() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="border-l-4 border-black pl-8 py-8"
+                className="border-l-4 border-white pl-8 py-8"
               >
                 <h3 className="text-4xl font-bold mb-4">{project.title}</h3>
-                <p className="text-xl text-gray-600 mb-8 leading-relaxed">{project.desc}</p>
+                <p className="text-xl text-gray-400 mb-8 leading-relaxed">{project.desc}</p>
                 <div className="flex flex-wrap gap-6">
                   {project.stats.map((stat, j) => (
                     <div key={j} className="flex items-center gap-2">
-                      <span className="w-2 h-2 bg-black rounded-full"></span>
-                      <span className="font-semibold">{stat}</span>
+                      <span className="w-2 h-2 bg-white rounded-full"></span>
+                      <span className="font-semibold text-gray-300">{stat}</span>
                     </div>
                   ))}
                 </div>
@@ -154,7 +154,7 @@ export default function Home() {
       </section>
 
       {/* Roadmap Section */}
-      <section className="min-h-screen flex items-center justify-center px-6 py-20 bg-gray-50">
+      <section className="min-h-screen flex items-center justify-center px-6 py-20 bg-gray-900">
         <div className="max-w-7xl mx-auto w-full">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -163,7 +163,7 @@ export default function Home() {
             className="text-center mb-20"
           >
             <h2 className="text-5xl md:text-7xl font-black mb-8 leading-tight">Mission Roadmap</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
               A vision to transcend the universe and enable humanity's cosmic exploration.
             </p>
           </motion.div>
@@ -195,19 +195,19 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.2 }}
-                className="border-l-4 border-black pl-8 py-8"
+                className="border-l-4 border-white pl-8 py-8"
               >
                 <div className="flex items-start gap-12">
                   <div className="flex-shrink-0">
-                    <div className="text-7xl font-black text-gray-200">{phase.number}</div>
+                    <div className="text-7xl font-black text-gray-700">{phase.number}</div>
                     <h3 className="text-3xl font-bold mt-4 mb-2">{phase.phase}</h3>
-                    <p className="text-gray-600 font-semibold">{phase.period}</p>
+                    <p className="text-gray-500 font-semibold">{phase.period}</p>
                   </div>
                   <div className="flex-1 mt-8">
                     <ul className="space-y-3">
                       {phase.items.map((item, j) => (
-                        <li key={j} className="flex items-start gap-3 text-gray-700 text-lg">
-                          <span className="text-black font-bold mt-0.5">→</span>
+                        <li key={j} className="flex items-start gap-3 text-gray-300 text-lg">
+                          <span className="text-white font-bold mt-0.5">→</span>
                           <span>{item}</span>
                         </li>
                       ))}
@@ -221,7 +221,7 @@ export default function Home() {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="min-h-screen flex items-center justify-center px-6 py-20 bg-white">
+      <section id="contact" className="min-h-screen flex items-center justify-center px-6 py-20 bg-black">
         <div className="max-w-5xl mx-auto text-center w-full">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -229,7 +229,7 @@ export default function Home() {
             viewport={{ once: true }}
           >
             <h2 className="text-5xl md:text-7xl font-black mb-12 leading-tight">Let's Connect</h2>
-            <p className="text-xl text-gray-600 mb-20 leading-relaxed">
+            <p className="text-xl text-gray-400 mb-20 leading-relaxed">
               Join me on the journey to build the future. Let's create something extraordinary together.
             </p>
 
@@ -252,7 +252,7 @@ export default function Home() {
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1 }}
                     whileHover={{ scale: 1.1 }}
-                    className="p-6 border-2 border-black rounded hover:bg-black hover:text-white transition-all group"
+                    className="p-6 border-2 border-white rounded hover:bg-white hover:text-black transition-all group"
                   >
                     <div className="text-4xl mb-3 group-hover:scale-110 transition-transform">{contact.icon}</div>
                     <div className="font-bold text-sm">{contact.name}</div>
@@ -264,12 +264,12 @@ export default function Home() {
                     whileInView={{ scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1 }}
-                    className="p-6 border-2 border-black rounded cursor-pointer hover:bg-black hover:text-white transition-all group"
+                    className="p-6 border-2 border-white rounded cursor-pointer hover:bg-white hover:text-black transition-all group"
                     title={contact.wechat}
                   >
                     <div className="text-4xl mb-3 group-hover:scale-110 transition-transform">{contact.icon}</div>
                     <div className="font-bold text-sm">{contact.name}</div>
-                    <div className="text-xs text-gray-600 group-hover:text-white/70 mt-1 transition-colors">{contact.wechat}</div>
+                    <div className="text-xs text-gray-500 group-hover:text-black/70 mt-1 transition-colors">{contact.wechat}</div>
                   </motion.div>
                 )
               )}
@@ -282,12 +282,12 @@ export default function Home() {
               transition={{ delay: 0.5 }}
               className="mt-20"
             >
-              <p className="text-gray-600 text-lg mb-8">
+              <p className="text-gray-400 text-lg mb-8">
                 Ready to build the future? Let's make it happen.
               </p>
               <a
                 href="mailto:shawnwick7499@gmail.com"
-                className="inline-block px-8 py-4 bg-black text-white font-bold rounded hover:bg-gray-900 transition-all"
+                className="inline-block px-8 py-4 bg-white text-black font-bold rounded hover:bg-gray-200 transition-all"
               >
                 Send Me a Message
               </a>
@@ -297,10 +297,10 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-black text-white py-12 px-6">
+      <footer className="bg-black text-white py-12 px-6 border-t border-gray-800">
         <div className="max-w-7xl mx-auto text-center">
           <h3 className="text-3xl font-black mb-4">WICK</h3>
-          <p className="text-gray-400 mb-8">
+          <p className="text-gray-500 mb-8">
             Building the path beyond the universe
           </p>
           <div className="flex justify-center gap-8 mb-8">
@@ -314,13 +314,13 @@ export default function Home() {
                 href={link.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-white transition-colors font-semibold"
+                className="text-gray-500 hover:text-white transition-colors font-semibold"
               >
                 {link.name}
               </a>
             ))}
           </div>
-          <p className="text-gray-500 text-sm">© 2024 WICK. All rights reserved.</p>
+          <p className="text-gray-600 text-sm">© 2024 WICK. All rights reserved.</p>
         </div>
       </footer>
     </div>
