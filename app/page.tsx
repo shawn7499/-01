@@ -1,10 +1,21 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, Suspense } from 'react'
 import { motion } from 'framer-motion'
 import { FullPageScroll } from '@/components/FullPageScroll'
-import MatrixRain from '@/components/MatrixRain'
+import dynamic from 'next/dynamic'
 import Giscus from '@/components/Giscus'
+
+// 动态导入组件
+const MatrixRain = dynamic(() => import('@/components/MatrixRain'), {
+  loading: () => <div className="absolute inset-0 bg-gradient-to-b from-slate-900 via-purple-900 to-black" />,
+  ssr: false,
+})
+
+const AICreatePage = dynamic(() => import('@/components/AICreatePage'), {
+  loading: () => <div className="w-full h-screen flex items-center justify-center bg-gradient-to-b from-slate-900 to-black">Loading...</div>,
+  ssr: false,
+})
 
 export default function Home() {
   const [lang, setLang] = useState<'en' | 'zh'>('en')
@@ -12,21 +23,21 @@ export default function Home() {
   const content = {
     en: {
       hero: {
-        title: 'Building the future',
-        subtitle: 'beyond the universe',
+        title: 'Building the Future',
+        subtitle: 'Beyond the Universe',
         mission: 'Taking Humanity Beyond the Universe',
       },
       intro: {
-        text: 'Building technology that makes humanity\'s cosmic exploration possible, scalable, and inevitable.',
+        text: 'Pioneering technology that enables humanity\'s cosmic exploration, scalable, and inevitable.',
       },
       whatIDo: {
         title: 'WHAT I DO',
         items: [
-          { number: '01', title: 'AI Automation', desc: 'Building intelligent agents with OpenClaw' },
-          { number: '02', title: 'Quantitative Trading', desc: 'Developing profitable trading strategies' },
-          { number: '03', title: 'Web3 Development', desc: 'Creating decentralized applications' },
-          { number: '04', title: 'Meme Coin Trading', desc: 'Caught Trump 7u→65u, early WLFI investor', status: 'Waiting for opportunities' },
-          { number: '05', title: 'Prediction Market Bot', desc: 'Automated monitoring for Polymarket', status: 'In Development' },
+          { number: '01', title: 'AI Automation', desc: 'Building intelligent agents with OpenClaw', icon: '🤖' },
+          { number: '02', title: 'Quantitative Trading', desc: 'Developing profitable trading strategies', icon: '📈' },
+          { number: '03', title: 'AI Creation', desc: 'Advanced image and video generation', icon: '🎨' },
+          { number: '04', title: 'Web3 Development', desc: 'Creating decentralized applications', icon: '🌐' },
+          { number: '05', title: 'Meme Coin Trading', desc: 'Early opportunities in crypto', icon: '🚀' },
         ],
       },
       projects: {
@@ -34,51 +45,51 @@ export default function Home() {
         items: [
           {
             number: '01',
-            title: 'Gold Quantitative Trading',
-            desc: 'Sustainable compound interest strategy for long-term wealth accumulation.',
-            tags: ['Quantitative', 'Compound Interest', 'Long-term'],
-            link: 'https://smartgold.ai/dashboard?inviteCode=J5n5Rv',
+            title: 'AI Creative Workshop',
+            desc: 'Generate stunning images and videos with advanced AI models',
+            tags: ['Image Generation', 'AI', 'Creative Tools'],
+            icon: '🎬',
           },
           {
             number: '02',
-            title: 'OpenClaw Automation',
-            desc: 'Full personalization services including token provision, installation, and maintenance.',
-            tags: ['OpenClaw', 'Automation', 'Custom Service'],
-            link: null,
+            title: 'Trading Bot',
+            desc: 'Automated quantitative trading with real-time profit generation',
+            tags: ['Trading', 'Automation', 'Crypto'],
+            icon: '💹',
           },
           {
             number: '03',
-            title: 'Web3 Development',
-            desc: 'Professional Web3 website design and development services.',
-            tags: ['Web3', 'Next.js', 'Custom Design'],
-            link: null,
+            title: 'OpenClaw Services',
+            desc: 'Professional AI automation and custom integration services',
+            tags: ['Automation', 'AI', 'Custom'],
+            icon: '⚙️',
           },
         ],
       },
       roadmap: {
         title: 'MISSION ROADMAP',
-        subtitle: 'Born 1998 - Mission: Enable humanity to transcend the universe',
+        subtitle: 'Building the path to transcend the universe',
         phases: [
           {
             number: '01',
             phase: 'Capital Accumulation',
             period: '2024-2030',
             status: 'Current Phase',
-            items: ['Build wealth through Web3 & Web4', 'Quantitative trading strategies', 'OpenClaw automation services', 'Multiple revenue streams'],
+            items: ['Build wealth through multiple streams', 'AI & trading automation', 'Web3 innovation', 'Market dominance'],
           },
           {
             number: '02',
-            phase: 'Parallel Execution',
-            period: '2030+',
-            status: 'Three Missions',
-            items: ['Space Empire: Private space infrastructure', 'Molecular Revolution: Zero-waste civilization', 'Digital Immortality: Mind uploading/downloading'],
+            phase: 'Space & Technology',
+            period: '2030-2040',
+            status: 'Next Phase',
+            items: ['Private space infrastructure', 'Advanced AI research', 'Quantum computing', 'Dimensional exploration'],
           },
           {
             number: '03',
-            phase: 'Ultimate Goal',
-            period: 'Lifetime',
-            status: 'Grand Vision',
-            items: ['Enable humanity to transcend the universe', 'Break through dimensional limitations', 'Achieve true cosmic exploration'],
+            phase: 'Universal Transcendence',
+            period: '2040+',
+            status: 'Ultimate Goal',
+            items: ['Multiverse exploration', 'Consciousness digitization', 'Dimensional ascension', 'Cosmic civilization'],
           },
         ],
       },
@@ -87,7 +98,7 @@ export default function Home() {
         items: [
           { name: 'X (Twitter)', link: 'https://x.com/shawnwick960', icon: '𝕏' },
           { name: 'Telegram', link: 'https://t.me/shawick', icon: '✈️' },
-          { name: 'Email', link: 'mailto:sahwnwick7499@gmail.com', icon: '✉️' },
+          { name: 'Email', link: 'mailto:shawnwick7499@gmail.com', icon: '✉️' },
           { name: 'GitHub', link: 'https://github.com/shawn7499', icon: '💻' },
           { name: 'WeChat', link: null, icon: '💬', wechat: 'shawnwick' },
         ],
@@ -97,19 +108,19 @@ export default function Home() {
       hero: {
         title: '构建未来',
         subtitle: '超越宇宙',
-        mission: '让人类走出宇宙',
+        mission: '让人类超越宇宙',
       },
       intro: {
-        text: '构建让人类宇宙探索成为可能、可扩展且不可避免的技术。',
+        text: '开创技术，让人类的宇宙探索成为可能、可扩展和必然。',
       },
       whatIDo: {
-        title: '我正在做的',
+        title: '我的专长',
         items: [
-          { number: '01', title: 'AI 自动化', desc: '使用 OpenClaw 构建智能代理' },
-          { number: '02', title: '量化交易', desc: '开发盈利的交易策略' },
-          { number: '03', title: 'Web3 开发', desc: '创建去中心化应用' },
-          { number: '04', title: 'Meme 币交易', desc: '抓住 Trump 7u→65u，WLFI 早期投资者', status: '等待机会' },
-          { number: '05', title: '预测市场机器人', desc: 'Polymarket 自动监控', status: '开发中' },
+          { number: '01', title: 'AI 自动化', desc: '使用 OpenClaw 构建智能代理', icon: '🤖' },
+          { number: '02', title: '量化交易', desc: '开发盈利交易策略', icon: '📈' },
+          { number: '03', title: 'AI 创意', desc: '高级图像和视频生成', icon: '🎨' },
+          { number: '04', title: 'Web3 开发', desc: '创建去中心化应用', icon: '🌐' },
+          { number: '05', title: '币种交易', desc: '捕捉加密市场机会', icon: '🚀' },
         ],
       },
       projects: {
@@ -117,60 +128,60 @@ export default function Home() {
         items: [
           {
             number: '01',
-            title: '黄金量化交易',
-            desc: '可持续的复利策略，用于长期财富积累。',
-            tags: ['量化交易', '复利', '长期策略'],
-            link: 'https://smartgold.ai/dashboard?inviteCode=J5n5Rv',
+            title: 'AI 创意工坊',
+            desc: '使用先进 AI 模型生成令人惊叹的图像和视频',
+            tags: ['图像生成', 'AI', '创意工具'],
+            icon: '🎬',
           },
           {
             number: '02',
-            title: 'OpenClaw 自动化',
-            desc: '全方位个性化服务，包括代币供应、安装和维护。',
-            tags: ['OpenClaw', '自动化', '定制服务'],
-            link: null,
+            title: '交易机器人',
+            desc: '自动化量化交易，实时盈利生成',
+            tags: ['交易', '自动化', '加密'],
+            icon: '💹',
           },
           {
             number: '03',
-            title: 'Web3 开发',
-            desc: '专业的 Web3 网站设计和开发服务。',
-            tags: ['Web3', 'Next.js', '定制设计'],
-            link: null,
+            title: 'OpenClaw 服务',
+            desc: '专业 AI 自动化和自定义集成服务',
+            tags: ['自动化', 'AI', '定制'],
+            icon: '⚙️',
           },
         ],
       },
       roadmap: {
         title: '使命路线图',
-        subtitle: '生于 1998 - 使命：让人类超越宇宙',
+        subtitle: '构建超越宇宙的路径',
         phases: [
           {
             number: '01',
             phase: '资本积累',
             period: '2024-2030',
             status: '当前阶段',
-            items: ['通过 Web3 和 Web4 积累财富', '量化交易策略', 'OpenClaw 自动化服务', '多元化收入来源'],
+            items: ['通过多种渠道建立财富', 'AI 和交易自动化', 'Web3 创新', '市场主导'],
           },
           {
             number: '02',
-            phase: '并行执行',
-            period: '2030+',
-            status: '三大使命',
-            items: ['太空帝国：私人太空基础设施', '分子革命：零浪费文明', '数字永生：意识上传/下载'],
+            phase: '空间与技术',
+            period: '2030-2040',
+            status: '下一阶段',
+            items: ['私人空间基础设施', '先进 AI 研究', '量子计算', '维度探索'],
           },
           {
             number: '03',
-            phase: '终极目标',
-            period: '终生',
-            status: '宏伟愿景',
-            items: ['让人类超越宇宙', '突破维度限制', '实现真正的宇宙探索'],
+            phase: '宇宙超越',
+            period: '2040+',
+            status: '终极目标',
+            items: ['多元宇宙探索', '意识数字化', '维度升华', '宇宙文明'],
           },
         ],
       },
       contact: {
-        title: '联系方式',
+        title: '联系我',
         items: [
           { name: 'X (Twitter)', link: 'https://x.com/shawnwick960', icon: '𝕏' },
           { name: 'Telegram', link: 'https://t.me/shawick', icon: '✈️' },
-          { name: '邮箱', link: 'mailto:sahwnwick7499@gmail.com', icon: '✉️' },
+          { name: '邮箱', link: 'mailto:shawnwick7499@gmail.com', icon: '✉️' },
           { name: 'GitHub', link: 'https://github.com/shawn7499', icon: '💻' },
           { name: '微信', link: null, icon: '💬', wechat: 'shawnwick' },
         ],
@@ -180,19 +191,50 @@ export default function Home() {
 
   const t = content[lang]
 
-  // 定义所有页面区块
+  // 星空背景组件
+  const StarryBackground = () => (
+    <div className="absolute inset-0 overflow-hidden">
+      {[...Array(100)].map((_, i) => (
+        <motion.div
+          key={i}
+          className="absolute bg-white rounded-full"
+          style={{
+            width: Math.random() * 3 + 'px',
+            height: Math.random() * 3 + 'px',
+            left: Math.random() * 100 + '%',
+            top: Math.random() * 100 + '%',
+          }}
+          animate={{
+            opacity: [0.3, 1, 0.3],
+          }}
+          transition={{
+            duration: Math.random() * 3 + 2,
+            repeat: Infinity,
+          }}
+        />
+      ))}
+    </div>
+  )
+
   const sections = [
-    // Section 1: Hero
-    <div key="hero" className="h-screen flex items-center justify-center px-6 relative">
+    // Hero Section
+    <div key="hero" className="h-screen flex items-center justify-center px-6 relative overflow-hidden">
+      <StarryBackground />
       <MatrixRain />
       
       {/* 导航栏 */}
-      <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-4 md:px-12 md:py-6">
-        <div className="flex justify-between items-center">
-          <div className="text-xl md:text-2xl font-bold">SHAWN WICK</div>
+      <nav className="fixed top-0 left-0 right-0 z-50 px-6 py-4 md:px-12 md:py-6 bg-gradient-to-b from-black to-transparent">
+        <div className="flex justify-between items-center max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-2xl md:text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent"
+          >
+            WICK
+          </motion.div>
           <button
             onClick={() => setLang(lang === 'en' ? 'zh' : 'en')}
-            className="px-3 py-1 md:px-4 md:py-2 border border-white/20 hover:border-[#00ff88] transition-colors text-sm md:text-base"
+            className="px-4 py-2 border border-cyan-400/50 hover:border-cyan-400 text-cyan-400 rounded-lg transition-all hover:bg-cyan-400/10 text-sm md:text-base font-semibold"
           >
             {lang === 'en' ? '中文' : 'EN'}
           </button>
@@ -205,143 +247,164 @@ export default function Home() {
         transition={{ duration: 1 }}
         className="text-center relative z-10"
       >
-        <h1 className="text-5xl md:text-7xl lg:text-9xl font-bold mb-8 leading-tight">
-          {t.hero.title}
-        </h1>
-        <h2 className="text-5xl md:text-7xl lg:text-9xl font-bold mb-12 leading-tight">
-          {t.hero.subtitle}
-        </h2>
-        <div className="inline-block px-4 md:px-6 py-2 md:py-3 border border-[#00ff88] text-[#00ff88] text-base md:text-xl mb-12">
+        <motion.h1
+          className="text-6xl md:text-8xl lg:text-9xl font-black mb-8 leading-tight"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
+          <span className="bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+            {t.hero.title}
+          </span>
+        </motion.h1>
+        <motion.h2
+          className="text-5xl md:text-7xl lg:text-8xl font-black mb-12 leading-tight"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
+          <span className="bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-400 bg-clip-text text-transparent">
+            {t.hero.subtitle}
+          </span>
+        </motion.h2>
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="inline-block px-6 md:px-8 py-3 md:py-4 border-2 border-cyan-400 text-cyan-400 text-base md:text-xl font-bold rounded-lg mb-12 hover:bg-cyan-400/10 transition-all"
+        >
           {t.hero.mission}
-        </div>
-        <p className="text-base md:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
+        </motion.div>
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
+          className="text-lg md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed"
+        >
           {t.intro.text}
-        </p>
+        </motion.p>
       </motion.div>
     </div>,
 
-    // Section 2: What I Do
-    <div key="what-i-do" className="min-h-screen flex items-center justify-center px-6 relative">
-      <div className="container mx-auto max-w-6xl py-20">
-        <div className="text-sm text-gray-500 mb-16">/// {t.whatIDo.title}</div>
+    // What I Do Section
+    <div key="what-i-do" className="min-h-screen flex items-center justify-center px-6 relative bg-gradient-to-b from-black via-slate-900 to-black py-20">
+      <div className="container mx-auto max-w-7xl">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center mb-20"
+        >
+          <div className="text-cyan-400 text-sm font-bold mb-4 uppercase tracking-widest">/// {t.whatIDo.title}</div>
+          <h2 className="text-5xl md:text-6xl font-black text-white">What I Do</h2>
+        </motion.div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {t.whatIDo.items.map((item, index) => (
             <motion.div
               key={index}
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="border border-white/10 hover:border-[#00ff88] transition-all duration-300 p-8 group"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.1 }}
+              className="group glass-effect p-8 rounded-xl hover:border-cyan-400 transition-all duration-300"
             >
-              <div className="text-sm text-gray-500 mb-4">[{item.number}]</div>
-              <h3 className="text-2xl font-bold mb-3 group-hover:text-[#00ff88] transition-colors">
+              <div className="text-5xl mb-4">{item.icon}</div>
+              <div className="text-cyan-400 text-sm font-bold mb-3">/{item.number}</div>
+              <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-cyan-400 transition-colors">
                 {item.title}
               </h3>
-              <p className="text-gray-400 mb-4">{item.desc}</p>
-              {item.status && (
-                <div className="text-sm text-[#00ff88] border border-[#00ff88]/30 px-3 py-1 inline-block">
-                  {item.status}
-                </div>
-              )}
+              <p className="text-gray-400 leading-relaxed">{item.desc}</p>
             </motion.div>
           ))}
         </div>
       </div>
     </div>,
 
-    // Section 3: Projects
-    <div key="projects" className="min-h-screen flex items-center justify-center px-6 relative">
-      <div className="container mx-auto max-w-6xl py-20">
-        <div className="text-sm text-gray-500 mb-4">/// {t.projects.title}</div>
+    // AI Create Section
+    <AICreatePage />,
+
+    // Projects Section
+    <div key="projects" className="min-h-screen flex items-center justify-center px-6 relative bg-gradient-to-b from-black via-slate-900 to-black py-20">
+      <div className="container mx-auto max-w-7xl">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center mb-20"
+        >
+          <div className="text-cyan-400 text-sm font-bold mb-4 uppercase tracking-widest">/// {t.projects.title}</div>
+          <h2 className="text-5xl md:text-6xl font-black text-white">Active Projects</h2>
+        </motion.div>
         <div className="space-y-8">
           {t.projects.items.map((project, index) => (
             <motion.div
               key={index}
-              initial={{ scale: 0.9, opacity: 0, x: -50 }}
-              animate={{ scale: 1, opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.2 }}
-              className="group"
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: index * 0.2 }}
+              className="group glass-effect p-8 md:p-12 rounded-xl hover:border-cyan-400 transition-all"
             >
-              <a
-                href={project.link || '#'}
-                target={project.link ? '_blank' : undefined}
-                rel={project.link ? 'noopener noreferrer' : undefined}
-                className={`block border border-white/10 p-8 md:p-12 hover:border-[#00ff88] transition-all ${
-                  project.link ? 'cursor-pointer' : 'cursor-default'
-                }`}
-              >
-                <div className="flex justify-between items-start gap-8">
-                  <div className="flex-1">
-                    <div className="text-sm text-gray-500 mb-4">[{project.number}]</div>
-                    <h3 className="text-3xl md:text-4xl font-bold mb-4 group-hover:text-[#00ff88] transition-colors">
-                      {project.title}
-                    </h3>
-                    <p className="text-gray-400 mb-6 text-lg">{project.desc}</p>
-                    <div className="flex flex-wrap gap-3">
-                      {project.tags.map((tag, i) => (
-                        <span
-                          key={i}
-                          className="px-4 py-2 border border-white/20 text-sm"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
+              <div className="flex flex-col md:flex-row gap-8 items-start">
+                <div className="text-6xl">{project.icon}</div>
+                <div className="flex-1">
+                  <div className="text-cyan-400 text-sm font-bold mb-2">/{project.number}</div>
+                  <h3 className="text-4xl font-bold text-white mb-4 group-hover:text-cyan-400 transition-colors">
+                    {project.title}
+                  </h3>
+                  <p className="text-gray-300 text-lg mb-6 leading-relaxed">{project.desc}</p>
+                  <div className="flex flex-wrap gap-3">
+                    {project.tags.map((tag, i) => (
+                      <span
+                        key={i}
+                        className="px-4 py-2 border border-cyan-400/50 text-cyan-400 text-sm rounded-lg group-hover:border-cyan-400 transition-colors"
+                      >
+                        {tag}
+                      </span>
+                    ))}
                   </div>
-                  {project.link && (
-                    <div className="text-[#00ff88] text-2xl">→</div>
-                  )}
                 </div>
-              </a>
+                <div className="text-cyan-400 text-3xl">→</div>
+              </div>
             </motion.div>
           ))}
         </div>
       </div>
     </div>,
 
-    // Section 4: Roadmap
-    <div key="roadmap" className="min-h-screen flex items-center justify-center px-6 relative">
-      <div className="container mx-auto max-w-6xl py-20">
-        <div className="text-sm text-gray-500 mb-4">/// {t.roadmap.title}</div>
-        <p className="text-xl text-gray-400 mb-16">{t.roadmap.subtitle}</p>
+    // Roadmap Section
+    <div key="roadmap" className="min-h-screen flex items-center justify-center px-6 relative bg-gradient-to-b from-black via-slate-900 to-black py-20">
+      <div className="container mx-auto max-w-7xl">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-center mb-20"
+        >
+          <div className="text-cyan-400 text-sm font-bold mb-4 uppercase tracking-widest">/// {t.roadmap.title}</div>
+          <h2 className="text-5xl md:text-6xl font-black text-white mb-6">Mission Roadmap</h2>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">{t.roadmap.subtitle}</p>
+        </motion.div>
         <div className="space-y-8">
           {t.roadmap.phases.map((phase, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, rotateX: -15 }}
-              animate={{ opacity: 1, rotateX: 0 }}
-              transition={{ duration: 0.8, delay: index * 0.2 }}
-              className="border border-white/10 p-8 md:p-12 hover:border-[#00ff88] transition-all"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.2 }}
+              className="glass-effect p-8 md:p-12 rounded-xl border-l-4 border-cyan-400 hover:border-cyan-300 transition-all"
             >
               <div className="flex flex-col md:flex-row gap-8">
                 <div className="md:w-1/3">
-                  <motion.div
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    transition={{ duration: 0.5, delay: index * 0.2 + 0.3 }}
-                    className="text-6xl font-bold text-[#00ff88] mb-4"
-                  >
-                    [{phase.number}]
-                  </motion.div>
-                  <h3 className="text-3xl font-bold mb-2">{phase.phase}</h3>
-                  <div className="text-gray-500 mb-2">{phase.period}</div>
-                  <div className="text-sm text-[#00ff88] border border-[#00ff88]/30 px-3 py-1 inline-block">
+                  <div className="text-7xl font-black text-cyan-400/30 mb-4">{phase.number}</div>
+                  <h3 className="text-3xl font-bold text-white mb-2">{phase.phase}</h3>
+                  <div className="text-gray-400 mb-3">{phase.period}</div>
+                  <div className="inline-block px-4 py-2 bg-cyan-400/20 text-cyan-400 rounded-lg text-sm font-bold">
                     {phase.status}
                   </div>
                 </div>
                 <div className="md:w-2/3">
                   <ul className="space-y-3">
                     {phase.items.map((item, i) => (
-                      <motion.li
-                        key={i}
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.5, delay: index * 0.2 + 0.4 + i * 0.1 }}
-                        className="flex items-start gap-3 text-gray-400"
-                      >
-                        <span className="text-[#00ff88] mt-1">→</span>
-                        <span>{item}</span>
-                      </motion.li>
+                      <li key={i} className="flex items-start gap-3 text-gray-300">
+                        <span className="text-cyan-400 mt-1">→</span>
+                        <span className="text-lg">{item}</span>
+                      </li>
                     ))}
                   </ul>
                 </div>
@@ -352,45 +415,51 @@ export default function Home() {
       </div>
     </div>,
 
-    // Section 5: Contact
-    <div key="contact" className="h-screen flex items-center justify-center px-6 relative">
-      <div className="container mx-auto max-w-6xl">
-        <div className="text-sm text-gray-500 mb-8">/// {t.contact.title}</div>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6">
-          {t.contact.items.map((item, index) =>
-            item.link ? (
-              <motion.a
-                key={index}
-                href={item.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={{ scale: 0, rotate: -45 }}
-                animate={{ scale: 1, rotate: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                whileHover={{ scale: 1.05, y: -5 }}
-                className="border border-white/10 hover:border-[#00ff88] p-8 text-center transition-all group"
-              >
-                <span className="text-4xl mb-4 block">{item.icon}</span>
-                <div className="text-sm font-bold group-hover:text-[#00ff88] transition-colors">
-                  {item.name}
-                </div>
-              </motion.a>
-            ) : (
-              <motion.div
-                key={index}
-                initial={{ scale: 0, rotate: -45 }}
-                animate={{ scale: 1, rotate: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="border border-white/10 p-8 text-center"
-                title={item.wechat}
-              >
-                <span className="text-4xl mb-4 block">{item.icon}</span>
-                <div className="text-sm font-bold">{item.name}</div>
-                <div className="text-xs text-gray-500 mt-1">{item.wechat}</div>
-              </motion.div>
-            )
-          )}
-        </div>
+    // Contact Section
+    <div key="contact" className="h-screen flex items-center justify-center px-6 relative bg-gradient-to-b from-black via-slate-900 to-black">
+      <div className="container mx-auto max-w-7xl text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          <div className="text-cyan-400 text-sm font-bold mb-6 uppercase tracking-widest">/// {t.contact.title}</div>
+          <h2 className="text-6xl md:text-7xl font-black text-white mb-16">Let\'s Connect</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6">
+            {t.contact.items.map((item, index) =>
+              item.link ? (
+                <motion.a
+                  key={index}
+                  href={item.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  initial={{ scale: 0, rotate: -45 }}
+                  animate={{ scale: 1, rotate: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  whileHover={{ scale: 1.1, y: -5 }}
+                  className="glass-effect p-8 text-center rounded-xl group hover:border-cyan-400 transition-all"
+                >
+                  <span className="text-5xl block mb-3">{item.icon}</span>
+                  <div className="text-sm font-bold text-gray-300 group-hover:text-cyan-400 transition-colors">
+                    {item.name}
+                  </div>
+                </motion.a>
+              ) : (
+                <motion.div
+                  key={index}
+                  initial={{ scale: 0, rotate: -45 }}
+                  animate={{ scale: 1, rotate: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  className="glass-effect p-8 text-center rounded-xl group cursor-pointer hover:border-cyan-400 transition-all"
+                  title={item.wechat}
+                >
+                  <span className="text-5xl block mb-3">{item.icon}</span>
+                  <div className="text-sm font-bold text-gray-300">{item.name}</div>
+                  <div className="text-xs text-gray-500 mt-2">{item.wechat}</div>
+                </motion.div>
+              )
+            )}
+          </div>
+        </motion.div>
       </div>
     </div>,
   ]
