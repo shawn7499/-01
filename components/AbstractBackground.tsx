@@ -16,8 +16,13 @@ export default function AbstractBackground({ type }: AbstractBackgroundProps) {
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
-    canvas.width = window.innerWidth
-    canvas.height = window.innerHeight
+    const updateSize = () => {
+      canvas.width = window.innerWidth
+      canvas.height = window.innerHeight
+    }
+
+    updateSize()
+    window.addEventListener('resize', updateSize)
 
     let animationId: number
     let time = 0
@@ -89,19 +94,23 @@ export default function AbstractBackground({ type }: AbstractBackgroundProps) {
     const animate = () => {
       time += 1
 
-      switch (type) {
-        case 'gradient':
-          drawGradient()
-          break
-        case 'waves':
-          drawWaves()
-          break
-        case 'particles':
-          drawParticles()
-          break
-        case 'geometric':
-          drawGeometric()
-          break
+      try {
+        switch (type) {
+          case 'gradient':
+            drawGradient()
+            break
+          case 'waves':
+            drawWaves()
+            break
+          case 'particles':
+            drawParticles()
+            break
+          case 'geometric':
+            drawGeometric()
+            break
+        }
+      } catch (e) {
+        console.error('Canvas drawing error:', e)
       }
 
       animationId = requestAnimationFrame(animate)
@@ -109,14 +118,8 @@ export default function AbstractBackground({ type }: AbstractBackgroundProps) {
 
     animate()
 
-    const handleResize = () => {
-      canvas.width = window.innerWidth
-      canvas.height = window.innerHeight
-    }
-
-    window.addEventListener('resize', handleResize)
     return () => {
-      window.removeEventListener('resize', handleResize)
+      window.removeEventListener('resize', updateSize)
       cancelAnimationFrame(animationId)
     }
   }, [type])
@@ -124,8 +127,11 @@ export default function AbstractBackground({ type }: AbstractBackgroundProps) {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 z-0"
-      style={{ background: '#0a0e27' }}
+      className="absolute inset-0 w-full h-full"
+      style={{
+        display: 'block',
+        backgroundColor: '#0a0e27',
+      }}
     />
   )
 }
