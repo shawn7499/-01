@@ -1,41 +1,37 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import dynamic from 'next/dynamic'
-
-const AICreatePage = dynamic(() => import('@/components/AICreatePage'), {
-  ssr: false,
-})
+import Link from 'next/link'
 
 export default function Home() {
   return (
     <div className="bg-black text-white">
-      <section className="min-h-screen flex flex-col items-center justify-center px-6 py-20 bg-gradient-to-b from-black to-gray-900">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="max-w-5xl text-center"
-        >
-          <h1 className="text-6xl md:text-8xl font-black mb-12 leading-tight tracking-tight">
-            Building the Future
-          </h1>
-          <h2 className="text-3xl md:text-5xl font-light mb-16 text-gray-300 leading-tight">
-            Beyond the Universe
-          </h2>
+      {/* Navigation */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur border-b border-gray-800 px-6 py-4">
+        <div className="max-w-7xl mx-auto flex justify-between items-center">
+          <h1 className="text-2xl font-black">SHAWN WICK</h1>
+          <div className="flex gap-8">
+            <a href="#about" className="text-gray-400 hover:text-white transition">What I Do</a>
+            <a href="#projects" className="text-gray-400 hover:text-white transition">Projects</a>
+            <a href="#roadmap" className="text-gray-400 hover:text-white transition">Roadmap</a>
+            <a href="#contact" className="text-gray-400 hover:text-white transition">Contact</a>
+          </div>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section className="min-h-screen flex flex-col items-center justify-center px-6 py-20 bg-gradient-to-b from-black to-gray-900 pt-32">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="max-w-5xl text-center">
+          <h1 className="text-6xl md:text-8xl font-black mb-12 leading-tight tracking-tight">Building the Future</h1>
+          <h2 className="text-3xl md:text-5xl font-light mb-16 text-gray-300 leading-tight">Beyond the Universe</h2>
           <p className="text-xl md:text-2xl text-gray-400 mb-20 leading-relaxed max-w-3xl mx-auto">
             Pioneering technology that enables humanity's cosmic exploration, scalable, and inevitable.
           </p>
         </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="flex flex-col sm:flex-row gap-6 justify-center mt-12"
-        >
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2 }} className="flex flex-col sm:flex-row gap-6 justify-center mt-12">
           <a href="#projects" className="px-8 py-4 bg-white text-black font-bold rounded hover:bg-gray-200 transition-all">
-            Get Started
+            View Projects
           </a>
           <a href="#about" className="px-8 py-4 border-2 border-white text-white font-bold rounded hover:bg-white hover:text-black transition-all">
             Learn More
@@ -43,13 +39,12 @@ export default function Home() {
         </motion.div>
       </section>
 
+      {/* What I Do */}
       <section id="about" className="min-h-screen flex items-center justify-center px-6 py-20 bg-black">
         <div className="max-w-7xl mx-auto">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-20">
             <h2 className="text-5xl md:text-7xl font-black mb-8 leading-tight">What I Do</h2>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">
-              Combining AI, trading, and Web3 to build the future of technology and create sustainable abundance.
-            </p>
+            <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">Combining AI, trading, and Web3 to build the future of technology.</p>
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
@@ -70,11 +65,8 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="py-20 bg-gray-900">
-        <AICreatePage />
-      </section>
-
-      <section id="projects" className="min-h-screen flex items-center justify-center px-6 py-20 bg-black">
+      {/* Projects */}
+      <section id="projects" className="min-h-screen flex items-center justify-center px-6 py-20 bg-gray-900">
         <div className="max-w-7xl mx-auto w-full">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-20">
             <h2 className="text-5xl md:text-7xl font-black mb-8 leading-tight">Active Projects</h2>
@@ -83,14 +75,29 @@ export default function Home() {
 
           <div className="space-y-12">
             {[
-              { title: 'AI Creative Workshop', desc: 'Generate stunning images and videos with advanced AI models. Powered by state-of-the-art diffusion technology.', stats: ['61+ Models', 'Real-time Generation', 'High Resolution'] },
-              { title: 'Trading Bot', desc: 'Automated quantitative trading with real-time profit generation. Intelligent algorithms powered by machine learning.', stats: ['24/7 Trading', 'Multi-Market', 'Risk Management'] },
-              { title: 'OpenClaw Services', desc: 'Professional AI automation and custom integration services. Building the future of intelligent automation.', stats: ['Custom Solutions', 'Enterprise Grade', 'Full Support'] },
+              {
+                title: 'Gold Quantitative Trading',
+                desc: 'Sustainable compound interest strategy for long-term wealth accumulation. Intelligent algorithms for consistent returns.',
+                stats: ['Compound Returns', 'Risk Management', 'Long-term Growth'],
+                link: 'https://smartgold.ai/dashboard?inviteCode=J5n5Rv'
+              },
+              {
+                title: 'AI Creative Workshop',
+                desc: 'Generate stunning images and videos with advanced AI models. 61+ models with real-time generation capabilities.',
+                stats: ['61+ Models', 'Real-time Generation', 'High Resolution'],
+                link: '/ai-workshop'
+              },
+              {
+                title: 'OpenClaw Services',
+                desc: 'Professional AI automation and custom integration services. Building the future of intelligent automation.',
+                stats: ['Custom Solutions', 'Enterprise Grade', 'Full Support'],
+                link: null
+              },
             ].map((project, i) => (
-              <motion.div key={i} initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="border-l-4 border-white pl-8 py-8">
-                <h3 className="text-4xl font-bold mb-4">{project.title}</h3>
+              <motion.div key={i} initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="border-l-4 border-white pl-8 py-8 group hover:border-gray-300 transition-colors">
+                <h3 className="text-4xl font-bold mb-4 group-hover:text-gray-100 transition-colors">{project.title}</h3>
                 <p className="text-xl text-gray-400 mb-8 leading-relaxed">{project.desc}</p>
-                <div className="flex flex-wrap gap-6">
+                <div className="flex flex-wrap gap-6 mb-8">
                   {project.stats.map((stat, j) => (
                     <div key={j} className="flex items-center gap-2">
                       <span className="w-2 h-2 bg-white rounded-full"></span>
@@ -98,13 +105,19 @@ export default function Home() {
                     </div>
                   ))}
                 </div>
+                {project.link && (
+                  <a href={project.link} target={project.link.startsWith('http') ? '_blank' : undefined} rel={project.link.startsWith('http') ? 'noopener noreferrer' : undefined} className="inline-block px-6 py-2 border border-white text-white hover:bg-white hover:text-black transition-all text-sm font-semibold">
+                    {project.link.startsWith('http') ? 'Visit Project' : 'View Project'} →
+                  </a>
+                )}
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="min-h-screen flex items-center justify-center px-6 py-20 bg-gray-900">
+      {/* Roadmap */}
+      <section id="roadmap" className="min-h-screen flex items-center justify-center px-6 py-20 bg-black">
         <div className="max-w-7xl mx-auto w-full">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-20">
             <h2 className="text-5xl md:text-7xl font-black mb-8 leading-tight">Mission Roadmap</h2>
@@ -141,7 +154,8 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="contact" className="min-h-screen flex items-center justify-center px-6 py-20 bg-black">
+      {/* Contact */}
+      <section id="contact" className="min-h-screen flex items-center justify-center px-6 py-20 bg-gray-900">
         <div className="max-w-5xl mx-auto text-center w-full">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <h2 className="text-5xl md:text-7xl font-black mb-12 leading-tight">Lets Connect</h2>
@@ -171,7 +185,6 @@ export default function Home() {
             </div>
 
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: 0.5 }} className="mt-20">
-              <p className="text-gray-400 text-lg mb-8">Ready to build the future. Lets make it happen.</p>
               <a href="mailto:shawnwick7499@gmail.com" className="inline-block px-8 py-4 bg-white text-black font-bold rounded hover:bg-gray-200 transition-all">
                 Send Me a Message
               </a>
@@ -180,6 +193,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Footer */}
       <footer className="bg-black text-white py-12 px-6 border-t border-gray-800">
         <div className="max-w-7xl mx-auto text-center">
           <h3 className="text-3xl font-black mb-4">SHAWN WICK</h3>
