@@ -1,0 +1,93 @@
+/* Mobile Optimization */
+
+@media (max-width: 768px) {
+  /* Navigation */
+  nav {
+    padding: 1rem 1rem !important;
+  }
+  
+  nav a {
+    font-size: 0.9rem !important;
+    padding: 0.5rem 0.75rem !important;
+  }
+  
+  /* Hero Section */
+  h1 {
+    font-size: 2.5rem !important;
+    line-height: 1.2 !important;
+    margin-bottom: 1rem !important;
+  }
+  
+  h2 {
+    font-size: 1.8rem !important;
+  }
+  
+  /* Text */
+  p {
+    font-size: 1rem !important;
+    line-height: 1.6 !important;
+  }
+  
+  /* Buttons */
+  button {
+    padding: 0.75rem 1.5rem !important;
+    font-size: 1rem !important;
+    min-height: 44px !important;
+  }
+  
+  /* Spacing */
+  section {
+    padding: 1.5rem !important;
+  }
+  
+  /* Grid - single column */
+  .grid {
+    grid-template-columns: 1fr !important;
+  }
+  
+  /* Cards */
+  .card, .feature-box {
+    padding: 1rem !important;
+    margin-bottom: 1rem !important;
+  }
+  
+  /* Language Switcher */
+  .lang-switcher {
+    top: 80px !important;
+    right: 10px !important;
+  }
+  
+  .lang-btn {
+    padding: 0.5rem 0.75rem !important;
+    font-size: 0.85rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Extra small devices */
+  h1 {
+    font-size: 1.8rem !important;
+  }
+  
+  h2 {
+    font-size: 1.4rem !important;
+  }
+  
+  p {
+    font-size: 0.95rem !important;
+  }
+  
+  section {
+    padding: 1rem !important;
+  }
+  
+  nav {
+    flex-direction: column !important;
+  }
+  
+  nav a {
+    display: block !important;
+    padding: 0.75rem !important;
+    border-bottom: 1px solid #333 !important;
+  }
+}
