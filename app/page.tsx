@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <div className="bg-black text-white">
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-black/60 backdrop-blur border-b border-gray-800 px-6 py-4">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur border-b border-gray-800 px-6 py-4">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <h1 className="text-2xl font-black">SHAWN WICK</h1>
           <div className="flex gap-8">
@@ -23,10 +23,12 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* Hero Section - Gradient Abstract Background */}
-      <section className="min-h-screen flex flex-col items-center justify-center px-6 py-20 relative pt-32 overflow-hidden bg-black">
-        <AbstractBackground type="gradient" />
-        <div className="absolute inset-0 bg-black/30 z-10"></div>
+      {/* Hero Section - Pure Abstract Background */}
+      <section className="min-h-screen flex flex-col items-center justify-center px-6 py-20 relative pt-32 overflow-hidden">
+        <div className="absolute inset-0 bg-black z-0"></div>
+        <div className="absolute inset-0 z-0">
+          <AbstractBackground type="gradient" />
+        </div>
         
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="max-w-5xl text-center relative z-20">
           <h1 className="text-6xl md:text-8xl font-black mb-12 leading-tight tracking-tight">Building the Future</h1>
@@ -46,10 +48,12 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* What I Do - Waves Abstract Background */}
-      <section id="about" className="min-h-screen flex items-center justify-center px-6 py-20 relative bg-black overflow-hidden">
-        <AbstractBackground type="waves" />
-        <div className="absolute inset-0 bg-black/40 z-10"></div>
+      {/* What I Do - Pure Abstract Background */}
+      <section id="about" className="min-h-screen flex items-center justify-center px-6 py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-black z-0"></div>
+        <div className="absolute inset-0 z-0">
+          <AbstractBackground type="waves" />
+        </div>
         <div className="max-w-7xl mx-auto relative z-20">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-20">
             <h2 className="text-5xl md:text-7xl font-black mb-8 leading-tight">What I Do</h2>
@@ -74,10 +78,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Projects - Particles Abstract Background */}
-      <section id="projects" className="min-h-screen flex items-center justify-center px-6 py-20 relative bg-black overflow-hidden">
-        <AbstractBackground type="particles" />
-        <div className="absolute inset-0 bg-black/40 z-10"></div>
+      {/* Projects - Pure Abstract Background */}
+      <section id="projects" className="min-h-screen flex items-center justify-center px-6 py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-black z-0"></div>
+        <div className="absolute inset-0 z-0">
+          <AbstractBackground type="particles" />
+        </div>
         <div className="max-w-7xl mx-auto w-full relative z-20">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-20">
             <h2 className="text-5xl md:text-7xl font-black mb-8 leading-tight">Active Projects</h2>
@@ -118,7 +124,7 @@ export default function Home() {
                 </div>
                 {project.link && (
                   <a href={project.link} target={project.link.startsWith('http') ? '_blank' : undefined} rel={project.link.startsWith('http') ? 'noopener noreferrer' : undefined} className="inline-block px-6 py-2 border border-white text-white hover:bg-white hover:text-black transition-all text-sm font-semibold">
-                    {project.link.startsWith('http') ? 'Visit Project' : 'View Project'} arrow
+                    {project.link.startsWith('http') ? 'Visit Project' : 'View Project'} →
                   </a>
                 )}
               </motion.div>
@@ -127,10 +133,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Roadmap - Geometric Abstract Background */}
-      <section id="roadmap" className="min-h-screen flex items-center justify-center px-6 py-20 relative bg-black overflow-hidden">
-        <AbstractBackground type="geometric" />
-        <div className="absolute inset-0 bg-black/40 z-10"></div>
+      {/* Roadmap - Pure Abstract Background */}
+      <section id="roadmap" className="min-h-screen flex items-center justify-center px-6 py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-black z-0"></div>
+        <div className="absolute inset-0 z-0">
+          <AbstractBackground type="geometric" />
+        </div>
         <div className="max-w-7xl mx-auto w-full relative z-20">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-20">
             <h2 className="text-5xl md:text-7xl font-black mb-8 leading-tight">Mission Roadmap</h2>
@@ -167,10 +175,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Contact - Gradient Abstract Background */}
-      <section id="contact" className="min-h-screen flex items-center justify-center px-6 py-20 relative bg-black overflow-hidden">
-        <AbstractBackground type="gradient" />
-        <div className="absolute inset-0 bg-black/40 z-10"></div>
+      {/* Contact - Pure Abstract Background */}
+      <section id="contact" className="min-h-screen flex items-center justify-center px-6 py-20 relative overflow-hidden">
+        <div className="absolute inset-0 bg-black z-0"></div>
+        <div className="absolute inset-0 z-0">
+          <AbstractBackground type="gradient" />
+        </div>
         <div className="max-w-5xl mx-auto text-center w-full relative z-20">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <h2 className="text-5xl md:text-7xl font-black mb-12 leading-tight">Lets Connect</h2>
@@ -209,7 +219,7 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-black/80 text-white py-12 px-6 border-t border-gray-800">
+      <footer className="bg-black text-white py-12 px-6 border-t border-gray-800">
         <div className="max-w-7xl mx-auto text-center">
           <h3 className="text-3xl font-black mb-4">SHAWN WICK</h3>
           <p className="text-gray-400 mb-8">Building the path beyond the universe</p>
