@@ -3,35 +3,49 @@
 import { motion } from 'framer-motion'
 import dynamic from 'next/dynamic'
 
-const GradientMosaic = dynamic(() => import('@/components/GradientMosaic'), {
+const UniverseBackground = dynamic(() => import('@/components/UniverseBackground'), {
   ssr: false,
 })
 
 export default function Home() {
+  const backgroundImages = [
+    'https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=1400&h=900&fit=crop',
+    'https://images.unsplash.com/photo-1462332420958-a05d1e7413e3?w=1400&h=900&fit=crop',
+    'https://images.unsplash.com/photo-1444080748397-f442aa95c3e5?w=1400&h=900&fit=crop',
+    'https://images.unsplash.com/photo-1446776877081-d282a0f896e2?w=1400&h=900&fit=crop',
+  ]
+
   return (
     <div className="bg-black text-white">
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur border-b border-gray-800 px-6 py-4">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-black/60 backdrop-blur border-b border-gray-800 px-6 py-4">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <h1 className="text-2xl font-black">SHAWN WICK</h1>
           <div className="flex gap-8">
-            <a href="#about" className="text-gray-400 hover:text-white transition">What I Do</a>
-            <a href="#projects" className="text-gray-400 hover:text-white transition">Projects</a>
-            <a href="#roadmap" className="text-gray-400 hover:text-white transition">Roadmap</a>
-            <a href="#contact" className="text-gray-400 hover:text-white transition">Contact</a>
+            <a href="#about" className="text-gray-300 hover:text-white transition">What I Do</a>
+            <a href="#projects" className="text-gray-300 hover:text-white transition">Projects</a>
+            <a href="#roadmap" className="text-gray-300 hover:text-white transition">Roadmap</a>
+            <a href="#contact" className="text-gray-300 hover:text-white transition">Contact</a>
           </div>
         </div>
       </nav>
 
-      {/* Hero Section with Gradient Mosaic - ONLY HERE */}
-      <section className="min-h-screen flex flex-col items-center justify-center px-6 py-20 relative pt-32 overflow-hidden">
-        <GradientMosaic />
-        <div className="absolute inset-0 bg-black/40 z-10"></div>
+      {/* Hero Section - Universe Background */}
+      <section
+        className="min-h-screen flex flex-col items-center justify-center px-6 py-20 relative pt-32 overflow-hidden"
+        style={{
+          backgroundImage: `url(${backgroundImages[0]})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed',
+        }}
+      >
+        <div className="absolute inset-0 bg-black/50 z-10"></div>
         
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="max-w-5xl text-center relative z-20">
           <h1 className="text-6xl md:text-8xl font-black mb-12 leading-tight tracking-tight">Building the Future</h1>
-          <h2 className="text-3xl md:text-5xl font-light mb-16 text-gray-300 leading-tight">Beyond the Universe</h2>
-          <p className="text-xl md:text-2xl text-gray-400 mb-20 leading-relaxed max-w-3xl mx-auto">
+          <h2 className="text-3xl md:text-5xl font-light mb-16 text-gray-200 leading-tight">Beyond the Universe</h2>
+          <p className="text-xl md:text-2xl text-gray-300 mb-20 leading-relaxed max-w-3xl mx-auto">
             Pioneering technology that enables humanity's cosmic exploration, scalable, and inevitable.
           </p>
         </motion.div>
@@ -46,12 +60,22 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* What I Do - Pure Black Background */}
-      <section id="about" className="min-h-screen flex items-center justify-center px-6 py-20 bg-black">
-        <div className="max-w-7xl mx-auto">
+      {/* What I Do - Universe Background */}
+      <section
+        id="about"
+        className="min-h-screen flex items-center justify-center px-6 py-20 relative"
+        style={{
+          backgroundImage: `url(${backgroundImages[1]})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed',
+        }}
+      >
+        <div className="absolute inset-0 bg-black/60 z-10"></div>
+        <div className="max-w-7xl mx-auto relative z-20">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-20">
             <h2 className="text-5xl md:text-7xl font-black mb-8 leading-tight">What I Do</h2>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">Combining AI, trading, and Web3 to build the future of technology.</p>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">Combining AI, trading, and Web3 to build the future of technology.</p>
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
@@ -63,21 +87,31 @@ export default function Home() {
               { title: 'Meme Coin Trading', desc: 'Early opportunities in crypto' },
               { title: 'Innovation', desc: 'Pushing boundaries of whats possible' },
             ].map((item, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="border-l-4 border-white pl-6">
+              <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="border-l-4 border-white pl-6 bg-white/5 backdrop-blur-sm p-6 rounded">
                 <h3 className="text-2xl font-bold mb-3">{item.title}</h3>
-                <p className="text-gray-400 leading-relaxed">{item.desc}</p>
+                <p className="text-gray-300 leading-relaxed">{item.desc}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Projects - Pure Black Background */}
-      <section id="projects" className="min-h-screen flex items-center justify-center px-6 py-20 bg-black">
-        <div className="max-w-7xl mx-auto w-full">
+      {/* Projects - Universe Background */}
+      <section
+        id="projects"
+        className="min-h-screen flex items-center justify-center px-6 py-20 relative"
+        style={{
+          backgroundImage: `url(${backgroundImages[2]})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed',
+        }}
+      >
+        <div className="absolute inset-0 bg-black/60 z-10"></div>
+        <div className="max-w-7xl mx-auto w-full relative z-20">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-20">
             <h2 className="text-5xl md:text-7xl font-black mb-8 leading-tight">Active Projects</h2>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">Transforming ideas into reality with cutting-edge technology.</p>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">Transforming ideas into reality with cutting-edge technology.</p>
           </motion.div>
 
           <div className="space-y-12">
@@ -101,9 +135,9 @@ export default function Home() {
                 link: null
               },
             ].map((project, i) => (
-              <motion.div key={i} initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="border-l-4 border-white pl-8 py-8 group hover:border-gray-300 transition-colors">
+              <motion.div key={i} initial={{ opacity: 0, x: -50 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="border-l-4 border-white pl-8 py-8 bg-white/5 backdrop-blur-sm p-6 rounded group hover:border-gray-300 transition-colors">
                 <h3 className="text-4xl font-bold mb-4 group-hover:text-gray-100 transition-colors">{project.title}</h3>
-                <p className="text-xl text-gray-400 mb-8 leading-relaxed">{project.desc}</p>
+                <p className="text-xl text-gray-300 mb-8 leading-relaxed">{project.desc}</p>
                 <div className="flex flex-wrap gap-6 mb-8">
                   {project.stats.map((stat, j) => (
                     <div key={j} className="flex items-center gap-2">
@@ -114,7 +148,7 @@ export default function Home() {
                 </div>
                 {project.link && (
                   <a href={project.link} target={project.link.startsWith('http') ? '_blank' : undefined} rel={project.link.startsWith('http') ? 'noopener noreferrer' : undefined} className="inline-block px-6 py-2 border border-white text-white hover:bg-white hover:text-black transition-all text-sm font-semibold">
-                    {project.link.startsWith('http') ? 'Visit Project' : 'View Project'} arrow
+                    {project.link.startsWith('http') ? 'Visit Project' : 'View Project'} →
                   </a>
                 )}
               </motion.div>
@@ -123,12 +157,22 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Roadmap - Pure Black Background */}
-      <section id="roadmap" className="min-h-screen flex items-center justify-center px-6 py-20 bg-black">
-        <div className="max-w-7xl mx-auto w-full">
+      {/* Roadmap - Universe Background */}
+      <section
+        id="roadmap"
+        className="min-h-screen flex items-center justify-center px-6 py-20 relative"
+        style={{
+          backgroundImage: `url(${backgroundImages[3]})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed',
+        }}
+      >
+        <div className="absolute inset-0 bg-black/60 z-10"></div>
+        <div className="max-w-7xl mx-auto w-full relative z-20">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-20">
             <h2 className="text-5xl md:text-7xl font-black mb-8 leading-tight">Mission Roadmap</h2>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed">A vision to transcend the universe and enable humanity's cosmic exploration.</p>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">A vision to transcend the universe and enable humanity's cosmic exploration.</p>
           </motion.div>
 
           <div className="space-y-16">
@@ -137,12 +181,12 @@ export default function Home() {
               { number: '02', phase: 'Space and Technology', period: '2030-2040', items: ['Private space infrastructure', 'Advanced AI research', 'Quantum computing', 'Dimensional exploration'] },
               { number: '03', phase: 'Universal Transcendence', period: '2040+', items: ['Multiverse exploration', 'Consciousness digitization', 'Dimensional ascension', 'Cosmic civilization'] },
             ].map((phase, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.2 }} className="border-l-4 border-white pl-8 py-8">
+              <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.2 }} className="border-l-4 border-white pl-8 py-8 bg-white/5 backdrop-blur-sm p-6 rounded">
                 <div className="flex items-start gap-12">
                   <div className="flex-shrink-0">
-                    <div className="text-7xl font-black text-gray-700">{phase.number}</div>
+                    <div className="text-7xl font-black text-gray-500">{phase.number}</div>
                     <h3 className="text-3xl font-bold mt-4 mb-2">{phase.phase}</h3>
-                    <p className="text-gray-500 font-semibold">{phase.period}</p>
+                    <p className="text-gray-400 font-semibold">{phase.period}</p>
                   </div>
                   <div className="flex-1 mt-8">
                     <ul className="space-y-3">
@@ -161,12 +205,22 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Contact - Pure Black Background */}
-      <section id="contact" className="min-h-screen flex items-center justify-center px-6 py-20 bg-black">
-        <div className="max-w-5xl mx-auto text-center w-full">
+      {/* Contact - Universe Background */}
+      <section
+        id="contact"
+        className="min-h-screen flex items-center justify-center px-6 py-20 relative"
+        style={{
+          backgroundImage: `url(${backgroundImages[0]})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed',
+        }}
+      >
+        <div className="absolute inset-0 bg-black/60 z-10"></div>
+        <div className="max-w-5xl mx-auto text-center w-full relative z-20">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <h2 className="text-5xl md:text-7xl font-black mb-12 leading-tight">Lets Connect</h2>
-            <p className="text-xl text-gray-400 mb-20 leading-relaxed">Join me on the journey to build the future. Lets create something extraordinary together.</p>
+            <p className="text-xl text-gray-300 mb-20 leading-relaxed">Join me on the journey to build the future. Lets create something extraordinary together.</p>
 
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8">
               {[
@@ -177,15 +231,15 @@ export default function Home() {
                 { name: 'WeChat', icon: 'WX', wechat: 'shawnwick' },
               ].map((contact, i) =>
                 contact.link ? (
-                  <motion.a key={i} href={contact.link} target="_blank" rel="noopener noreferrer" initial={{ scale: 0 }} whileInView={{ scale: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} whileHover={{ scale: 1.1 }} className="p-6 border-2 border-white rounded hover:bg-white hover:text-black transition-all group">
+                  <motion.a key={i} href={contact.link} target="_blank" rel="noopener noreferrer" initial={{ scale: 0 }} whileInView={{ scale: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} whileHover={{ scale: 1.1 }} className="p-6 border-2 border-white rounded hover:bg-white hover:text-black transition-all group bg-white/5 backdrop-blur-sm">
                     <div className="text-xl font-bold mb-3">{contact.icon}</div>
                     <div className="font-bold text-sm">{contact.name}</div>
                   </motion.a>
                 ) : (
-                  <motion.div key={i} initial={{ scale: 0 }} whileInView={{ scale: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="p-6 border-2 border-white rounded cursor-pointer hover:bg-white hover:text-black transition-all group" title={contact.wechat}>
+                  <motion.div key={i} initial={{ scale: 0 }} whileInView={{ scale: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="p-6 border-2 border-white rounded cursor-pointer hover:bg-white hover:text-black transition-all group bg-white/5 backdrop-blur-sm" title={contact.wechat}>
                     <div className="text-xl font-bold mb-3">{contact.icon}</div>
                     <div className="font-bold text-sm">{contact.name}</div>
-                    <div className="text-xs text-gray-500 group-hover:text-black/70 mt-1 transition-colors">{contact.wechat}</div>
+                    <div className="text-xs text-gray-400 group-hover:text-black/70 mt-1 transition-colors">{contact.wechat}</div>
                   </motion.div>
                 )
               )}
@@ -201,17 +255,17 @@ export default function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-black text-white py-12 px-6 border-t border-gray-800">
+      <footer className="bg-black/80 text-white py-12 px-6 border-t border-gray-800">
         <div className="max-w-7xl mx-auto text-center">
           <h3 className="text-3xl font-black mb-4">SHAWN WICK</h3>
-          <p className="text-gray-500 mb-8">Building the path beyond the universe</p>
+          <p className="text-gray-400 mb-8">Building the path beyond the universe</p>
           <div className="flex justify-center gap-8 mb-8">
             {[
               { name: 'X', link: 'https://x.com/shawnwick960' },
               { name: 'Telegram', link: 'https://t.me/shawick' },
               { name: 'GitHub', link: 'https://github.com/shawn7499' },
             ].map((link, i) => (
-              <a key={i} href={link.link} target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-colors font-semibold">
+              <a key={i} href={link.link} target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-colors font-semibold">
                 {link.name}
               </a>
             ))}
