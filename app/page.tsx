@@ -2,6 +2,11 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
+
+const GradientMosaic = dynamic(() => import('@/components/GradientMosaic'), {
+  ssr: false,
+})
 
 export default function Home() {
   return (
@@ -19,9 +24,12 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* Hero Section */}
-      <section className="min-h-screen flex flex-col items-center justify-center px-6 py-20 bg-gradient-to-b from-black to-gray-900 pt-32">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="max-w-5xl text-center">
+      {/* Hero Section with Gradient Mosaic */}
+      <section className="min-h-screen flex flex-col items-center justify-center px-6 py-20 relative pt-32 overflow-hidden">
+        <GradientMosaic />
+        <div className="absolute inset-0 bg-black/40 z-10"></div>
+        
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="max-w-5xl text-center relative z-20">
           <h1 className="text-6xl md:text-8xl font-black mb-12 leading-tight tracking-tight">Building the Future</h1>
           <h2 className="text-3xl md:text-5xl font-light mb-16 text-gray-300 leading-tight">Beyond the Universe</h2>
           <p className="text-xl md:text-2xl text-gray-400 mb-20 leading-relaxed max-w-3xl mx-auto">
@@ -29,7 +37,7 @@ export default function Home() {
           </p>
         </motion.div>
 
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2 }} className="flex flex-col sm:flex-row gap-6 justify-center mt-12">
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2 }} className="flex flex-col sm:flex-row gap-6 justify-center mt-12 relative z-20">
           <a href="#projects" className="px-8 py-4 bg-white text-black font-bold rounded hover:bg-gray-200 transition-all">
             View Projects
           </a>
@@ -107,7 +115,7 @@ export default function Home() {
                 </div>
                 {project.link && (
                   <a href={project.link} target={project.link.startsWith('http') ? '_blank' : undefined} rel={project.link.startsWith('http') ? 'noopener noreferrer' : undefined} className="inline-block px-6 py-2 border border-white text-white hover:bg-white hover:text-black transition-all text-sm font-semibold">
-                    {project.link.startsWith('http') ? 'Visit Project' : 'View Project'} →
+                    {project.link.startsWith('http') ? 'Visit Project' : 'View Project'} arrow
                   </a>
                 )}
               </motion.div>
