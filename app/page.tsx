@@ -23,12 +23,17 @@ export default function Home() {
         </div>
       </nav>
 
-      {/* Hero Section - Pure Abstract Background */}
-      <section className="min-h-screen flex flex-col items-center justify-center px-6 py-20 relative pt-32 overflow-hidden">
-        <div className="absolute inset-0 bg-black z-0"></div>
-        <div className="absolute inset-0 z-0">
-          <AbstractBackground type="gradient" />
-        </div>
+      {/* Hero Section - Image Background */}
+      <section 
+        className="min-h-screen flex flex-col items-center justify-center px-6 py-20 relative pt-32 overflow-hidden"
+        style={{
+          backgroundImage: 'url(/hero-bg.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed'
+        }}
+      >
+        <div className="absolute inset-0 bg-black/50 z-0"></div>
         
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }} className="max-w-5xl text-center relative z-20">
           <h1 className="text-6xl md:text-8xl font-black mb-12 leading-tight tracking-tight">Building the Future</h1>
@@ -48,7 +53,7 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* What I Do - Pure Abstract Background */}
+      {/* What I Do - Waves Abstract Background */}
       <section id="about" className="min-h-screen flex items-center justify-center px-6 py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-black z-0"></div>
         <div className="absolute inset-0 z-0">
@@ -78,7 +83,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Projects - Pure Abstract Background */}
+      {/* Projects - Particles Abstract Background */}
       <section id="projects" className="min-h-screen flex items-center justify-center px-6 py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-black z-0"></div>
         <div className="absolute inset-0 z-0">
@@ -133,7 +138,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Roadmap - Pure Abstract Background */}
+      {/* Roadmap - Geometric Abstract Background */}
       <section id="roadmap" className="min-h-screen flex items-center justify-center px-6 py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-black z-0"></div>
         <div className="absolute inset-0 z-0">
@@ -175,12 +180,18 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Contact - Pure Abstract Background */}
-      <section id="contact" className="min-h-screen flex items-center justify-center px-6 py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-black z-0"></div>
-        <div className="absolute inset-0 z-0">
-          <AbstractBackground type="gradient" />
-        </div>
+      {/* Contact - Image Background */}
+      <section 
+        id="contact" 
+        className="min-h-screen flex items-center justify-center px-6 py-20 relative overflow-hidden"
+        style={{
+          backgroundImage: 'url(/hero-bg.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundAttachment: 'fixed'
+        }}
+      >
+        <div className="absolute inset-0 bg-black/50 z-0"></div>
         <div className="max-w-5xl mx-auto text-center w-full relative z-20">
           <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
             <h2 className="text-5xl md:text-7xl font-black mb-12 leading-tight">Lets Connect</h2>
