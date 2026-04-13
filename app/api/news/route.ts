@@ -7,6 +7,8 @@ const RSS_SOURCES = {
   "Odaily": "https://www.odaily.news/feed",
   "BlockBeats": "https://www.theblockbeats.info/rss",
   "CoinDesk": "https://www.coindesk.com/arc/outboundfeeds/rss/",
+  "Foresight News": "https://foresightnews.pro/rss.xml",
+  "PANews": "https://www.panewslab.com/rss/index.xml",
 };
 
 interface NewsArticle {

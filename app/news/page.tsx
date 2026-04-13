@@ -36,7 +36,9 @@ const translations = {
       All: 'All',
       Odaily: 'Odaily',
       BlockBeats: 'BlockBeats',
-      CoinDesk: 'CoinDesk'
+      CoinDesk: 'CoinDesk',
+      'Foresight News': 'Foresight News',
+      PANews: 'PANews'
     }
   },
   zh: {
@@ -58,7 +60,9 @@ const translations = {
       All: '全部',
       Odaily: 'Odaily',
       BlockBeats: '律动',
-      CoinDesk: 'CoinDesk'
+      CoinDesk: 'CoinDesk',
+      'Foresight News': 'Foresight News',
+      PANews: 'PANews'
     }
   }
 };
@@ -73,7 +77,7 @@ export default function NewsPage() {
   const t = translations[lang];
 
   const categories = ['All', 'Bitcoin', 'Ethereum', 'DeFi', 'NFT', 'Regulation', 'General'];
-  const sources = ['All', 'Odaily', 'BlockBeats', 'CoinDesk'];
+  const sources = ['All', 'Odaily', 'BlockBeats', 'CoinDesk', 'Foresight News', 'PANews'];
 
   useEffect(() => {
     fetchNews();
