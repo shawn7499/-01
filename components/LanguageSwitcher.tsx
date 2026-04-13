@@ -13,7 +13,7 @@ export default function LanguageSwitcher({ currentLang, onLanguageChange }: Lang
       <style>{`
         .lang-switcher {
           position: fixed;
-          top: 20px;
+          top: 80px;
           right: 20px;
           z-index: 99999;
           display: flex;
@@ -21,7 +21,7 @@ export default function LanguageSwitcher({ currentLang, onLanguageChange }: Lang
         }
         @media (max-width: 768px) {
           .lang-switcher {
-            top: 10px;
+            top: 60px;
             right: 10px;
             gap: 4px;
           }
