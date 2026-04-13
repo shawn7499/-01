@@ -30,6 +30,12 @@ export const translations = {
       description: 'Transforming ideas into reality with cutting-edge technology.',
       items: [
         {
+          title: 'Crypto News Platform',
+          desc: 'Real-time cryptocurrency news aggregation with intelligent categorization. Multi-source RSS feeds with automatic translation.',
+          stats: ['Real-time Updates', 'Auto Translation', 'Smart Filtering'],
+          btnText: 'View News',
+        },
+        {
           title: 'Gold Quantitative Trading',
           desc: 'Sustainable compound interest strategy for long-term wealth accumulation. Intelligent algorithms for consistent returns.',
           stats: ['Compound Returns', 'Risk Management', 'Long-term Growth'],
@@ -114,6 +120,12 @@ export const translations = {
       title: '活跃项目',
       description: '用尖端技术将想法转化为现实。',
       items: [
+        {
+          title: '加密货币新闻平台',
+          desc: '实时加密货币新闻聚合，智能分类。多源 RSS 订阅，自动翻译。',
+          stats: ['实时更新', '自动翻译', '智能筛选'],
+          btnText: '查看新闻',
+        },
         {
           title: '黄金量化交易',
           desc: '长期财富积累的可持续复合利息策略。用于一致回报的智能算法。',

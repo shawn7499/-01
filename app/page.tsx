@@ -117,7 +117,16 @@ export default function Home() {
                   ))}
                 </div>
                 {project.btnText && (
-                  <a href={i === 0 ? 'https://smartgold.ai/dashboard?inviteCode=J5n5Rv' : '/ai-workshop'} target={i === 0 ? '_blank' : undefined} rel={i === 0 ? 'noopener noreferrer' : undefined} className="inline-block px-6 py-2 border border-white text-white hover:bg-white hover:text-black transition-all text-sm font-semibold">
+                  <a 
+                    href={
+                      i === 0 ? '/news' : 
+                      i === 1 ? 'https://smartgold.ai/dashboard?inviteCode=J5n5Rv' : 
+                      '/ai-workshop'
+                    } 
+                    target={i === 1 ? '_blank' : undefined} 
+                    rel={i === 1 ? 'noopener noreferrer' : undefined} 
+                    className="inline-block px-6 py-2 border border-white text-white hover:bg-white hover:text-black transition-all text-sm font-semibold"
+                  >
                     {project.btnText} →
                   </a>
                 )}

@@ -19,6 +19,13 @@ export default function LanguageSwitcher({ currentLang, onLanguageChange }: Lang
           display: flex;
           gap: 8px;
         }
+        @media (max-width: 768px) {
+          .lang-switcher {
+            top: 10px;
+            right: 10px;
+            gap: 4px;
+          }
+        }
         .lang-btn {
           padding: 8px 16px;
           border: none;
@@ -26,6 +33,12 @@ export default function LanguageSwitcher({ currentLang, onLanguageChange }: Lang
           font-weight: bold;
           cursor: pointer;
           transition: all 0.3s ease;
+        }
+        @media (max-width: 768px) {
+          .lang-btn {
+            padding: 6px 12px;
+            font-size: 12px;
+          }
         }
         .lang-btn.active {
           background-color: white;
