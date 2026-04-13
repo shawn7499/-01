@@ -30,7 +30,7 @@ export default function NewsPage() {
 
   const fetchNews = async () => {
     try {
-      let url = 'http://localhost:8002/api/news?limit=50';
+      let url = '/api/news?limit=50';
       if (selectedCategory !== 'All') {
         url += `&category=${selectedCategory}`;
       }
