@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
 
 interface NewsArticle {
   id: number;
@@ -13,11 +14,61 @@ interface NewsArticle {
   category: string;
 }
 
+const translations = {
+  en: {
+    title: 'Crypto News',
+    category: 'Category',
+    source: 'Source',
+    loading: 'Loading...',
+    noNews: 'No news available',
+    categories: {
+      All: 'All',
+      Bitcoin: 'Bitcoin',
+      Ethereum: 'Ethereum',
+      DeFi: 'DeFi',
+      NFT: 'NFT',
+      Regulation: 'Regulation',
+      General: 'General'
+    },
+    sources: {
+      All: 'All',
+      Odaily: 'Odaily',
+      BlockBeats: 'BlockBeats',
+      CoinDesk: 'CoinDesk'
+    }
+  },
+  zh: {
+    title: '加密货币新闻',
+    category: '分类',
+    source: '来源',
+    loading: '加载中...',
+    noNews: '暂无新闻',
+    categories: {
+      All: '全部',
+      Bitcoin: '比特币',
+      Ethereum: '以太坊',
+      DeFi: 'DeFi',
+      NFT: 'NFT',
+      Regulation: '监管',
+      General: '综合'
+    },
+    sources: {
+      All: '全部',
+      Odaily: 'Odaily',
+      BlockBeats: '律动',
+      CoinDesk: 'CoinDesk'
+    }
+  }
+};
+
 export default function NewsPage() {
+  const [lang, setLang] = useState<'en' | 'zh'>('en');
   const [articles, setArticles] = useState<NewsArticle[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [selectedSource, setSelectedSource] = useState<string>('All');
+  
+  const t = translations[lang];
 
   const categories = ['All', 'Bitcoin', 'Ethereum', 'DeFi', 'NFT', 'Regulation', 'General'];
   const sources = ['All', 'Odaily', 'BlockBeats', 'CoinDesk'];
@@ -76,12 +127,14 @@ export default function NewsPage() {
 
   return (
     <div className="min-h-screen bg-black text-white">
+      <LanguageSwitcher currentLang={lang} onLanguageChange={setLang} />
+      
       {/* Header */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-sm border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between">
             <a href="/" className="text-xl font-bold">SHAWN WICK</a>
-            <h1 className="text-2xl font-bold">Crypto News</h1>
+            <h1 className="text-2xl font-bold">{t.title}</h1>
           </div>
         </div>
       </header>
@@ -92,7 +145,7 @@ export default function NewsPage() {
         <div className="mb-8 space-y-4">
           {/* Category Filter */}
           <div>
-            <h3 className="text-sm text-gray-400 mb-2">分类</h3>
+            <h3 className="text-sm text-gray-400 mb-2">{t.category}</h3>
             <div className="flex flex-wrap gap-2">
               {categories.map((category) => (
                 <button
@@ -104,7 +157,7 @@ export default function NewsPage() {
                       : 'bg-transparent text-white border-white/20 hover:border-white/40'
                   }`}
                 >
-                  {category}
+                  {t.categories[category as keyof typeof t.categories]}
                 </button>
               ))}
             </div>
@@ -112,7 +165,7 @@ export default function NewsPage() {
 
           {/* Source Filter */}
           <div>
-            <h3 className="text-sm text-gray-400 mb-2">来源</h3>
+            <h3 className="text-sm text-gray-400 mb-2">{t.source}</h3>
             <div className="flex flex-wrap gap-2">
               {sources.map((source) => (
                 <button
@@ -124,7 +177,7 @@ export default function NewsPage() {
                       : 'bg-transparent text-white border-white/20 hover:border-white/40'
                   }`}
                 >
-                  {source}
+                  {t.sources[source as keyof typeof t.sources]}
                 </button>
               ))}
             </div>
@@ -135,7 +188,7 @@ export default function NewsPage() {
         {loading ? (
           <div className="text-center py-12">
             <div className="inline-block animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-white"></div>
-            <p className="mt-4 text-gray-400">加载中...</p>
+            <p className="mt-4 text-gray-400">{t.loading}</p>
           </div>
         ) : (
           <div className="space-y-4">
@@ -189,7 +242,7 @@ export default function NewsPage() {
 
         {!loading && articles.length === 0 && (
           <div className="text-center py-12">
-            <p className="text-gray-400">暂无新闻</p>
+            <p className="text-gray-400">{t.noNews}</p>
           </div>
         )}
       </main>
