@@ -12,6 +12,8 @@ interface NewsArticle {
   published: string;
   source: string;
   category: string;
+  translatedTitle?: string;
+  translatedDescription?: string;
 }
 
 const translations = {
@@ -79,6 +81,12 @@ export default function NewsPage() {
     return () => clearInterval(interval);
   }, [selectedCategory, selectedSource]);
 
+  useEffect(() => {
+    if (lang === 'zh' && articles.length > 0) {
+      translateArticles();
+    }
+  }, [lang, articles.length]);
+
   const fetchNews = async () => {
     try {
       let url = '/api/news?limit=50';
@@ -97,6 +105,44 @@ export default function NewsPage() {
       console.error('Failed to fetch news:', error);
       setLoading(false);
     }
+  };
+
+  const translateArticles = async () => {
+    const translatedArticles = await Promise.all(
+      articles.map(async (article) => {
+        if (article.translatedTitle) return article;
+        
+        try {
+          const titleRes = await fetch('/api/translate', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ text: article.title, targetLang: 'zh-CN' })
+          });
+          const titleData = await titleRes.json();
+          
+          let descData = null;
+          if (article.description) {
+            const descRes = await fetch('/api/translate', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ text: article.description, targetLang: 'zh-CN' })
+            });
+            descData = await descRes.json();
+          }
+          
+          return {
+            ...article,
+            translatedTitle: titleData.translated,
+            translatedDescription: descData?.translated
+          };
+        } catch (error) {
+          console.error('Translation failed:', error);
+          return article;
+        }
+      })
+    );
+    
+    setArticles(translatedArticles);
   };
 
   const formatDate = (dateString: string) => {
@@ -206,11 +252,11 @@ export default function NewsPage() {
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex-1">
                     <h2 className="text-xl font-semibold mb-2 group-hover:text-gray-300 transition-colors">
-                      {article.title}
+                      {lang === 'zh' && article.translatedTitle ? article.translatedTitle : article.title}
                     </h2>
                     {article.description && (
                       <p className="text-gray-400 text-sm mb-3 line-clamp-2">
-                        {article.description}
+                        {lang === 'zh' && article.translatedDescription ? article.translatedDescription : article.description}
                       </p>
                     )}
                     <div className="flex items-center gap-3 text-sm">
