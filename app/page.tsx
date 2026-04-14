@@ -26,12 +26,14 @@ export default function Home() {
             <a href="#about" className="text-sm text-gray-300 hover:text-white transition">{t.nav.whatIDo}</a>
             <a href="#projects" className="text-sm text-gray-300 hover:text-white transition">{t.nav.projects}</a>
             <a href="#roadmap" className="text-sm text-gray-300 hover:text-white transition">{t.nav.roadmap}</a>
+            <a href="/opportunities" className="text-sm text-gray-300 hover:text-white transition">Opportunities</a>
             <a href="/news" className="text-sm text-gray-300 hover:text-white transition">News</a>
             <a href="#contact" className="text-sm text-gray-300 hover:text-white transition">{t.nav.contact}</a>
           </div>
           <div className="md:hidden flex gap-2.5 items-center text-xs">
             <a href="#about" className="text-gray-400 hover:text-white transition px-1.5">About</a>
             <a href="#projects" className="text-gray-400 hover:text-white transition px-1.5">Work</a>
+            <a href="/opportunities" className="text-gray-400 hover:text-white transition px-1.5">Opps</a>
             <a href="/news" className="text-gray-400 hover:text-white transition px-1.5">News</a>
             <a href="#contact" className="text-gray-400 hover:text-white transition px-1.5">Contact</a>
           </div>
