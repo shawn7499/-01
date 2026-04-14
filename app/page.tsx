@@ -123,7 +123,7 @@ export default function Home() {
                     href={
                       i === 0 ? '/news' : 
                       i === 1 ? 'https://smartgold.ai/dashboard?inviteCode=J5n5Rv' : 
-                      '/ai-workshop'
+                      '#'
                     } 
                     target={i === 1 ? '_blank' : undefined} 
                     rel={i === 1 ? 'noopener noreferrer' : undefined} 

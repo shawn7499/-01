@@ -42,12 +42,6 @@ export const translations = {
           btnText: 'Visit Project',
         },
         {
-          title: 'AI Creative Workshop',
-          desc: 'Generate stunning images and videos with advanced AI models. 61+ models with real-time generation capabilities.',
-          stats: ['61+ Models', 'Real-time Generation', 'High Resolution'],
-          btnText: 'View Project',
-        },
-        {
           title: 'OpenClaw Services',
           desc: 'Professional AI automation and custom integration services. Building the future of intelligent automation.',
           stats: ['Custom Solutions', 'Enterprise Grade', 'Full Support'],
@@ -131,12 +125,6 @@ export const translations = {
           desc: '长期财富积累的可持续复合利息策略。用于一致回报的智能算法。',
           stats: ['复合回报', '风险管理', '长期增长'],
           btnText: '访问项目',
-        },
-        {
-          title: 'AI 创意工坊',
-          desc: '使用先进的 AI 模型生成令人惊艳的图像和视频。61+ 模型具有实时生成功能。',
-          stats: ['61+ 模型', '实时生成', '高分辨率'],
-          btnText: '查看项目',
         },
         {
           title: 'OpenClaw 服务',
