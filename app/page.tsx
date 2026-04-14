@@ -21,7 +21,7 @@ export default function Home() {
       {/* Navigation - Mobile Optimized */}
       <nav className="fixed top-0 left-0 right-0 z-40 bg-black/95 backdrop-blur border-b border-gray-800 px-3 md:px-6 py-2.5 md:py-4">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <h1 className="text-base md:text-2xl font-black tracking-tight">SHAWN</h1>
+          <h1 className="text-base md:text-2xl font-black tracking-tight">SHAWN WICK</h1>
           <div className="hidden md:flex gap-8 items-center">
             <a href="#about" className="text-sm text-gray-300 hover:text-white transition">{t.nav.whatIDo}</a>
             <a href="#projects" className="text-sm text-gray-300 hover:text-white transition">{t.nav.projects}</a>
