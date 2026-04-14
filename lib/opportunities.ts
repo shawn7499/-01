@@ -28,6 +28,28 @@ export interface Opportunity {
 
 export const opportunities: Opportunity[] = [
   {
+    id: 'spacex-ipo-bitget-2026-04',
+    title: 'SpaceX Stock IPO on Bitget',
+    titleZh: 'SpaceX 股票 IPO（Bitget）',
+    category: 'token_launch',
+    status: 'active',
+    startDate: '2026-04-14',
+    description: 'Bitget will launch SpaceX stock trading. Trade SpaceX shares on blockchain before traditional IPO.',
+    descriptionZh: 'Bitget 将上线 SpaceX 股票交易。在传统 IPO 之前，通过区块链交易 SpaceX 股票。',
+    source: 'Bitget Official',
+    sourceZh: 'Bitget 官方',
+    riskLevel: 'high',
+    potentialReturn: 'High (SpaceX valuation growth)',
+    potentialReturnZh: '高（SpaceX 估值增长）',
+    participationMethod: 'Trade on Bitget platform',
+    participationMethodZh: '在 Bitget 平台交易',
+    links: {
+      official: 'https://www.bitget.art/zh-CN/support/articles/12560603882368',
+    },
+    tags: ['Stock', 'SpaceX', 'IPO', 'Bitget', 'RWA'],
+    tagsZh: ['股票', 'SpaceX', 'IPO', 'Bitget', 'RWA']
+  },
+  {
     id: 'arc-network-2026-04',
     title: 'Arc Network Token Launch',
     titleZh: 'Arc Network 代币发行',
