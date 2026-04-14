@@ -84,7 +84,7 @@ export default function Home() {
 
       <section className="hero-cover hero-vignette relative min-h-screen overflow-hidden px-4 pt-28 pb-16 sm:px-6 sm:pt-36 sm:pb-20">
         <div className="mx-auto flex min-h-[calc(100vh-7rem)] max-w-6xl items-start justify-center pt-10 sm:min-h-[calc(100vh-8rem)] sm:items-center sm:pt-0">
-          <div className="relative z-10 w-full max-w-5xl rounded-[2rem] border border-white/18 bg-black/58 px-5 py-10 text-center shadow-[0_30px_90px_rgba(0,0,0,0.45)] backdrop-blur-md sm:px-10 sm:py-16 lg:px-14 lg:py-20">
+          <div className="relative z-10 w-full max-w-5xl rounded-[2rem] border border-white/18 bg-black/72 px-5 py-10 text-center shadow-[0_30px_90px_rgba(0,0,0,0.45)] backdrop-blur-none sm:bg-black/58 sm:px-10 sm:py-16 sm:backdrop-blur-md lg:px-14 lg:py-20">
             <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.85 }}>
               <h1 className="text-4xl font-black leading-[0.98] tracking-tight text-white drop-shadow-[0_12px_32px_rgba(0,0,0,0.45)] sm:text-6xl lg:text-8xl">
                 {t.hero.title}
