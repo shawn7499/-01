@@ -1,7 +1,5 @@
 'use client'
 
-import { useState } from 'react'
-
 interface LanguageSwitcherProps {
   currentLang: 'en' | 'zh'
   onLanguageChange: (lang: 'en' | 'zh') => void
@@ -9,63 +7,23 @@ interface LanguageSwitcherProps {
 
 export default function LanguageSwitcher({ currentLang, onLanguageChange }: LanguageSwitcherProps) {
   return (
-    <>
-      <style>{`
-        .lang-switcher {
-          position: fixed;
-          top: 80px;
-          right: 20px;
-          z-index: 99999;
-          display: flex;
-          gap: 8px;
-        }
-        @media (max-width: 768px) {
-          .lang-switcher {
-            top: 60px;
-            right: 10px;
-            gap: 4px;
-          }
-        }
-        .lang-btn {
-          padding: 8px 16px;
-          border: none;
-          border-radius: 4px;
-          font-weight: bold;
-          cursor: pointer;
-          transition: all 0.3s ease;
-        }
-        @media (max-width: 768px) {
-          .lang-btn {
-            padding: 6px 12px;
-            font-size: 12px;
-          }
-        }
-        .lang-btn.active {
-          background-color: white;
-          color: black;
-        }
-        .lang-btn.inactive {
-          background-color: #374151;
-          color: white;
-        }
-        .lang-btn.inactive:hover {
-          background-color: #4b5563;
-        }
-      `}</style>
-      <div className="lang-switcher">
+    <div className="fixed right-4 top-20 z-50 flex rounded-full border border-white/10 bg-black/70 p-1 shadow-[0_10px_30px_rgba(0,0,0,0.28)] backdrop-blur-xl sm:right-6 sm:top-24">
+      {([
+        { label: 'EN', value: 'en' },
+        { label: '中文', value: 'zh' },
+      ] as const).map((item) => (
         <button
-          onClick={() => onLanguageChange('en')}
-          className={`lang-btn ${currentLang === 'en' ? 'active' : 'inactive'}`}
+          key={item.value}
+          onClick={() => onLanguageChange(item.value)}
+          className={`rounded-full px-3 py-1.5 text-xs font-semibold transition sm:px-4 ${
+            currentLang === item.value
+              ? 'bg-white text-black'
+              : 'text-white/70 hover:bg-white/8 hover:text-white'
+          }`}
         >
-          EN
+          {item.label}
         </button>
-        <button
-          onClick={() => onLanguageChange('zh')}
-          className={`lang-btn ${currentLang === 'zh' ? 'active' : 'inactive'}`}
-        >
-          中文
-        </button>
-      </div>
-    </>
+      ))}
+    </div>
   )
 }

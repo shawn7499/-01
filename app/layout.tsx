@@ -1,12 +1,15 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Space_Grotesk } from 'next/font/google'
 
-const inter = Inter({ subsets: ['latin'] })
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  variable: '--font-space-grotesk',
+})
 
 export const metadata: Metadata = {
-  title: 'Wick - Web3 Developer & AI Enthusiast',
-  description: 'Building the future with Web3, AI, and Trading',
+  title: 'Shawn Wick | Crypto Signals, Automation, and Product Experiments',
+  description: 'A product-first personal platform for crypto intelligence, AI automation, and future apps.',
 }
 
 export default function RootLayout({
@@ -16,7 +19,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={spaceGrotesk.variable}>{children}</body>
     </html>
   )
 }
