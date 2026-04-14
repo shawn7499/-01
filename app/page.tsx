@@ -1,10 +1,15 @@
 'use client'
 
+import dynamic from 'next/dynamic'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 
 import LanguageSwitcher from '@/components/LanguageSwitcher'
 import { translations } from '@/lib/translations'
+
+const AbstractBackground = dynamic(() => import('@/components/AbstractBackground'), {
+  ssr: false,
+})
 
 const fadeUp = {
   initial: { opacity: 0, y: 24 },
@@ -83,16 +88,16 @@ export default function Home() {
       </nav>
 
       <section className="hero-cover hero-vignette relative min-h-screen overflow-hidden px-4 pt-28 pb-16 sm:px-6 sm:pt-36 sm:pb-20">
-        <div className="mx-auto flex min-h-[calc(100vh-7rem)] max-w-6xl items-start justify-center pt-10 sm:min-h-[calc(100vh-8rem)] sm:items-center sm:pt-0">
-          <div className="relative z-10 w-full max-w-5xl rounded-[2rem] border border-white/18 bg-black/72 px-5 py-10 text-center shadow-[0_30px_90px_rgba(0,0,0,0.45)] backdrop-blur-none sm:bg-black/58 sm:px-10 sm:py-16 sm:backdrop-blur-md lg:px-14 lg:py-20">
+        <div className="mx-auto flex min-h-[calc(100vh-7rem)] max-w-6xl items-start justify-center pt-12 sm:min-h-[calc(100vh-8rem)] sm:items-center sm:pt-0">
+          <div className="relative z-10 w-full max-w-5xl px-2 py-10 text-center sm:px-8 sm:py-16 lg:px-10 lg:py-20">
             <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.85 }}>
-              <h1 className="text-4xl font-black leading-[0.98] tracking-tight text-white drop-shadow-[0_12px_32px_rgba(0,0,0,0.45)] sm:text-6xl lg:text-8xl">
+              <h1 className="text-4xl font-black leading-[0.98] tracking-tight text-white drop-shadow-[0_14px_34px_rgba(0,0,0,0.52)] sm:text-6xl lg:text-8xl">
                 {t.hero.title}
               </h1>
-              <h2 className="mt-5 text-xl font-light text-white/92 drop-shadow-[0_8px_22px_rgba(0,0,0,0.35)] sm:text-3xl lg:text-5xl">
+              <h2 className="mt-5 text-xl font-light text-white/94 drop-shadow-[0_10px_24px_rgba(0,0,0,0.38)] sm:text-3xl lg:text-5xl">
                 {t.hero.subtitle}
               </h2>
-              <p className="mx-auto mt-6 max-w-3xl text-base leading-7 text-white/88 sm:text-lg lg:text-2xl lg:leading-10">
+              <p className="mx-auto mt-6 max-w-3xl text-base leading-7 text-white/92 drop-shadow-[0_8px_20px_rgba(0,0,0,0.28)] sm:text-lg lg:text-2xl lg:leading-10">
                 {t.hero.description}
               </p>
             </motion.div>
@@ -121,6 +126,9 @@ export default function Home() {
       </section>
 
       <section id="about" className="section-ambient relative overflow-hidden border-t border-white/8 bg-black px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+        <div className="absolute inset-0 opacity-75">
+          <AbstractBackground type="waves" />
+        </div>
         <div className="mx-auto max-w-7xl relative z-10">
           <motion.div {...fadeUp} className="mx-auto max-w-3xl text-center">
             <h2 className="text-4xl font-black leading-tight sm:text-6xl md:text-7xl">{t.about.title}</h2>
@@ -150,6 +158,9 @@ export default function Home() {
       </section>
 
       <section id="projects" className="section-ambient relative overflow-hidden border-t border-white/8 bg-black px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+        <div className="absolute inset-0 opacity-75">
+          <AbstractBackground type="particles" />
+        </div>
         <div className="mx-auto max-w-7xl relative z-10">
           <motion.div {...fadeUp} className="mx-auto max-w-3xl text-center">
             <h2 className="text-4xl font-black leading-tight sm:text-6xl md:text-7xl">{t.projects.title}</h2>
@@ -203,6 +214,9 @@ export default function Home() {
       </section>
 
       <section id="roadmap" className="section-ambient relative overflow-hidden border-t border-white/8 bg-black px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+        <div className="absolute inset-0 opacity-75">
+          <AbstractBackground type="geometric" />
+        </div>
         <div className="mx-auto max-w-7xl relative z-10">
           <motion.div {...fadeUp} className="mx-auto max-w-3xl text-center">
             <h2 className="text-4xl font-black leading-tight sm:text-6xl md:text-7xl">{t.roadmap.title}</h2>
@@ -247,7 +261,10 @@ export default function Home() {
 
       <section id="contact" className="hero-cover hero-vignette relative overflow-hidden border-t border-white/8 px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
         <div className="mx-auto max-w-5xl relative z-10">
-          <motion.div {...fadeUp} className="rounded-[2rem] border border-white/10 bg-black/28 px-6 py-12 text-center shadow-[0_30px_90px_rgba(0,0,0,0.35)] backdrop-blur-sm sm:px-10 sm:py-16">
+          <motion.div
+            {...fadeUp}
+            className="rounded-[2rem] border border-white/10 bg-black/28 px-6 py-12 text-center shadow-[0_30px_90px_rgba(0,0,0,0.35)] backdrop-blur-sm sm:px-10 sm:py-16"
+          >
             <h2 className="text-4xl font-black leading-tight sm:text-6xl md:text-7xl">{t.contact.title}</h2>
             <p className="mx-auto mt-5 max-w-3xl text-base leading-7 text-gray-300 sm:text-lg md:text-xl">
               {t.contact.description}
@@ -268,8 +285,8 @@ export default function Home() {
                     whileHover={{ y: -4, scale: 1.02 }}
                     className="rounded-[1.5rem] border border-white/12 bg-white/[0.06] px-4 py-5 transition hover:bg-white hover:text-black"
                   >
-                    <div className="text-lg font-bold mb-2">{contact.icon}</div>
-                    <div className="font-bold text-sm">{contact.name}</div>
+                    <div className="mb-2 text-lg font-bold">{contact.icon}</div>
+                    <div className="text-sm font-bold">{contact.name}</div>
                   </motion.a>
                 ) : (
                   <motion.div
@@ -282,8 +299,8 @@ export default function Home() {
                     className="rounded-[1.5rem] border border-white/12 bg-white/[0.06] px-4 py-5 transition hover:bg-white hover:text-black"
                     title={contact.wechat}
                   >
-                    <div className="text-lg font-bold mb-2">{contact.icon}</div>
-                    <div className="font-bold text-sm">{contact.name}</div>
+                    <div className="mb-2 text-lg font-bold">{contact.icon}</div>
+                    <div className="text-sm font-bold">{contact.name}</div>
                     <div className="mt-1 text-xs text-gray-400">{contact.wechat}</div>
                   </motion.div>
                 )
@@ -308,11 +325,11 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="bg-black text-white py-12 px-6 border-t border-gray-800">
+      <footer className="bg-black px-6 py-12 text-white border-t border-gray-800">
         <div className="max-w-7xl mx-auto text-center">
-          <h3 className="text-3xl font-black mb-4">{t.footer.title}</h3>
-          <p className="text-gray-400 mb-8">{t.footer.description}</p>
-          <div className="flex justify-center gap-8 mb-8">
+          <h3 className="mb-4 text-3xl font-black">{t.footer.title}</h3>
+          <p className="mb-8 text-gray-400">{t.footer.description}</p>
+          <div className="mb-8 flex justify-center gap-8">
             {[
               { name: 'X', link: 'https://x.com/shawnwick960' },
               { name: 'Telegram', link: 'https://t.me/shawick' },
@@ -323,13 +340,13 @@ export default function Home() {
                 href={link.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-white transition-colors font-semibold"
+                className="font-semibold text-gray-400 transition-colors hover:text-white"
               >
                 {link.name}
               </a>
             ))}
           </div>
-          <p className="text-gray-600 text-sm">{t.footer.copyright}</p>
+          <p className="text-sm text-gray-600">{t.footer.copyright}</p>
         </div>
       </footer>
     </div>
