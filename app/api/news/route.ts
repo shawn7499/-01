@@ -6,12 +6,28 @@ export const dynamic = 'force-dynamic';
 const parser = new Parser();
 
 const RSS_SOURCES = {
-  "Odaily": "https://www.odaily.news/feed",
-  "BlockBeats": "https://www.theblockbeats.info/rss",
+  "Odaily": "https://rss.odaily.news/rss/newsflash",
+  "BlockBeats": "https://api.theblockbeats.news/v1/open-api/home-xml",
   "CoinDesk": "https://www.coindesk.com/arc/outboundfeeds/rss/",
   "Foresight News": "https://foresightnews.pro/rss.xml",
   "PANews": "https://www.panewslab.com/rss/index.xml",
 };
+
+async function fetchFeed(url: string, sourceName: string) {
+  const response = await fetch(url, {
+    headers: {
+      Accept: 'application/rss+xml, application/xml, text/xml;q=0.9, */*;q=0.8',
+      'User-Agent': 'Mozilla/5.0 (compatible; ShawnWickNewsBot/1.0)',
+    },
+    cache: 'no-store',
+  });
+
+  if (!response.ok) {
+    throw new Error(`${sourceName} request failed with ${response.status}`);
+  }
+
+  return parser.parseString(await response.text());
+}
 
 interface NewsArticle {
   id: string;
@@ -59,7 +75,7 @@ export async function GET(request: Request) {
       }
 
       try {
-        const feed = await parser.parseURL(url);
+        const feed = await fetchFeed(url, sourceName);
         
         feed.items.slice(0, 20).forEach((item, index) => {
           const title = item.title || 'No Title';

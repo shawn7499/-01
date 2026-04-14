@@ -8,8 +8,27 @@ export const dynamic = 'force-dynamic'
 const parser = new Parser()
 
 const SIGNAL_SOURCES = {
-  Odaily: 'https://www.odaily.news/feed',
-  BlockBeats: 'https://www.theblockbeats.info/rss',
+  Odaily: 'https://rss.odaily.news/rss/newsflash',
+  BlockBeats: 'https://api.theblockbeats.news/v1/open-api/home-xml',
+}
+
+async function fetchFeedItems(source: string, url: string) {
+  const response = await fetch(url, {
+    headers: {
+      Accept: 'application/rss+xml, application/xml, text/xml;q=0.9, */*;q=0.8',
+      'User-Agent': 'Mozilla/5.0 (compatible; ShawnWickSignalsBot/1.0)',
+    },
+    cache: 'no-store',
+  })
+
+  if (!response.ok) {
+    throw new Error(`${source} feed request failed with ${response.status}`)
+  }
+
+  const xml = await response.text()
+  const feed = await parser.parseString(xml)
+
+  return feed.items
 }
 
 function categorizeArticle(title: string): string {
@@ -37,9 +56,9 @@ export async function GET(request: Request) {
     const sourceResults = await Promise.all(
       Object.entries(SIGNAL_SOURCES).map(async ([source, url]) => {
         try {
-          const feed = await parser.parseURL(url)
+          const items = await fetchFeedItems(source, url)
 
-          return feed.items.slice(0, 20).map((item, index) => {
+          return items.slice(0, 20).map((item, index) => {
             const title = item.title || 'Untitled'
 
             return {
