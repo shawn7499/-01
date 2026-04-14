@@ -109,7 +109,7 @@ const TRIGGER_RULES: TriggerRule[] = [
       '宏观利好经常在预期里提前反映。',
       '如果消息表述模糊，市场可能很快回吐。',
     ],
-    keywords: ['etf', 'approval', 'approved', 'fed', 'rate cut', '降息', '获批', '通过', '宏观'],
+    keywords: ['etf', 'approval', 'approved', 'fed', 'rate cut', '降息', '获批', 'etf获批', '宏观'],
   },
   {
     name: 'Narrative Meme Catalyst',
@@ -177,6 +177,37 @@ const ASSET_KEYWORDS = [
   { label: 'Airdrop', keywords: ['airdrop', '积分', '空投'] },
 ]
 
+const CRYPTO_RELEVANCE_KEYWORDS = [
+  'crypto',
+  'cryptocurrency',
+  'token',
+  'tokens',
+  'blockchain',
+  'web3',
+  'bitcoin',
+  'ethereum',
+  'solana',
+  'binance',
+  'bnb',
+  'btc',
+  'eth',
+  'sol',
+  'defi',
+  'airdrop',
+  'meme',
+  'nft',
+  '稳定币',
+  '代币',
+  '加密',
+  '区块链',
+  '比特币',
+  '以太坊',
+  '公链',
+  '交易所',
+  '空投',
+  '链上',
+]
+
 function normalizeText(article: NewsArticle) {
   return `${article.title} ${article.description}`.toLowerCase()
 }
@@ -194,6 +225,10 @@ function detectAssets(text: string) {
   tickerMatches.forEach((match) => detected.add(match.toUpperCase()))
 
   return Array.from(detected).slice(0, 5)
+}
+
+function isCryptoRelevant(text: string) {
+  return CRYPTO_RELEVANCE_KEYWORDS.some((keyword) => text.includes(keyword))
 }
 
 function getMatchedRule(text: string): TriggerRule | null {
@@ -260,9 +295,23 @@ export function analyzeArticle(article: NewsArticle): NewsSignal {
   const text = normalizeText(article)
   const detectedAssets = detectAssets(text)
   const matchedRule = getMatchedRule(text)
+  const cryptoRelevant = isCryptoRelevant(text) || detectedAssets.length > 0
 
   if (!matchedRule) {
     return fallbackSignal(article)
+  }
+
+  if (!cryptoRelevant) {
+    return {
+      ...fallbackSignal(article),
+      triggerType: 'Macro Context',
+      thesis: '这条消息更像宏观背景噪音，目前缺少直接映射到加密资产的明确路径。',
+      actionPlan: '把它当作背景信息即可，优先等待它对 BTC、ETH 或主流生态的二次传导再决定是否跟进。',
+      risks: [
+        '宏观新闻很容易被过度解读成所有币种的买点。',
+        '如果没有清晰的加密资产映射关系，贸然交易通常性价比很低。',
+      ],
+    }
   }
 
   const baseScore = matchedRule.direction === 'bearish' ? 64 : 52

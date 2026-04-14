@@ -13,6 +13,21 @@ const RSS_SOURCES = {
   "PANews": "https://www.panewslab.com/rss/index.xml",
 };
 
+function repairMojibake(text: string) {
+  if (!text) return '';
+
+  const likelyBroken = /[\u00C0-\u00FF]{3,}/.test(text);
+  if (!likelyBroken) {
+    return text;
+  }
+
+  try {
+    return Buffer.from(text, 'latin1').toString('utf8');
+  } catch {
+    return text;
+  }
+}
+
 async function fetchFeed(url: string, sourceName: string) {
   const response = await fetch(url, {
     headers: {
@@ -78,7 +93,8 @@ export async function GET(request: Request) {
         const feed = await fetchFeed(url, sourceName);
         
         feed.items.slice(0, 20).forEach((item, index) => {
-          const title = item.title || 'No Title';
+          const title = repairMojibake(item.title || 'No Title');
+          const description = repairMojibake(item.contentSnippet || item.content || '');
           const category = categorizeArticle(title);
 
           if (categoryFilter && categoryFilter !== 'All' && categoryFilter !== category) {
@@ -89,7 +105,7 @@ export async function GET(request: Request) {
             id: `${sourceName}-${index}-${Date.now()}`,
             title,
             link: item.link || '',
-            description: item.contentSnippet || item.content || '',
+            description,
             published: item.pubDate || new Date().toISOString(),
             source: sourceName,
             category,

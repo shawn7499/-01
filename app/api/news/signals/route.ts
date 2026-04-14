@@ -12,6 +12,21 @@ const SIGNAL_SOURCES = {
   BlockBeats: 'https://api.theblockbeats.news/v1/open-api/home-xml',
 }
 
+function repairMojibake(text: string) {
+  if (!text) return ''
+
+  const likelyBroken = /[\u00C0-\u00FF]{3,}/.test(text)
+  if (!likelyBroken) {
+    return text
+  }
+
+  try {
+    return Buffer.from(text, 'latin1').toString('utf8')
+  } catch {
+    return text
+  }
+}
+
 async function fetchFeedItems(source: string, url: string) {
   const response = await fetch(url, {
     headers: {
@@ -59,13 +74,14 @@ export async function GET(request: Request) {
           const items = await fetchFeedItems(source, url)
 
           return items.slice(0, 20).map((item, index) => {
-            const title = item.title || 'Untitled'
+            const title = repairMojibake(item.title || 'Untitled')
+            const description = repairMojibake(item.contentSnippet || item.content || '')
 
             return {
               id: `${source}-${index}-${item.pubDate || Date.now()}`,
               title,
               link: item.link || '',
-              description: item.contentSnippet || item.content || '',
+              description,
               published: item.pubDate || new Date().toISOString(),
               source,
               category: categorizeArticle(title),
