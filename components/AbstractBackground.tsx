@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react'
 
 interface AbstractBackgroundProps {
-  type: 'gradient' | 'waves' | 'particles' | 'geometric'
+  type: 'gradient' | 'waves' | 'particles' | 'geometric' | 'orbital'
 }
 
 type Particle = {
@@ -12,6 +12,17 @@ type Particle = {
   radius: number
   speedX: number
   speedY: number
+  alpha: number
+}
+
+type Orbit = {
+  centerX: number
+  centerY: number
+  radiusX: number
+  radiusY: number
+  rotation: number
+  speed: number
+  phase: number
   alpha: number
 }
 
@@ -36,6 +47,7 @@ export default function AbstractBackground({ type }: AbstractBackgroundProps) {
     let height = 0
     let time = 0
     let particles: Particle[] = []
+    let orbits: Orbit[] = []
 
     const buildParticles = () => {
       const particleCount = width < 768 ? 16 : 28
@@ -47,6 +59,27 @@ export default function AbstractBackground({ type }: AbstractBackgroundProps) {
         speedY: (Math.random() - 0.5) * 0.18,
         alpha: Math.random() * 0.28 + 0.1,
       }))
+    }
+
+    const buildOrbits = () => {
+      const orbitCount = width < 768 ? 3 : 5
+      const baseRadius = Math.min(width, height)
+
+      orbits = Array.from({ length: orbitCount }, (_, index) => {
+        const spread = orbitCount > 1 ? index / (orbitCount - 1) : 0
+        const radiusScale = width < 768 ? 0.18 + spread * 0.18 : 0.2 + spread * 0.2
+
+        return {
+          centerX: width * (0.22 + spread * 0.56),
+          centerY: height * (0.34 + Math.sin(index * 0.8) * 0.08),
+          radiusX: baseRadius * (radiusScale + 0.08),
+          radiusY: baseRadius * radiusScale * 0.42,
+          rotation: ((Math.PI / 180) * 18) + index * 0.34,
+          speed: 0.24 + index * 0.06,
+          phase: index * 1.6,
+          alpha: 0.1 + index * 0.018,
+        }
+      })
     }
 
     const updateSize = () => {
@@ -64,6 +97,7 @@ export default function AbstractBackground({ type }: AbstractBackgroundProps) {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
 
       buildParticles()
+      buildOrbits()
       drawFrame()
     }
 
@@ -165,6 +199,97 @@ export default function AbstractBackground({ type }: AbstractBackgroundProps) {
       }
     }
 
+    const drawOrbital = () => {
+      clear()
+
+      const glow = ctx.createRadialGradient(width * 0.5, height * 0.42, 0, width * 0.5, height * 0.42, Math.max(width, height) * 0.56)
+      glow.addColorStop(0, 'rgba(255,255,255,0.12)')
+      glow.addColorStop(0.28, 'rgba(113,214,255,0.09)')
+      glow.addColorStop(0.6, 'rgba(0,255,136,0.04)')
+      glow.addColorStop(1, 'rgba(0,0,0,0)')
+      ctx.fillStyle = glow
+      ctx.fillRect(0, 0, width, height)
+
+      orbits.forEach((orbit, index) => {
+        ctx.save()
+        ctx.translate(orbit.centerX, orbit.centerY)
+        ctx.rotate(orbit.rotation + Math.sin(time * 0.18 + index) * 0.08)
+
+        ctx.beginPath()
+        ctx.strokeStyle = `rgba(255,255,255,${orbit.alpha})`
+        ctx.lineWidth = index % 2 === 0 ? 1.2 : 0.8
+        ctx.setLineDash(index % 2 === 0 ? [0, 0] : [8, 10])
+        ctx.ellipse(0, 0, orbit.radiusX, orbit.radiusY, 0, 0, Math.PI * 2)
+        ctx.stroke()
+
+        const angle = time * orbit.speed + orbit.phase
+        const nodeX = Math.cos(angle) * orbit.radiusX
+        const nodeY = Math.sin(angle) * orbit.radiusY
+
+        ctx.beginPath()
+        ctx.fillStyle = 'rgba(255,255,255,0.78)'
+        ctx.shadowColor = 'rgba(162,234,255,0.45)'
+        ctx.shadowBlur = width < 768 ? 10 : 14
+        ctx.arc(nodeX, nodeY, width < 768 ? 2.1 : 2.8, 0, Math.PI * 2)
+        ctx.fill()
+
+        ctx.beginPath()
+        ctx.strokeStyle = `rgba(164,237,255,${0.12 + index * 0.02})`
+        ctx.lineWidth = 0.7
+        ctx.moveTo(0, 0)
+        ctx.lineTo(nodeX, nodeY)
+        ctx.stroke()
+        ctx.restore()
+      })
+
+      const shapeCount = width < 768 ? 4 : 6
+
+      for (let i = 0; i < shapeCount; i += 1) {
+        const drift = time * (0.18 + i * 0.02)
+        const centerX = width * (0.14 + (i / Math.max(shapeCount - 1, 1)) * 0.72) + Math.sin(drift + i) * 12
+        const centerY = height * (0.24 + ((i % 3) * 0.22)) + Math.cos(drift * 0.8 + i * 1.3) * 10
+        const size = (width < 768 ? 22 : 30) + (i % 3) * 10
+        const rotation = drift * 0.35 + i
+
+        ctx.save()
+        ctx.translate(centerX, centerY)
+        ctx.rotate(rotation)
+        ctx.beginPath()
+
+        for (let side = 0; side < 4; side += 1) {
+          const theta = (Math.PI * 2 * side) / 4
+          const px = Math.cos(theta) * size
+          const py = Math.sin(theta) * size * 0.56
+
+          if (side === 0) ctx.moveTo(px, py)
+          else ctx.lineTo(px, py)
+        }
+
+        ctx.closePath()
+        ctx.strokeStyle = `rgba(255,255,255,${0.05 + (i % 3) * 0.02})`
+        ctx.lineWidth = 1
+        ctx.stroke()
+        ctx.restore()
+      }
+
+      particles.forEach((particle, index) => {
+        particle.x += particle.speedX * 0.55
+        particle.y += particle.speedY * 0.55
+
+        if (particle.x < -20) particle.x = width + 20
+        if (particle.x > width + 20) particle.x = -20
+        if (particle.y < -20) particle.y = height + 20
+        if (particle.y > height + 20) particle.y = -20
+
+        const pulse = 0.48 + Math.sin(time * 0.9 + index) * 0.18
+
+        ctx.beginPath()
+        ctx.fillStyle = `rgba(255,255,255,${particle.alpha * pulse * 0.75})`
+        ctx.arc(particle.x, particle.y, particle.radius * 0.9, 0, Math.PI * 2)
+        ctx.fill()
+      })
+    }
+
     const drawFrame = () => {
       switch (type) {
         case 'gradient':
@@ -178,6 +303,9 @@ export default function AbstractBackground({ type }: AbstractBackgroundProps) {
           break
         case 'geometric':
           drawGeometric()
+          break
+        case 'orbital':
+          drawOrbital()
           break
       }
     }

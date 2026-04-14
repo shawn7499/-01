@@ -88,26 +88,38 @@ export default function Home() {
       </nav>
 
       <section className="hero-cover hero-vignette relative min-h-screen overflow-hidden px-4 pt-28 pb-16 sm:px-6 sm:pt-36 sm:pb-20">
+        <div className="absolute inset-0 opacity-[0.78]">
+          <AbstractBackground type="orbital" />
+        </div>
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 opacity-[0.16]"
+          style={{
+            backgroundImage:
+              'linear-gradient(rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px)',
+            backgroundSize: '80px 80px',
+            maskImage: 'radial-gradient(circle at center, black 28%, transparent 92%)',
+          }}
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_20%,rgba(255,255,255,0.16),transparent_22%),radial-gradient(circle_at_82%_24%,rgba(116,214,255,0.16),transparent_20%),radial-gradient(circle_at_50%_72%,rgba(0,255,136,0.08),transparent_28%)]"
+        />
         <div className="mx-auto flex min-h-[calc(100vh-7rem)] max-w-6xl items-start justify-center pt-12 sm:min-h-[calc(100vh-8rem)] sm:items-center sm:pt-0">
           <div className="relative z-10 w-full max-w-5xl px-2 py-10 text-center sm:px-8 sm:py-16 lg:px-10 lg:py-20">
-            <motion.div initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.85 }}>
+            <div>
               <h1 className="text-4xl font-black leading-[0.98] tracking-tight text-white drop-shadow-[0_14px_34px_rgba(0,0,0,0.52)] sm:text-6xl lg:text-8xl">
                 {t.hero.title}
               </h1>
               <h2 className="mt-5 text-xl font-light text-white/94 drop-shadow-[0_10px_24px_rgba(0,0,0,0.38)] sm:text-3xl lg:text-5xl">
                 {t.hero.subtitle}
               </h2>
-              <p className="mx-auto mt-6 max-w-3xl text-base leading-7 text-white/92 drop-shadow-[0_8px_20px_rgba(0,0,0,0.28)] sm:text-lg lg:text-2xl lg:leading-10">
+              <p className="mx-auto mt-6 max-w-[21rem] px-3 text-sm leading-6 text-white/92 drop-shadow-[0_8px_20px_rgba(0,0,0,0.28)] sm:max-w-3xl sm:px-0 sm:text-lg sm:leading-7 lg:text-2xl lg:leading-10">
                 {t.hero.description}
               </p>
-            </motion.div>
+            </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.85, delay: 0.16 }}
-              className="mt-10 flex flex-col gap-3 sm:mt-12 sm:flex-row sm:justify-center sm:gap-5"
-            >
+            <div className="mt-10 flex flex-col gap-3 sm:mt-12 sm:flex-row sm:justify-center sm:gap-5">
               <a
                 href="#projects"
                 className="inline-flex items-center justify-center rounded-full bg-white px-7 py-3.5 text-sm font-bold text-black transition hover:bg-gray-200 sm:px-8 sm:text-base"
@@ -120,7 +132,7 @@ export default function Home() {
               >
                 {t.hero.btnLearn}
               </a>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
