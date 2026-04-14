@@ -191,6 +191,25 @@ export default function NewsPage() {
 
       {/* Main Content */}
       <main className="pt-24 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <section className="mb-8 overflow-hidden rounded-[2rem] border border-cyan-400/20 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.16),transparent_35%),radial-gradient(circle_at_75%_20%,rgba(168,85,247,0.12),transparent_30%),rgba(255,255,255,0.03)] p-6">
+          <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+            <div className="max-w-3xl">
+              <p className="text-xs uppercase tracking-[0.35em] text-cyan-200/80">Signal Feed</p>
+              <h2 className="mt-3 text-2xl font-black sm:text-3xl">Turn headlines into action plans</h2>
+              <p className="mt-3 text-sm leading-6 text-gray-300 sm:text-base">
+                Follow the new signal page for Odaily and BlockBeats only. Each card converts raw news into an
+                opportunity score, trade thesis, risk labels, and a simple execution checklist for newer users.
+              </p>
+            </div>
+            <a
+              href="/news/signals"
+              className="inline-flex items-center justify-center rounded-full border border-white/15 bg-white px-5 py-3 text-sm font-semibold text-black transition hover:bg-gray-200"
+            >
+              Open Signal Page
+            </a>
+          </div>
+        </section>
+
         {/* Filters */}
         <div className="mb-8 space-y-4">
           {/* Category Filter */}
