@@ -5,10 +5,9 @@
 @import './transitions.css';
 
 :root {
-  --background: #050505;
-  --foreground: #f5f7fb;
-  --muted: rgba(245, 247, 251, 0.7);
-  --border: rgba(255, 255, 255, 0.1);
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 0, 0, 0;
 }
 
 html {
@@ -16,46 +15,82 @@ html {
 }
 
 body {
-  min-height: 100vh;
-  background:
-    radial-gradient(circle at top, rgba(35, 80, 107, 0.18), transparent 30%),
-    radial-gradient(circle at 80% 20%, rgba(96, 78, 188, 0.12), transparent 24%),
-    var(--background);
-  color: var(--foreground);
-  font-family: var(--font-space-grotesk), 'Segoe UI', sans-serif;
+  color: rgb(var(--foreground-rgb));
+  background: rgb(var(--background-start-rgb));
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 ::selection {
-  background: #d3f8ff;
-  color: #081016;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-button {
-  font: inherit;
+  background-color: #00ff88;
+  color: #000;
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #070707;
+  background: #000;
 }
 
 ::-webkit-scrollbar-thumb {
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.18);
+  background: #333;
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: #00ff88;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+}
+
+.hero-cover {
+  background-image:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.28) 0%, rgba(0, 0, 0, 0.48) 100%),
+    url('/hero-bg.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.hero-vignette::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at top, rgba(255, 255, 255, 0.08), transparent 32%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.42));
+  pointer-events: none;
+}
+
+.section-ambient {
+  position: relative;
+  overflow: hidden;
+}
+
+.section-ambient::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(255, 255, 255, 0.06), transparent 20%),
+    radial-gradient(circle at 86% 22%, rgba(0, 255, 136, 0.06), transparent 18%);
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .hero-cover {
+    background-attachment: scroll;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
