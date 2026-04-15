@@ -45,7 +45,7 @@ function formatAge(hours: number | null) {
 function formatTimestamp(value: string) {
   if (!value) return '--'
 
-  return new Date(value).toLocaleString('zh-CN', {
+  return new Date(value).toLocaleString('en-US', {
     month: 'short',
     day: 'numeric',
     hour: '2-digit',
@@ -84,9 +84,7 @@ export default function TokenRadarPage({
                 News Signals
               </a>
             </div>
-            <div>
-              Updated {formatTimestamp(generatedAt)}
-            </div>
+            <div>Updated {formatTimestamp(generatedAt)}</div>
           </div>
 
           <div className="mt-10 max-w-4xl">
@@ -100,11 +98,12 @@ export default function TokenRadarPage({
             </div>
 
             <h1 className="mt-6 text-4xl font-black leading-tight sm:text-6xl">
-              热门代币和 BSC 中文叙事，放到同一个总页里
+              Track hot onchain tokens in one place
             </h1>
             <p className="mt-5 max-w-3xl text-base leading-7 text-white/72 sm:text-lg">
-              上面保留全站热门代币观察流，下面单独拉出 BNB Chain 中文代币模块，并且扩大到 GMGN 的
-              1 小时和 5 分钟趋势窗口，不再只靠总榜事后筛选。
+              Follow the broader hot-token stream and a dedicated BNB Chain Chinese narrative feed,
+              with contracts, chain labels, market context, and direct GMGN links collected into one
+              clean workflow.
             </p>
 
             <div className="mt-7 flex flex-wrap gap-3">
@@ -128,34 +127,42 @@ export default function TokenRadarPage({
             <StatCard
               label="BSC Chinese"
               value={String(chineseSignals.length)}
-              description="GMGN 1h + 5m dedicated feed"
+              description="Dedicated GMGN 1h and 5m feed"
             />
-            <StatCard label="Contracts" value="Ready" description="Chain, address, reasons, and links included" />
+            <StatCard
+              label="Research ready"
+              value="Live"
+              description="Contract, chain, context, and direct links included"
+            />
           </div>
         </div>
       </div>
 
       <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
         <div className="mb-8 rounded-2xl border border-amber-300/20 bg-amber-400/8 p-4 text-sm leading-6 text-amber-50/85">
-          这页更适合做观察和研究，不构成投资建议。热门不等于安全，中文叙事也不等于有持续性，合约、流动性和持仓结构仍然需要你自己复核。
+          This page is built for monitoring and research, not financial advice. Attention can move
+          faster than liquidity, and narrative tokens still require contract, holder, and risk checks
+          before any decision.
         </div>
 
         <TokenSection
           id="all-hot"
           badge="All Hot Tokens"
-          title="全站热门代币"
-          description="保留全站热门观察流，方便你先看整体热度分布，再决定要不要继续往某条链或某个叙事深挖。"
+          title="Cross-chain hot tokens"
+          description="Use the main stream to scan what is moving across major chains before drilling into
+          specific narratives, contracts, or momentum pockets."
           signals={hotSignals}
-          emptyText="当前没有拿到热门代币数据。"
+          emptyText="No hot-token data is available right now."
         />
 
         <TokenSection
           id="bsc-chinese"
           badge="BSC Chinese"
-          title="BNB Chain 中文代币"
-          description="这一块不再从总榜里事后筛，而是专门抓 BSC 的 GMGN 1 小时和 5 分钟趋势，再把中文名、中文符号、中文翻译线索和相关叙事单独拉出来。"
+          title="BNB Chain Chinese narrative tokens"
+          description="This feed focuses on BNB Chain tokens with Chinese names, symbols, or GMGN translation
+          cues, so Chinese-language narrative plays are easier to spot without digging through the full market stream."
           signals={chineseSignals}
-          emptyText="当前没有拿到 BSC 中文代币数据。"
+          emptyText="No BSC Chinese-token data is available right now."
         />
       </main>
     </div>
@@ -184,9 +191,7 @@ function TokenSection({
           {badge}
         </span>
         <h2 className="mt-4 text-3xl font-black sm:text-4xl">{title}</h2>
-        <p className="mt-3 max-w-3xl text-sm leading-7 text-white/68 sm:text-base">
-          {description}
-        </p>
+        <p className="mt-3 max-w-3xl text-sm leading-7 text-white/68 sm:text-base">{description}</p>
       </div>
 
       {signals.length === 0 ? (
@@ -242,7 +247,9 @@ function TokenCard({ signal }: { signal: HotTokenSignal }) {
         </div>
 
         <div className="text-right">
-          <div className={`text-sm font-semibold ${(signal.priceChange1h ?? 0) >= 0 ? 'text-emerald-300' : 'text-rose-300'}`}>
+          <div
+            className={`text-sm font-semibold ${(signal.priceChange1h ?? 0) >= 0 ? 'text-emerald-300' : 'text-rose-300'}`}
+          >
             {formatPercent(signal.priceChange1h)}
           </div>
           <div className="mt-1 text-xs text-white/45">1H change</div>
@@ -255,7 +262,10 @@ function TokenCard({ signal }: { signal: HotTokenSignal }) {
         <MetricCard label="Liquidity" value={formatCurrency(signal.liquidityUsd)} />
         <MetricCard label="24H change" value={formatPercent(signal.priceChange24h)} />
         <MetricCard label="Age" value={formatAge(signal.ageHours)} />
-        <MetricCard label="Buys / Sells" value={`${formatCompactNumber(signal.buys1h)} / ${formatCompactNumber(signal.sells1h)}`} />
+        <MetricCard
+          label="Buys / Sells"
+          value={`${formatCompactNumber(signal.buys1h)} / ${formatCompactNumber(signal.sells1h)}`}
+        />
       </div>
 
       <div className="mt-4 rounded-2xl border border-white/10 bg-black/20 p-4">
