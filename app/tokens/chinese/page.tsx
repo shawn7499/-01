@@ -1,5 +1,7 @@
-import TokenRadarPage from '@/components/TokenRadarPage'
+import { redirect } from 'next/navigation'
+
+export const dynamic = 'force-dynamic'
 
 export default function ChineseTokensPage() {
-  return <TokenRadarPage mode="chinese" />
+  redirect('/tokens/hot#bsc-chinese')
 }

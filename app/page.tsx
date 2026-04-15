@@ -62,10 +62,7 @@ export default function Home() {
                 News
               </a>
               <a href="/tokens/hot" className="text-sm text-gray-300 hover:text-white transition">
-                Hot Tokens
-              </a>
-              <a href="/tokens/chinese" className="text-sm text-gray-300 hover:text-white transition">
-                Chinese Tokens
+                Token Radar
               </a>
               <a href="#contact" className="text-sm text-gray-300 hover:text-white transition">
                 {t.nav.contact}
@@ -87,10 +84,7 @@ export default function Home() {
               News
             </a>
             <a href="/tokens/hot" className="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-gray-300">
-              Hot
-            </a>
-            <a href="/tokens/chinese" className="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-gray-300">
-              Chinese
+              Radar
             </a>
             <a href="#contact" className="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-gray-300">
               Contact
