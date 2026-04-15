@@ -13,6 +13,13 @@ type TokenRadarPageProps = {
   generatedAt: string
 }
 
+type RefreshStatus = {
+  tone: 'success' | 'neutral' | 'error'
+  checkedAt: string
+  newTokens: number
+  changedTokens: number
+}
+
 const copy = {
   en: {
     nav: {
@@ -213,6 +220,91 @@ function sectionMeta(signals: HotTokenSignal[]) {
   return chains.join(' / ') || 'GMGN'
 }
 
+function countSignalChanges(previousSignals: HotTokenSignal[], nextSignals: HotTokenSignal[]) {
+  const previousMap = new Map(previousSignals.map((signal) => [signal.id, signal]))
+
+  let newTokens = 0
+  let changedTokens = 0
+
+  for (const signal of nextSignals) {
+    const previousSignal = previousMap.get(signal.id)
+
+    if (!previousSignal) {
+      newTokens += 1
+      changedTokens += 1
+      continue
+    }
+
+    if (
+      previousSignal.score !== signal.score ||
+      previousSignal.priceChange1h !== signal.priceChange1h ||
+      previousSignal.priceChange24h !== signal.priceChange24h ||
+      previousSignal.volume1h !== signal.volume1h ||
+      previousSignal.liquidityUsd !== signal.liquidityUsd
+    ) {
+      changedTokens += 1
+    }
+  }
+
+  return { newTokens, changedTokens }
+}
+
+function describeRefreshStatus(status: RefreshStatus, lang: Lang) {
+  if (status.tone === 'error') {
+    return {
+      message:
+        lang === 'zh'
+          ? '刷新失败了，稍后再试一次。'
+          : 'Refresh failed. Please try again in a moment.',
+      meta:
+        lang === 'zh'
+          ? `最后检查：${formatTimestamp(status.checkedAt, lang)}`
+          : `Last check: ${formatTimestamp(status.checkedAt, lang)}`,
+      className: 'border-rose-300/20 bg-rose-400/10 text-rose-100/90',
+    }
+  }
+
+  if (status.newTokens > 0) {
+    return {
+      message:
+        lang === 'zh'
+          ? `刚刚已刷新，发现 ${status.newTokens} 个新代币。`
+          : `Updated just now. ${status.newTokens} new tokens detected.`,
+      meta:
+        lang === 'zh'
+          ? `最后检查：${formatTimestamp(status.checkedAt, lang)}`
+          : `Last check: ${formatTimestamp(status.checkedAt, lang)}`,
+      className: 'border-emerald-300/20 bg-emerald-400/10 text-emerald-100/90',
+    }
+  }
+
+  if (status.changedTokens > 0) {
+    return {
+      message:
+        lang === 'zh'
+          ? `刚刚已刷新，${status.changedTokens} 个代币数据有变化。`
+          : `Updated just now. ${status.changedTokens} token entries changed.`,
+      meta:
+        lang === 'zh'
+          ? `最后检查：${formatTimestamp(status.checkedAt, lang)}`
+          : `Last check: ${formatTimestamp(status.checkedAt, lang)}`,
+      className: 'border-cyan-300/20 bg-cyan-400/10 text-cyan-100/90',
+    }
+  }
+
+  return {
+    message:
+      lang === 'zh'
+        ? '刚刚已检查，热门列表没有明显变化。'
+        : 'Checked just now. No major feed changes detected.',
+    meta:
+      lang === 'zh'
+        ? `最后检查：${formatTimestamp(status.checkedAt, lang)}`
+        : `Last check: ${formatTimestamp(status.checkedAt, lang)}`,
+    className: 'border-white/10 bg-white/[0.05] text-white/75',
+  }
+}
+
 function localizeGeneratedLine(text: string, lang: Lang) {
   if (lang === 'en') {
     return text
@@ -279,9 +371,11 @@ export default function TokenRadarPage({
   const [generatedAt, setGeneratedAt] = useState(initialGeneratedAt)
   const [selectedChain, setSelectedChain] = useState('all')
   const [refreshing, setRefreshing] = useState(false)
+  const [refreshStatus, setRefreshStatus] = useState<RefreshStatus | null>(null)
   const [copiedId, setCopiedId] = useState('')
 
   const t = copy[lang]
+  const refreshFeedback = refreshStatus ? describeRefreshStatus(refreshStatus, lang) : null
 
   const chainFilters = useMemo(
     () => ['all', ...Array.from(new Set(signals.map((signal) => signal.chainId)))],
@@ -310,17 +404,35 @@ export default function TokenRadarPage({
   async function refreshData() {
     try {
       setRefreshing(true)
-      const response = await fetch('/api/tokens/hot?limit=18', { cache: 'no-store' })
+      const response = await fetch(`/api/tokens/hot?limit=18&refresh=${Date.now()}`, {
+        cache: 'no-store',
+      })
 
       if (!response.ok) {
         throw new Error('Token radar refresh failed.')
       }
 
       const data = await response.json()
-      setSignals(data.signals ?? [])
-      setGeneratedAt(data.generatedAt ?? new Date().toISOString())
+      const nextSignals = data.signals ?? []
+      const nextGeneratedAt = data.generatedAt ?? new Date().toISOString()
+      const changes = countSignalChanges(signals, nextSignals)
+
+      setSignals(nextSignals)
+      setGeneratedAt(nextGeneratedAt)
+      setRefreshStatus({
+        tone: changes.newTokens > 0 || changes.changedTokens > 0 ? 'success' : 'neutral',
+        checkedAt: nextGeneratedAt,
+        newTokens: changes.newTokens,
+        changedTokens: changes.changedTokens,
+      })
     } catch (error) {
       console.error('Failed to refresh token radar data:', error)
+      setRefreshStatus({
+        tone: 'error',
+        checkedAt: new Date().toISOString(),
+        newTokens: 0,
+        changedTokens: 0,
+      })
     } finally {
       setRefreshing(false)
     }
@@ -417,10 +529,26 @@ export default function TokenRadarPage({
               </a>
               <button
                 onClick={() => void refreshData()}
-                className="rounded-full border border-white/15 px-4 py-2 text-sm text-white/80 transition hover:border-white/30 hover:bg-white/5 hover:text-white"
+                disabled={refreshing}
+                className={`rounded-full border px-4 py-2 text-sm transition ${
+                  refreshing
+                    ? 'cursor-not-allowed border-white/10 bg-white/[0.04] text-white/45'
+                    : 'border-white/15 text-white/80 hover:border-white/30 hover:bg-white/5 hover:text-white'
+                }`}
               >
                 {refreshing ? t.hero.refreshing : t.hero.refresh}
               </button>
+            </div>
+
+            <div className="mt-4 min-h-[52px]" aria-live="polite">
+              {refreshFeedback ? (
+                <div
+                  className={`inline-flex max-w-full flex-col gap-1 rounded-2xl border px-4 py-3 text-sm ${refreshFeedback.className}`}
+                >
+                  <span>{refreshFeedback.message}</span>
+                  <span className="text-xs opacity-80">{refreshFeedback.meta}</span>
+                </div>
+              ) : null}
             </div>
           </motion.div>
 
