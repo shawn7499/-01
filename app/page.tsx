@@ -56,13 +56,13 @@ export default function Home() {
                 {t.nav.roadmap}
               </a>
               <a href="/opportunities" className="text-sm text-gray-300 hover:text-white transition">
-                Opportunities
+                {lang === 'zh' ? '机遇' : 'Opportunities'}
               </a>
               <a href="/news" className="text-sm text-gray-300 hover:text-white transition">
-                News
+                {lang === 'zh' ? '新闻' : 'News'}
               </a>
               <a href="/tokens/hot" className="text-sm text-gray-300 hover:text-white transition">
-                Token Radar
+                {lang === 'zh' ? '代币' : 'Token Radar'}
               </a>
               <a href="#contact" className="text-sm text-gray-300 hover:text-white transition">
                 {t.nav.contact}
@@ -78,13 +78,13 @@ export default function Home() {
               Work
             </a>
             <a href="/opportunities" className="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-gray-300">
-              Opps
+              {lang === 'zh' ? '机遇' : 'Opps'}
             </a>
             <a href="/news" className="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-gray-300">
-              News
+              {lang === 'zh' ? '新闻' : 'News'}
             </a>
             <a href="/tokens/hot" className="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-gray-300">
-              Radar
+              {lang === 'zh' ? '代币' : 'Radar'}
             </a>
             <a href="#contact" className="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-gray-300">
               Contact

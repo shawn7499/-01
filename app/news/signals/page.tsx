@@ -3,13 +3,17 @@
 import { useEffect, useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
 
-import LanguageSwitcher from '@/components/LanguageSwitcher'
+import SiteHeader from '@/components/SiteHeader'
 import type { NewsSignal } from '@/lib/news-signals'
+
+type Lang = 'en' | 'zh'
+type FilterKey = 'all' | 'bullish' | 'watch' | 'bearish'
 
 const translations = {
   en: {
     pageTitle: 'News Signals',
-    pageSubtitle: 'Odaily + BlockBeats intelligence, translated into tradeable scenarios and risk-aware action plans.',
+    pageSubtitle:
+      'Odaily and BlockBeats headlines translated into tradeable scenarios and risk-aware action plans.',
     back: 'Back to News',
     refresh: 'Refresh',
     generatedAt: 'Updated',
@@ -40,17 +44,17 @@ const translations = {
       action: 'Suggested Action',
       execution: 'Execution Checklist',
       risks: 'Key Risks',
-      assets: 'Relevant Assets',
       trigger: 'Trigger Type',
       window: 'Time Window',
     },
     loading: 'Building signal cards...',
     empty: 'No signals match this filter right now.',
-    note: 'These cards are decision-support summaries, not guaranteed outcomes. Small size and confirmation matter more than speed.',
+    note:
+      'These cards are decision-support summaries, not guaranteed outcomes. Small size and confirmation matter more than speed.',
   },
   zh: {
     pageTitle: '新闻信号',
-    pageSubtitle: '把 Odaily 和 BlockBeats 的新闻翻译成可执行的机会判断、风险提示和操作思路。',
+    pageSubtitle: '把 Odaily 和 BlockBeats 的新闻翻译成可执行的机会判断与风险提示。',
     back: '返回新闻页',
     refresh: '刷新',
     generatedAt: '更新时间',
@@ -81,20 +85,17 @@ const translations = {
       action: '建议动作',
       execution: '执行清单',
       risks: '核心风险',
-      assets: '相关标的',
       trigger: '触发类型',
       window: '时间窗口',
     },
     loading: '正在生成信号卡片...',
     empty: '当前筛选下没有匹配的信号。',
-    note: '这些卡片是决策辅助，不代表确定收益。对小白来说，仓位控制和确认信号比速度更重要。',
+    note: '这些卡片用于辅助判断，不代表确定收益。对多数用户来说，确认信号和控制仓位比速度更重要。',
   },
-}
-
-type FilterKey = 'all' | 'bullish' | 'watch' | 'bearish'
+} as const
 
 export default function NewsSignalsPage() {
-  const [lang, setLang] = useState<'en' | 'zh'>('zh')
+  const [lang, setLang] = useState<Lang>('zh')
   const [signals, setSignals] = useState<NewsSignal[]>([])
   const [loading, setLoading] = useState(true)
   const [filter, setFilter] = useState<FilterKey>('all')
@@ -152,12 +153,15 @@ export default function NewsSignalsPage() {
 
   return (
     <div className="min-h-screen bg-[#060606] text-white">
-      <LanguageSwitcher currentLang={lang} onLanguageChange={setLang} />
+      <SiteHeader lang={lang} onLanguageChange={setLang} active="news" />
 
       <div className="relative overflow-hidden border-b border-white/10 bg-[radial-gradient(circle_at_top,#1f3b4d,transparent_45%),radial-gradient(circle_at_80%_20%,#28301a,transparent_25%),#060606]">
-        <div className="mx-auto max-w-7xl px-4 pb-12 pt-24 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl px-4 pb-12 pt-28 sm:px-6 lg:px-8 lg:pt-32">
           <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
-            <a href="/news" className="inline-flex items-center gap-2 text-sm text-white/70 transition hover:text-white">
+            <a
+              href="/news"
+              className="inline-flex items-center gap-2 text-sm text-white/70 transition hover:text-white"
+            >
               <span>←</span>
               <span>{t.back}</span>
             </a>
@@ -172,12 +176,16 @@ export default function NewsSignalsPage() {
           <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} className="max-w-4xl">
             <p className="mb-3 text-sm uppercase tracking-[0.35em] text-cyan-200/70">Signal Feed</p>
             <h1 className="max-w-4xl text-4xl font-black leading-tight sm:text-6xl">{t.pageTitle}</h1>
-            <p className="mt-5 max-w-3xl text-base leading-7 text-white/72 sm:text-lg">{t.pageSubtitle}</p>
+            <p className="mt-5 max-w-3xl text-base leading-7 text-white/72 sm:text-lg">
+              {t.pageSubtitle}
+            </p>
             <div className="mt-6 flex flex-wrap items-center gap-3 text-sm text-white/60">
-              <span>{t.generatedAt}: {formatTimestamp(generatedAt)}</span>
-              <span className="h-1 w-1 rounded-full bg-white/30"></span>
+              <span>
+                {t.generatedAt}: {formatTimestamp(generatedAt)}
+              </span>
+              <span className="h-1 w-1 rounded-full bg-white/30" />
               <span>Odaily + BlockBeats</span>
-              <span className="h-1 w-1 rounded-full bg-white/30"></span>
+              <span className="h-1 w-1 rounded-full bg-white/30" />
               <span>{signals.length} cards</span>
             </div>
           </motion.div>
@@ -207,7 +215,7 @@ export default function NewsSignalsPage() {
 
         {loading ? (
           <div className="rounded-[2rem] border border-white/10 bg-white/[0.03] px-8 py-20 text-center text-white/65">
-            <div className="mx-auto mb-5 h-12 w-12 animate-spin rounded-full border-2 border-white/10 border-t-cyan-300"></div>
+            <div className="mx-auto mb-5 h-12 w-12 animate-spin rounded-full border-2 border-white/10 border-t-cyan-300" />
             <p>{t.loading}</p>
           </div>
         ) : filteredSignals.length === 0 ? (
@@ -221,15 +229,19 @@ export default function NewsSignalsPage() {
                 key={signal.id}
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.04 }}
+                transition={{ delay: Math.min(index * 0.04, 0.24) }}
                 className="overflow-hidden rounded-[2rem] border border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.06),rgba(255,255,255,0.02))] p-6 shadow-[0_20px_70px_rgba(0,0,0,0.35)]"
               >
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div className="flex flex-wrap gap-2">
-                    <span className={`rounded-full border px-3 py-1 text-xs font-semibold ${getLevelClasses(signal.opportunityLevel)}`}>
+                    <span
+                      className={`rounded-full border px-3 py-1 text-xs font-semibold ${getLevelClasses(signal.opportunityLevel)}`}
+                    >
                       {t.levels[signal.opportunityLevel]}
                     </span>
-                    <span className={`rounded-full border px-3 py-1 text-xs font-semibold ${getDirectionClasses(signal.direction)}`}>
+                    <span
+                      className={`rounded-full border px-3 py-1 text-xs font-semibold ${getDirectionClasses(signal.direction)}`}
+                    >
                       {t.directions[signal.direction]}
                     </span>
                   </div>
@@ -240,66 +252,40 @@ export default function NewsSignalsPage() {
                 </div>
 
                 <div className="mt-5">
-                  <a href={signal.link} target="_blank" rel="noopener noreferrer" className="text-2xl font-bold leading-tight transition hover:text-cyan-200">
+                  <a
+                    href={signal.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-2xl font-bold leading-tight transition hover:text-cyan-200"
+                  >
                     {signal.title}
                   </a>
                   <p className="mt-3 text-sm leading-6 text-white/60">{signal.description}</p>
                 </div>
 
                 <div className="mt-5 grid gap-3 sm:grid-cols-3">
-                  <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-                    <div className="text-xs uppercase tracking-[0.25em] text-white/35">{t.sections.trigger}</div>
-                    <div className="mt-2 text-sm font-semibold text-white/85">{signal.triggerType}</div>
-                  </div>
-                  <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-                    <div className="text-xs uppercase tracking-[0.25em] text-white/35">Score</div>
-                    <div className="mt-2 text-sm font-semibold text-white/85">{signal.score} / 100</div>
-                  </div>
-                  <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
-                    <div className="text-xs uppercase tracking-[0.25em] text-white/35">{t.sections.window}</div>
-                    <div className="mt-2 text-sm font-semibold text-white/85">{t.windows[signal.timeWindow]}</div>
-                  </div>
+                  <SignalMetric label={t.sections.trigger} value={signal.triggerType} />
+                  <SignalMetric label="Score" value={`${signal.score} / 100`} />
+                  <SignalMetric label={t.sections.window} value={t.windows[signal.timeWindow]} />
                 </div>
 
                 <div className="mt-5 grid gap-5">
-                  <section className="rounded-2xl border border-white/10 bg-black/20 p-4">
-                    <h2 className="text-sm font-semibold text-cyan-200">{t.sections.thesis}</h2>
-                    <p className="mt-2 text-sm leading-6 text-white/78">{signal.thesis}</p>
-                  </section>
-
-                  <section className="rounded-2xl border border-white/10 bg-black/20 p-4">
-                    <h2 className="text-sm font-semibold text-emerald-200">{t.sections.action}</h2>
-                    <p className="mt-2 text-sm leading-6 text-white/78">{signal.actionPlan}</p>
-                  </section>
-
-                  <section className="rounded-2xl border border-white/10 bg-black/20 p-4">
-                    <h2 className="text-sm font-semibold text-white">{t.sections.execution}</h2>
-                    <ul className="mt-3 space-y-2 text-sm leading-6 text-white/72">
-                      {signal.execution.map((item) => (
-                        <li key={item} className="flex gap-3">
-                          <span className="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-cyan-300"></span>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </section>
-
-                  <section className="rounded-2xl border border-white/10 bg-black/20 p-4">
-                    <h2 className="text-sm font-semibold text-rose-200">{t.sections.risks}</h2>
-                    <ul className="mt-3 space-y-2 text-sm leading-6 text-white/72">
-                      {signal.risks.map((item) => (
-                        <li key={item} className="flex gap-3">
-                          <span className="mt-2 h-1.5 w-1.5 flex-none rounded-full bg-rose-300"></span>
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </section>
+                  <SignalBlock title={t.sections.thesis} accent="text-cyan-200">
+                    {signal.thesis}
+                  </SignalBlock>
+                  <SignalBlock title={t.sections.action} accent="text-emerald-200">
+                    {signal.actionPlan}
+                  </SignalBlock>
+                  <ListBlock title={t.sections.execution} accent="text-white" items={signal.execution} dotClass="bg-cyan-300" />
+                  <ListBlock title={t.sections.risks} accent="text-rose-200" items={signal.risks} dotClass="bg-rose-300" />
                 </div>
 
                 <div className="mt-5 flex flex-wrap gap-2">
                   {(signal.detectedAssets.length ? signal.detectedAssets : [signal.category]).map((asset) => (
-                    <span key={asset} className="rounded-full border border-white/12 bg-white/5 px-3 py-1 text-xs text-white/70">
+                    <span
+                      key={asset}
+                      className="rounded-full border border-white/12 bg-white/5 px-3 py-1 text-xs text-white/70"
+                    >
                       {asset}
                     </span>
                   ))}
@@ -310,5 +296,57 @@ export default function NewsSignalsPage() {
         )}
       </main>
     </div>
+  )
+}
+
+function SignalMetric({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-2xl border border-white/10 bg-white/[0.03] p-4">
+      <div className="text-xs uppercase tracking-[0.25em] text-white/35">{label}</div>
+      <div className="mt-2 text-sm font-semibold text-white/85">{value}</div>
+    </div>
+  )
+}
+
+function SignalBlock({
+  title,
+  accent,
+  children,
+}: {
+  title: string
+  accent: string
+  children: React.ReactNode
+}) {
+  return (
+    <section className="rounded-2xl border border-white/10 bg-black/20 p-4">
+      <h2 className={`text-sm font-semibold ${accent}`}>{title}</h2>
+      <p className="mt-2 text-sm leading-6 text-white/78">{children}</p>
+    </section>
+  )
+}
+
+function ListBlock({
+  title,
+  accent,
+  items,
+  dotClass,
+}: {
+  title: string
+  accent: string
+  items: string[]
+  dotClass: string
+}) {
+  return (
+    <section className="rounded-2xl border border-white/10 bg-black/20 p-4">
+      <h2 className={`text-sm font-semibold ${accent}`}>{title}</h2>
+      <ul className="mt-3 space-y-2 text-sm leading-6 text-white/72">
+        {items.map((item) => (
+          <li key={item} className="flex gap-3">
+            <span className={`mt-2 h-1.5 w-1.5 flex-none rounded-full ${dotClass}`} />
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+    </section>
   )
 }

@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
 
-import LanguageSwitcher from '@/components/LanguageSwitcher'
+import SiteHeader from '@/components/SiteHeader'
 import type { HotTokenSignal } from '@/lib/hot-tokens'
 
 type Lang = 'en' | 'zh'
@@ -22,28 +22,22 @@ type RefreshStatus = {
 
 const copy = {
   en: {
-    nav: {
-      home: 'Home',
-      news: 'News',
-      opportunities: 'Opportunities',
-      radar: 'Token Radar',
-      allHot: 'All Hot',
-    },
     hero: {
       badge: 'Token Radar',
       source: 'GMGN Live Feed',
-      title: 'Track hot onchain tokens in one place',
+      title: 'All hot onchain tokens in one place',
       subtitle:
-        'Follow the broader hot-token stream with contracts, chain labels, market context, and direct GMGN links in one clean workflow.',
+        'Track the broader hot-token stream with contracts, chain labels, market context, and direct GMGN links.',
       refresh: 'Refresh',
       refreshing: 'Refreshing...',
       updated: 'Updated',
       sourceLabel: 'Source',
-      cta: 'All Hot Tokens',
+      cta: 'Jump to Feed',
     },
     stats: {
       total: 'Hot Feed',
       bsc: 'BNB Chain',
+      bscDescription: 'Visible inside the same feed',
       liveLabel: 'Research Ready',
       liveValue: 'Live',
       liveDescription: 'Contracts, chains, reasons, and links included',
@@ -52,16 +46,16 @@ const copy = {
       badge: 'All Hot Tokens',
       title: 'Cross-chain hot tokens',
       description:
-        'Use the main stream to scan what is moving across major chains, then filter by chain when you want to drill into BNB Chain, Solana, Base, or other momentum pockets.',
+        'Scan the full feed first, then use the chain filter to focus on BNB Chain, Solana, Base, or other pockets of momentum.',
       filterLabel: 'Chain filter',
       allChains: 'All chains',
       disclaimer:
         'This page is for monitoring and research support only. Hot attention does not equal low risk, and narrative tokens still need contract, holder, and liquidity checks before any decision.',
       loading: 'Loading latest token data...',
       empty: 'No hot-token data is available right now.',
-      summary: 'Watch thesis',
-      reasons: 'Why it is hot',
-      risks: 'Risk flags',
+      summary: 'Watch Thesis',
+      reasons: 'Why It Is Hot',
+      risks: 'Risk Flags',
       contract: 'Contract',
       price: 'Price',
       volume1h: '1H volume',
@@ -90,54 +84,46 @@ const copy = {
     },
   },
   zh: {
-    nav: {
-      home: '首页',
-      news: '新闻',
-      opportunities: '机会板',
-      radar: '代币雷达',
-      allHot: '热门代币',
-    },
     hero: {
       badge: '代币雷达',
       source: 'GMGN 实时数据',
       title: '全站热门代币',
-      subtitle:
-        '在一个页面里查看全站热门代币，直接拿到链、合约、热度原因、风险提示和 GMGN 跳转链接。',
+      subtitle: '在一个页面里查看热门代币、所属链、合约地址、热度理由和直达 GMGN 的链接。',
       refresh: '刷新',
       refreshing: '刷新中...',
       updated: '更新时间',
       sourceLabel: '数据源',
-      cta: '全部热门代币',
+      cta: '查看热门列表',
     },
     stats: {
       total: '热门总览',
       bsc: 'BNB Chain',
+      bscDescription: '已并入主热门流',
       liveLabel: '研究就绪',
       liveValue: '在线',
-      liveDescription: '合约、链、理由和链接都已整理好',
+      liveDescription: '合约、链、理由和跳转链接都已整理',
     },
     section: {
       badge: '热门代币',
       title: '跨链热门代币',
-      description:
-        '先看整体热度流，再按链筛选。这样你可以快速切到 BNB Chain、Solana、Base 或其他链，不会被单一链的热榜淹没。',
+      description: '先看整体热门流，再用链筛选切到 BNB Chain、Solana、Base 等重点链。',
       filterLabel: '链筛选',
       allChains: '全部链',
       disclaimer:
-        '这个页面更适合做观察和研究，不构成投资建议。热度不等于安全，下决定前仍然要复核合约、持仓结构和流动性。',
+        '这个页面用于观察和研究，不构成投资建议。热度不等于安全，做决定前仍然要复核合约、持仓结构和流动性。',
       loading: '正在加载最新代币数据...',
       empty: '当前没有拿到热门代币数据。',
       summary: '观察逻辑',
       reasons: '热门理由',
       risks: '风险提示',
-      contract: '合约',
+      contract: '合约地址',
       price: '价格',
-      volume1h: '1小时成交量',
+      volume1h: '1 小时成交量',
       liquidity: '流动性',
-      momentum24h: '24小时涨跌',
-      pairAge: '年龄',
-      buys1h: '1小时买单',
-      sells1h: '1小时卖单',
+      momentum24h: '24 小时涨跌',
+      pairAge: '上线时间',
+      buys1h: '1 小时买单',
+      sells1h: '1 小时卖单',
       score: '热度分',
     },
     actions: {
@@ -312,29 +298,20 @@ function localizeGeneratedLine(text: string, lang: Lang) {
 
   const rules: Array<[RegExp, (matches: RegExpMatchArray) => string]> = [
     [/GMGN hot level is elevated at (\d+)\./, (m) => `GMGN 热度等级较高，当前为 ${m[1]}。`],
-    [/Smart-money participation is notable with (\d+) active wallets\./, (m) => `聪明钱参与度不低，当前活跃钱包数约为 ${m[1]}。`],
-    [/KOL-style participation is visible with (\d+) renowned wallets involved\./, (m) => `KOL 类型的钱包参与度可见，当前约有 ${m[1]} 个知名钱包。`],
+    [/Smart-money participation is notable with (\d+) active wallets\./, (m) => `聪明钱参与度不低，当前活跃钱包约为 ${m[1]} 个。`],
     [/1-hour volume is already above \$1M\./, () => '1 小时成交量已经超过 100 万美元。'],
-    [/1-hour volume is meaningful for a hot onchain token\./, () => '1 小时成交量对链上热门代币来说已经不低。'],
-    [/Liquidity is stronger than most fresh meme launches\./, () => '流动性比多数新发 meme 代币更强。'],
-    [/Liquidity is usable enough for a watchlist candidate\./, () => '流动性已经足够进入观察名单。'],
+    [/Liquidity is stronger than most fresh meme launches\./, () => '流动性强于大多数新发的 meme 代币。'],
     [/One-hour momentum is extremely strong\./, () => '1 小时动能非常强。'],
     [/One-hour momentum is clearly positive\./, () => '1 小时动能明显偏强。'],
     [/Buy-side activity is still dominating the last hour\./, () => '最近 1 小时依然是买盘占优。'],
-    [/The token is still very new, so attention is concentrated and fast-moving\./, () => '这个代币仍然很新，注意力集中而且变化很快。'],
-    [/Launchpad attention is coming from (.+)\./, (m) => `当前关注主要来自 ${m[1]}。`],
+    [/The token is still very new, so attention is concentrated and fast-moving\./, () => '这个代币还很新，注意力集中且变化很快。'],
     [/Chinese-language or Chinese narrative cues are part of the attention\./, () => '中文文本或中文叙事线索也是热度来源之一。'],
     [/New listing: volatility can be extreme\./, () => '新上线代币，波动可能非常大。'],
-    [/GMGN marks this token as a potential honeypot risk\./, () => 'GMGN 将这个代币标记为潜在土狗陷阱风险。'],
     [/Top-holder concentration is elevated\./, () => '前排持仓集中度偏高。'],
-    [/Developer\/team hold rate is still noticeable\./, () => '开发者或团队持仓比例仍然偏明显。'],
-    [/Bundler activity is elevated, so early flow may be crowded\./, () => 'Bundler 活跃度偏高，早期资金可能比较拥挤。'],
-    [/Bot-driven trading activity is relatively high\./, () => '机器人驱动的交易活跃度相对偏高。'],
-    [/The move is already steep, so pullback risk is high\./, () => '涨跌幅已经比较陡，回撤风险偏高。'],
+    [/The move is already steep, so pullback risk is high\./, () => '涨幅已经较陡，回撤风险偏高。'],
     [/Contract source visibility is limited\./, () => '合约源码可见性有限。'],
     [/Ownership is not clearly renounced yet\./, () => '所有权是否放弃还不够明确。'],
-    [/Creator wallet still appears active in token holdings\./, () => '创建者钱包在持仓里仍然比较活跃。'],
-    [/([A-Za-z ]+) trending token surfaced by GMGN\./, (m) => `${m[1]} 上的这个代币来自 GMGN 热榜。`],
+    [/Creator wallet still appears active in token holdings\./, () => '创建者钱包在持仓中依然较活跃。'],
     [/Launchpad: (.+)\./, (m) => `启动平台：${m[1]}。`],
     [/GMGN translation hints: (.+)\./, (m) => `GMGN 给出的翻译线索包括：${m[1]}。`],
   ]
@@ -450,47 +427,7 @@ export default function TokenRadarPage({
 
   return (
     <div className="min-h-screen bg-[#050505] text-white">
-      <LanguageSwitcher currentLang={lang} onLanguageChange={setLang} />
-
-      <nav className="fixed left-0 right-0 top-0 z-40 border-b border-white/10 bg-black/80 backdrop-blur-xl">
-        <div className="mx-auto max-w-7xl px-3 py-3 md:px-6 md:py-4">
-          <div className="flex items-center justify-between gap-4">
-            <a href="/" className="text-sm font-black tracking-[0.2em] md:text-2xl md:tracking-tight">
-              SHAWN WICK
-            </a>
-
-            <div className="hidden items-center gap-8 md:flex">
-              <a href="/" className="text-sm text-gray-300 transition hover:text-white">
-                {t.nav.home}
-              </a>
-              <a href="/news" className="text-sm text-gray-300 transition hover:text-white">
-                {t.nav.news}
-              </a>
-              <a href="/opportunities" className="text-sm text-gray-300 transition hover:text-white">
-                {t.nav.opportunities}
-              </a>
-              <a href="/tokens/hot" className="text-sm text-white transition hover:text-white">
-                {t.nav.radar}
-              </a>
-            </div>
-          </div>
-
-          <div className="mt-3 flex gap-2 overflow-x-auto pb-1 md:hidden">
-            <a href="/" className="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-gray-300">
-              {t.nav.home}
-            </a>
-            <a href="/news" className="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-gray-300">
-              {t.nav.news}
-            </a>
-            <a href="/opportunities" className="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-gray-300">
-              {t.nav.opportunities}
-            </a>
-            <a href="#hot-feed" className="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-gray-300">
-              {t.nav.allHot}
-            </a>
-          </div>
-        </div>
-      </nav>
+      <SiteHeader lang={lang} onLanguageChange={setLang} active="tokens" />
 
       <div className="relative overflow-hidden border-b border-white/10 bg-[radial-gradient(circle_at_top,rgba(18,95,74,0.7),transparent_42%),radial-gradient(circle_at_75%_20%,rgba(29,78,216,0.24),transparent_32%),#050505]">
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:56px_56px] opacity-40" />
@@ -554,7 +491,7 @@ export default function TokenRadarPage({
 
           <div className="mt-10 grid gap-4 sm:grid-cols-3">
             <StatCard label={t.stats.total} value={String(signals.length)} description={sectionMeta(signals)} />
-            <StatCard label={t.stats.bsc} value={String(bscCount)} description="Visible in the main hot feed" />
+            <StatCard label={t.stats.bsc} value={String(bscCount)} description={t.stats.bscDescription} />
             <StatCard label={t.stats.liveLabel} value={t.stats.liveValue} description={t.stats.liveDescription} />
           </div>
         </div>
@@ -688,7 +625,9 @@ function TokenCard({
 
         <div className="text-right">
           <div
-            className={`text-sm font-semibold ${(signal.priceChange1h ?? 0) >= 0 ? 'text-emerald-300' : 'text-rose-300'}`}
+            className={`text-sm font-semibold ${
+              (signal.priceChange1h ?? 0) >= 0 ? 'text-emerald-300' : 'text-rose-300'
+            }`}
           >
             {formatPercent(signal.priceChange1h)}
           </div>
@@ -726,7 +665,9 @@ function TokenCard({
       <div className="mt-5 grid gap-5">
         <section className="rounded-2xl border border-white/10 bg-black/20 p-4">
           <h4 className="text-sm font-semibold text-emerald-200">{t.section.summary}</h4>
-          <p className="mt-2 text-sm leading-6 text-white/78">{localizeGeneratedLine(signal.description, lang)}</p>
+          <p className="mt-2 text-sm leading-6 text-white/78">
+            {localizeGeneratedLine(signal.description, lang)}
+          </p>
         </section>
 
         <section className="rounded-2xl border border-white/10 bg-black/20 p-4">
