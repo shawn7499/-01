@@ -61,6 +61,9 @@ export default function Home() {
               <a href="/news" className="text-sm text-gray-300 hover:text-white transition">
                 News
               </a>
+              <a href="/tokens/hot" className="text-sm text-gray-300 hover:text-white transition">
+                Hot Tokens
+              </a>
               <a href="#contact" className="text-sm text-gray-300 hover:text-white transition">
                 {t.nav.contact}
               </a>
@@ -79,6 +82,9 @@ export default function Home() {
             </a>
             <a href="/news" className="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-gray-300">
               News
+            </a>
+            <a href="/tokens/hot" className="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-gray-300">
+              Hot
             </a>
             <a href="#contact" className="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-gray-300">
               Contact
