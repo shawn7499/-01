@@ -9,8 +9,7 @@ import type { HotTokenSignal } from '@/lib/hot-tokens'
 type Lang = 'en' | 'zh'
 
 type TokenRadarPageProps = {
-  hotSignals: HotTokenSignal[]
-  chineseSignals: HotTokenSignal[]
+  signals: HotTokenSignal[]
   generatedAt: string
 }
 
@@ -22,61 +21,48 @@ const copy = {
       opportunities: 'Opportunities',
       radar: 'Token Radar',
       allHot: 'All Hot',
-      chinese: 'BSC Chinese',
     },
     hero: {
       badge: 'Token Radar',
       source: 'GMGN Live Feed',
-      title: 'Track hot onchain tokens with faster BNB Chain visibility',
+      title: 'Track hot onchain tokens in one place',
       subtitle:
-        'Use one page to monitor the broader hot-token stream and a dedicated BNB Chain Chinese narrative feed, with contracts, chain labels, market context, and direct GMGN links.',
+        'Follow the broader hot-token stream with contracts, chain labels, market context, and direct GMGN links in one clean workflow.',
       refresh: 'Refresh',
       refreshing: 'Refreshing...',
       updated: 'Updated',
       sourceLabel: 'Source',
-      allHot: 'All Hot Tokens',
-      chinese: 'BSC Chinese Tokens',
+      cta: 'All Hot Tokens',
     },
     stats: {
-      hot: 'Hot Feed',
+      total: 'Hot Feed',
       bsc: 'BNB Chain',
-      chinese: 'Chinese Feed',
-      live: 'Live',
       liveLabel: 'Research Ready',
+      liveValue: 'Live',
       liveDescription: 'Contracts, chains, reasons, and links included',
     },
-    sections: {
-      chineseBadge: 'BSC Chinese',
-      chineseTitle: 'BNB Chain Chinese narrative tokens',
-      chineseDescription:
-        'This block is focused on BNB Chain tokens with Chinese names, symbols, or GMGN translation cues, so Chinese-language narrative plays are visible without digging through the broader stream.',
-      hotBadge: 'All Hot Tokens',
-      hotTitle: 'Cross-chain hot tokens',
-      hotDescription:
-        'Use the main stream to scan what is moving across major chains, then filter by chain when you want to drill into BNB Chain, Solana, or other momentum pockets.',
+    section: {
+      badge: 'All Hot Tokens',
+      title: 'Cross-chain hot tokens',
+      description:
+        'Use the main stream to scan what is moving across major chains, then filter by chain when you want to drill into BNB Chain, Solana, Base, or other momentum pockets.',
       filterLabel: 'Chain filter',
       allChains: 'All chains',
       disclaimer:
         'This page is for monitoring and research support only. Hot attention does not equal low risk, and narrative tokens still need contract, holder, and liquidity checks before any decision.',
       loading: 'Loading latest token data...',
-      emptyHot: 'No hot-token data is available right now.',
-      emptyChinese: 'No BSC Chinese-token data is available right now.',
+      empty: 'No hot-token data is available right now.',
       summary: 'Watch thesis',
       reasons: 'Why it is hot',
       risks: 'Risk flags',
-      chain: 'Chain',
       contract: 'Contract',
-      dex: 'Source',
-      pairAge: 'Age',
       price: 'Price',
       volume1h: '1H volume',
-      volume24h: '24H volume',
       liquidity: 'Liquidity',
-      momentum1h: '1H change',
       momentum24h: '24H change',
+      pairAge: 'Age',
       buys1h: '1H buys',
       sells1h: '1H sells',
-      fdv: 'FDV',
       score: 'Heat score',
     },
     actions: {
@@ -103,61 +89,48 @@ const copy = {
       opportunities: '机会板',
       radar: '代币雷达',
       allHot: '热门代币',
-      chinese: 'BSC 中文',
     },
     hero: {
       badge: '代币雷达',
       source: 'GMGN 实时数据',
-      title: '更快看到热门代币，也更快看到 BNB Chain 机会',
+      title: '全站热门代币',
       subtitle:
-        '在一个页面里同时查看全站热门代币流和 BNB Chain 中文叙事代币，直接拿到链、合约、热度原因、风险提示和 GMGN 跳转链接。',
+        '在一个页面里查看全站热门代币，直接拿到链、合约、热度原因、风险提示和 GMGN 跳转链接。',
       refresh: '刷新',
       refreshing: '刷新中...',
       updated: '更新时间',
       sourceLabel: '数据源',
-      allHot: '全部热门代币',
-      chinese: 'BSC 中文代币',
+      cta: '全部热门代币',
     },
     stats: {
-      hot: '热门总览',
+      total: '热门总览',
       bsc: 'BNB Chain',
-      chinese: '中文代币',
-      live: '在线',
       liveLabel: '研究就绪',
+      liveValue: '在线',
       liveDescription: '合约、链、理由和链接都已整理好',
     },
-    sections: {
-      chineseBadge: 'BSC 中文',
-      chineseTitle: 'BNB Chain 中文叙事代币',
-      chineseDescription:
-        '这里单独聚焦 BNB Chain 上带中文名称、中文符号或 GMGN 中文翻译线索的代币，方便你更快看到中文叙事盘，而不是在总榜里慢慢翻。',
-      hotBadge: '热门代币',
-      hotTitle: '全站热门代币',
-      hotDescription:
-        '先看整体热度流，再按链筛选。这样你可以快速切到 BNB Chain、Solana 或其他链，不会再被单一链的热榜淹没。',
+    section: {
+      badge: '热门代币',
+      title: '跨链热门代币',
+      description:
+        '先看整体热度流，再按链筛选。这样你可以快速切到 BNB Chain、Solana、Base 或其他链，不会被单一链的热榜淹没。',
       filterLabel: '链筛选',
       allChains: '全部链',
       disclaimer:
-        '这个页面更适合做观察和研究，不构成投资建议。热度不等于安全，叙事盘也不等于有持续性，下决定前仍然要复核合约、持仓结构和流动性。',
+        '这个页面更适合做观察和研究，不构成投资建议。热度不等于安全，下决定前仍然要复核合约、持仓结构和流动性。',
       loading: '正在加载最新代币数据...',
-      emptyHot: '当前没有拿到热门代币数据。',
-      emptyChinese: '当前没有拿到 BSC 中文代币数据。',
+      empty: '当前没有拿到热门代币数据。',
       summary: '观察逻辑',
       reasons: '热门理由',
       risks: '风险提示',
-      chain: '链',
       contract: '合约',
-      dex: '来源',
-      pairAge: '年龄',
       price: '价格',
       volume1h: '1小时成交量',
-      volume24h: '24小时成交量',
       liquidity: '流动性',
-      momentum1h: '1小时涨跌',
       momentum24h: '24小时涨跌',
+      pairAge: '年龄',
       buys1h: '1小时买单',
       sells1h: '1小时卖单',
-      fdv: 'FDV',
       score: '热度分',
     },
     actions: {
@@ -240,17 +213,6 @@ function sectionMeta(signals: HotTokenSignal[]) {
   return chains.join(' / ') || 'GMGN'
 }
 
-function linkLabel(signal: HotTokenSignal, url: string, label: string | undefined, lang: Lang) {
-  if (url === signal.dexscreenerUrl || label === 'GMGN') return copy[lang].labels.gmgn
-  if (url === signal.explorerUrl || label === 'Explorer') return copy[lang].labels.explorer
-  if (label === 'Website') return copy[lang].labels.website
-  if (label === 'X') return copy[lang].labels.twitter
-  if (label === 'Telegram') return copy[lang].labels.telegram
-  if (label === 'Docs') return copy[lang].labels.docs
-  if (label === 'App') return copy[lang].labels.app
-  return label || copy[lang].labels.other
-}
-
 function localizeGeneratedLine(text: string, lang: Lang) {
   if (lang === 'en') {
     return text
@@ -280,11 +242,6 @@ function localizeGeneratedLine(text: string, lang: Lang) {
     [/Contract source visibility is limited\./, () => '合约源码可见性有限。'],
     [/Ownership is not clearly renounced yet\./, () => '所有权是否放弃还不够明确。'],
     [/Creator wallet still appears active in token holdings\./, () => '创建者钱包在持仓里仍然比较活跃。'],
-    [/Original name or symbol already uses Chinese text\./, () => '原始名称或符号本身就是中文。'],
-    [/GMGN translation plus narrative cues suggest Chinese-language attention\./, () => 'GMGN 的翻译线索和叙事提示都显示它有中文关注度。'],
-    [/The token is appearing in both GMGN 5-minute and 1-hour BSC trending windows\./, () => '这个代币同时出现在 GMGN 的 5 分钟和 1 小时 BSC 趋势窗口里。'],
-    [/The token is surfacing in the fast 5-minute GMGN BSC trending window\./, () => '这个代币正在出现在 GMGN 的 5 分钟 BSC 快速趋势窗口里。'],
-    [/The token is still present in the 1-hour GMGN BSC trending window\./, () => '这个代币仍然在 GMGN 的 1 小时 BSC 趋势窗口里。'],
     [/([A-Za-z ]+) trending token surfaced by GMGN\./, (m) => `${m[1]} 上的这个代币来自 GMGN 热榜。`],
     [/Launchpad: (.+)\./, (m) => `启动平台：${m[1]}。`],
     [/GMGN translation hints: (.+)\./, (m) => `GMGN 给出的翻译线索包括：${m[1]}。`],
@@ -300,14 +257,25 @@ function localizeGeneratedLine(text: string, lang: Lang) {
   return text
 }
 
+function linkLabel(signal: HotTokenSignal, url: string, label: string | undefined, lang: Lang) {
+  const labels = copy[lang].labels
+
+  if (url === signal.dexscreenerUrl || label === 'GMGN') return labels.gmgn
+  if (url === signal.explorerUrl || label === 'Explorer') return labels.explorer
+  if (label === 'Website') return labels.website
+  if (label === 'X') return labels.twitter
+  if (label === 'Telegram') return labels.telegram
+  if (label === 'Docs') return labels.docs
+  if (label === 'App') return labels.app
+  return label || labels.other
+}
+
 export default function TokenRadarPage({
-  hotSignals: initialHotSignals,
-  chineseSignals: initialChineseSignals,
+  signals: initialSignals,
   generatedAt: initialGeneratedAt,
 }: TokenRadarPageProps) {
   const [lang, setLang] = useState<Lang>('zh')
-  const [hotSignals, setHotSignals] = useState(initialHotSignals)
-  const [chineseSignals, setChineseSignals] = useState(initialChineseSignals)
+  const [signals, setSignals] = useState(initialSignals)
   const [generatedAt, setGeneratedAt] = useState(initialGeneratedAt)
   const [selectedChain, setSelectedChain] = useState('all')
   const [refreshing, setRefreshing] = useState(false)
@@ -316,21 +284,21 @@ export default function TokenRadarPage({
   const t = copy[lang]
 
   const chainFilters = useMemo(
-    () => ['all', ...Array.from(new Set(hotSignals.map((signal) => signal.chainId)))],
-    [hotSignals]
+    () => ['all', ...Array.from(new Set(signals.map((signal) => signal.chainId)))],
+    [signals]
   )
 
-  const filteredHotSignals = useMemo(() => {
+  const filteredSignals = useMemo(() => {
     if (selectedChain === 'all') {
-      return hotSignals
+      return signals
     }
 
-    return hotSignals.filter((signal) => signal.chainId === selectedChain)
-  }, [hotSignals, selectedChain])
+    return signals.filter((signal) => signal.chainId === selectedChain)
+  }, [signals, selectedChain])
 
   const bscCount = useMemo(
-    () => hotSignals.filter((signal) => signal.chainId === 'bsc').length,
-    [hotSignals]
+    () => signals.filter((signal) => signal.chainId === 'bsc').length,
+    [signals]
   )
 
   useEffect(() => {
@@ -342,22 +310,15 @@ export default function TokenRadarPage({
   async function refreshData() {
     try {
       setRefreshing(true)
+      const response = await fetch('/api/tokens/hot?limit=18', { cache: 'no-store' })
 
-      const [hotResponse, chineseResponse] = await Promise.all([
-        fetch('/api/tokens/hot?limit=18', { cache: 'no-store' }),
-        fetch('/api/tokens/chinese?limit=12', { cache: 'no-store' }),
-      ])
-
-      if (!hotResponse.ok || !chineseResponse.ok) {
+      if (!response.ok) {
         throw new Error('Token radar refresh failed.')
       }
 
-      const hotData = await hotResponse.json()
-      const chineseData = await chineseResponse.json()
-
-      setHotSignals(hotData.signals ?? [])
-      setChineseSignals(chineseData.signals ?? [])
-      setGeneratedAt(hotData.generatedAt ?? new Date().toISOString())
+      const data = await response.json()
+      setSignals(data.signals ?? [])
+      setGeneratedAt(data.generatedAt ?? new Date().toISOString())
     } catch (error) {
       console.error('Failed to refresh token radar data:', error)
     } finally {
@@ -412,11 +373,8 @@ export default function TokenRadarPage({
             <a href="/opportunities" className="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-gray-300">
               {t.nav.opportunities}
             </a>
-            <a href="#all-hot" className="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-gray-300">
+            <a href="#hot-feed" className="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-gray-300">
               {t.nav.allHot}
-            </a>
-            <a href="#bsc-chinese" className="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-gray-300">
-              {t.nav.chinese}
             </a>
           </div>
         </div>
@@ -447,21 +405,15 @@ export default function TokenRadarPage({
                 {t.hero.sourceLabel}: GMGN
               </span>
               <span className="h-1 w-1 rounded-full bg-white/30" />
-              <span>{hotSignals.length + chineseSignals.length} tokens</span>
+              <span>{signals.length} tokens</span>
             </div>
 
             <div className="mt-7 flex flex-wrap gap-3">
               <a
-                href="#all-hot"
+                href="#hot-feed"
                 className="rounded-full border border-white bg-white px-4 py-2 text-sm font-semibold text-black transition hover:bg-gray-200"
               >
-                {t.hero.allHot}
-              </a>
-              <a
-                href="#bsc-chinese"
-                className="rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm text-white/80 transition hover:border-white/30 hover:text-white"
-              >
-                {t.hero.chinese}
+                {t.hero.cta}
               </a>
               <button
                 onClick={() => void refreshData()}
@@ -472,49 +424,36 @@ export default function TokenRadarPage({
             </div>
           </motion.div>
 
-          <div className="mt-10 grid gap-4 sm:grid-cols-4">
-            <StatCard label={t.stats.hot} value={String(hotSignals.length)} description={sectionMeta(hotSignals)} />
+          <div className="mt-10 grid gap-4 sm:grid-cols-3">
+            <StatCard label={t.stats.total} value={String(signals.length)} description={sectionMeta(signals)} />
             <StatCard label={t.stats.bsc} value={String(bscCount)} description="Visible in the main hot feed" />
-            <StatCard label={t.stats.chinese} value={String(chineseSignals.length)} description="Dedicated BSC narrative feed" />
-            <StatCard label={t.stats.liveLabel} value={t.stats.live} description={t.stats.liveDescription} />
+            <StatCard label={t.stats.liveLabel} value={t.stats.liveValue} description={t.stats.liveDescription} />
           </div>
         </div>
       </div>
 
       <main className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
         <div className="mb-8 rounded-2xl border border-amber-300/20 bg-amber-400/8 p-4 text-sm leading-6 text-amber-50/85">
-          {t.sections.disclaimer}
+          {t.section.disclaimer}
         </div>
 
-        <TokenSection
-          id="bsc-chinese"
-          lang={lang}
-          badge={t.sections.chineseBadge}
-          title={t.sections.chineseTitle}
-          description={t.sections.chineseDescription}
-          signals={chineseSignals}
-          emptyText={t.sections.emptyChinese}
-          copiedId={copiedId}
-          onCopyContract={copyContract}
-        />
-
-        <section id="all-hot" className="scroll-mt-28 py-6">
+        <section id="hot-feed" className="scroll-mt-28 py-6">
           <div className="mb-6">
             <span className="rounded-full border border-white/10 bg-white/[0.05] px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-white/70">
-              {t.sections.hotBadge}
+              {t.section.badge}
             </span>
-            <h2 className="mt-4 text-3xl font-black sm:text-4xl">{t.sections.hotTitle}</h2>
-            <p className="mt-3 max-w-3xl text-sm leading-7 text-white/68 sm:text-base">{t.sections.hotDescription}</p>
+            <h2 className="mt-4 text-3xl font-black sm:text-4xl">{t.section.title}</h2>
+            <p className="mt-3 max-w-3xl text-sm leading-7 text-white/68 sm:text-base">{t.section.description}</p>
           </div>
 
           <div className="mb-6 flex flex-wrap items-center gap-3">
-            <span className="text-sm text-white/58">{t.sections.filterLabel}</span>
+            <span className="text-sm text-white/58">{t.section.filterLabel}</span>
             {chainFilters.map((chain) => {
               const isSelected = selectedChain === chain
               const label =
                 chain === 'all'
-                  ? t.sections.allChains
-                  : hotSignals.find((signal) => signal.chainId === chain)?.chainLabel ?? chain
+                  ? t.section.allChains
+                  : signals.find((signal) => signal.chainId === chain)?.chainLabel ?? chain
 
               return (
                 <button
@@ -532,13 +471,13 @@ export default function TokenRadarPage({
             })}
           </div>
 
-          {refreshing && hotSignals.length === 0 ? (
-            <LoadingState text={t.sections.loading} />
-          ) : filteredHotSignals.length === 0 ? (
-            <EmptyState text={t.sections.emptyHot} />
+          {refreshing && signals.length === 0 ? (
+            <LoadingState text={t.section.loading} />
+          ) : filteredSignals.length === 0 ? (
+            <EmptyState text={t.section.empty} />
           ) : (
             <div className="grid gap-6 lg:grid-cols-2">
-              {filteredHotSignals.map((signal, index) => (
+              {filteredSignals.map((signal, index) => (
                 <TokenCard
                   key={signal.id}
                   signal={signal}
@@ -553,57 +492,6 @@ export default function TokenRadarPage({
         </section>
       </main>
     </div>
-  )
-}
-
-function TokenSection({
-  id,
-  badge,
-  title,
-  description,
-  signals,
-  emptyText,
-  lang,
-  copiedId,
-  onCopyContract,
-}: {
-  id: string
-  badge: string
-  title: string
-  description: string
-  signals: HotTokenSignal[]
-  emptyText: string
-  lang: Lang
-  copiedId: string
-  onCopyContract: (id: string, contract: string) => Promise<void>
-}) {
-  return (
-    <section id={id} className="scroll-mt-28 py-6">
-      <div className="mb-6">
-        <span className="rounded-full border border-white/10 bg-white/[0.05] px-3 py-1 text-xs font-semibold uppercase tracking-[0.24em] text-white/70">
-          {badge}
-        </span>
-        <h2 className="mt-4 text-3xl font-black sm:text-4xl">{title}</h2>
-        <p className="mt-3 max-w-3xl text-sm leading-7 text-white/68 sm:text-base">{description}</p>
-      </div>
-
-      {signals.length === 0 ? (
-        <EmptyState text={emptyText} />
-      ) : (
-        <div className="grid gap-6 lg:grid-cols-2">
-          {signals.map((signal, index) => (
-            <TokenCard
-              key={signal.id}
-              signal={signal}
-              lang={lang}
-              copiedId={copiedId}
-              index={index}
-              onCopyContract={onCopyContract}
-            />
-          ))}
-        </div>
-      )}
-    </section>
   )
 }
 
@@ -649,7 +537,7 @@ function TokenCard({
                 {signal.chainLabel}
               </span>
               <span className="rounded-full border border-white/10 bg-white/[0.05] px-3 py-1 text-xs text-white/65">
-                {t.sections.score}: {signal.score}
+                {t.section.score}: {signal.score}
               </span>
               <span className="rounded-full border border-cyan-300/30 bg-cyan-400/10 px-3 py-1 text-xs text-cyan-100">
                 {signal.dexId.toUpperCase()}
@@ -676,18 +564,18 @@ function TokenCard({
           >
             {formatPercent(signal.priceChange1h)}
           </div>
-          <div className="mt-1 text-xs text-white/45">{t.sections.momentum1h}</div>
+          <div className="mt-1 text-xs text-white/45">1H</div>
         </div>
       </div>
 
       <div className="mt-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-        <MetricCard label={t.sections.price} value={formatCurrency(signal.priceUsd, lang)} />
-        <MetricCard label={t.sections.volume1h} value={formatCurrency(signal.volume1h, lang)} />
-        <MetricCard label={t.sections.liquidity} value={formatCurrency(signal.liquidityUsd, lang)} />
-        <MetricCard label={t.sections.momentum24h} value={formatPercent(signal.priceChange24h)} />
-        <MetricCard label={t.sections.pairAge} value={formatAge(signal.ageHours, lang)} />
+        <MetricCard label={t.section.price} value={formatCurrency(signal.priceUsd, lang)} />
+        <MetricCard label={t.section.volume1h} value={formatCurrency(signal.volume1h, lang)} />
+        <MetricCard label={t.section.liquidity} value={formatCurrency(signal.liquidityUsd, lang)} />
+        <MetricCard label={t.section.momentum24h} value={formatPercent(signal.priceChange24h)} />
+        <MetricCard label={t.section.pairAge} value={formatAge(signal.ageHours, lang)} />
         <MetricCard
-          label={`${t.sections.buys1h} / ${t.sections.sells1h}`}
+          label={`${t.section.buys1h} / ${t.section.sells1h}`}
           value={`${formatCompactNumber(signal.buys1h, lang)} / ${formatCompactNumber(signal.sells1h, lang)}`}
         />
       </div>
@@ -695,7 +583,7 @@ function TokenCard({
       <div className="mt-4 rounded-2xl border border-white/10 bg-black/20 p-4">
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
-            <div className="text-xs uppercase tracking-[0.24em] text-white/35">{t.sections.contract}</div>
+            <div className="text-xs uppercase tracking-[0.24em] text-white/35">{t.section.contract}</div>
             <div className="mt-2 break-all text-sm font-semibold text-white/85">{signal.tokenAddress}</div>
           </div>
           <button
@@ -709,12 +597,12 @@ function TokenCard({
 
       <div className="mt-5 grid gap-5">
         <section className="rounded-2xl border border-white/10 bg-black/20 p-4">
-          <h4 className="text-sm font-semibold text-emerald-200">{t.sections.summary}</h4>
+          <h4 className="text-sm font-semibold text-emerald-200">{t.section.summary}</h4>
           <p className="mt-2 text-sm leading-6 text-white/78">{localizeGeneratedLine(signal.description, lang)}</p>
         </section>
 
         <section className="rounded-2xl border border-white/10 bg-black/20 p-4">
-          <h4 className="text-sm font-semibold text-cyan-200">{t.sections.reasons}</h4>
+          <h4 className="text-sm font-semibold text-cyan-200">{t.section.reasons}</h4>
           <ul className="mt-3 space-y-2 text-sm leading-6 text-white/75">
             {signal.hotReasons.slice(0, 4).map((reason) => (
               <li key={reason} className="flex gap-3">
@@ -726,7 +614,7 @@ function TokenCard({
         </section>
 
         <section className="rounded-2xl border border-white/10 bg-black/20 p-4">
-          <h4 className="text-sm font-semibold text-rose-200">{t.sections.risks}</h4>
+          <h4 className="text-sm font-semibold text-rose-200">{t.section.risks}</h4>
           <ul className="mt-3 space-y-2 text-sm leading-6 text-white/75">
             {signal.riskFlags.slice(0, 4).map((risk) => (
               <li key={risk} className="flex gap-3">
