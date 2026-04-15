@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 
 import LanguageSwitcher from '@/components/LanguageSwitcher'
+import { incubatingHomeCopy, incubatingProjects } from '@/lib/incubating-projects'
 import { translations } from '@/lib/translations'
 
 const AbstractBackground = dynamic(() => import('@/components/AbstractBackground'), {
@@ -20,7 +21,9 @@ const fadeUp = {
 
 export default function Home() {
   const [lang, setLang] = useState<'en' | 'zh'>('en')
+  const [ideasMenuOpen, setIdeasMenuOpen] = useState(false)
   const t = translations[lang]
+  const ideasCopy = incubatingHomeCopy[lang]
 
   const projectLinks = [
     '/news',
@@ -234,28 +237,82 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.65 }}
+            onMouseEnter={() => setIdeasMenuOpen(true)}
+            onMouseLeave={() => setIdeasMenuOpen(false)}
+            onFocusCapture={() => setIdeasMenuOpen(true)}
+            onBlurCapture={(event) => {
+              const nextTarget = event.relatedTarget as Node | null
+              if (!nextTarget || !event.currentTarget.contains(nextTarget)) {
+                setIdeasMenuOpen(false)
+              }
+            }}
             className="mt-8 rounded-[1.75rem] border border-emerald-300/20 bg-[radial-gradient(circle_at_top_left,rgba(16,185,129,0.16),transparent_35%),rgba(255,255,255,0.03)] p-6 shadow-[0_18px_50px_rgba(0,0,0,0.18)]"
           >
-            <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+            <div className="flex flex-col gap-5 xl:flex-row xl:items-end xl:justify-between">
               <div className="max-w-3xl">
-                <p className="text-xs uppercase tracking-[0.35em] text-emerald-200/80">
-                  {lang === 'zh' ? '酝酿中的项目' : 'Incubating'}
-                </p>
-                <h3 className="mt-3 text-2xl font-black sm:text-3xl">
-                  {lang === 'zh' ? '链上本地生活网络' : 'Onchain Local Commerce Network'}
-                </h3>
-                <p className="mt-3 text-sm leading-6 text-gray-300 sm:text-base">
-                  {lang === 'zh'
-                    ? '一个更接近真实消费场景的 Web3 构想：中心化履约、稳定币结算、补贴透明化。首页只放简版，完整规划单独展开。'
-                    : 'A concise teaser for a consumer-facing Web3 concept built around centralized fulfillment, stablecoin settlement, and transparent subsidy flows.'}
+                <p className="text-xs uppercase tracking-[0.35em] text-emerald-200/80">{ideasCopy.eyebrow}</p>
+                <h3 className="mt-3 text-2xl font-black sm:text-3xl">{ideasCopy.title}</h3>
+                <p className="mt-3 text-sm leading-6 text-gray-300 sm:text-base">{ideasCopy.description}</p>
+                <p className="mt-4 hidden text-xs uppercase tracking-[0.28em] text-white/38 md:block">
+                  {ideasCopy.hoverHint}
                 </p>
               </div>
-              <a
-                href="/incubating"
-                className="inline-flex items-center justify-center rounded-full border border-white px-5 py-3 text-sm font-semibold text-white transition hover:bg-white hover:text-black"
-              >
-                {lang === 'zh' ? '查看完整规划' : 'Read Full Plan'}
-              </a>
+
+              <div className="flex flex-col gap-3 sm:flex-row xl:justify-end">
+                <button
+                  type="button"
+                  onClick={() => setIdeasMenuOpen((open) => !open)}
+                  aria-expanded={ideasMenuOpen}
+                  aria-controls="incubating-project-menu"
+                  className="inline-flex items-center justify-center rounded-full border border-white/20 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+                >
+                  {ideasCopy.browseTracks}
+                </button>
+                <a
+                  href="/incubating"
+                  className="inline-flex items-center justify-center rounded-full border border-white px-5 py-3 text-sm font-semibold text-white transition hover:bg-white hover:text-black"
+                >
+                  {ideasCopy.openPage}
+                </a>
+              </div>
+            </div>
+
+            <div
+              id="incubating-project-menu"
+              className={`mt-6 hidden overflow-hidden transition-all duration-300 md:block ${
+                ideasMenuOpen ? 'max-h-[32rem] opacity-100' : 'max-h-0 opacity-0 pointer-events-none'
+              }`}
+            >
+              <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+                {incubatingProjects.map((project) => (
+                  <a
+                    key={project.id}
+                    href={`/incubating#${project.id}`}
+                    className="group rounded-[1.4rem] border border-white/10 bg-black/20 p-4 transition hover:border-emerald-300/40 hover:bg-white/[0.06]"
+                  >
+                    <div className="text-[11px] uppercase tracking-[0.24em] text-white/38">{project.stage[lang]}</div>
+                    <h4 className="mt-3 text-lg font-bold">{project.title[lang]}</h4>
+                    <p className="mt-2 text-sm leading-6 text-gray-300">{project.summary[lang]}</p>
+                    <div className="mt-4 text-sm font-semibold text-emerald-200 transition group-hover:text-white">
+                      {ideasCopy.jumpToProject}
+                    </div>
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-6 grid gap-3 md:hidden">
+              {incubatingProjects.map((project) => (
+                <a
+                  key={project.id}
+                  href={`/incubating#${project.id}`}
+                  className="rounded-[1.4rem] border border-white/10 bg-black/20 p-4"
+                >
+                  <div className="text-[11px] uppercase tracking-[0.24em] text-white/38">{project.stage[lang]}</div>
+                  <h4 className="mt-3 text-base font-bold">{project.title[lang]}</h4>
+                  <p className="mt-2 text-sm leading-6 text-gray-300">{project.summary[lang]}</p>
+                </a>
+              ))}
             </div>
           </motion.div>
         </div>
