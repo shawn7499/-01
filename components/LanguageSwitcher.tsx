@@ -5,7 +5,10 @@ interface LanguageSwitcherProps {
   onLanguageChange: (lang: 'en' | 'zh') => void
 }
 
-export default function LanguageSwitcher({ currentLang, onLanguageChange }: LanguageSwitcherProps) {
+export default function LanguageSwitcher({
+  currentLang,
+  onLanguageChange,
+}: LanguageSwitcherProps) {
   return (
     <div className="fixed right-4 top-20 z-50 flex rounded-full border border-white/10 bg-black/70 p-1 shadow-[0_10px_30px_rgba(0,0,0,0.28)] backdrop-blur-xl sm:right-6 sm:top-24">
       {([
