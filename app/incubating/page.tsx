@@ -9,154 +9,207 @@ type Lang = 'en' | 'zh'
 
 const copy = {
   en: {
-    badge: 'Incubating Project',
-    title: 'Onchain Local Commerce Network',
+    badge: 'Ideas Page',
+    title: 'Decentralized Daily Life Network',
     subtitle:
-      'A practical consumer app where users can switch between ordering and delivery, merchants fund visible discounts, and stablecoin settlement makes incentives more transparent.',
-    heroCta: 'Why This Could Matter',
-    statusLabel: 'Current status',
-    statusValue: 'Research and planning',
-    modelLabel: 'Core model',
-    modelValue: 'Centralized fulfillment, onchain settlement rails',
-    fundingLabel: 'Rough financing',
-    fundingValue: '$250k - $500k pre-seed for first city pilot',
+      'One umbrella project that brings Web3 into real consumer behavior: local services, commerce, ride-hailing, media, and AI working as one coordinated network.',
+    statusLabel: 'Current stage',
+    statusValue: 'Research and system design',
+    structureLabel: 'Project shape',
+    structureValue: 'One network, multiple consumer apps',
+    fundingLabel: 'Rough financing path',
+    fundingValue: '$300k MVP to $2M multi-vertical expansion',
+    noteTitle: 'Core thesis',
+    note:
+      'The real opportunity is not one isolated app. It is a connected stack of consumer platforms where incentives, payments, advertising budgets, creator rewards, and AI services all reinforce each other.',
     sections: {
-      problem: 'Problem',
-      concept: 'Product Concept',
-      architecture: 'How It Would Work',
-      roadmap: 'Execution Roadmap',
-      business: 'Business Model',
+      vision: 'Vision',
+      modules: 'Project Modules',
+      infrastructure: 'Shared Infrastructure',
+      rollout: 'Execution Path',
+      economics: 'Economic Model',
       funding: 'Financing Plan',
-      risks: 'Key Risks',
-      metrics: 'What Success Looks Like',
+      moat: 'Why This Could Compound',
+      risks: 'Main Risks',
     },
-    problem: [
-      'Local commerce platforms capture most of the value through opaque commissions, ad auctions, and ranking systems.',
-      'Merchants spend heavily on promotion, but users and riders rarely see where that budget goes.',
-      'Most Web3 consumer products still stop at tokens and trading instead of solving a real-world habit like ordering food or local delivery.',
+    vision: [
+      'Most daily-life apps are still highly centralized, especially food delivery, ecommerce, ride-hailing, and video distribution.',
+      'Users, merchants, drivers, riders, and creators all pay hidden platform taxes through ranking systems, ad auctions, commissions, and algorithmic distribution.',
+      'Web3 has not yet fully entered everyday consumer infrastructure. That gap is the opportunity.',
     ],
-    concept: [
-      'Users can switch between customer mode and rider mode inside the same app.',
-      'Merchants deposit promotion budgets that are converted into direct user discounts, repeat-order rewards, and rider peak-hour bonuses.',
-      'The platform earns a small service fee per order plus a small fee on ad or promotion budgets instead of extracting oversized marketplace margins.',
-      'Checkout supports stablecoins, with a USDT-first user experience and room to add other stablecoin rails over time.',
+    modules: [
+      'Decentralized local life platform: food ordering, errands, merchant campaigns, and rider incentives with transparent subsidy accounting.',
+      'Decentralized ecommerce: lower-fee merchant storefronts, onchain loyalty, and direct promotion budgets flowing to customer discounts.',
+      'Decentralized ride-hailing: driver choice, lower platform take rate, and rider-driver incentives with more transparent fee breakdowns.',
+      'Decentralized video platform: creators keep more of the value, viewers receive direct participation rewards, and advertisers buy measurable exposure without opaque middle layers.',
+      'Decentralized AI layer: recommendation, search, customer service, personalization, and creator tooling become a shared intelligence network across every app.',
     ],
-    architecture: [
-      'Keep dispatch, order matching, refunds, customer service, and fraud controls off-chain so the app stays fast and operationally realistic.',
-      'Put treasury, settlement records, promotion pools, and transparent subsidy accounting onchain so merchants can verify how budgets are used.',
-      'Launch with an embedded wallet flow so normal users do not need to understand private keys before placing an order.',
-      'Use partner off-ramp and compliance services before attempting direct multi-party stablecoin payout infrastructure.',
+    infrastructure: [
+      'Wallet and identity layer so one account can move across commerce, delivery, transport, media, and AI tools.',
+      'Stablecoin settlement rails so payments, rewards, promotions, and creator payouts can run on one treasury system.',
+      'Merchant and advertiser budget engine so promotion money can be routed directly into visible user rewards instead of disappearing into black-box ad systems.',
+      'Reputation graph covering customers, merchants, drivers, riders, and creators across the network.',
+      'AI orchestration layer for matching, ranking, fraud control, user assistance, and long-term personalization.',
     ],
-    roadmap: [
-      'Phase 0: Validate one niche market such as a campus, apartment cluster, or one commercial district.',
-      'Phase 1 MVP: Customer app, rider mode, merchant dashboard, promotion budget engine, coupon logic, and simple stablecoin checkout.',
-      'Phase 2 Pilot: Add dispatch rules, anti-fraud, refunds, rider scoring, merchant analytics, and wallet abstraction polish.',
-      'Phase 3 First city: Expand density before variety. Win one neighborhood deeply before adding many categories.',
+    rollout: [
+      'Phase 1: start with the narrowest real-world wedge, likely local life or commerce, because they create the clearest transaction loops.',
+      'Phase 2: reuse the same identity, wallet, and budget engine for adjacent verticals like ride-hailing or creator commerce.',
+      'Phase 3: add video and creator tools so attention, commerce, and distribution begin feeding one another.',
+      'Phase 4: unify all products under a decentralized AI network that learns from the full ecosystem rather than one isolated app.',
     ],
-    business: [
-      'Order service fee: small percentage charged per completed transaction.',
-      'Promotion fee: small fee on merchant-funded acquisition and retention budgets.',
-      'Merchant SaaS tools: analytics, campaign tools, CRM, and loyalty automation later on.',
-      'Long-term moat: lower take rate plus transparent subsidy distribution and faster merchant feedback loops.',
+    economics: [
+      'Take small service fees instead of extreme platform extraction.',
+      'Charge small technology and routing fees on merchant or advertiser promotion budgets.',
+      'Return more of the ad budget directly to users, creators, drivers, or riders as visible benefits.',
+      'Let the AI layer become a later monetization engine through enterprise tools, matching, optimization, and automation services.',
     ],
     funding: [
-      'Bootstrap research and design: $10k - $30k if the first version is mostly self-built.',
-      'Functional MVP with wallet, order flow, and merchant tooling: roughly $80k - $150k.',
-      'Real first-city pilot with operations, compliance, support, and growth budget: roughly $250k - $500k pre-seed.',
-      'If the model proves retention and repeat order density, larger seed capital can be used for city expansion rather than premature token speculation.',
+      'Research and prototype phase: $20k - $80k if execution is heavily founder-led.',
+      'First usable MVP in one vertical: roughly $300k - $600k including product, operations, compliance, and user acquisition.',
+      'City-scale or category-scale validation: roughly $800k - $1.2M.',
+      'Multi-vertical expansion plus shared AI infrastructure: likely $1.5M - $2M+ depending on geography and compliance burden.',
+    ],
+    moat: [
+      'Each vertical can feed the others: merchants buy promotion, users earn discounts, creators drive traffic, AI improves matching, and stablecoin rails unify settlement.',
+      'The network becomes stronger when budgets, attention, reputation, and identity are portable across products.',
+      'This is not just a cheaper app. It is a different economic structure for digital daily life.',
     ],
     risks: [
-      'Payment and custody rules are more difficult than the product demo. Stablecoin settlement introduces compliance and money-transmission questions.',
-      'Rider management, refunds, fake orders, and subsidy abuse are harder than building the frontend.',
-      'If delivery density is weak, unit economics break quickly.',
-      'The first version must solve one narrow real-world use case instead of trying to replace every centralized platform at once.',
+      'Consumer products are much harder than token dashboards because real logistics, support, and fraud control matter.',
+      'Stablecoin custody, money transmission, labor rules, and local regulation can become major execution constraints.',
+      'The first version must stay focused. Trying to launch all modules at once would destroy execution quality.',
+      'The AI layer only matters if the underlying consumer products actually gain transaction density and retention.',
     ],
-    metrics: [
-      'Merchant retention after the first 30 to 60 days.',
-      'Repeat order rate and effective customer acquisition cost after subsidy usage.',
-      'Average delivery time and successful fulfillment rate.',
-      'Promotion budget efficiency compared with existing marketplace channels.',
+    moduleCards: [
+      {
+        title: 'Local Life',
+        desc: 'Delivery, errands, merchant rewards, and rider incentives.',
+      },
+      {
+        title: 'Commerce',
+        desc: 'Lower-fee ecommerce with onchain loyalty and transparent ad spend.',
+      },
+      {
+        title: 'Ride-Hailing',
+        desc: 'Driver-first economics and clearer fee transparency.',
+      },
+      {
+        title: 'Video',
+        desc: 'Creator rewards, audience incentives, and ad efficiency.',
+      },
+      {
+        title: 'Decentralized AI',
+        desc: 'A shared intelligence layer connecting every app in the network.',
+      },
     ],
-    noteTitle: 'Planning Note',
-    note:
-      'This is intentionally a hybrid design. The goal is not to force everything onchain. The goal is to use Web3 where it creates real transparency and better incentives.',
   },
   zh: {
-    badge: '酝酿中的项目',
-    title: '链上本地生活网络',
+    badge: '想法页面',
+    title: '去中心化日常生活网络',
     subtitle:
-      '这会是一款更贴近真实消费场景的应用：用户可以在同一个系统里切换点单和骑手身份，商家的推广预算会更透明地流向补贴，稳定币负责结算，平台只赚小额服务费。',
-    heroCta: '为什么值得做',
-    statusLabel: '当前状态',
-    statusValue: '研究与规划阶段',
-    modelLabel: '核心模式',
-    modelValue: '中心化履约 + 链上结算轨道',
-    fundingLabel: '粗略融资需求',
-    fundingValue: '首个城市试点约需 25 万到 50 万美元 Pre-seed',
+      '这不是单一 App，而是一个总项目：把本地生活、电商、打车、视频和去中心化 AI 连接起来，让 Web3 真正进入现实世界的消费与服务场景。',
+    statusLabel: '当前阶段',
+    statusValue: '研究与系统设计阶段',
+    structureLabel: '项目形态',
+    structureValue: '一个底层网络，多个消费级应用',
+    fundingLabel: '粗略融资路径',
+    fundingValue: '从 30 万美元 MVP 到 200 万美元多垂类扩张',
+    noteTitle: '核心判断',
+    note:
+      '真正有价值的不是单独做一个 Web3 外卖或一个 Web3 打车，而是建立一张完整的去中心化日常生活网络，让支付、广告预算、激励、内容分发和 AI 服务彼此连通。',
     sections: {
-      problem: '要解决的问题',
-      concept: '产品构想',
-      architecture: '大致实现方式',
-      roadmap: '推进路线',
-      business: '商业模式',
+      vision: '项目愿景',
+      modules: '项目模块',
+      infrastructure: '共享基础设施',
+      rollout: '推进路径',
+      economics: '经济模型',
       funding: '融资规划',
-      risks: '核心风险',
-      metrics: '成功指标',
+      moat: '为什么会形成复利',
+      risks: '主要风险',
     },
-    problem: [
-      '本地生活平台的抽成、广告竞价和排序机制高度中心化，商家投入大量预算，但真实流向对用户和骑手并不透明。',
-      '商家交了推广费和广告费，最终真正变成了多少优惠、多少骑手补贴，通常是黑盒。',
-      '很多 Web3 应用停留在发币和交易，缺少真正进入日常消费场景的产品。',
+    vision: [
+      '今天绝大多数日常生活类应用依然高度中心化，尤其是外卖、电商、打车和视频分发。',
+      '用户、商家、司机、骑手和创作者都在为平台的排序机制、广告竞价、抽成和流量分发支付隐性成本。',
+      'Web3 还没有真正进入现实中的消费基础设施，这正是最大的机会之一。',
     ],
-    concept: [
-      '用户在同一个应用里可以切换顾客模式和骑手模式，不必被完全分割成两个体系。',
-      '商家把推广预算充值进平台，这部分预算不只是买曝光，而是直接转化成新客优惠、复购补贴和骑手高峰奖励。',
-      '平台每单只收小额服务费，同时对商家推广预算收取小额运营费，而不是靠高抽成赚钱。',
-      '支付体验可以优先支持 USDT，同时保留后续接入更多稳定币结算轨道的空间。',
+    modules: [
+      '去中心化本地生活平台：外卖、跑腿、商家推广预算和骑手补贴都可以做得更透明。',
+      '去中心化电商：更低抽成的商家店铺、链上会员积分和直接转化为优惠的推广预算。',
+      '去中心化打车软件：司机与乘客之间更清晰的费用结构，更低的平台抽成和更公平的激励。',
+      '去中心化视频平台：创作者分成更直接，用户观看更有参与收益，广告商能用更低成本获得更透明的曝光。',
+      '去中心化 AI 层：推荐、搜索、客服、个性化和创作者工具都由一套共享的 AI 网络来支持。',
     ],
-    architecture: [
-      '订单撮合、配送调度、客服、退款和反作弊放在链下完成，这样响应速度和履约效率才足够现实。',
-      '资金池、结算记录、补贴池和推广预算使用情况放到链上记账，让商家能清楚看到预算怎么被消耗。',
-      '第一版采用嵌入式钱包或轻钱包体验，让普通用户不用先学会私钥管理才能下单。',
-      '真正做多方稳定币结算之前，先接第三方出入金和合规服务，避免平台一开始就把支付复杂度扛满。',
+    infrastructure: [
+      '统一的钱包与身份系统，让用户能在电商、本地生活、打车、视频和 AI 工具之间无缝切换。',
+      '稳定币结算轨道，让支付、补贴、广告预算和创作者分成都能跑在同一套资金系统上。',
+      '商家与广告主预算引擎，让推广费用直接变成可见的用户福利、创作者激励、司机或骑手奖励。',
+      '跨应用信誉图谱，连接用户、商家、司机、骑手和创作者。',
+      'AI 编排层，负责匹配、推荐、反作弊、用户协助和长期个性化。',
     ],
-    roadmap: [
-      '阶段 0：先验证一个非常窄的场景，比如校园、园区、公寓群或单一商圈。',
-      '阶段 1 MVP：完成顾客端、骑手模式、商家后台、推广预算引擎、优惠券逻辑和基础稳定币支付。',
-      '阶段 2 试点：补齐调度规则、反作弊、退款流程、骑手评分、商家分析和钱包抽象体验。',
-      '阶段 3 首城验证：先做高密度，再做大而全，优先打透一个片区而不是同时铺很多城市。',
+    rollout: [
+      '阶段 1：先从最窄、最能形成真实交易闭环的场景切入，优先考虑本地生活或电商。',
+      '阶段 2：复用同一套身份、钱包和预算系统，拓展到打车或创作者商业化场景。',
+      '阶段 3：加入视频平台，让内容、消费和分发彼此导流。',
+      '阶段 4：最终把所有产品接到去中心化 AI 网络上，让整张网不再是几个孤立应用。',
     ],
-    business: [
-      '订单服务费：对完成订单收取小额服务费。',
-      '推广预算费：对商家引流和复购预算收取小额技术与运营费。',
-      '后续 SaaS 工具：商家分析、活动管理、CRM 和会员系统可以成为追加收入来源。',
-      '长期护城河：更低抽成、更透明的补贴流向，以及更快的商家反馈循环。',
+    economics: [
+      '平台只收小额服务费，不走传统平台那种高抽成路线。',
+      '对商家和广告主预算收取小额技术与分发费用。',
+      '把更多广告预算直接返还给用户、创作者、司机或骑手，形成真正可感知的福利。',
+      '长期来看，AI 层会成为更强的增值引擎，提供匹配优化、自动化运营和企业工具收入。',
     ],
     funding: [
-      '自研调研和设计阶段：如果主要靠自己推进，大约需要 1 万到 3 万美元。',
-      '能跑起来的 MVP：带钱包、订单流和商家后台，粗略需要 8 万到 15 万美元。',
-      '真正的首城试点：加上运营、合规、客服和增长预算，粗略需要 25 万到 50 万美元的 Pre-seed。',
-      '如果后面验证了复购率和片区密度，再去拿更大的 Seed，比一开始就做发币叙事更健康。',
+      '研究和原型阶段：如果主要靠创始人推进，大约需要 2 万到 8 万美元。',
+      '单一垂类的第一个可用 MVP：粗略需要 30 万到 60 万美元，覆盖产品、运营、合规和冷启动。',
+      '一个城市或一个品类的有效验证：粗略需要 80 万到 120 万美元。',
+      '多垂类扩张并叠加共享 AI 基础设施：大概率需要 150 万到 200 万美元以上。',
+    ],
+    moat: [
+      '每个模块都能给其他模块输送价值：商家买推广，用户拿优惠，创作者带流量，AI 提升匹配，稳定币系统统一结算。',
+      '当预算、注意力、信誉和身份可以跨产品流动时，这张网络会越来越强。',
+      '这不只是“更便宜的 App”，而是一种新的数字日常生活经济结构。',
     ],
     risks: [
-      '最大难点不是页面，而是支付合规和资金流设计。稳定币结算很容易碰到托管和传输问题。',
-      '骑手管理、退款、虚假订单、刷补贴和商家自买自刷都会是真实难题。',
-      '如果订单密度起不来，配送成本会快速压垮模型。',
-      '第一版必须解决一个窄但真实的需求，而不是一上来就想替代所有中心化平台。',
+      '消费级产品远比纯链上工具难，真正的履约、客服和反作弊会决定成败。',
+      '稳定币托管、支付合规、劳动关系和本地监管会成为实操层面的重大难题。',
+      '第一版必须非常聚焦，不能试图一次性把所有模块一起上线。',
+      '去中心化 AI 只有在前面的消费产品真的建立了交易密度和留存之后才有意义。',
     ],
-    metrics: [
-      '商家在 30 到 60 天后的留存率。',
-      '补贴消耗后的复购率和真实获客成本。',
-      '平均配送时长与履约成功率。',
-      '商家推广预算相较传统平台的转化效率。',
+    moduleCards: [
+      {
+        title: '本地生活',
+        desc: '外卖、跑腿、商家奖励与骑手激励。',
+      },
+      {
+        title: '电商',
+        desc: '更低抽成的电商系统与链上会员体系。',
+      },
+      {
+        title: '打车',
+        desc: '更透明的费用结构与司机优先的经济模型。',
+      },
+      {
+        title: '视频',
+        desc: '创作者收益、用户参与和广告效率的重构。',
+      },
+      {
+        title: '去中心化 AI',
+        desc: '连接整个网络的共享智能层。',
+      },
     ],
-    noteTitle: '规划说明',
-    note:
-      '这会是一个刻意保持混合架构的项目。目标不是为了上链而上链，而是只把透明结算和激励分配这些真正适合 Web3 的部分放到链上。',
   },
 } as const
 
-const sectionOrder = ['problem', 'concept', 'architecture', 'roadmap', 'business', 'funding', 'risks', 'metrics'] as const
+const sectionOrder = [
+  'vision',
+  'modules',
+  'infrastructure',
+  'rollout',
+  'economics',
+  'funding',
+  'moat',
+  'risks',
+] as const
 
 export default function IncubatingPage() {
   const [lang, setLang] = useState<Lang>('zh')
@@ -180,14 +233,36 @@ export default function IncubatingPage() {
 
           <div className="mt-8 grid gap-4 md:grid-cols-3">
             <MetaCard label={t.statusLabel} value={t.statusValue} />
-            <MetaCard label={t.modelLabel} value={t.modelValue} />
+            <MetaCard label={t.structureLabel} value={t.structureValue} />
             <MetaCard label={t.fundingLabel} value={t.fundingValue} />
           </div>
         </motion.section>
 
         <section className="mt-8 rounded-[1.75rem] border border-emerald-300/20 bg-emerald-400/8 p-5 text-sm leading-7 text-emerald-50/90">
-          <div className="text-xs uppercase tracking-[0.28em] text-emerald-100/70">{t.heroCta}</div>
+          <div className="text-xs uppercase tracking-[0.28em] text-emerald-100/70">{t.noteTitle}</div>
           <p className="mt-3">{t.note}</p>
+        </section>
+
+        <section className="mt-10">
+          <div className="mb-5 text-xs uppercase tracking-[0.28em] text-white/45">
+            {lang === 'zh' ? '核心模块' : 'Core Modules'}
+          </div>
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+            {t.moduleCards.map((card, index) => (
+              <motion.article
+                key={card.title}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.18 }}
+                transition={{ delay: Math.min(index * 0.04, 0.16) }}
+                className="rounded-[1.6rem] border border-white/10 bg-white/[0.04] p-5 shadow-[0_18px_50px_rgba(0,0,0,0.18)]"
+              >
+                <div className="h-1.5 w-12 rounded-full bg-white" />
+                <h2 className="mt-4 text-xl font-black">{card.title}</h2>
+                <p className="mt-3 text-sm leading-7 text-white/70">{card.desc}</p>
+              </motion.article>
+            ))}
+          </div>
         </section>
 
         <div className="mt-10 grid gap-6">
