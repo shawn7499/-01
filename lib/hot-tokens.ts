@@ -1,3 +1,5 @@
+import { ensureChainCoverage } from '@/lib/token-radar-utils'
+
 type DexLink = {
   type?: string
   label?: string
@@ -400,7 +402,14 @@ async function fetchCandidates() {
 
   const candidates = new Map<string, DexCandidate>()
 
-  for (const item of [...boosted.slice(0, 20), ...profiles.slice(0, 40)]) {
+  const prioritizedPools = [
+    ...boosted.slice(0, 20),
+    ...boosted.filter((item) => item.chainId === 'bsc').slice(0, 14),
+    ...profiles.filter((item) => item.chainId === 'bsc').slice(0, 24),
+    ...profiles.slice(0, 40),
+  ]
+
+  for (const item of prioritizedPools) {
     const key = `${item.chainId}:${item.tokenAddress}`
     const existing = candidates.get(key)
 
@@ -478,7 +487,7 @@ async function buildSignal(candidate: DexCandidate) {
 export async function getHotTokenSignals(limit = 18) {
   const candidates = await fetchCandidates()
 
-  const settled = await Promise.allSettled(candidates.slice(0, 28).map(buildSignal))
+  const settled = await Promise.allSettled(candidates.slice(0, 36).map(buildSignal))
 
   const signals = settled
     .flatMap((result) => (result.status === 'fulfilled' && result.value ? [result.value] : []))
@@ -489,5 +498,5 @@ export async function getHotTokenSignals(limit = 18) {
     })
     .sort((a, b) => b.score - a.score || (b.volume24h ?? 0) - (a.volume24h ?? 0))
 
-  return signals.slice(0, limit)
+  return ensureChainCoverage(signals, limit, 'bsc', limit >= 12 ? 4 : Math.min(3, limit))
 }
