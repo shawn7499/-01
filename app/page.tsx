@@ -4,8 +4,10 @@ import dynamic from 'next/dynamic'
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 
+import DesktopHoverNav from '@/components/DesktopHoverNav'
 import LanguageSwitcher from '@/components/LanguageSwitcher'
 import { incubatingHomeCopy, incubatingProjects } from '@/lib/incubating-projects'
+import { homeNavItems } from '@/lib/navigation'
 import { translations } from '@/lib/translations'
 
 const AbstractBackground = dynamic(() => import('@/components/AbstractBackground'), {
@@ -48,50 +50,24 @@ export default function Home() {
           <div className="flex items-center justify-between gap-4">
             <h1 className="text-sm font-black tracking-[0.2em] md:text-2xl md:tracking-tight">SHAWN WICK</h1>
 
-            <div className="hidden md:flex gap-8 items-center">
-              <a href="#about" className="text-sm text-gray-300 hover:text-white transition">
-                {t.nav.whatIDo}
-              </a>
-              <a href="#projects" className="text-sm text-gray-300 hover:text-white transition">
-                {t.nav.projects}
-              </a>
-              <a href="#roadmap" className="text-sm text-gray-300 hover:text-white transition">
-                {t.nav.roadmap}
-              </a>
-              <a href="/opportunities" className="text-sm text-gray-300 hover:text-white transition">
-                {lang === 'zh' ? '机遇' : 'Opportunities'}
-              </a>
-              <a href="/news" className="text-sm text-gray-300 hover:text-white transition">
-                {lang === 'zh' ? '新闻' : 'News'}
-              </a>
-              <a href="/tokens/hot" className="text-sm text-gray-300 hover:text-white transition">
-                {lang === 'zh' ? '代币' : 'Token Radar'}
-              </a>
-              <a href="#contact" className="text-sm text-gray-300 hover:text-white transition">
-                {t.nav.contact}
-              </a>
-            </div>
+            <DesktopHoverNav
+              items={homeNavItems}
+              lang={lang}
+              className="hidden items-center gap-8 md:flex"
+            />
           </div>
 
           <div className="mt-3 flex gap-2 overflow-x-auto pb-1 md:hidden">
-            <a href="#about" className="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-gray-300">
-              About
-            </a>
-            <a href="#projects" className="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-gray-300">
-              Work
-            </a>
-            <a href="/opportunities" className="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-gray-300">
-              {lang === 'zh' ? '机遇' : 'Opps'}
-            </a>
-            <a href="/news" className="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-gray-300">
-              {lang === 'zh' ? '新闻' : 'News'}
-            </a>
-            <a href="/tokens/hot" className="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-gray-300">
-              {lang === 'zh' ? '代币' : 'Radar'}
-            </a>
-            <a href="#contact" className="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-gray-300">
-              Contact
-            </a>
+            {homeNavItems.map((item) => (
+              <a
+                key={item.key}
+                href={item.href}
+                className="whitespace-nowrap rounded-full border border-white/10 bg-white/[0.04] px-3 py-1.5 text-xs text-gray-300"
+                title={item.subtitle[lang]}
+              >
+                {item.label[lang]}
+              </a>
+            ))}
           </div>
         </div>
       </nav>
