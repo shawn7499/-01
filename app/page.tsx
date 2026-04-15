@@ -228,6 +228,36 @@ export default function Home() {
               </motion.div>
             ))}
           </div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.65 }}
+            className="mt-8 rounded-[1.75rem] border border-emerald-300/20 bg-[radial-gradient(circle_at_top_left,rgba(16,185,129,0.16),transparent_35%),rgba(255,255,255,0.03)] p-6 shadow-[0_18px_50px_rgba(0,0,0,0.18)]"
+          >
+            <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+              <div className="max-w-3xl">
+                <p className="text-xs uppercase tracking-[0.35em] text-emerald-200/80">
+                  {lang === 'zh' ? '酝酿中的项目' : 'Incubating'}
+                </p>
+                <h3 className="mt-3 text-2xl font-black sm:text-3xl">
+                  {lang === 'zh' ? '链上本地生活网络' : 'Onchain Local Commerce Network'}
+                </h3>
+                <p className="mt-3 text-sm leading-6 text-gray-300 sm:text-base">
+                  {lang === 'zh'
+                    ? '一个更接近真实消费场景的 Web3 构想：中心化履约、稳定币结算、补贴透明化。首页只放简版，完整规划单独展开。'
+                    : 'A concise teaser for a consumer-facing Web3 concept built around centralized fulfillment, stablecoin settlement, and transparent subsidy flows.'}
+                </p>
+              </div>
+              <a
+                href="/incubating"
+                className="inline-flex items-center justify-center rounded-full border border-white px-5 py-3 text-sm font-semibold text-white transition hover:bg-white hover:text-black"
+              >
+                {lang === 'zh' ? '查看完整规划' : 'Read Full Plan'}
+              </a>
+            </div>
+          </motion.div>
         </div>
       </section>
 

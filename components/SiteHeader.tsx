@@ -1,7 +1,7 @@
 'use client'
 
 type Lang = 'en' | 'zh'
-type ActivePage = 'home' | 'news' | 'opportunities' | 'tokens'
+type ActivePage = 'home' | 'news' | 'opportunities' | 'tokens' | 'none'
 
 type SiteHeaderProps = {
   lang: Lang
@@ -24,7 +24,7 @@ const labels = {
   },
 } as const
 
-const navItems: Array<{ key: ActivePage; href: string }> = [
+const navItems: Array<{ key: Exclude<ActivePage, 'none'>; href: string }> = [
   { key: 'home', href: '/' },
   { key: 'news', href: '/news' },
   { key: 'opportunities', href: '/opportunities' },
