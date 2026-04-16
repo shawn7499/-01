@@ -4,7 +4,7 @@ import DesktopHoverNav from '@/components/DesktopHoverNav'
 import { siteNavItems } from '@/lib/navigation'
 
 type Lang = 'en' | 'zh'
-type ActivePage = 'home' | 'news' | 'opportunities' | 'tokens' | 'none'
+type ActivePage = 'home' | 'news' | 'opportunities' | 'tokens' | 'crypto-monitor' | 'none'
 
 type SiteHeaderProps = {
   lang: Lang
@@ -29,7 +29,7 @@ export default function SiteHeader({
             items={siteNavItems}
             lang={lang}
             activeKey={active === 'none' ? undefined : active}
-            className="hidden items-center gap-8 md:flex"
+            className="hidden items-center gap-5 lg:flex xl:gap-8"
           />
 
           <div className="flex rounded-full border border-white/10 bg-black/70 p-1 shadow-[0_10px_30px_rgba(0,0,0,0.28)]">
@@ -52,7 +52,7 @@ export default function SiteHeader({
           </div>
         </div>
 
-        <div className="mt-3 flex gap-2 overflow-x-auto pb-1 md:hidden">
+        <div className="mt-3 flex gap-2 overflow-x-auto pb-1 lg:hidden">
           {siteNavItems.map((item) => {
             const isActive = active === item.key
 

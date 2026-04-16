@@ -53,11 +53,11 @@ export default function Home() {
             <DesktopHoverNav
               items={homeNavItems}
               lang={lang}
-              className="hidden items-center gap-8 md:flex"
+              className="hidden items-center gap-5 lg:flex xl:gap-8"
             />
           </div>
 
-          <div className="mt-3 flex gap-2 overflow-x-auto pb-1 md:hidden">
+          <div className="mt-3 flex gap-2 overflow-x-auto pb-1 lg:hidden">
             {homeNavItems.map((item) => (
               <a
                 key={item.key}

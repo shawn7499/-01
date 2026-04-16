@@ -44,6 +44,15 @@ export const siteNavItems: NavItem[] = [
       zh: '查看热门代币、所属链、合约地址与短线热度。',
     },
   },
+  {
+    key: 'crypto-monitor',
+    href: '/crypto-monitor',
+    label: { en: 'Crypto Monitor', zh: '涨幅监控' },
+    subtitle: {
+      en: 'Watch the OKX and Binance 1-hour gainer rankings.',
+      zh: '监控 OKX 与币安的 1 小时涨幅榜。',
+    },
+  },
 ]
 
 export const homeNavItems: NavItem[] = [
@@ -99,6 +108,15 @@ export const homeNavItems: NavItem[] = [
     subtitle: {
       en: 'Watch hot tokens, chains, contracts, and onchain narratives.',
       zh: '跟踪热门代币、所属链、合约和链上题材热度。',
+    },
+  },
+  {
+    key: 'crypto-monitor',
+    href: '/crypto-monitor',
+    label: { en: 'Crypto Monitor', zh: '涨幅监控' },
+    subtitle: {
+      en: 'Track OKX and Binance 1-hour gainers from the local monitor service.',
+      zh: '从本地监控服务读取 OKX 与币安的 1 小时涨幅榜。',
     },
   },
   {
