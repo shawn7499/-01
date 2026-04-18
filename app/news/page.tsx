@@ -23,10 +23,10 @@ const translations = {
   en: {
     title: 'Crypto News',
     subtitle:
-      'A cleaner reading surface for major crypto headlines, with filters for category and source.',
+      'Track the latest stories across major crypto news sources with category and source filters.',
     category: 'Category',
     source: 'Source',
-    loading: 'Loading news...',
+    loading: 'Loading...',
     noNews: 'No news available',
     signalBadge: 'Signal Feed',
     signalTitle: 'Turn headlines into action plans',
@@ -38,7 +38,6 @@ const translations = {
       Bitcoin: 'Bitcoin',
       Ethereum: 'Ethereum',
       DeFi: 'DeFi',
-      Meme: 'Meme',
       NFT: 'NFT',
       Regulation: 'Regulation',
       General: 'General',
@@ -51,26 +50,24 @@ const translations = {
       'Foresight News': 'Foresight News',
       PANews: 'PANews',
     },
-    badge: 'News Desk',
   },
   zh: {
     title: '加密新闻',
-    subtitle: '把主要加密媒体的新闻整理成更清爽的阅读面板，并支持按分类和来源快速筛选。',
+    subtitle: '聚合主要加密媒体的最新动态，并支持按分类与来源快速筛选。',
     category: '分类',
     source: '来源',
-    loading: '正在加载新闻...',
+    loading: '加载中...',
     noNews: '暂无新闻',
     signalBadge: '信号页',
-    signalTitle: '把标题翻译成可执行判断',
+    signalTitle: '把新闻翻译成可执行判断',
     signalDescription:
-      '进入信号页后，可以直接查看 Odaily 和 BlockBeats 被整理后的机会判断、风险标签和执行清单。',
+      '打开信号页后，你可以直接查看 Odaily 和 BlockBeats 被整理成的机会判断、风险标签和执行清单。',
     signalCta: '打开信号页',
     categories: {
       All: '全部',
       Bitcoin: '比特币',
       Ethereum: '以太坊',
       DeFi: 'DeFi',
-      Meme: 'Meme',
       NFT: 'NFT',
       Regulation: '监管',
       General: '综合',
@@ -83,11 +80,10 @@ const translations = {
       'Foresight News': 'Foresight News',
       PANews: 'PANews',
     },
-    badge: 'News Desk',
   },
 } as const
 
-const categories = ['All', 'Bitcoin', 'Ethereum', 'DeFi', 'Meme', 'NFT', 'Regulation', 'General']
+const categories = ['All', 'Bitcoin', 'Ethereum', 'DeFi', 'NFT', 'Regulation', 'General']
 const sources = ['All', 'Odaily', 'BlockBeats', 'CoinDesk', 'Foresight News', 'PANews']
 
 export default function NewsPage() {
@@ -198,60 +194,61 @@ export default function NewsPage() {
 
   function getCategoryColor(category: string) {
     const colors: Record<string, string> = {
-      Bitcoin: 'bg-orange-500/12 text-orange-100 border-orange-400/20',
-      Ethereum: 'bg-blue-500/12 text-blue-100 border-blue-400/20',
-      DeFi: 'bg-emerald-500/12 text-emerald-100 border-emerald-400/20',
-      NFT: 'bg-violet-500/12 text-violet-100 border-violet-400/20',
-      Regulation: 'bg-rose-500/12 text-rose-100 border-rose-400/20',
-      General: 'bg-white/5 text-white/70 border-white/10',
+      Bitcoin: 'bg-orange-500/20 text-orange-300 border-orange-500/30',
+      Ethereum: 'bg-blue-500/20 text-blue-300 border-blue-500/30',
+      DeFi: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30',
+      NFT: 'bg-violet-500/20 text-violet-300 border-violet-500/30',
+      Regulation: 'bg-rose-500/20 text-rose-300 border-rose-500/30',
+      General: 'bg-white/10 text-white/70 border-white/15',
     }
 
     return colors[category] || colors.General
   }
 
   return (
-    <div className="page-shell">
+    <div className="min-h-screen bg-black text-white">
       <SiteHeader lang={lang} onLanguageChange={setLang} active="news" />
 
-      <main className="page-container pb-14 pt-32 md:pt-36">
-        <section className="glass-panel rounded-[2rem] px-6 py-8 sm:px-8 sm:py-10 lg:px-12">
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_14%_18%,rgba(153,200,255,0.16),transparent_24%),radial-gradient(circle_at_82%_20%,rgba(110,231,212,0.12),transparent_18%)]" />
-          <div className="relative max-w-4xl">
-            <p className="section-label">{t.badge}</p>
-            <h1 className="section-title mt-4 text-5xl sm:text-6xl lg:text-7xl">{t.title}</h1>
-            <p className="section-copy mt-5 text-sm sm:text-base lg:text-lg">{t.subtitle}</p>
-          </div>
+      <main className="mx-auto max-w-7xl px-4 pb-12 pt-28 sm:px-6 lg:px-8 lg:pt-32">
+        <section className="mb-8 rounded-[2rem] border border-white/10 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.16),transparent_35%),radial-gradient(circle_at_75%_20%,rgba(168,85,247,0.12),transparent_30%),rgba(255,255,255,0.03)] p-6 sm:p-8">
+          <h1 className="text-4xl font-black sm:text-6xl">{t.title}</h1>
+          <p className="mt-4 max-w-3xl text-sm leading-7 text-white/72 sm:text-base">
+            {t.subtitle}
+          </p>
         </section>
 
-        <section className="glass-panel mt-8 rounded-[1.8rem] px-6 py-6">
-          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_12%_12%,rgba(110,231,212,0.14),transparent_24%),radial-gradient(circle_at_84%_18%,rgba(153,200,255,0.1),transparent_18%)]" />
-          <div className="relative flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+        <section className="mb-8 overflow-hidden rounded-[2rem] border border-cyan-400/20 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,0.16),transparent_35%),radial-gradient(circle_at_75%_20%,rgba(168,85,247,0.12),transparent_30%),rgba(255,255,255,0.03)] p-6">
+          <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
             <div className="max-w-3xl">
-              <p className="section-label">{t.signalBadge}</p>
-              <h2 className="mt-3 text-3xl font-semibold tracking-[-0.04em] text-white/92">
-                {t.signalTitle}
-              </h2>
-              <p className="section-copy mt-3 text-sm sm:text-base">{t.signalDescription}</p>
+              <p className="text-xs uppercase tracking-[0.35em] text-cyan-200/80">
+                {t.signalBadge}
+              </p>
+              <h2 className="mt-3 text-2xl font-black sm:text-3xl">{t.signalTitle}</h2>
+              <p className="mt-3 text-sm leading-6 text-gray-300 sm:text-base">
+                {t.signalDescription}
+              </p>
             </div>
-            <a href="/news/signals" className="site-button">
+            <a
+              href="/news/signals"
+              className="inline-flex items-center justify-center rounded-full border border-white/15 bg-white px-5 py-3 text-sm font-semibold text-black transition hover:bg-gray-200"
+            >
               {t.signalCta}
             </a>
           </div>
         </section>
 
-        <div className="mt-8 grid gap-5 xl:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
-          <div className="glass-panel-soft rounded-[1.55rem] p-5">
-            <h3 className="section-label">{t.category}</h3>
-            <div className="mt-4 flex flex-wrap gap-2">
+        <div className="mb-8 space-y-4">
+          <div>
+            <h3 className="mb-2 text-sm text-gray-400">{t.category}</h3>
+            <div className="flex flex-wrap gap-2">
               {categories.map((category) => (
                 <button
                   key={category}
-                  type="button"
                   onClick={() => setSelectedCategory(category)}
                   className={`rounded-full border px-4 py-2 text-sm transition ${
                     selectedCategory === category
                       ? 'border-white bg-white text-black'
-                      : 'border-white/12 bg-white/[0.04] text-white/72 hover:border-white/20 hover:text-white'
+                      : 'border-white/20 bg-transparent text-white hover:border-white/40'
                   }`}
                 >
                   {t.categories[category as keyof typeof t.categories]}
@@ -260,18 +257,17 @@ export default function NewsPage() {
             </div>
           </div>
 
-          <div className="glass-panel-soft rounded-[1.55rem] p-5">
-            <h3 className="section-label">{t.source}</h3>
-            <div className="mt-4 flex flex-wrap gap-2">
+          <div>
+            <h3 className="mb-2 text-sm text-gray-400">{t.source}</h3>
+            <div className="flex flex-wrap gap-2">
               {sources.map((source) => (
                 <button
                   key={source}
-                  type="button"
                   onClick={() => setSelectedSource(source)}
                   className={`rounded-full border px-4 py-2 text-sm transition ${
                     selectedSource === source
                       ? 'border-white bg-white text-black'
-                      : 'border-white/12 bg-white/[0.04] text-white/72 hover:border-white/20 hover:text-white'
+                      : 'border-white/20 bg-transparent text-white hover:border-white/40'
                   }`}
                 >
                   {t.sources[source as keyof typeof t.sources]}
@@ -281,57 +277,73 @@ export default function NewsPage() {
           </div>
         </div>
 
-        <section className="mt-8">
-          {loading ? (
-            <div className="glass-panel-soft rounded-[1.9rem] px-8 py-20 text-center text-white/65">
-              <div className="mx-auto mb-5 h-12 w-12 animate-spin rounded-full border-2 border-white/10 border-t-[var(--accent)]" />
-              <p>{t.loading}</p>
-            </div>
-          ) : articles.length === 0 ? (
-            <div className="glass-panel-soft rounded-[1.9rem] px-8 py-20 text-center text-white/65">
-              <p>{t.noNews}</p>
-            </div>
-          ) : (
-            <div className="grid gap-4 lg:grid-cols-2">
-              {articles.map((article, index) => (
-                <motion.a
-                  key={article.id}
-                  href={article.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  initial={{ opacity: 0, y: 18 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: Math.min(index * 0.03, 0.18), duration: 0.5 }}
-                  className="glass-panel-soft hover-lift rounded-[1.6rem] p-5"
-                >
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span
-                      className={`rounded-full border px-3 py-1 text-xs font-semibold ${getCategoryColor(
-                        article.category
-                      )}`}
-                    >
-                      {t.categories[article.category as keyof typeof t.categories] || article.category}
-                    </span>
-                    <span className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 text-xs text-white/62">
-                      {article.source}
-                    </span>
-                    <span className="text-xs text-white/45">{formatDate(article.published)}</span>
+        {loading ? (
+          <div className="py-12 text-center">
+            <div className="inline-block h-12 w-12 animate-spin rounded-full border-b-2 border-t-2 border-white" />
+            <p className="mt-4 text-gray-400">{t.loading}</p>
+          </div>
+        ) : articles.length === 0 ? (
+          <div className="py-12 text-center">
+            <p className="text-gray-400">{t.noNews}</p>
+          </div>
+        ) : (
+          <div className="space-y-4">
+            {articles.map((article, index) => (
+              <motion.a
+                key={article.id}
+                href={article.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: Math.min(index * 0.04, 0.2) }}
+                className="block rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-6 transition-all hover:bg-white/[0.05]"
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1">
+                    <h2 className="mb-2 text-xl font-semibold transition-colors group-hover:text-gray-300">
+                      {lang === 'zh' && article.translatedTitle
+                        ? article.translatedTitle
+                        : article.title}
+                    </h2>
+
+                    {article.description ? (
+                      <p className="mb-3 line-clamp-2 text-sm text-gray-400">
+                        {lang === 'zh' && article.translatedDescription
+                          ? article.translatedDescription
+                          : article.description}
+                      </p>
+                    ) : null}
+
+                    <div className="flex flex-wrap items-center gap-3 text-sm">
+                      <span className={`rounded-full border px-2.5 py-1 ${getCategoryColor(article.category)}`}>
+                        {t.categories[article.category as keyof typeof t.categories] || article.category}
+                      </span>
+                      <span className="text-gray-500">
+                        {t.sources[article.source as keyof typeof t.sources] || article.source}
+                      </span>
+                      <span className="text-gray-500">{formatDate(article.published)}</span>
+                    </div>
                   </div>
 
-                  <h2 className="mt-4 text-2xl font-semibold tracking-[-0.04em] text-white/92">
-                    {lang === 'zh' ? article.translatedTitle || article.title : article.title}
-                  </h2>
-
-                  <p className="section-copy mt-3 text-sm">
-                    {lang === 'zh'
-                      ? article.translatedDescription || article.description
-                      : article.description}
-                  </p>
-                </motion.a>
-              ))}
-            </div>
-          )}
-        </section>
+                  <svg
+                    className="h-5 w-5 flex-shrink-0 text-gray-400 transition-colors hover:text-white"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                    />
+                  </svg>
+                </div>
+              </motion.a>
+            ))}
+          </div>
+        )}
       </main>
     </div>
   )
