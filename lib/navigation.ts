@@ -13,8 +13,8 @@ export const siteNavItems: NavItem[] = [
     href: '/',
     label: { en: 'Home', zh: '首页' },
     subtitle: {
-      en: 'Return to the main landing page and mission overview.',
-      zh: '返回主站首页，查看整体定位与主线内容。',
+      en: 'Return to the main landing page and broader site direction.',
+      zh: '回到主站首页，查看整体定位、作品入口和未来方向。',
     },
   },
   {
@@ -22,8 +22,8 @@ export const siteNavItems: NavItem[] = [
     href: '/news',
     label: { en: 'News', zh: '新闻' },
     subtitle: {
-      en: 'Browse curated crypto headlines and the signal feed.',
-      zh: '查看加密新闻聚合与信号解读页面。',
+      en: 'Browse curated crypto headlines and the action-oriented signal feed.',
+      zh: '查看加密新闻聚合，以及把消息翻译成行动判断的信号页。',
     },
   },
   {
@@ -31,8 +31,8 @@ export const siteNavItems: NavItem[] = [
     href: '/opportunities',
     label: { en: 'Opportunities', zh: '机遇' },
     subtitle: {
-      en: 'Track event-driven setups, timing windows, and narrative plays.',
-      zh: '跟踪事件驱动机会、时间窗口和题材节奏。',
+      en: 'Track event-driven setups, timing windows, and narrative opportunities.',
+      zh: '跟踪事件驱动机会、时间窗口和值得观察的市场题材。',
     },
   },
   {
@@ -40,8 +40,8 @@ export const siteNavItems: NavItem[] = [
     href: '/tokens/hot',
     label: { en: 'Token Radar', zh: '代币雷达' },
     subtitle: {
-      en: 'Monitor hot tokens, chains, contracts, and short-term momentum.',
-      zh: '查看热门代币、所属链、合约地址与短线热度。',
+      en: 'Monitor hot tokens, chain rotation, contracts, and onchain momentum.',
+      zh: '观察热门代币、链轮动、合约地址和快速变化的链上热度。',
     },
   },
 ]
@@ -50,10 +50,10 @@ export const homeNavItems: NavItem[] = [
   {
     key: 'about',
     href: '#about',
-    label: { en: 'What I Do', zh: '我的专长' },
+    label: { en: 'What I Do', zh: '我的能力' },
     subtitle: {
-      en: 'AI, trading, design, and Web3 capabilities in one overview.',
-      zh: '快速了解我在 AI、交易、设计与 Web3 上的能力结构。',
+      en: 'A fast overview of the systems, product, and market skills behind the site.',
+      zh: '快速了解我在产品、开发、设计、AI 和市场研究上的能力结构。',
     },
   },
   {
@@ -61,8 +61,8 @@ export const homeNavItems: NavItem[] = [
     href: '#projects',
     label: { en: 'Projects', zh: '项目' },
     subtitle: {
-      en: 'See active products, live experiments, and the project atlas.',
-      zh: '查看当前产品、实验项目和项目实验室入口。',
+      en: 'See live products, active experiments, and the broader project atlas.',
+      zh: '查看当前在线产品、正在推进的实验，以及后续项目目录。',
     },
   },
   {
@@ -70,8 +70,8 @@ export const homeNavItems: NavItem[] = [
     href: '#roadmap',
     label: { en: 'Roadmap', zh: '路线图' },
     subtitle: {
-      en: 'A long-range mission map for where the work is heading.',
-      zh: '查看长期目标、阶段路线与未来推进方向。',
+      en: 'A long-range map for how today’s work can grow into larger systems.',
+      zh: '查看这些产品如何逐步扩展成更大系统的长期路线。',
     },
   },
   {
@@ -79,8 +79,8 @@ export const homeNavItems: NavItem[] = [
     href: '/opportunities',
     label: { en: 'Opportunities', zh: '机遇' },
     subtitle: {
-      en: 'A board for event-driven market ideas and setup tracking.',
-      zh: '聚合事件驱动的市场机会和可跟踪的参与思路。',
+      en: 'A board for event-driven market ideas, timing windows, and setup tracking.',
+      zh: '聚合事件驱动的市场机会、时间窗口和可跟踪的参与思路。',
     },
   },
   {
@@ -88,8 +88,8 @@ export const homeNavItems: NavItem[] = [
     href: '/news',
     label: { en: 'News', zh: '新闻' },
     subtitle: {
-      en: 'Curated crypto headlines with filters and signal translation.',
-      zh: '查看经过筛选的加密新闻与信号解读。',
+      en: 'Curated crypto headlines with filters, categories, and signal translation.',
+      zh: '查看经过筛选的加密新闻，并进一步进入信号解读页。',
     },
   },
   {
@@ -97,8 +97,8 @@ export const homeNavItems: NavItem[] = [
     href: '/tokens/hot',
     label: { en: 'Token Radar', zh: '代币雷达' },
     subtitle: {
-      en: 'Watch hot tokens, chains, contracts, and onchain narratives.',
-      zh: '跟踪热门代币、所属链、合约和链上题材热度。',
+      en: 'Watch hot tokens, chain rotation, contract details, and onchain narratives.',
+      zh: '跟踪热门代币、链轮动、合约信息和链上叙事热度。',
     },
   },
   {
@@ -106,8 +106,8 @@ export const homeNavItems: NavItem[] = [
     href: '#contact',
     label: { en: 'Contact', zh: '联系' },
     subtitle: {
-      en: 'Reach out through X, Telegram, GitHub, or email.',
-      zh: '通过 X、Telegram、GitHub 或邮箱联系我。',
+      en: 'Reach out through X, Telegram, GitHub, email, or WeChat.',
+      zh: '通过 X、Telegram、GitHub、邮箱或微信与我联系。',
     },
   },
 ]

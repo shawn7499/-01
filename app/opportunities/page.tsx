@@ -16,7 +16,7 @@ const translations = {
   en: {
     title: 'Market Opportunities',
     subtitle:
-      'Track event-driven setups, launch narratives, and strategy ideas in one place.',
+      'A cleaner board for event-driven setups, narrative windows, and research-worthy ideas.',
     filterAll: 'All',
     filterActive: 'Active',
     filterEnding: 'Ending Soon',
@@ -29,10 +29,11 @@ const translations = {
     actualReturn: 'Observed Result',
     empty: 'No opportunities match this filter right now.',
     official: 'Official Link',
+    badge: 'Opportunity Board',
   },
   zh: {
     title: '市场机遇',
-    subtitle: '把题材、事件和策略机会放到同一个页面里，方便快速筛选和跟踪。',
+    subtitle: '把事件驱动机会、题材窗口和值得研究的想法放到一个更清晰的看板里。',
     filterAll: '全部',
     filterActive: '进行中',
     filterEnding: '即将结束',
@@ -43,8 +44,9 @@ const translations = {
     startDate: '开始时间',
     endDate: '结束时间',
     actualReturn: '结果记录',
-    empty: '当前筛选下没有可展示的机会。',
+    empty: '当前筛选下没有可展示的机遇。',
     official: '官方链接',
+    badge: 'Opportunity Board',
   },
 } as const
 
@@ -74,37 +76,36 @@ export default function OpportunitiesPage() {
   })
 
   function getStatusColor(status: FilterKey) {
-    if (status === 'active') return 'bg-emerald-500 text-black'
-    if (status === 'ending_soon') return 'bg-amber-400 text-black'
-    return 'bg-white/20 text-white'
+    if (status === 'active') return 'bg-emerald-500/12 text-emerald-100 border-emerald-400/30'
+    if (status === 'ending_soon') return 'bg-amber-400/12 text-amber-50 border-amber-300/30'
+    return 'bg-white/5 text-white/72 border-white/12'
   }
 
   function getRiskColor(risk: 'low' | 'medium' | 'high') {
-    if (risk === 'low') return 'text-emerald-300'
-    if (risk === 'medium') return 'text-amber-300'
-    return 'text-rose-300'
+    if (risk === 'low') return 'text-emerald-200'
+    if (risk === 'medium') return 'text-amber-200'
+    return 'text-rose-200'
   }
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="page-shell">
       <SiteHeader lang={lang} onLanguageChange={setLang} active="opportunities" />
 
-      <main className="mx-auto max-w-7xl px-4 pb-20 pt-28 sm:px-6 lg:px-8 lg:pt-32">
+      <main className="page-container pb-20 pt-32 md:pt-36">
         <motion.section
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-10 rounded-[2rem] border border-white/10 bg-[radial-gradient(circle_at_top_left,rgba(34,197,94,0.18),transparent_35%),radial-gradient(circle_at_75%_20%,rgba(59,130,246,0.14),transparent_30%),rgba(255,255,255,0.03)] p-6 sm:p-8"
+          className="glass-panel rounded-[2rem] px-6 py-8 sm:px-8 sm:py-10 lg:px-12"
         >
-          <p className="text-xs uppercase tracking-[0.35em] text-emerald-200/80">
-            Opportunity Board
-          </p>
-          <h1 className="mt-4 text-4xl font-black sm:text-6xl">{t.title}</h1>
-          <p className="mt-4 max-w-3xl text-sm leading-7 text-white/72 sm:text-base">
-            {t.subtitle}
-          </p>
+          <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_15%_18%,rgba(216,246,168,0.14),transparent_22%),radial-gradient(circle_at_82%_20%,rgba(153,200,255,0.14),transparent_18%)]" />
+          <div className="relative max-w-4xl">
+            <p className="section-label">{t.badge}</p>
+            <h1 className="section-title mt-4 text-5xl sm:text-6xl lg:text-7xl">{t.title}</h1>
+            <p className="section-copy mt-5 text-sm sm:text-base lg:text-lg">{t.subtitle}</p>
+          </div>
         </motion.section>
 
-        <div className="mb-10 flex flex-wrap gap-3">
+        <div className="mt-8 flex flex-wrap gap-3">
           {([
             ['all', t.filterAll],
             ['active', t.filterActive],
@@ -113,11 +114,12 @@ export default function OpportunitiesPage() {
           ] as const).map(([key, label]) => (
             <button
               key={key}
+              type="button"
               onClick={() => setFilter(key)}
               className={`rounded-full border px-4 py-2 text-sm transition ${
                 filter === key
                   ? 'border-white bg-white text-black'
-                  : 'border-white/15 bg-white/5 text-white/75 hover:border-white/30 hover:text-white'
+                  : 'border-white/12 bg-white/[0.04] text-white/72 hover:border-white/20 hover:text-white'
               }`}
             >
               {label}
@@ -126,30 +128,30 @@ export default function OpportunitiesPage() {
         </div>
 
         {filteredOpportunities.length === 0 ? (
-          <div className="rounded-[2rem] border border-white/10 bg-white/[0.03] px-8 py-20 text-center text-white/65">
+          <div className="glass-panel-soft mt-8 rounded-[1.8rem] px-8 py-20 text-center text-white/65">
             <p>{t.empty}</p>
           </div>
         ) : (
-          <div className="space-y-8">
+          <div className="mt-8 space-y-6">
             {filteredOpportunities.map((opportunity, index) => (
               <motion.article
                 key={opportunity.id}
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: Math.min(index * 0.06, 0.24) }}
-                className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-6 shadow-[0_20px_70px_rgba(0,0,0,0.25)]"
+                transition={{ delay: Math.min(index * 0.05, 0.2), duration: 0.55 }}
+                className="glass-panel rounded-[1.9rem] px-6 py-6"
               >
                 <div className="flex flex-wrap items-start justify-between gap-4">
                   <div className="max-w-3xl">
                     <div className="flex flex-wrap items-center gap-3">
                       <span
-                        className={`rounded-full px-3 py-1 text-xs font-semibold ${getStatusColor(
+                        className={`rounded-full border px-3 py-1 text-xs font-semibold ${getStatusColor(
                           opportunity.resolvedStatus
                         )}`}
                       >
                         {statusLabels[lang][opportunity.resolvedStatus]}
                       </span>
-                      <span className="rounded-full border border-white/12 bg-white/5 px-3 py-1 text-xs text-white/75">
+                      <span className="rounded-full border border-white/12 bg-white/5 px-3 py-1 text-xs text-white/72">
                         {categoryLabels[lang][opportunity.category]}
                       </span>
                       <span className={`text-sm font-semibold ${getRiskColor(opportunity.riskLevel)}`}>
@@ -157,16 +159,16 @@ export default function OpportunitiesPage() {
                       </span>
                     </div>
 
-                    <h2 className="mt-4 text-3xl font-black sm:text-4xl">
+                    <h2 className="mt-4 text-3xl font-semibold tracking-[-0.04em] text-white/92 sm:text-4xl">
                       {lang === 'en' ? opportunity.title : opportunity.titleZh}
                     </h2>
-                    <p className="mt-4 text-sm leading-7 text-white/72 sm:text-base">
+                    <p className="section-copy mt-4 text-sm sm:text-base">
                       {lang === 'en' ? opportunity.description : opportunity.descriptionZh}
                     </p>
                   </div>
                 </div>
 
-                <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
                   <InfoCard
                     label={t.source}
                     value={lang === 'en' ? opportunity.source : opportunity.sourceZh}
@@ -183,9 +185,9 @@ export default function OpportunitiesPage() {
                   <InfoCard label={t.endDate} value={opportunity.endDate || '--'} />
                 </div>
 
-                <section className="mt-6 rounded-2xl border border-white/10 bg-black/20 p-4">
-                  <h3 className="text-sm font-semibold text-white/85">{t.participation}</h3>
-                  <p className="mt-2 text-sm leading-6 text-white/72">
+                <section className="glass-panel-soft mt-6 rounded-[1.4rem] p-4">
+                  <h3 className="text-sm font-semibold text-white/84">{t.participation}</h3>
+                  <p className="section-copy mt-3 text-sm">
                     {lang === 'en'
                       ? opportunity.participationMethod
                       : opportunity.participationMethodZh}
@@ -193,11 +195,11 @@ export default function OpportunitiesPage() {
                 </section>
 
                 {opportunity.actualReturn ? (
-                  <section className="mt-5 rounded-2xl border border-white/10 bg-black/20 p-4">
-                    <h3 className="text-sm font-semibold text-cyan-200">{t.actualReturn}</h3>
-                    <p className="mt-2 text-sm leading-6 text-cyan-100/90">
-                      {opportunity.actualReturn}
-                    </p>
+                  <section className="glass-panel-soft mt-5 rounded-[1.4rem] p-4">
+                    <h3 className="text-sm font-semibold text-[var(--accent-cyan)]">
+                      {t.actualReturn}
+                    </h3>
+                    <p className="mt-3 text-sm leading-6 text-white/78">{opportunity.actualReturn}</p>
                   </section>
                 ) : null}
 
@@ -205,7 +207,7 @@ export default function OpportunitiesPage() {
                   {(lang === 'en' ? opportunity.tags : opportunity.tagsZh).map((tag) => (
                     <span
                       key={tag}
-                      className="rounded-full border border-white/12 bg-white/5 px-3 py-1 text-xs text-white/70"
+                      className="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 text-xs text-white/64"
                     >
                       {tag}
                     </span>
@@ -213,12 +215,12 @@ export default function OpportunitiesPage() {
                 </div>
 
                 {opportunity.links?.official ? (
-                  <div className="mt-5">
+                  <div className="mt-6">
                     <a
                       href={opportunity.links.official}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center rounded-full border border-white px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-white hover:text-black"
+                      className="site-button-secondary"
                     >
                       {t.official}
                     </a>
@@ -235,9 +237,9 @@ export default function OpportunitiesPage() {
 
 function InfoCard({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-2xl border border-white/10 bg-black/20 p-4">
-      <div className="text-xs uppercase tracking-[0.22em] text-white/35">{label}</div>
-      <div className="mt-2 text-sm font-semibold text-white/85">{value}</div>
+    <div className="glass-panel-soft rounded-[1.35rem] p-4">
+      <div className="section-label text-[10px]">{label}</div>
+      <div className="mt-2 text-sm font-semibold text-white/86">{value}</div>
     </div>
   )
 }
