@@ -4,7 +4,7 @@ import DesktopHoverNav from '@/components/DesktopHoverNav'
 import { siteNavItems } from '@/lib/navigation'
 
 type Lang = 'en' | 'zh'
-type ActivePage = 'home' | 'news' | 'opportunities' | 'tokens' | 'crypto-monitor' | 'none'
+type ActivePage = 'home' | 'news' | 'opportunities' | 'tokens' | 'none'
 
 type SiteHeaderProps = {
   lang: Lang
