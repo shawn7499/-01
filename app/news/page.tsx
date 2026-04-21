@@ -1,12 +1,12 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
 
 import SiteHeader from '@/components/SiteHeader'
 
 interface NewsArticle {
-  id: number
+  id: string
   title: string
   link: string
   description: string
@@ -19,6 +19,8 @@ interface NewsArticle {
 
 type Lang = 'en' | 'zh'
 
+const PAGE_SIZE = 50
+
 const translations = {
   en: {
     title: 'Crypto News',
@@ -27,7 +29,12 @@ const translations = {
     category: 'Category',
     source: 'Source',
     loading: 'Loading...',
+    loadMore: 'Load More',
+    loadingMore: 'Loading more...',
     noNews: 'No news available',
+    showing: 'Showing',
+    of: 'of',
+    cached: 'cached articles',
     signalBadge: 'Signal Feed',
     signalTitle: 'Turn headlines into action plans',
     signalDescription:
@@ -57,9 +64,14 @@ const translations = {
     category: '分类',
     source: '来源',
     loading: '加载中...',
+    loadMore: '加载更多',
+    loadingMore: '正在加载...',
     noNews: '暂无新闻',
+    showing: '已显示',
+    of: '/',
+    cached: '条缓存新闻',
     signalBadge: '信号页',
-    signalTitle: '把新闻翻译成可执行判断',
+    signalTitle: '把新闻翻译成行动判断',
     signalDescription:
       '打开信号页后，你可以直接查看 Odaily 和 BlockBeats 被整理成的机会判断、风险标签和执行清单。',
     signalCta: '打开信号页',
@@ -90,31 +102,64 @@ export default function NewsPage() {
   const [lang, setLang] = useState<Lang>('zh')
   const [articles, setArticles] = useState<NewsArticle[]>([])
   const [loading, setLoading] = useState(true)
+  const [loadingMore, setLoadingMore] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState<string>('All')
   const [selectedSource, setSelectedSource] = useState<string>('All')
+  const [visibleLimit, setVisibleLimit] = useState(PAGE_SIZE)
+  const [totalArticles, setTotalArticles] = useState(0)
 
   const t = translations[lang]
+  const untranslatedFingerprint = useMemo(
+    () =>
+      articles
+        .filter((article) => !article.translatedTitle)
+        .map((article) => article.id)
+        .join('|'),
+    [articles]
+  )
 
   useEffect(() => {
-    void fetchNews()
+    void fetchNews(visibleLimit)
     const interval = window.setInterval(() => {
-      void fetchNews()
+      void fetchNews(visibleLimit)
     }, 60000)
 
     return () => window.clearInterval(interval)
-  }, [selectedCategory, selectedSource])
+  }, [selectedCategory, selectedSource, visibleLimit])
 
   useEffect(() => {
-    if (lang === 'zh' && articles.length > 0) {
+    if (lang === 'zh' && untranslatedFingerprint) {
       void translateArticles()
     }
-  }, [lang, articles.length])
+  }, [lang, untranslatedFingerprint])
 
-  async function fetchNews() {
+  function mergeArticlesWithTranslations(nextArticles: NewsArticle[]) {
+    setArticles((previousArticles) => {
+      const previousById = new Map(previousArticles.map((article) => [article.id, article]))
+
+      return nextArticles.map((article) => {
+        const previous = previousById.get(article.id)
+        if (!previous) {
+          return article
+        }
+
+        return {
+          ...article,
+          translatedTitle: previous.translatedTitle ?? article.translatedTitle,
+          translatedDescription:
+            previous.translatedDescription ?? article.translatedDescription,
+        }
+      })
+    })
+  }
+
+  async function fetchNews(limitToFetch: number) {
     try {
-      setLoading(true)
+      if (articles.length === 0 && !loadingMore) {
+        setLoading(true)
+      }
 
-      let url = '/api/news?limit=50'
+      let url = `/api/news?limit=${limitToFetch}`
       if (selectedCategory !== 'All') {
         url += `&category=${selectedCategory}`
       }
@@ -124,12 +169,15 @@ export default function NewsPage() {
 
       const response = await fetch(url, { cache: 'no-store' })
       const data = await response.json()
-      setArticles(data.articles || [])
+      mergeArticlesWithTranslations(data.articles || [])
+      setTotalArticles(data.total || 0)
     } catch (error) {
       console.error('Failed to fetch news:', error)
       setArticles([])
+      setTotalArticles(0)
     } finally {
       setLoading(false)
+      setLoadingMore(false)
     }
   }
 
@@ -169,6 +217,25 @@ export default function NewsPage() {
     )
 
     setArticles(translatedArticles)
+  }
+
+  function handleCategoryChange(category: string) {
+    setSelectedCategory(category)
+    setVisibleLimit(PAGE_SIZE)
+    setArticles([])
+    setTotalArticles(0)
+  }
+
+  function handleSourceChange(source: string) {
+    setSelectedSource(source)
+    setVisibleLimit(PAGE_SIZE)
+    setArticles([])
+    setTotalArticles(0)
+  }
+
+  function handleLoadMore() {
+    setLoadingMore(true)
+    setVisibleLimit((current) => Math.min(current + PAGE_SIZE, totalArticles || current + PAGE_SIZE))
   }
 
   function formatDate(dateString: string) {
@@ -238,13 +305,19 @@ export default function NewsPage() {
         </section>
 
         <div className="mb-8 space-y-4">
+          {articles.length > 0 ? (
+            <p className="text-sm text-white/55">
+              {t.showing} {articles.length} {t.of} {totalArticles} {t.cached}
+            </p>
+          ) : null}
+
           <div>
             <h3 className="mb-2 text-sm text-gray-400">{t.category}</h3>
             <div className="flex flex-wrap gap-2">
               {categories.map((category) => (
                 <button
                   key={category}
-                  onClick={() => setSelectedCategory(category)}
+                  onClick={() => handleCategoryChange(category)}
                   className={`rounded-full border px-4 py-2 text-sm transition ${
                     selectedCategory === category
                       ? 'border-white bg-white text-black'
@@ -263,7 +336,7 @@ export default function NewsPage() {
               {sources.map((source) => (
                 <button
                   key={source}
-                  onClick={() => setSelectedSource(source)}
+                  onClick={() => handleSourceChange(source)}
                   className={`rounded-full border px-4 py-2 text-sm transition ${
                     selectedSource === source
                       ? 'border-white bg-white text-black'
@@ -342,6 +415,18 @@ export default function NewsPage() {
                 </div>
               </motion.a>
             ))}
+
+            {totalArticles > articles.length ? (
+              <div className="pt-2 text-center">
+                <button
+                  onClick={handleLoadMore}
+                  disabled={loadingMore}
+                  className="rounded-full border border-white/15 bg-white/[0.05] px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/[0.1] disabled:cursor-not-allowed disabled:opacity-60"
+                >
+                  {loadingMore ? t.loadingMore : t.loadMore}
+                </button>
+              </div>
+            ) : null}
           </div>
         )}
       </main>
