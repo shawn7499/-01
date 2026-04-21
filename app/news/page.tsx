@@ -17,24 +17,33 @@ interface NewsArticle {
   translatedDescription?: string
 }
 
+interface TranslationCacheEntry {
+  translatedTitle?: string
+  translatedDescription?: string
+}
+
 type Lang = 'en' | 'zh'
 
-const PAGE_SIZE = 50
+const PAGE_SIZE = 100
+const MAX_PAGES = 10
 
 const translations = {
   en: {
     title: 'Crypto News',
     subtitle:
-      'Track the latest stories across major crypto news sources with category and source filters.',
+      'Review up to 1,000 cached headlines, organized into 10 analysis-friendly pages with source and category filters.',
     category: 'Category',
     source: 'Source',
     loading: 'Loading...',
-    loadMore: 'Load More',
-    loadingMore: 'Loading more...',
     noNews: 'No news available',
     showing: 'Showing',
+    rangeJoin: '-',
     of: 'of',
-    cached: 'cached articles',
+    filtered: 'filtered articles',
+    cachedPool: 'from a 1,000-item cache pool',
+    page: 'Page',
+    prev: 'Prev',
+    next: 'Next',
     signalBadge: 'Signal Feed',
     signalTitle: 'Turn headlines into action plans',
     signalDescription:
@@ -60,16 +69,19 @@ const translations = {
   },
   zh: {
     title: '加密新闻',
-    subtitle: '聚合主要加密媒体的最新动态，并支持按分类与来源快速筛选。',
+    subtitle: '最多保留 1000 条新闻缓存，并按每页 100 条拆成 10 页，方便你做回看和分析。',
     category: '分类',
     source: '来源',
     loading: '加载中...',
-    loadMore: '加载更多',
-    loadingMore: '正在加载...',
     noNews: '暂无新闻',
-    showing: '已显示',
+    showing: '当前显示',
+    rangeJoin: '-',
     of: '/',
-    cached: '条缓存新闻',
+    filtered: '条筛选结果',
+    cachedPool: '来自 1000 条缓存池',
+    page: '第',
+    prev: '上一页',
+    next: '下一页',
     signalBadge: '信号页',
     signalTitle: '把新闻翻译成行动判断',
     signalDescription:
@@ -101,14 +113,18 @@ const sources = ['All', 'Odaily', 'BlockBeats', 'CoinDesk', 'Foresight News', 'P
 export default function NewsPage() {
   const [lang, setLang] = useState<Lang>('zh')
   const [articles, setArticles] = useState<NewsArticle[]>([])
+  const [translationCache, setTranslationCache] = useState<Record<string, TranslationCacheEntry>>({})
   const [loading, setLoading] = useState(true)
-  const [loadingMore, setLoadingMore] = useState(false)
   const [selectedCategory, setSelectedCategory] = useState<string>('All')
   const [selectedSource, setSelectedSource] = useState<string>('All')
-  const [visibleLimit, setVisibleLimit] = useState(PAGE_SIZE)
+  const [currentPage, setCurrentPage] = useState(1)
   const [totalArticles, setTotalArticles] = useState(0)
+  const [cachedTotal, setCachedTotal] = useState(0)
 
   const t = translations[lang]
+  const totalPages = Math.max(1, Math.min(MAX_PAGES, Math.ceil(totalArticles / PAGE_SIZE) || 1))
+  const visibleStart = totalArticles === 0 ? 0 : (currentPage - 1) * PAGE_SIZE + 1
+  const visibleEnd = Math.min(currentPage * PAGE_SIZE, totalArticles)
   const untranslatedFingerprint = useMemo(
     () =>
       articles
@@ -119,13 +135,13 @@ export default function NewsPage() {
   )
 
   useEffect(() => {
-    void fetchNews(visibleLimit)
+    void fetchNews(currentPage)
     const interval = window.setInterval(() => {
-      void fetchNews(visibleLimit)
+      void fetchNews(currentPage)
     }, 60000)
 
     return () => window.clearInterval(interval)
-  }, [selectedCategory, selectedSource, visibleLimit])
+  }, [selectedCategory, selectedSource, currentPage])
 
   useEffect(() => {
     if (lang === 'zh' && untranslatedFingerprint) {
@@ -133,33 +149,27 @@ export default function NewsPage() {
     }
   }, [lang, untranslatedFingerprint])
 
-  function mergeArticlesWithTranslations(nextArticles: NewsArticle[]) {
-    setArticles((previousArticles) => {
-      const previousById = new Map(previousArticles.map((article) => [article.id, article]))
+  function applyTranslationCache(nextArticles: NewsArticle[]) {
+    return nextArticles.map((article) => {
+      const cached = translationCache[article.id]
+      if (!cached) {
+        return article
+      }
 
-      return nextArticles.map((article) => {
-        const previous = previousById.get(article.id)
-        if (!previous) {
-          return article
-        }
-
-        return {
-          ...article,
-          translatedTitle: previous.translatedTitle ?? article.translatedTitle,
-          translatedDescription:
-            previous.translatedDescription ?? article.translatedDescription,
-        }
-      })
+      return {
+        ...article,
+        translatedTitle: cached.translatedTitle ?? article.translatedTitle,
+        translatedDescription: cached.translatedDescription ?? article.translatedDescription,
+      }
     })
   }
 
-  async function fetchNews(limitToFetch: number) {
+  async function fetchNews(page: number) {
     try {
-      if (articles.length === 0 && !loadingMore) {
-        setLoading(true)
-      }
+      setLoading(true)
 
-      let url = `/api/news?limit=${limitToFetch}`
+      const offset = (page - 1) * PAGE_SIZE
+      let url = `/api/news?limit=${PAGE_SIZE}&offset=${offset}`
       if (selectedCategory !== 'All') {
         url += `&category=${selectedCategory}`
       }
@@ -169,15 +179,16 @@ export default function NewsPage() {
 
       const response = await fetch(url, { cache: 'no-store' })
       const data = await response.json()
-      mergeArticlesWithTranslations(data.articles || [])
+      setArticles(applyTranslationCache(data.articles || []))
       setTotalArticles(data.total || 0)
+      setCachedTotal(data.cachedTotal || 0)
     } catch (error) {
       console.error('Failed to fetch news:', error)
       setArticles([])
       setTotalArticles(0)
+      setCachedTotal(0)
     } finally {
       setLoading(false)
-      setLoadingMore(false)
     }
   }
 
@@ -204,11 +215,21 @@ export default function NewsPage() {
             descData = await descRes.json()
           }
 
-          return {
+          const translatedArticle = {
             ...article,
             translatedTitle: titleData.translated,
             translatedDescription: descData?.translated,
           }
+
+          setTranslationCache((current) => ({
+            ...current,
+            [article.id]: {
+              translatedTitle: translatedArticle.translatedTitle,
+              translatedDescription: translatedArticle.translatedDescription,
+            },
+          }))
+
+          return translatedArticle
         } catch (error) {
           console.error('Translation failed:', error)
           return article
@@ -219,23 +240,12 @@ export default function NewsPage() {
     setArticles(translatedArticles)
   }
 
-  function handleCategoryChange(category: string) {
-    setSelectedCategory(category)
-    setVisibleLimit(PAGE_SIZE)
+  function resetFilters(nextCategory: string, nextSource: string) {
+    setSelectedCategory(nextCategory)
+    setSelectedSource(nextSource)
+    setCurrentPage(1)
     setArticles([])
     setTotalArticles(0)
-  }
-
-  function handleSourceChange(source: string) {
-    setSelectedSource(source)
-    setVisibleLimit(PAGE_SIZE)
-    setArticles([])
-    setTotalArticles(0)
-  }
-
-  function handleLoadMore() {
-    setLoadingMore(true)
-    setVisibleLimit((current) => Math.min(current + PAGE_SIZE, totalArticles || current + PAGE_SIZE))
   }
 
   function formatDate(dateString: string) {
@@ -305,11 +315,11 @@ export default function NewsPage() {
         </section>
 
         <div className="mb-8 space-y-4">
-          {articles.length > 0 ? (
-            <p className="text-sm text-white/55">
-              {t.showing} {articles.length} {t.of} {totalArticles} {t.cached}
-            </p>
-          ) : null}
+          <p className="text-sm text-white/55">
+            {t.showing} {visibleStart}
+            {t.rangeJoin}
+            {visibleEnd} {t.of} {totalArticles} {t.filtered} · {cachedTotal} {t.cachedPool}
+          </p>
 
           <div>
             <h3 className="mb-2 text-sm text-gray-400">{t.category}</h3>
@@ -317,7 +327,7 @@ export default function NewsPage() {
               {categories.map((category) => (
                 <button
                   key={category}
-                  onClick={() => handleCategoryChange(category)}
+                  onClick={() => resetFilters(category, selectedSource)}
                   className={`rounded-full border px-4 py-2 text-sm transition ${
                     selectedCategory === category
                       ? 'border-white bg-white text-black'
@@ -336,7 +346,7 @@ export default function NewsPage() {
               {sources.map((source) => (
                 <button
                   key={source}
-                  onClick={() => handleSourceChange(source)}
+                  onClick={() => resetFilters(selectedCategory, source)}
                   className={`rounded-full border px-4 py-2 text-sm transition ${
                     selectedSource === source
                       ? 'border-white bg-white text-black'
@@ -360,74 +370,104 @@ export default function NewsPage() {
             <p className="text-gray-400">{t.noNews}</p>
           </div>
         ) : (
-          <div className="space-y-4">
-            {articles.map((article, index) => (
-              <motion.a
-                key={article.id}
-                href={article.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: Math.min(index * 0.04, 0.2) }}
-                className="block rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-6 transition-all hover:bg-white/[0.05]"
-              >
-                <div className="flex items-start justify-between gap-4">
-                  <div className="flex-1">
-                    <h2 className="mb-2 text-xl font-semibold transition-colors group-hover:text-gray-300">
-                      {lang === 'zh' && article.translatedTitle
-                        ? article.translatedTitle
-                        : article.title}
-                    </h2>
-
-                    {article.description ? (
-                      <p className="mb-3 line-clamp-2 text-sm text-gray-400">
-                        {lang === 'zh' && article.translatedDescription
-                          ? article.translatedDescription
-                          : article.description}
-                      </p>
-                    ) : null}
-
-                    <div className="flex flex-wrap items-center gap-3 text-sm">
-                      <span className={`rounded-full border px-2.5 py-1 ${getCategoryColor(article.category)}`}>
-                        {t.categories[article.category as keyof typeof t.categories] || article.category}
-                      </span>
-                      <span className="text-gray-500">
-                        {t.sources[article.source as keyof typeof t.sources] || article.source}
-                      </span>
-                      <span className="text-gray-500">{formatDate(article.published)}</span>
-                    </div>
-                  </div>
-
-                  <svg
-                    className="h-5 w-5 flex-shrink-0 text-gray-400 transition-colors hover:text-white"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                    />
-                  </svg>
-                </div>
-              </motion.a>
-            ))}
-
-            {totalArticles > articles.length ? (
-              <div className="pt-2 text-center">
-                <button
-                  onClick={handleLoadMore}
-                  disabled={loadingMore}
-                  className="rounded-full border border-white/15 bg-white/[0.05] px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/[0.1] disabled:cursor-not-allowed disabled:opacity-60"
+          <>
+            <div className="space-y-4">
+              {articles.map((article, index) => (
+                <motion.a
+                  key={article.id}
+                  href={article.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: Math.min(index * 0.02, 0.12) }}
+                  className="block rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-6 transition-all hover:bg-white/[0.05]"
                 >
-                  {loadingMore ? t.loadingMore : t.loadMore}
+                  <div className="flex items-start justify-between gap-4">
+                    <div className="flex-1">
+                      <h2 className="mb-2 text-xl font-semibold transition-colors group-hover:text-gray-300">
+                        {lang === 'zh' && article.translatedTitle
+                          ? article.translatedTitle
+                          : article.title}
+                      </h2>
+
+                      {article.description ? (
+                        <p className="mb-3 line-clamp-2 text-sm text-gray-400">
+                          {lang === 'zh' && article.translatedDescription
+                            ? article.translatedDescription
+                            : article.description}
+                        </p>
+                      ) : null}
+
+                      <div className="flex flex-wrap items-center gap-3 text-sm">
+                        <span className={`rounded-full border px-2.5 py-1 ${getCategoryColor(article.category)}`}>
+                          {t.categories[article.category as keyof typeof t.categories] || article.category}
+                        </span>
+                        <span className="text-gray-500">
+                          {t.sources[article.source as keyof typeof t.sources] || article.source}
+                        </span>
+                        <span className="text-gray-500">{formatDate(article.published)}</span>
+                      </div>
+                    </div>
+
+                    <svg
+                      className="h-5 w-5 flex-shrink-0 text-gray-400 transition-colors hover:text-white"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                      />
+                    </svg>
+                  </div>
+                </motion.a>
+              ))}
+            </div>
+
+            <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div className="text-sm text-white/55">
+                {lang === 'zh'
+                  ? `第 ${currentPage} / ${totalPages} 页`
+                  : `${t.page} ${currentPage} / ${totalPages}`}
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2">
+                <button
+                  onClick={() => setCurrentPage((page) => Math.max(1, page - 1))}
+                  disabled={currentPage === 1}
+                  className="rounded-full border border-white/15 bg-white/[0.05] px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/[0.1] disabled:cursor-not-allowed disabled:opacity-50"
+                >
+                  {t.prev}
+                </button>
+
+                {Array.from({ length: totalPages }, (_, index) => index + 1).map((page) => (
+                  <button
+                    key={page}
+                    onClick={() => setCurrentPage(page)}
+                    className={`rounded-full border px-4 py-2 text-sm font-semibold transition ${
+                      currentPage === page
+                        ? 'border-white bg-white text-black'
+                        : 'border-white/15 bg-white/[0.05] text-white hover:bg-white/[0.1]'
+                    }`}
+                  >
+                    {page}
+                  </button>
+                ))}
+
+                <button
+                  onClick={() => setCurrentPage((page) => Math.min(totalPages, page + 1))}
+                  disabled={currentPage === totalPages}
+                  className="rounded-full border border-white/15 bg-white/[0.05] px-4 py-2 text-sm font-semibold text-white transition hover:bg-white/[0.1] disabled:cursor-not-allowed disabled:opacity-50"
+                >
+                  {t.next}
                 </button>
               </div>
-            ) : null}
-          </div>
+            </div>
+          </>
         )}
       </main>
     </div>

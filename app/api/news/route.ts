@@ -18,6 +18,7 @@ const RSS_SOURCES = {
 } as const;
 
 const MAX_CACHE_ITEMS = 1000;
+const MAX_PAGE_SIZE = 100;
 const FEED_ITEM_LIMIT = 250;
 const CACHE_REFRESH_MS = 60_000;
 const CACHE_FILE_PATH = path.join(os.tmpdir(), 'wick-portfolio-news-cache.json');
@@ -198,8 +199,8 @@ async function getCachePayload() {
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url);
-    const requestedLimit = parseInt(searchParams.get('limit') || '50', 10);
-    const limit = Math.min(Math.max(requestedLimit, 1), MAX_CACHE_ITEMS);
+    const requestedLimit = parseInt(searchParams.get('limit') || String(MAX_PAGE_SIZE), 10);
+    const limit = Math.min(Math.max(requestedLimit, 1), MAX_PAGE_SIZE);
     const offset = Math.max(parseInt(searchParams.get('offset') || '0', 10), 0);
     const sourceFilter = searchParams.get('source');
     const categoryFilter = searchParams.get('category');
@@ -219,6 +220,8 @@ export async function GET(request: Request) {
     return NextResponse.json({
       total: filteredArticles.length,
       cachedTotal: payload.articles.length,
+      maxCacheItems: MAX_CACHE_ITEMS,
+      maxPageSize: MAX_PAGE_SIZE,
       limit,
       offset,
       hasMore: offset + limit < filteredArticles.length,
