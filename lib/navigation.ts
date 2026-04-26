@@ -22,8 +22,17 @@ export const siteNavItems: NavItem[] = [
     href: '/news',
     label: { en: 'News', zh: '新闻' },
     subtitle: {
-      en: 'Browse curated crypto headlines and the signal feed.',
-      zh: '查看加密新闻聚合与信号解读页面。',
+      en: 'Browse cached crypto headlines with source and category filters.',
+      zh: '查看加密新闻聚合，并按来源和分类筛选。',
+    },
+  },
+  {
+    key: 'intelligence',
+    href: '/news/signals',
+    label: { en: 'Intelligence', zh: '情报' },
+    subtitle: {
+      en: 'Monitor Odaily and BlockBeats with market context, risks, and next actions.',
+      zh: '监控 Odaily 和 BlockBeats，并输出市场情报、风险和下一步动作。',
     },
   },
   {
@@ -88,8 +97,17 @@ export const homeNavItems: NavItem[] = [
     href: '/news',
     label: { en: 'News', zh: '新闻' },
     subtitle: {
-      en: 'Curated crypto headlines with filters and signal translation.',
-      zh: '查看经过筛选的加密新闻与信号解读。',
+      en: 'Curated crypto headlines with filters and intelligence translation.',
+      zh: '查看加密新闻聚合与情报解读。',
+    },
+  },
+  {
+    key: 'intelligence',
+    href: '/news/signals',
+    label: { en: 'Intelligence', zh: '情报' },
+    subtitle: {
+      en: 'Turn Odaily and BlockBeats headlines into intelligence cards.',
+      zh: '把 Odaily 和 BlockBeats 消息整理成情报卡片。',
     },
   },
   {

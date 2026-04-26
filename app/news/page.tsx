@@ -44,11 +44,11 @@ const translations = {
     page: 'Page',
     prev: 'Prev',
     next: 'Next',
-    signalBadge: 'Signal Feed',
-    signalTitle: 'Turn headlines into action plans',
+    signalBadge: 'Intelligence Agent',
+    signalTitle: 'Turn headlines into intelligence cards',
     signalDescription:
-      'Open the signal page to translate Odaily and BlockBeats headlines into trade ideas, risk labels, and execution checklists.',
-    signalCta: 'Open Signal Page',
+      'Open the intelligence agent to monitor Odaily and BlockBeats, then receive market context, affected assets, risks, and next actions.',
+    signalCta: 'Open Agent',
     categories: {
       All: 'All',
       Bitcoin: 'Bitcoin',
@@ -82,11 +82,11 @@ const translations = {
     page: '第',
     prev: '上一页',
     next: '下一页',
-    signalBadge: '信号页',
-    signalTitle: '把新闻翻译成行动判断',
+    signalBadge: '情报智能体',
+    signalTitle: '把新闻整理成情报卡片',
     signalDescription:
-      '打开信号页后，你可以直接查看 Odaily 和 BlockBeats 被整理成的机会判断、风险标签和执行清单。',
-    signalCta: '打开信号页',
+      '打开智能体后，你可以直接查看 Odaily 和 BlockBeats 被整理成的市场情报、影响对象、风险提示和下一步动作。',
+    signalCta: '打开智能体',
     categories: {
       All: '全部',
       Bitcoin: '比特币',

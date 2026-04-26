@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto'
 import { NextResponse } from 'next/server'
 import Parser from 'rss-parser'
 
@@ -6,6 +7,8 @@ import { analyzeArticles, NewsArticle } from '@/lib/news-signals'
 export const dynamic = 'force-dynamic'
 
 const parser = new Parser()
+const SOURCE_ITEM_LIMIT = 80
+const MAX_SIGNAL_LIMIT = 60
 
 const SIGNAL_SOURCES = {
   Odaily: 'https://rss.odaily.news/rss/newsflash',
@@ -27,11 +30,23 @@ function repairMojibake(text: string) {
   }
 }
 
+function createArticleId(source: string, title: string, link: string, published: string) {
+  return createHash('sha1').update(`${source}|${title}|${link}|${published}`).digest('hex')
+}
+
+function normalizeDate(rawDate?: string) {
+  const parsed = rawDate ? new Date(rawDate) : new Date()
+  if (Number.isNaN(parsed.getTime())) {
+    return new Date().toISOString()
+  }
+  return parsed.toISOString()
+}
+
 async function fetchFeedItems(source: string, url: string) {
   const response = await fetch(url, {
     headers: {
       Accept: 'application/rss+xml, application/xml, text/xml;q=0.9, */*;q=0.8',
-      'User-Agent': 'Mozilla/5.0 (compatible; ShawnWickSignalsBot/1.0)',
+      'User-Agent': 'Mozilla/5.0 (compatible; ShawnWickIntelligenceAgent/1.0)',
     },
     cache: 'no-store',
   })
@@ -48,17 +63,23 @@ async function fetchFeedItems(source: string, url: string) {
 
 function categorizeArticle(title: string): string {
   const titleLower = title.toLowerCase()
-  if (titleLower.includes('btc') || titleLower.includes('bitcoin') || titleLower.includes('比特币')) {
+  if (titleLower.includes('btc') || titleLower.includes('bitcoin') || title.includes('比特币')) {
     return 'Bitcoin'
   }
-  if (titleLower.includes('eth') || titleLower.includes('ethereum') || titleLower.includes('以太坊')) {
+  if (titleLower.includes('eth') || titleLower.includes('ethereum') || title.includes('以太坊')) {
     return 'Ethereum'
   }
   if (titleLower.includes('defi') || titleLower.includes('dex') || titleLower.includes('swap')) {
     return 'DeFi'
   }
-  if (titleLower.includes('meme') || titleLower.includes('memecoin') || titleLower.includes('土狗')) {
+  if (titleLower.includes('meme') || titleLower.includes('memecoin') || title.includes('梗')) {
     return 'Meme'
+  }
+  if (titleLower.includes('airdrop') || title.includes('空投') || title.includes('积分')) {
+    return 'Airdrop'
+  }
+  if (titleLower.includes('hack') || titleLower.includes('exploit') || title.includes('攻击') || title.includes('漏洞')) {
+    return 'Security'
   }
   return 'General'
 }
@@ -66,29 +87,32 @@ function categorizeArticle(title: string): string {
 export async function GET(request: Request) {
   try {
     const { searchParams } = new URL(request.url)
-    const limit = parseInt(searchParams.get('limit') || '18', 10)
+    const requestedLimit = parseInt(searchParams.get('limit') || '30', 10)
+    const limit = Math.min(Math.max(requestedLimit, 1), MAX_SIGNAL_LIMIT)
 
     const sourceResults = await Promise.all(
       Object.entries(SIGNAL_SOURCES).map(async ([source, url]) => {
         try {
           const items = await fetchFeedItems(source, url)
 
-          return items.slice(0, 20).map((item, index) => {
+          return items.slice(0, SOURCE_ITEM_LIMIT).map((item) => {
             const title = repairMojibake(item.title || 'Untitled')
             const description = repairMojibake(item.contentSnippet || item.content || '')
+            const published = normalizeDate(item.pubDate)
+            const link = item.link || ''
 
             return {
-              id: `${source}-${index}-${item.pubDate || Date.now()}`,
+              id: createArticleId(source, title, link, published),
               title,
-              link: item.link || '',
+              link,
               description,
-              published: item.pubDate || new Date().toISOString(),
+              published,
               source,
               category: categorizeArticle(title),
             } satisfies NewsArticle
           })
         } catch (error) {
-          console.error(`Failed to fetch signal feed from ${source}:`, error)
+          console.error(`Failed to fetch intelligence feed from ${source}:`, error)
           return []
         }
       })
@@ -107,11 +131,13 @@ export async function GET(request: Request) {
 
     return NextResponse.json({
       total: signals.length,
+      scanned: dedupedArticles.length,
       generatedAt: new Date().toISOString(),
+      sources: Object.keys(SIGNAL_SOURCES),
       signals,
     })
   } catch (error) {
-    console.error('Signal API error:', error)
-    return NextResponse.json({ error: 'Failed to build news signals' }, { status: 500 })
+    console.error('Intelligence API error:', error)
+    return NextResponse.json({ error: 'Failed to build crypto intelligence' }, { status: 500 })
   }
 }
