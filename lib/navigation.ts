@@ -53,6 +53,15 @@ export const siteNavItems: NavItem[] = [
       zh: '查看热门代币、所属链、合约地址与短线热度。',
     },
   },
+  {
+    key: 'stocks',
+    href: '/stocks',
+    label: { en: 'Stock Radar', zh: '美股雷达' },
+    subtitle: {
+      en: 'Track KOL stock calls, mention momentum, and watchlist conviction.',
+      zh: '追踪美股 KOL 喊单、提及热度和观察名单强弱。',
+    },
+  },
 ]
 
 export const homeNavItems: NavItem[] = [
@@ -117,6 +126,15 @@ export const homeNavItems: NavItem[] = [
     subtitle: {
       en: 'Watch hot tokens, chains, contracts, and onchain narratives.',
       zh: '跟踪热门代币、所属链、合约和链上题材热度。',
+    },
+  },
+  {
+    key: 'stocks',
+    href: '/stocks',
+    label: { en: 'Stock Radar', zh: '美股雷达' },
+    subtitle: {
+      en: 'Follow public KOL stock calls and build a watchlist from mention momentum.',
+      zh: '跟踪公开 KOL 美股喊单，用提及热度整理观察池。',
     },
   },
   {
