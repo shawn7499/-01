@@ -189,7 +189,7 @@ export default function NewsSignalsPage() {
 
   return (
     <div className="min-h-screen bg-[#060606] text-white">
-      <SiteHeader lang={lang} onLanguageChange={setLang} active="news" />
+      <SiteHeader lang={lang} onLanguageChange={setLang} active="intelligence" />
 
       <main className="mx-auto max-w-7xl px-4 pb-12 pt-28 sm:px-6 lg:px-8 lg:pt-32">
         <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
