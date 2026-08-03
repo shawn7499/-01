@@ -36,24 +36,6 @@ export const siteNavItems: NavItem[] = [
     },
   },
   {
-    key: 'opportunities',
-    href: '/opportunities',
-    label: { en: 'Opportunities', zh: '机遇' },
-    subtitle: {
-      en: 'Track event-driven setups, timing windows, and narrative plays.',
-      zh: '跟踪事件驱动机会、时间窗口和题材节奏。',
-    },
-  },
-  {
-    key: 'tokens',
-    href: '/tokens/hot',
-    label: { en: 'Token Radar', zh: '代币雷达' },
-    subtitle: {
-      en: 'Monitor hot tokens, chains, contracts, and short-term momentum.',
-      zh: '查看热门代币、所属链、合约地址与短线热度。',
-    },
-  },
-  {
     key: 'stocks',
     href: '/stocks',
     label: { en: 'Stock Radar', zh: '美股雷达' },
@@ -93,15 +75,6 @@ export const homeNavItems: NavItem[] = [
     },
   },
   {
-    key: 'opportunities',
-    href: '/opportunities',
-    label: { en: 'Opportunities', zh: '机遇' },
-    subtitle: {
-      en: 'A board for event-driven market ideas and setup tracking.',
-      zh: '聚合事件驱动的市场机会和可跟踪的参与思路。',
-    },
-  },
-  {
     key: 'news',
     href: '/news',
     label: { en: 'News', zh: '新闻' },
@@ -117,15 +90,6 @@ export const homeNavItems: NavItem[] = [
     subtitle: {
       en: 'Turn Odaily and BlockBeats headlines into intelligence cards.',
       zh: '把 Odaily 和 BlockBeats 消息整理成情报卡片。',
-    },
-  },
-  {
-    key: 'tokens',
-    href: '/tokens/hot',
-    label: { en: 'Token Radar', zh: '代币雷达' },
-    subtitle: {
-      en: 'Watch hot tokens, chains, contracts, and onchain narratives.',
-      zh: '跟踪热门代币、所属链、合约和链上题材热度。',
     },
   },
   {
